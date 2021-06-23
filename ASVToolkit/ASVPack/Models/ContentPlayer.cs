@@ -26,6 +26,7 @@ namespace ASVPack.Models
         [DataMember] public byte[] Stats { get; set; } = new byte[0];
         [DataMember] public double LastTimeInGame { get; set; } = 0;
         [DataMember] public DateTime? LastActiveDateTime { get; set; } = null;
+        [DataMember] public int TargetingTeam { get; set; } = int.MinValue; //abandoned
 
         public bool HasGameFile { get; set; } = false;
 
@@ -43,6 +44,7 @@ namespace ASVPack.Models
 
             //get data
             Id = playerComponent.HasAnyProperty("PlayerDataID")?playerComponent.GetPropertyValue<long>("PlayerDataID"):playerComponent.GetPropertyValue<long>("LinkedPlayerDataID");
+            TargetingTeam = playerComponent.GetPropertyValue<int>("TargetingTeam");
             SteamId = ((StructUniqueNetIdRepl)playerComponent.GetTypedProperty<PropertyStruct>("PlatformProfileID").Value).NetId;
             Stats = new byte[12];
             if(statusComponent!=null)

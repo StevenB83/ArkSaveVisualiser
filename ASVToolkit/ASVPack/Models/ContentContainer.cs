@@ -257,16 +257,16 @@ namespace ASVPack.Models
                         var wildTime = TimeSpan.FromTicks(wildEnd - wildStart);
                         Console.WriteLine($"Wilds loaded in: {wildTime.TotalSeconds.ToString("f1")} seconds.");
 
+
                         var allTames = objectContainer.Where(x => x.IsTamed() && x.ClassString != "MotorRaft_BP_C" && x.ClassString != "Raft_BP_C"); //exclude rafts.. no idea why these are "creatures"
                         var playerStructures = objectContainer.Where(x => x.IsStructure() && x.GetPropertyValue<int>("TargetingTeam") >= 50_000).GroupBy(x=>x.Names[0]).Select(s=>s.First()).ToList();
 
 
                         long tribeStart = DateTime.Now.Ticks;
 
-                        
                         //game tribes/players
                         string tribeFilepath = Path.GetDirectoryName(fileName);
-                        var tribesAndPlayers = objectContainer.Where(o => o.IsPlayer() & !o.HasAnyProperty("MyDeathHarvestingComponent")).GroupBy(x=> x.HasAnyProperty("PlayerDataID")?x.GetPropertyValue<long>("PlayerDataID") : x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x=>x.First())
+                        var tribesAndPlayers = objectContainer.Where(o => o.IsPlayer()).GroupBy(x=> x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x=>x.First())
                             .GroupBy(x => new
                             {
                                 TribeId = x.GetPropertyValue<int>("TargetingTeam"),
@@ -279,6 +279,60 @@ namespace ASVPack.Models
                             })
                             .ToList();
 
+                        //attempt to get missing tribe data from structures
+                        var missingStructureTribes = playerStructures
+                            .Where(x => !tribesAndPlayers.Any(t => t.Key.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .Select(x => new
+                            {
+                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
+                                TribeName = x.GetPropertyValue<string>("OwnerName")
+                            }).GroupBy(x=>x.TribeId)
+                            .Select(x=>x.First())
+                            .ToList();
+
+                        if (missingStructureTribes != null && missingStructureTribes.Count > 0)
+                        {
+                            missingStructureTribes.ForEach(s =>
+                            {
+                                tribesAndPlayers.Add(new 
+                                { 
+                                    Key = new 
+                                    { 
+                                        TribeId = s.TribeId, 
+                                        TribeName = s.TribeName 
+                                    }, 
+                                    Players = new List<GameObject>() 
+                                });
+                            });
+                            
+                        }
+
+                        //attempt to get missing tribe data from tames
+                        var missingTameTribes = playerStructures
+                            .Where(x => !tribesAndPlayers.Any(t => t.Key.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .Select(x => new
+                            {
+                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
+                                TribeName = x.GetPropertyValue<string>("OwnerName")
+                            }).GroupBy(x => x.TribeId)
+                            .Select(x => x.First())
+                            .ToList();
+
+                        if (missingTameTribes != null && missingTameTribes.Count > 0)
+                        {
+                            missingTameTribes.ForEach(s =>
+                            {
+                                tribesAndPlayers.Add(new
+                                {
+                                    Key = new
+                                    {
+                                        TribeId = s.TribeId,
+                                        TribeName = s.TribeName
+                                    },
+                                    Players = new List<GameObject>()
+                                });
+                            });
+                        }
 
                         long tribeEnd = DateTime.Now.Ticks;
                         var tribeTime = TimeSpan.FromTicks(tribeEnd - tribeStart);
@@ -301,6 +355,8 @@ namespace ASVPack.Models
                             TribeId = int.MinValue,
                             TribeName = "[ASV Abandoned]"
                         });
+
+
 
 
                         foreach (var tribe in tribesAndPlayers)

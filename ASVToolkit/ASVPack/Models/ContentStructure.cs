@@ -19,7 +19,7 @@ namespace ASVPack.Models
         [DataMember] public float Z { get; set; } = 0;
         [DataMember] public ContentInventory Inventory { get; set; } = new ContentInventory();
         [DataMember] public long TargetingTeam { get; set; } = 0;
-        [DataMember] public long AbandonedTeam { get; set; } = 0;
+
         [DataMember] public double CreatedTimeInGame { get; set; } = 0;
         public DateTime? CreatedDateTime { get; internal set; }
 

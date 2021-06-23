@@ -790,7 +790,6 @@
             this.tpgWild.TabIndex = 0;
             this.tpgWild.Text = "Wild Creatures";
             this.tpgWild.UseVisualStyleBackColor = true;
-            this.tpgWild.Click += new System.EventHandler(this.tpgWild_Click);
             // 
             // cboWildResource
             // 
@@ -2269,7 +2268,6 @@
             this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picIcon.TabIndex = 24;
             this.picIcon.TabStop = false;
-            this.picIcon.Click += new System.EventHandler(this.picIcon_Click);
             // 
             // lblTitle
             // 
@@ -2360,7 +2358,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARK Savegame Visualiser";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmViewer_FormClosed);
-            this.Load += new System.EventHandler(this.frmViewer_Load);
+            
             this.LocationChanged += new System.EventHandler(this.frmViewer_LocationChanged);
             this.Enter += new System.EventHandler(this.frmViewer_Enter);
             this.mnuContext.ResumeLayout(false);

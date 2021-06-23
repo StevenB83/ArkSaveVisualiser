@@ -341,10 +341,15 @@ namespace ARKViewer
                     ftpClient.Credentials.UserName = txtFTPUsername.Text;
                     ftpClient.Credentials.Password = txtFTPPassword.Text;
                     ftpClient.Port = (int)udFTPPort.Value;
+
+
+                    //ftps
+                    ftpClient.EncryptionMode = FtpEncryptionMode.Implicit;
+                    ftpClient.ValidateCertificate += FtpClient_ValidateCertificate;
+                    ftpClient.ValidateAnyCertificate = true;
+
                     ftpClient.Connect();
                     btnConnect.Enabled = false;
-
-
 
                     lvwFileBrowser.Enabled = true;
                     txtServerName.Enabled = false;
@@ -361,7 +366,7 @@ namespace ARKViewer
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Unable to connect to server.\n\nPlease check entered information and try again.", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show($"Unable to connect to server.\n\n{ex.Message}.", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     btnConnect.Enabled = true;
                     optFtpModeFtp.Enabled = true;
                     optFtpModeSftp.Enabled = true;
@@ -403,9 +408,14 @@ namespace ARKViewer
             }
 
             this.Cursor = Cursors.Default;
-            btnConnect.Enabled = true;
+
             optFtpModeFtp.Enabled = true;
             optFtpModeSftp.Enabled = true;
+        }
+
+        private void FtpClient_ValidateCertificate(FtpClient control, FtpSslValidationEventArgs e)
+        {
+            e.Accept = true;
         }
 
         private void lvwFileBrowser_SelectedIndexChanged(object sender, EventArgs e)

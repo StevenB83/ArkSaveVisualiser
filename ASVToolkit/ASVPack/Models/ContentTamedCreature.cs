@@ -16,7 +16,6 @@ namespace ASVPack.Models
     [DataContract]
     public class ContentTamedCreature: ContentCreature
     {
-        [DataMember] public long AbandonedTeam { get; set; } = 0;
         [DataMember] public long? FatherId { get; internal set; }
         [DataMember] public string FatherName { get; set; } = "";
         [DataMember] public bool IsClaimed { get; set; } = true;
@@ -45,8 +44,6 @@ namespace ASVPack.Models
 
             TamedTimeInGame = creatureObject.GetPropertyValue<double>("TamedAtTime");
             
-            AbandonedTeam = 0;
-
             int testTarget = creatureObject.GetPropertyValue<int>("TargetingTeam");
             int testTeam = creatureObject.GetPropertyValue<int>("TamingTeamID");
 

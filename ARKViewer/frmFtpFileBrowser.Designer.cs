@@ -77,7 +77,7 @@ namespace ARKViewer
             this.lvwFileBrowser.LargeImageList = this.imagesFileBrowser;
             this.lvwFileBrowser.Location = new System.Drawing.Point(279, 66);
             this.lvwFileBrowser.Name = "lvwFileBrowser";
-            this.lvwFileBrowser.Size = new System.Drawing.Size(190, 306);
+            this.lvwFileBrowser.Size = new System.Drawing.Size(550, 306);
             this.lvwFileBrowser.SmallImageList = this.imagesFileBrowser;
             this.lvwFileBrowser.TabIndex = 15;
             this.lvwFileBrowser.UseCompatibleStateImageBehavior = false;
@@ -114,7 +114,7 @@ namespace ARKViewer
             this.btnSelect.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnSelect.Enabled = false;
             this.btnSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSelect.Location = new System.Drawing.Point(353, 414);
+            this.btnSelect.Location = new System.Drawing.Point(713, 414);
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(71, 23);
             this.btnSelect.TabIndex = 1;
@@ -130,7 +130,7 @@ namespace ARKViewer
             this.lblStatus.ForeColor = System.Drawing.Color.DimGray;
             this.lblStatus.Location = new System.Drawing.Point(21, 417);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(316, 20);
+            this.lblStatus.Size = new System.Drawing.Size(676, 20);
             this.lblStatus.TabIndex = 3;
             // 
             // optFtpModeSftp
@@ -301,7 +301,7 @@ namespace ARKViewer
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(430, 414);
+            this.btnClose.Location = new System.Drawing.Point(790, 414);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(71, 23);
             this.btnClose.TabIndex = 2;
@@ -334,7 +334,7 @@ namespace ARKViewer
             this.grpFtpServer.Controls.Add(this.txtFTPPassword);
             this.grpFtpServer.Location = new System.Drawing.Point(12, 12);
             this.grpFtpServer.Name = "grpFtpServer";
-            this.grpFtpServer.Size = new System.Drawing.Size(487, 389);
+            this.grpFtpServer.Size = new System.Drawing.Size(847, 389);
             this.grpFtpServer.TabIndex = 0;
             this.grpFtpServer.TabStop = false;
             // 
@@ -370,7 +370,7 @@ namespace ARKViewer
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label22.Location = new System.Drawing.Point(0, 0);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(489, 6);
+            this.label22.Size = new System.Drawing.Size(849, 6);
             this.label22.TabIndex = 0;
             this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -379,7 +379,7 @@ namespace ARKViewer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(514, 446);
+            this.ClientSize = new System.Drawing.Size(874, 446);
             this.Controls.Add(this.grpFtpServer);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblStatus);

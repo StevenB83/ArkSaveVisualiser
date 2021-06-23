@@ -91,8 +91,6 @@ namespace ARKViewer
             }
         }
 
-
-
         private void InitializeDefaults()
         {
             isLoading = true;
@@ -183,7 +181,6 @@ namespace ARKViewer
 
                 RefreshPlayerTribes();
                 RefreshTamedTribes();
-                RefreshCryoTribes();
                 RefreshStructureTribes();
                 RefreshItemListTribes();
                 RefreshStructureSummary();
@@ -444,12 +441,6 @@ namespace ARKViewer
         }
 
 
-        private void RefreshCryoTribes()
-        {
-
-        }
-
-
         private void RefreshStructureTribes()
         {
             if (cm == null) return;
@@ -653,15 +644,6 @@ namespace ARKViewer
             }
             cboPlayers.SelectedIndex = 0;
         }
-
-
-        private void RefreshCryoPlayerList()
-        {
-
-
-
-        }
-
 
 
         private void RefreshTamePlayerList()
@@ -898,22 +880,6 @@ namespace ARKViewer
 
 
 
-
-        private void BtnDownload_Click(object sender, EventArgs e)
-        {
-            this.Cursor = Cursors.WaitCursor;
-
-            var downloadedFile = Download();
-            if (File.Exists(downloadedFile))
-            {
-                ARKViewer.Program.ProgramConfig.SelectedFile = downloadedFile;
-                LoadContent(downloadedFile);
-            }
-
-            this.Cursor = Cursors.Default;
-        }
-
-
         private bool DeletePlayerFtp(ContentPlayer player)
         {
 
@@ -941,7 +907,10 @@ namespace ARKViewer
                         ftpClient.Credentials.UserName = selectedServer.Username;
                         ftpClient.Credentials.Password = selectedServer.Password;
                         ftpClient.Port = selectedServer.Port;
-
+                        ftpClient.EncryptionMode = FtpEncryptionMode.Implicit;
+                        ftpClient.ValidateCertificate += FtpClient_ValidateCertificate;
+                        ftpClient.ValidateAnyCertificate = true;
+                        ftpClient.Connect();
                         ftpClient.DeleteFile(ftpFilePath);
 
                     }
@@ -983,81 +952,12 @@ namespace ARKViewer
             return returnVal;
         }
 
-
-
-
-
-
-        private List<Tuple<string, DateTime>> GetFtpFileList(Uri address, string username, string password)
+        private void FtpClient_ValidateCertificate(FtpClient control, FtpSslValidationEventArgs e)
         {
-            FtpWebRequest request = (FtpWebRequest)FtpWebRequest.Create(address);
-            request.Method = WebRequestMethods.Ftp.ListDirectoryDetails;
-            request.Credentials = new NetworkCredential(username, password);
-            request.UsePassive = true;
-            request.UseBinary = true;
-            request.KeepAlive = false;
-
-            List<Tuple<string, DateTime>> fileList = new List<Tuple<string, DateTime>>();
-            string[] list = null;
-
-
-            using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
-            using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-            {
-                list = reader.ReadToEnd().Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            }
-
-            foreach (var line in list)
-            {
-                if (!line.Contains("<DIR>"))
-                {
-                    //file
-                    string fileLine = line.Substring(0, line.LastIndexOf(" "));
-
-                    int.TryParse(fileLine.Substring(0, 2), out int dateMonth);
-                    int.TryParse(fileLine.Substring(3, 2), out int dateDay);
-                    int.TryParse(fileLine.Substring(6, 2), out int dateYear);
-
-                    int.TryParse(fileLine.Substring(10, 2), out int dateHour);
-                    int.TryParse(fileLine.Substring(13, 2), out int dateMin);
-                    if (fileLine.ToLower().Contains("pm"))
-                    {
-                        dateHour += 12;
-                        if (dateHour > 23)
-                        {
-                            dateHour = 0;
-                        }
-                    }
-
-                    if (dateYear.ToString().Length == 2) dateYear = dateYear + 2000;
-
-
-                    DateTime fileDateTime = DateTime.Now;
-                    try
-                    {
-
-                        string[] FtpDateFormats = { "yyyyMMddHHmmss", "yyyyMMddHHmmss'.'f", "yyyyMMddHHmmss'.'ff", "yyyyMMddHHmmss'.'fff", "MMM dd  yyyy", "MMM  d  yyyy", "MMM dd HH:mm", "MMM  d HH:mm" };
-
-                        DateTime.TryParseExact(fileLine, FtpDateFormats, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out DateTime ftpFileTime);
-
-
-                        fileDateTime = new DateTime(dateYear, dateMonth, dateDay, dateHour, dateMin, 0);
-                    }
-                    catch
-                    {
-                        //try other formats
-                        fileDateTime = DateTime.Now;
-                    }
-
-
-                    string fileName = line.Substring(line.LastIndexOf(" ") + 1);
-                    fileList.Add(new Tuple<string, DateTime>(fileName, fileDateTime));
-                }
-            }
-
-            return fileList;
+            e.Accept = true;
         }
 
+        
         private void DrawMap(decimal selectedX, decimal selectedY)
         {
             if (cm == null || MapViewer == null || MapViewer.IsDisposed)
@@ -1647,16 +1547,6 @@ namespace ARKViewer
                 lblTameTotal.Text = $"Count: {lvwTameDetail.Items.Count}";
 
 
-                /*
-                Bitmap originalImage = DrawMap(selectedX, selectedY);
-
-                Bitmap bitmap = new Bitmap(originalImage.Width, originalImage.Height);
-                Graphics graphics = Graphics.FromImage(bitmap);
-                graphics.DrawImage(originalImage, new Rectangle(0, 0, originalImage.Width, originalImage.Height));
-
-                */
-
-
                 if (tabFeatures.SelectedTab.Name == "tpgTamed")
                 {
                     DrawMap(selectedX, selectedY);
@@ -1846,17 +1736,6 @@ namespace ARKViewer
                 lblStatus.Text = "Creature data populated.";
                 lblStatus.Refresh();
 
-
-
-                /*
-                Bitmap originalImage = DrawMap(selectedX, selectedY);
-
-                Bitmap bitmap = new Bitmap(originalImage.Width, originalImage.Height);
-                Graphics graphics = Graphics.FromImage(bitmap);
-                graphics.DrawImage(originalImage, new Rectangle(0, 0, originalImage.Width, originalImage.Height));
-
-                */
-
                 if (tabFeatures.SelectedTab.Name == "tpgWild")
                 {
                     DrawMap(selectedX, selectedY);
@@ -1978,12 +1857,6 @@ namespace ARKViewer
 
             lblStatus.Text = "Tamed creatures populated.";
             lblStatus.Refresh();
-
-        }
-
-
-        private void RefreshCryoSummary()
-        {
 
         }
 
@@ -2390,6 +2263,10 @@ namespace ARKViewer
                 ftpClient.Credentials.Password = selectedServer.Password;
                 ftpClient.Port = selectedServer.Port;
 
+                ftpClient.EncryptionMode = FtpEncryptionMode.Implicit;
+                ftpClient.ValidateCertificate += FtpClient_ValidateCertificate;
+                ftpClient.ValidateAnyCertificate = true;
+
                 string downloadPath = Path.Combine(Path.GetDirectoryName(Application.ExecutablePath), selectedServer.Name);
                 if (!Directory.Exists(downloadPath))
                 {
@@ -2744,13 +2621,6 @@ namespace ARKViewer
 
             // Sort.
             lvwPlayers.Sort();
-        }
-
-        private void btnPlayerTames_Click(object sender, EventArgs e)
-        {
-
-
-
         }
 
         private void btnPlayerInventory_Click(object sender, EventArgs e)
@@ -3184,7 +3054,7 @@ namespace ARKViewer
                     string selectedSteamId = selectedPlayer.SteamId;
 
                     var tribe = cm.GetPlayerTribe(selectedPlayer.Id);
-                    long selectedTribeId = tribe.TribeId;
+                    long selectedTribeId = selectedPlayer.TargetingTeam;
 
                     commandText = cboConsoleCommandsPlayerTribe.SelectedItem.ToString();
 
@@ -3247,14 +3117,8 @@ namespace ARKViewer
             {
                 ContentStructure selectedStructure = (ContentStructure)selectedItem.Tag;
 
-                if (selectedStructure.AbandonedTeam != 0)
-                {
-                    commandText = commandText.Replace("<TribeID>", selectedStructure.AbandonedTeam.ToString("f0"));
-                }
-                else
-                {
-                    commandText = commandText.Replace("<TribeID>", selectedStructure.TargetingTeam.ToString("f0"));
-                }
+
+                commandText = commandText.Replace("<TribeID>", selectedStructure.TargetingTeam.ToString("f0"));
 
                 commandText = commandText.Replace("<x>", System.FormattableString.Invariant($"{selectedStructure.X:0.00}"));
                 commandText = commandText.Replace("<y>", System.FormattableString.Invariant($"{selectedStructure.Y:0.00}"));
@@ -3536,16 +3400,6 @@ namespace ARKViewer
             this.Cursor = Cursors.Default;
         }
 
-        private void picMap_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cboCryoTribe_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            RefreshCryoPlayerList();
-        }
-
 
         private void btnCopyCommandWild_Click(object sender, EventArgs e)
         {
@@ -3597,15 +3451,7 @@ namespace ARKViewer
                 ContentTamedCreature selectedCreature = (ContentTamedCreature)selectedItem.Tag;
                 commandText = commandText.Replace("<ClassName>", selectedCreature.ClassName);
                 commandText = commandText.Replace("<Level>", (selectedCreature.BaseLevel / 1.5).ToString("f0"));
-
-                if (selectedCreature.AbandonedTeam != 0)
-                {
-                    commandText = commandText.Replace("<TribeID>", selectedCreature.AbandonedTeam.ToString("f0"));
-                }
-                else
-                {
-                    commandText = commandText.Replace("<TribeID>", selectedCreature.TargetingTeam.ToString("f0"));
-                }
+                commandText = commandText.Replace("<TribeID>", selectedCreature.TargetingTeam.ToString("f0"));
 
                 commandText = commandText.Replace("<x>", System.FormattableString.Invariant($"{selectedCreature.X:0.00}"));
                 commandText = commandText.Replace("<y>", System.FormattableString.Invariant($"{selectedCreature.Y:0.00}"));
@@ -4979,16 +4825,6 @@ namespace ARKViewer
             lvwDroppedItems.Sort();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tpgWild_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnViewMap_Click(object sender, EventArgs e)
         {
             ShowMapViewer();
@@ -5155,10 +4991,6 @@ namespace ARKViewer
             this.BringToFront();
         }
 
-        private void frmViewer_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private void frmViewer_LocationChanged(object sender, EventArgs e)
         {
@@ -5358,11 +5190,6 @@ namespace ARKViewer
                 lblStatus.Refresh();
 
             }
-        }
-
-        private void picIcon_Click(object sender, EventArgs e)
-        {
-            picIcon.Image.Save(@"C:\temp\ASV.png", System.Drawing.Imaging.ImageFormat.Png);
         }
 
         private void cboSelectedMap_SelectedIndexChanged(object sender, EventArgs e)
