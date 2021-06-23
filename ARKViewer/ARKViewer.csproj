@@ -1,0 +1,648 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2694464B-92D2-4DF6-9717-C187442F49C3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ARKViewer</RootNamespace>
+    <AssemblyName>ARKSaveViewer</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ASV.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentFTP, Version=34.0.0.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.34.0.0\lib\net45\FluentFTP.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2020.0.1.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2020.0.1\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuration\ApiConfiguration.cs" />
+    <Compile Include="Configuration\ApiUserConfiguration.cs" />
+    <Compile Include="Configuration\ServerConfiguration.cs" />
+    <Compile Include="Configuration\ViewerConfiguration.cs" />
+    <Compile Include="Configuration\ViewerWindow.cs" />
+    <Compile Include="frmAddLocalARK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAddLocalARK.Designer.cs">
+      <DependentUpon>frmAddLocalARK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBreedingFindOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBreedingFindOptions.Designer.cs">
+      <DependentUpon>frmBreedingFindOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBreedingLines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBreedingLines.Designer.cs">
+      <DependentUpon>frmBreedingLines.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmColourEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColourEditor.Designer.cs">
+      <DependentUpon>frmColourEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmColourPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmColourPicker.Designer.cs">
+      <DependentUpon>frmColourPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFtpConfirmPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFtpConfirmPassword.Designer.cs">
+      <DependentUpon>frmFtpConfirmPassword.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmFtpFileBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFtpFileBrowser.Designer.cs">
+      <DependentUpon>frmFtpFileBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmGenericClassMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmGenericClassMap.Designer.cs">
+      <DependentUpon>frmGenericClassMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDeathCacheViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDeathCacheViewer.Designer.cs">
+      <DependentUpon>frmDeathCacheViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDinoInventoryViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDinoInventoryViewer.Designer.cs">
+      <DependentUpon>frmDinoInventoryViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmErrorReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmErrorReport.Designer.cs">
+      <DependentUpon>frmErrorReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmItemClassMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmItemClassMap.Designer.cs">
+      <DependentUpon>frmItemClassMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMapToolboxMarkers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMapToolboxMarkers.Designer.cs">
+      <DependentUpon>frmMapToolboxMarkers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMapToolboxStructures.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMapToolboxStructures.Designer.cs">
+      <DependentUpon>frmMapToolboxStructures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMapView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMapView.Designer.cs">
+      <DependentUpon>frmMapView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmMarkerEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMarkerEditor.Designer.cs">
+      <DependentUpon>frmMarkerEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPlayerInventoryViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPlayerInventoryViewer.Designer.cs">
+      <DependentUpon>frmPlayerInventoryViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmClientAccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClientAccess.Designer.cs">
+      <DependentUpon>frmClientAccess.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStructureInventoryViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStructureInventoryViewer.Designer.cs">
+      <DependentUpon>frmStructureInventoryViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTribeLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTribeLog.Designer.cs">
+      <DependentUpon>frmTribeLog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSettings.Designer.cs">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmStructureExclusionFilter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmStructureExclusionFilter.Designer.cs">
+      <DependentUpon>frmStructureExclusionFilter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTribeLogColourMap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTribeLogColourMap.Designer.cs">
+      <DependentUpon>frmTribeLogColourMap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmViewer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmViewer.Designer.cs">
+      <DependentUpon>frmViewer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ASVAncestor.cs" />
+    <Compile Include="Models\ASVBreedingSearch.cs" />
+    <Compile Include="Models\ASVComboValue.cs" />
+    <Compile Include="Models\ASVCreatureSummary.cs" />
+    <Compile Include="Models\ASVDataManager.cs" />
+    <Compile Include="Models\ASVFoundItem.cs" />
+    <Compile Include="Models\ASVFtpItem.cs" />
+    <Compile Include="Models\ASVMapMarker.cs" />
+    <Compile Include="Models\ASVMarker.cs" />
+    <Compile Include="Models\ASVStructureMarker.cs" />
+    <Compile Include="Models\ListViewComparer.cs" />
+    <Compile Include="Models\NameMap\ColourMap.cs" />
+    <Compile Include="Models\NameMap\DinoClassMap.cs" />
+    <Compile Include="Models\NameMap\IGenericClassMap.cs" />
+    <Compile Include="Models\NameMap\ItemClassMap.cs" />
+    <Compile Include="Models\NameMap\LogColourMap.cs" />
+    <Compile Include="Models\NameMap\LogTextColourMap.cs" />
+    <Compile Include="Models\NameMap\PlayerMap.cs" />
+    <Compile Include="Models\NameMap\StructureClassMap.cs" />
+    <Compile Include="Models\NameMap\TribeMap.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmAddLocalARK.resx">
+      <DependentUpon>frmAddLocalARK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBreedingFindOptions.resx">
+      <DependentUpon>frmBreedingFindOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBreedingLines.resx">
+      <DependentUpon>frmBreedingLines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColourEditor.resx">
+      <DependentUpon>frmColourEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmColourPicker.resx">
+      <DependentUpon>frmColourPicker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFtpConfirmPassword.resx">
+      <DependentUpon>frmFtpConfirmPassword.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFtpFileBrowser.resx">
+      <DependentUpon>frmFtpFileBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmGenericClassMap.resx">
+      <DependentUpon>frmGenericClassMap.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDeathCacheViewer.resx">
+      <DependentUpon>frmDeathCacheViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDinoInventoryViewer.resx">
+      <DependentUpon>frmDinoInventoryViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmErrorReport.resx">
+      <DependentUpon>frmErrorReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmItemClassMap.resx">
+      <DependentUpon>frmItemClassMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMapToolboxMarkers.resx">
+      <DependentUpon>frmMapToolboxMarkers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMapToolboxStructures.resx">
+      <DependentUpon>frmMapToolboxStructures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMapView.resx">
+      <DependentUpon>frmMapView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMarkerEditor.resx">
+      <DependentUpon>frmMarkerEditor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPlayerInventoryViewer.resx">
+      <DependentUpon>frmPlayerInventoryViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmClientAccess.resx">
+      <DependentUpon>frmClientAccess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStructureInventoryViewer.resx">
+      <DependentUpon>frmStructureInventoryViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTribeLog.resx">
+      <DependentUpon>frmTribeLog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSettings.resx">
+      <DependentUpon>frmSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmStructureExclusionFilter.resx">
+      <DependentUpon>frmStructureExclusionFilter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTribeLogColourMap.resx">
+      <DependentUpon>frmTribeLogColourMap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmViewer.resx">
+      <DependentUpon>frmViewer.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dino_green_icon_dvr_icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\petroleum-icon-png-14374.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\water-icon-png-14374.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beaver-47736.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\oil-and-gas-icon-12215.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\homepage-icon-png-2574.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\48px-Giant_Beaver.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\48px-Alpha_Fire_Wyvern.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\48px-Deinonychus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tower-icon-25704.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trophy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\001-cave.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\002-north-pole.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\003-mushroom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\004-cactus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\005-bee.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\006-flood.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\008-stalactite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\009-flooding.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\010-healthcare-and-medical.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\011-cave-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\012-flower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\013-eruption.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\014-spider-web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\015-bear-trap.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\016-cactus-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\018-camping-tent.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\019-camping-tent-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\020-bed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\021-water.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\022-house.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\023-home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\024-house-1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\025-sailing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\026-yacht.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\027-treasure.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\028-writing.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\none.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\001-man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\002-woman.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\003-help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\004-relationship.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\005-seo-and-web.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\007-home-run.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\017-real-estate.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_crystalsles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\import.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\export.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\001-clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\002-save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\003-add-file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_folder.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_zoom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_file.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_blocks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_stroller.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_rex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_family.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker_battery.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\structure_marker_flower.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_filter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\structure_marker_lizard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\structure_marker_plantx.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Strucutre_Marker_RockDrake.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_notes.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_notepad.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_thecenter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_filterex.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_aberration.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_extinction.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_ragnarok.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_scorchedearth.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_theisland.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_valguero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_cryooff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\button_cryoon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_genesis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker_magmasaur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mapmarker_question.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\structure_marker_glitch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_crystalisles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_hope.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_tunguska.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_caballus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_fjordur.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_tiamat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_themes_1419100.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ModernXP-73-Globe-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Logs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TribeLogs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_gen2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map_astralark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\iconfinder_5172567_heart_like_love_icon_64px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon_love.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\loveicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\playicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stopicon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ASVToolkit\ASVPack\ASVPack.csproj">
+      <Project>{144d3950-c91c-4ac1-aaf0-bd64aace49e5}</Project>
+      <Name>ASVPack</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ASV.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

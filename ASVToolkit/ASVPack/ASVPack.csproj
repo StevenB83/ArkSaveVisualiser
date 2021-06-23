@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{144D3950-C91C-4AC1-AAF0-BD64AACE49E5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ASVPack</RootNamespace>
+    <AssemblyName>ASVPack</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\GameObjectExtensions.cs" />
+    <Compile Include="Models\ContentAncestor.cs" />
+    <Compile Include="Models\ContentContainer.cs" />
+    <Compile Include="Models\ContentCreature.cs" />
+    <Compile Include="Models\ContentDroppedItem.cs" />
+    <Compile Include="Models\ContentInventory.cs" />
+    <Compile Include="Models\ContentItem.cs" />
+    <Compile Include="Models\ContentMarker.cs" />
+    <Compile Include="Models\ContentMissionScore.cs" />
+    <Compile Include="Models\ContentPack.cs" />
+    <Compile Include="Models\ContentPlayer.cs" />
+    <Compile Include="Models\ContentStructure.cs" />
+    <Compile Include="Models\ContentTamedCreature.cs" />
+    <Compile Include="Models\ContentTribe.cs" />
+    <Compile Include="Models\ContentWildCreature.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArkSavegameToolkit\SavegameToolkitAdditions\SavegameToolkitAdditions.csproj">
+      <Project>{122d32e8-9eee-4982-9d26-4225583f97f6}</Project>
+      <Name>SavegameToolkitAdditions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArkSavegameToolkit\SavegameToolkit\SavegameToolkit.csproj">
+      <Project>{aabe6fb3-17fb-45e6-a354-5961f208f795}</Project>
+      <Name>SavegameToolkit</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
