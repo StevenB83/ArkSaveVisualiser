@@ -43,7 +43,8 @@ namespace ARKViewer
                 { "tunguska_p.ark", "Tunguska"},
                 { "caballus_p.ark", "Caballus"},
                 { "viking_p.ark", "Fjördur"},
-                { "tiamatprime.ark", "Tiamat Prime"}
+                { "tiamatprime.ark", "Tiamat Prime"},
+                { "glacius_p.ark", "Glacius"}
 };
 
         public ViewerConfiguration SavedConfig { get; set; }
@@ -477,7 +478,7 @@ namespace ARKViewer
                 if (MessageBox.Show("Unable to determine Steam library folder.\n\nWould you like to select it yourself?", "Steam Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
 
-
+                    //TODO://
 
 
 

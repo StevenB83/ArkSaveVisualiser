@@ -23,11 +23,18 @@ namespace ASVPack.Models
         [DataMember] public ConcurrentBag<ContentStructure> Structures { get; set; } = new ConcurrentBag<ContentStructure>();
         [DataMember] public ConcurrentBag<ContentTamedCreature> Tames { get; set; } = new ConcurrentBag<ContentTamedCreature>();
         [DataMember] public string[] Logs { get; set; } = new string[0];
+
+        public DateTime TribeFileDate { get; set; } = DateTime.MinValue;
+
         public DateTime? LastActive
         {
             get
             {
-                if (Players == null || Players.Count == 0) return null;
+                if (Players == null || Players.Count == 0)
+                {
+                    return TribeFileDate;
+                }
+                
                 return Players.Max(p => p.LastActiveDateTime);
             }
         }

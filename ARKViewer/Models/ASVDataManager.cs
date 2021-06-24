@@ -51,7 +51,8 @@ namespace ARKViewer.Models
                 { "tunguska_p.ark", "Tunguska"},
                 { "caballus_p.ark", "Caballus"},
                 { "viking_p.ark", "Fjördur"},
-                { "tiamatprime.ark", "Tiamat Prime"}
+                { "tiamatprime.ark", "Tiamat Prime"},
+                { "glacius_p.ark", "Glacius"}
             };
 
         ContentPack pack = null;
@@ -123,6 +124,9 @@ namespace ARKViewer.Models
                         return new Bitmap(ARKViewer.Properties.Resources.map_tiamat, new Size(1024, 1024));
                     case "gen2":
                         return new Bitmap(ARKViewer.Properties.Resources.map_gen2, new Size(1024, 1024));
+                    case "glacius_p":
+                        return new Bitmap(ARKViewer.Properties.Resources.map_glacius, new Size(1024, 1024));
+
                     default:
                         return new Bitmap(1024, 1024);
                 }

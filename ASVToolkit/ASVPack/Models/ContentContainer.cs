@@ -44,7 +44,7 @@ namespace ASVPack.Models
             { "caballus_p", Tuple.Create(50.0f, 8125.0f,50.0f, 8125.0f)},
             { "viking_p", Tuple.Create(50.0f, 7140.0f,50.0f, 7140.0f)},
             { "tiamatprime", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
-            { "glacius", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)}
+            { "glacius_p", Tuple.Create(50.0f, 16250.0f,50.0f, 16250.0f)}
         };
 
         Tuple<float, float, float, float> mapLatLonCalcs = new Tuple<float, float, float, float>(50.0f, 8000.0f, 50.0f, 8000.0f); //default to same as The Island map
@@ -264,6 +264,8 @@ namespace ASVPack.Models
 
                         long tribeStart = DateTime.Now.Ticks;
 
+                        var test  = objectContainer.Where(o => o.IsPlayer()).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID"));
+
                         //game tribes/players
                         string tribeFilepath = Path.GetDirectoryName(fileName);
                         var tribesAndPlayers = objectContainer.Where(o => o.IsPlayer()).GroupBy(x=> x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x=>x.First())
@@ -388,6 +390,7 @@ namespace ASVPack.Models
                                             arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
                                             newTribe = arkTribe.Tribe.AsTribe();
+                                            newTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
                                             newTribe.HasGameFile = true;
 
                                             cbTribes.Add(newTribe);
@@ -508,8 +511,6 @@ namespace ASVPack.Models
                         long tribeLoadEnd = DateTime.Now.Ticks;
                         var tribeLoadTime = TimeSpan.FromTicks(tribeLoadEnd - tribeLoadStart);
                         Console.WriteLine($"Tribe players loaded in: {tribeLoadTime.TotalSeconds.ToString("f1")} seconds.");
-
-
 
 
                         Parallel.ForEach(allTames, x =>

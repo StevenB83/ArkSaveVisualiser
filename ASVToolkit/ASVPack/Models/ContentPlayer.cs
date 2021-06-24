@@ -53,7 +53,7 @@ namespace ASVPack.Models
             LastTimeInGame = playerComponent.GetPropertyValue<double>("SavedLastTimeHadController");
             Name = playerComponent.GetPropertyValue<string>("PlatformProfileName");
             CharacterName = playerComponent.GetPropertyValue<string>("PlayerName");
-            Level = playerComponent.GetFullLevel();
+            Level = getFullLevel(statusComponent);
             if (playerComponent.Location != null)
             {
                 X = playerComponent.Location?.X;
@@ -73,6 +73,18 @@ namespace ASVPack.Models
         public override int GetHashCode()
         {
             return Id.GetHashCode();
+        }
+
+        private int getFullLevel(GameObject statusComponent)
+        {
+            if (statusComponent == null)
+            {
+                return 1;
+            }
+
+            int baseLevel = statusComponent.GetPropertyValue<int>("BaseCharacterLevel", defaultValue: 1);
+            short extraLevel = statusComponent.GetPropertyValue<short>("ExtraCharacterLevel");
+            return baseLevel + extraLevel;
         }
 
     }

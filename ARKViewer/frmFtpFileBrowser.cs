@@ -338,17 +338,34 @@ namespace ARKViewer
                 try
                 {
                     ftpClient = new FtpClient(txtFTPAddress.Text);
+
                     ftpClient.Credentials.UserName = txtFTPUsername.Text;
                     ftpClient.Credentials.Password = txtFTPPassword.Text;
                     ftpClient.Port = (int)udFTPPort.Value;
-
-
-                    //ftps
-                    ftpClient.EncryptionMode = FtpEncryptionMode.Implicit;
                     ftpClient.ValidateCertificate += FtpClient_ValidateCertificate;
                     ftpClient.ValidateAnyCertificate = true;
+                    ftpClient.SslProtocols = System.Security.Authentication.SslProtocols.Tls13 | System.Security.Authentication.SslProtocols.Tls12 | System.Security.Authentication.SslProtocols.Tls11 | System.Security.Authentication.SslProtocols.Ssl3 | System.Security.Authentication.SslProtocols.None;
 
-                    ftpClient.Connect();
+                    //try explict
+                    ftpClient.EncryptionMode = FtpEncryptionMode.Explicit;
+                    try
+                    {
+                        ftpClient.Connect();
+                    }
+                    catch (TimeoutException exTimeout)
+                    {
+                        //try implicit
+                        ftpClient.EncryptionMode = FtpEncryptionMode.Implicit;
+                        ftpClient.Connect();
+                    }
+                    catch (FtpSecurityNotAvailableException exSecurity)
+                    {
+                        //fail-back to plain text
+                        ftpClient.EncryptionMode = FtpEncryptionMode.None;
+                        ftpClient.Connect();
+                    }
+
+
                     btnConnect.Enabled = false;
 
                     lvwFileBrowser.Enabled = true;
