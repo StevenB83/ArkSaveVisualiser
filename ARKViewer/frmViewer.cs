@@ -225,6 +225,9 @@ namespace ARKViewer
                     break;
                 case ViewerModes.Mode_SinglePlayer:
 
+                    PopulateSinglePlayerGames();
+
+
                     break;
                 default:
 
@@ -2671,6 +2674,78 @@ namespace ARKViewer
 
 
 
+        private void PopulateSinglePlayerGames()
+        {
+
+            //get registry path for steam apps 
+            cboSelectedMap.Items.Clear();
+            string directoryCheck = "";
+
+            try
+            {
+                string steamRoot = Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString();
+
+                if (steamRoot != null && steamRoot.Length > 0)
+                {
+                    steamRoot = steamRoot.Replace(@"/", @"\");
+                    steamRoot = Path.Combine(steamRoot, @"steamapps\libraryfolders.vdf");
+                    if (File.Exists(steamRoot))
+                    {
+                        string fileText = File.ReadAllText(steamRoot).Replace("\"LibraryFolders\"", "");
+
+                        foreach (string line in fileText.Split('\n'))
+                        {
+                            if (line.Contains("\t"))
+                            {
+                                string[] lineContent = line.Split('\t');
+                                if (lineContent.Length == 4)
+                                {
+                                    //check 4th param as a path
+                                    directoryCheck = lineContent[3].ToString().Replace("\"", "").Replace(@"\\", @"\") + @"\SteamApps\Common\ARK\ShooterGame\Saved\";
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                //permission access to registry or unavailable?
+
+            }
+
+            if (Directory.Exists(directoryCheck))
+            {
+
+                var saveFiles = Directory.GetFiles(directoryCheck, "*.ark", SearchOption.AllDirectories);
+                foreach (string saveFilename in saveFiles)
+                {
+                    string fileName = Path.GetFileName(saveFilename);
+                    if (Program.MapFilenameMap.ContainsKey(fileName.ToLower()))
+                    {
+                        string knownMapName = Program.MapFilenameMap[fileName.ToLower()];
+                        if (knownMapName.Length > 0)
+                        {
+                            ASVComboValue comboValue = new ASVComboValue(saveFilename, knownMapName);
+                            int newIndex = cboSelectedMap.Items.Add(comboValue);
+
+                            if (Program.ProgramConfig.SelectedFile == saveFilename)
+                            {
+                                cboSelectedMap.SelectedIndex = newIndex;
+                            }
+                        
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+
 
 
 
@@ -3663,6 +3738,10 @@ namespace ARKViewer
                     }
                 }
 
+            }
+            else
+            {
+                cboTameClass.Items.Add(new ASVCreatureSummary() { ClassName = "", Name = "[All Creatures]", Count = 0 });
             }
 
 

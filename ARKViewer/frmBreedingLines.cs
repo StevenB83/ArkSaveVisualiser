@@ -10,6 +10,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
@@ -80,6 +81,13 @@ namespace ARKViewer
 
         private void PopulateWildLovers()
         {
+
+            var searchRankCriteria = Program.ProgramConfig.BreedingSearchOptions.FirstOrDefault(x => x.ClassName == tame.ClassName & !x.Tamed);
+            if (searchRankCriteria == null) searchRankCriteria = new ASVBreedingSearch()
+            {
+                ClassName = tame.ClassName,
+                Tamed=false
+            };
             var wildMatches = cm.GetWildCreatures(0, int.MaxValue, 50, 50, 250, tame.ClassName).Where(w => w.Gender != tame.Gender).ToList();
             lvwWildLovers.BeginUpdate();
             lvwWildLovers.Items.Clear();
@@ -90,8 +98,12 @@ namespace ARKViewer
 
                 Parallel.ForEach(wildMatches, wild =>
                 {
+
+                    ASVBreedingResult rankedResult = new ASVBreedingResult(tame,wild, searchRankCriteria);
+                    decimal percentRank = (rankedResult.RankCombined / rankedResult.MaxRank) * 100;
+
                     //Rank, Lvl, Lat, Lon, HP, Stam, Melee, Weight, Speed, Food, Oxygen, Craft, c0, c1, c2, c3, c4, c5
-                    ListViewItem newItem = new ListViewItem("0");
+                    ListViewItem newItem = new ListViewItem(percentRank.ToString("f2"));
                     newItem.UseItemStyleForSubItems = false;
 
                     newItem.SubItems.Add(wild.BaseLevel.ToString());
@@ -179,6 +191,12 @@ namespace ARKViewer
 
         private void PopulateTamedLovers()
         {
+
+
+            ASVBreedingSearch searchRankCriteria = Program.ProgramConfig.BreedingSearchOptions.FirstOrDefault(x => x.ClassName == tame.ClassName && x.Tamed);
+            if (searchRankCriteria == null) searchRankCriteria = new ASVBreedingSearch() { ClassName = tame.ClassName, Tamed = true };
+
+
             var tameMatches = cm.GetTamedCreatures(tame.ClassName, chkAllTribes.Checked ? 0 : tame.TargetingTeam, 0, true)
                                 .Where(t => t.Gender != tame.Gender)
                                 .OrderByDescending(o => o.BaseLevel)
@@ -201,10 +219,14 @@ namespace ARKViewer
                     if (tamedCreature.Name != null)
                     {
                         creatureName = tamedCreature.Name;
-                    }
+}
+
+
+                    ASVBreedingResult rankedResult = new ASVBreedingResult(tame, tamedCreature, searchRankCriteria);
+                    decimal percentRank = (rankedResult.RankCombined / rankedResult.MaxRank) * 100;
 
                     //Rank, Lvl, Lat, Lon, HP, Stam, Melee, Weight, Speed, Food, Oxygen, Craft, c0, c1, c2, c3, c4, c5
-                    ListViewItem newItem = new ListViewItem("0");
+                    ListViewItem newItem = new ListViewItem(percentRank.ToString("f2"));
                     newItem.UseItemStyleForSubItems = false;
                     newItem.SubItems.Add(tamedCreature.TribeName);
                     newItem.SubItems.Add(creatureName);
@@ -1387,28 +1409,84 @@ namespace ARKViewer
 
         private void btnTameSettings_Click(object sender, EventArgs e)
         {
-
-
-            using (frmBreedingFindOptions options = new frmBreedingFindOptions(tame.ClassName))
+            
+            using (frmBreedingFindOptions options = new frmBreedingFindOptions(tame))
             {
                 options.Owner = this;
                 if (options.ShowDialog() == DialogResult.OK)
                 {
+                    var selectedOptions = options.SearchOptions;
 
+                    var configOption = Program.ProgramConfig.BreedingSearchOptions.FirstOrDefault(x => x.ClassName == selectedOptions.ClassName && x.Tamed == true);
+                    if (configOption == null)
+                    {
+                        configOption = selectedOptions;
+                        configOption.Tamed = true;
+                        Program.ProgramConfig.BreedingSearchOptions.Add(configOption);
+                    }
+                    else
+                    {
+                        configOption.ColoursRegion0 = selectedOptions.ColoursRegion0;
+                        configOption.ColoursRegion1 = selectedOptions.ColoursRegion1;
+                        configOption.ColoursRegion2 = selectedOptions.ColoursRegion2;
+                        configOption.ColoursRegion3 = selectedOptions.ColoursRegion3;
+                        configOption.ColoursRegion4 = selectedOptions.ColoursRegion4;
+                        configOption.ColoursRegion5 = selectedOptions.ColoursRegion5;
+                        configOption.RangeCrafting = selectedOptions.RangeCrafting;
+                        configOption.RangeFood = selectedOptions.RangeFood;
+                        configOption.RangeHp = selectedOptions.RangeHp;
+                        configOption.RangeMelee = selectedOptions.RangeMelee;
+                        configOption.RangeOxygen = selectedOptions.RangeOxygen;
+                        configOption.RangeSpeed = selectedOptions.RangeSpeed;
+                        configOption.RangeStamina = selectedOptions.RangeStamina;
+                        configOption.RangeWeight = selectedOptions.RangeWeight;
+                    }
+
+                    PopulateTamedLovers();
                 }
             }
         }
 
         private void btnWildSettings_Click(object sender, EventArgs e)
         {
-
-
-            using (frmBreedingFindOptions options = new frmBreedingFindOptions(tame.ClassName))
+            
+            using (frmBreedingFindOptions options = new frmBreedingFindOptions(tame))
             {
                 options.Owner = this;
                 if (options.ShowDialog() == DialogResult.OK)
                 {
+                    options.Owner = this;
+                    if (options.ShowDialog() == DialogResult.OK)
+                    {
+                        var selectedOptions = options.SearchOptions;
 
+                        var configOption = Program.ProgramConfig.BreedingSearchOptions.FirstOrDefault(x => x.ClassName == selectedOptions.ClassName && x.Tamed == false);
+                        if (configOption == null)
+                        {
+                            configOption = selectedOptions;
+                            configOption.Tamed = false;
+                            Program.ProgramConfig.BreedingSearchOptions.Add(configOption);
+                        }
+                        else
+                        {
+                            configOption.ColoursRegion0 = selectedOptions.ColoursRegion0;
+                            configOption.ColoursRegion1 = selectedOptions.ColoursRegion1;
+                            configOption.ColoursRegion2 = selectedOptions.ColoursRegion2;
+                            configOption.ColoursRegion3 = selectedOptions.ColoursRegion3;
+                            configOption.ColoursRegion4 = selectedOptions.ColoursRegion4;
+                            configOption.ColoursRegion5 = selectedOptions.ColoursRegion5;
+                            configOption.RangeCrafting = selectedOptions.RangeCrafting;
+                            configOption.RangeFood = selectedOptions.RangeFood;
+                            configOption.RangeHp = selectedOptions.RangeHp;
+                            configOption.RangeMelee = selectedOptions.RangeMelee;
+                            configOption.RangeOxygen = selectedOptions.RangeOxygen;
+                            configOption.RangeSpeed = selectedOptions.RangeSpeed;
+                            configOption.RangeStamina = selectedOptions.RangeStamina;
+                            configOption.RangeWeight = selectedOptions.RangeWeight;
+                        }
+
+                        PopulateWildLovers();
+                    }
                 }
             }
         }

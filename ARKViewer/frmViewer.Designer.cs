@@ -2316,7 +2316,7 @@
             this.lblMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMap.AutoSize = true;
             this.lblMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMap.Location = new System.Drawing.Point(530, 69);
+            this.lblMap.Location = new System.Drawing.Point(530, 68);
             this.lblMap.Name = "lblMap";
             this.lblMap.Size = new System.Drawing.Size(89, 13);
             this.lblMap.TabIndex = 25;
@@ -2358,7 +2358,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARK Savegame Visualiser";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmViewer_FormClosed);
-            
             this.LocationChanged += new System.EventHandler(this.frmViewer_LocationChanged);
             this.Enter += new System.EventHandler(this.frmViewer_Enter);
             this.mnuContext.ResumeLayout(false);

@@ -76,10 +76,10 @@ namespace ASVPack.Models
             IsNeutered = creatureObject.GetPropertyValue<bool>("bNeutered", 0, false);
             IsBaby = creatureObject.GetPropertyValue<bool>("bIsBaby", 0, false);
 
-            BaseStats = new byte[12];
+            BaseStats = new byte[12] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             for (var i = 0; i < BaseStats.Length; i++) BaseStats[i] = statusObject.GetPropertyValue<ArkByteValue>("NumberOfLevelUpPointsApplied", i)?.ByteValue ?? 0;
 
-            Colors = new byte[6];
+            Colors = new byte[6] { 0,0,0,0,0,0 }; 
             for (var i = 0; i < Colors.Length; i++) Colors[i] = creatureObject.GetPropertyValue<ArkByteValue>("ColorSetIndices", i)?.ByteValue ?? 0;
 
             //resource production

@@ -205,6 +205,8 @@ namespace SavegameToolkit {
             int id = mbbReader.ReadInt32();
             int internalId = id - nameOffset;
 
+   
+
             if (internalId < 0 || internalId >= NameTable.Count) {
                 DebugMessage($"Found invalid nametable index {id} ({internalId})", -4);
                 return null;

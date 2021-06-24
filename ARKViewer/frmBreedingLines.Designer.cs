@@ -114,6 +114,7 @@ namespace ARKViewer
             this.btnTameSettings = new System.Windows.Forms.Button();
             this.chkAllTribes = new System.Windows.Forms.CheckBox();
             this.lvwTameLovers = new System.Windows.Forms.ListView();
+            this.tameLovers_Rank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tameLovers_Tribe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tameLovers_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tameLovers_Base = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -148,6 +149,7 @@ namespace ARKViewer
             this.cboWildCommand = new System.Windows.Forms.ComboBox();
             this.btnWildSettings = new System.Windows.Forms.Button();
             this.lvwWildLovers = new System.Windows.Forms.ListView();
+            this.lvwWildDetail_Rank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Level = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Lon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -168,8 +170,6 @@ namespace ARKViewer
             this.lvwWildDetail_Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnClose = new System.Windows.Forms.Button();
-            this.tameLovers_Rank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwWildDetail_Rank = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.picWindowIcon)).BeginInit();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -888,6 +888,10 @@ namespace ARKViewer
             this.lvwTameLovers.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwTameLovers_ColumnClick);
             this.lvwTameLovers.SelectedIndexChanged += new System.EventHandler(this.lvwTameLovers_SelectedIndexChanged);
             // 
+            // tameLovers_Rank
+            // 
+            this.tameLovers_Rank.Text = "Rank";
+            // 
             // tameLovers_Tribe
             // 
             this.tameLovers_Tribe.Text = "Tribe";
@@ -1126,110 +1130,96 @@ namespace ARKViewer
             this.lvwWildLovers.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwWildLovers_ColumnClick);
             this.lvwWildLovers.SelectedIndexChanged += new System.EventHandler(this.lvwWildDetail_SelectedIndexChanged);
             // 
+            // lvwWildDetail_Rank
+            // 
+            this.lvwWildDetail_Rank.Text = "Rank";
+            // 
             // lvwWildDetail_Level
             // 
-            this.lvwWildDetail_Level.DisplayIndex = 0;
             this.lvwWildDetail_Level.Text = "Lvl";
             // 
             // lvwWildDetail_Lat
             // 
-            this.lvwWildDetail_Lat.DisplayIndex = 1;
             this.lvwWildDetail_Lat.Text = "Lat";
             this.lvwWildDetail_Lat.Width = 51;
             // 
             // lvwWildDetail_Lon
             // 
-            this.lvwWildDetail_Lon.DisplayIndex = 2;
             this.lvwWildDetail_Lon.Text = "Lon";
             this.lvwWildDetail_Lon.Width = 40;
             // 
             // lvwWildDetail_HP
             // 
-            this.lvwWildDetail_HP.DisplayIndex = 3;
             this.lvwWildDetail_HP.Text = "HP";
             this.lvwWildDetail_HP.Width = 45;
             // 
             // lvwWildDetail_Stam
             // 
-            this.lvwWildDetail_Stam.DisplayIndex = 4;
             this.lvwWildDetail_Stam.Text = "Stam";
             this.lvwWildDetail_Stam.Width = 45;
             // 
             // lvwWildDetail_Melee
             // 
-            this.lvwWildDetail_Melee.DisplayIndex = 5;
             this.lvwWildDetail_Melee.Text = "Melee";
             this.lvwWildDetail_Melee.Width = 48;
             // 
             // lvwWildDetail_Weight
             // 
-            this.lvwWildDetail_Weight.DisplayIndex = 6;
             this.lvwWildDetail_Weight.Text = "Weight";
             this.lvwWildDetail_Weight.Width = 55;
             // 
             // lvwWildDetail_Speed
             // 
-            this.lvwWildDetail_Speed.DisplayIndex = 7;
             this.lvwWildDetail_Speed.Text = "Speed";
             this.lvwWildDetail_Speed.Width = 50;
             // 
             // lvwWildDetail_Food
             // 
-            this.lvwWildDetail_Food.DisplayIndex = 8;
             this.lvwWildDetail_Food.Text = "Food";
             this.lvwWildDetail_Food.Width = 47;
             // 
             // lvwWildDetail_Oxygen
             // 
-            this.lvwWildDetail_Oxygen.DisplayIndex = 9;
             this.lvwWildDetail_Oxygen.Text = "Oxygen";
             this.lvwWildDetail_Oxygen.Width = 53;
             // 
             // lvwWildDetail_Craft
             // 
-            this.lvwWildDetail_Craft.DisplayIndex = 10;
             this.lvwWildDetail_Craft.Text = "Craft";
             this.lvwWildDetail_Craft.Width = 50;
             // 
             // lvwWildDetail_Colour1
             // 
-            this.lvwWildDetail_Colour1.DisplayIndex = 11;
             this.lvwWildDetail_Colour1.Text = "C0";
             this.lvwWildDetail_Colour1.Width = 35;
             // 
             // lvwWildDetail_Colour2
             // 
-            this.lvwWildDetail_Colour2.DisplayIndex = 12;
             this.lvwWildDetail_Colour2.Text = "C1";
             this.lvwWildDetail_Colour2.Width = 35;
             // 
             // lvwWildDetail_Colour3
             // 
-            this.lvwWildDetail_Colour3.DisplayIndex = 13;
             this.lvwWildDetail_Colour3.Text = "C2";
             this.lvwWildDetail_Colour3.Width = 35;
             // 
             // lvwWildDetail_Colour4
             // 
-            this.lvwWildDetail_Colour4.DisplayIndex = 14;
             this.lvwWildDetail_Colour4.Text = "C3";
             this.lvwWildDetail_Colour4.Width = 35;
             // 
             // lvwWildDetail_Colour5
             // 
-            this.lvwWildDetail_Colour5.DisplayIndex = 15;
             this.lvwWildDetail_Colour5.Text = "C4";
             this.lvwWildDetail_Colour5.Width = 35;
             // 
             // lvwWildDetail_Colour6
             // 
-            this.lvwWildDetail_Colour6.DisplayIndex = 16;
             this.lvwWildDetail_Colour6.Text = "C5";
             this.lvwWildDetail_Colour6.Width = 35;
             // 
             // lvwWildDetail_Id
             // 
-            this.lvwWildDetail_Id.DisplayIndex = 17;
             this.lvwWildDetail_Id.Text = "Id";
             this.lvwWildDetail_Id.Width = 0;
             // 
@@ -1243,14 +1233,6 @@ namespace ARKViewer
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
-            // 
-            // tameLovers_Rank
-            // 
-            this.tameLovers_Rank.Text = "Rank";
-            // 
-            // lvwWildDetail_Rank
-            // 
-            this.lvwWildDetail_Rank.Text = "Rank";
             // 
             // frmBreedingLines
             // 

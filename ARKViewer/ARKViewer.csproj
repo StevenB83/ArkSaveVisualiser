@@ -212,6 +212,7 @@
       <DependentUpon>frmViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ASVAncestor.cs" />
+    <Compile Include="Models\ASVBreedingResult.cs" />
     <Compile Include="Models\ASVBreedingSearch.cs" />
     <Compile Include="Models\ASVComboValue.cs" />
     <Compile Include="Models\ASVCreatureSummary.cs" />

@@ -34,6 +34,28 @@ namespace ARKViewer
         public static ViewerConfiguration ProgramConfig { get; set; }
         public static ApiConfiguration ApiConfig { get; set; }
 
+
+        public static Dictionary<string, string> MapFilenameMap = new Dictionary<string, string>
+            {
+                { "theisland.ark", "The Island" },
+                { "thecenter.ark", "The Center" },
+                { "scorchedearth_p.ark","Scorched Earth"},
+                { "aberration_p.ark", "Aberration"},
+                { "extinction.ark", "Extinction"},
+                { "ragnarok.ark", "Ragnarok"},
+                { "valguero_p.ark", "Valguero" },
+                { "crystalisles.ark", "Crystal Isles" },
+                { "genesis.ark", "Genesis" },
+                { "gen2.ark", "Genesis 2" },
+                { "astralark.ark", "AstralARK" },
+                { "hope.ark", "Hope"},
+                { "tunguska_p.ark", "Tunguska"},
+                { "caballus_p.ark", "Caballus"},
+                { "viking_p.ark", "Fjördur"},
+                { "tiamatprime.ark", "Tiamat Prime"},
+                { "glacius_p.ark", "Glacius"}
+};
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>

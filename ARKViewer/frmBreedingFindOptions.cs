@@ -1,5 +1,6 @@
 ﻿using ARKViewer.Configuration;
 using ARKViewer.Models;
+using ASVPack.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +16,7 @@ namespace ARKViewer
     public partial class frmBreedingFindOptions : Form
     {
         public ASVBreedingSearch SearchOptions { get; internal set; } = new ASVBreedingSearch();
+        public ContentTamedCreature SelectedTame { get; internal set; } = null;
 
         private void LoadWindowSettings()
         {
@@ -68,29 +70,21 @@ namespace ARKViewer
             SearchOptions = Program.ProgramConfig.BreedingSearchOptions.FirstOrDefault(o => o.ClassName == className);
             if (SearchOptions == null) SearchOptions = new ASVBreedingSearch() { ClassName = className };
 
-            udMinHp.Value = SearchOptions.RangeHp.Item1;
-            udMaxHp.Value = SearchOptions.RangeHp.Item2;
+            udMaxHp.Value = SearchOptions.RangeHp;
 
-            udMinStamina.Value = SearchOptions.RangeStamina.Item1;
-            udMaxStamina.Value = SearchOptions.RangeStamina.Item2;
+            udMaxStamina.Value = SearchOptions.RangeStamina;
 
-            udMinMelee.Value = SearchOptions.RangeMelee.Item1;
-            udMaxMelee.Value = SearchOptions.RangeMelee.Item2;
+            udMaxMelee.Value = SearchOptions.RangeMelee;
 
-            udMinWeight.Value = SearchOptions.RangeWeight.Item1;
-            udMaxWeight.Value = SearchOptions.RangeWeight.Item2;
+            udMaxWeight.Value = SearchOptions.RangeWeight;
 
-            udMinSpeed.Value = SearchOptions.RangeSpeed.Item1;
-            udMaxSpeed.Value = SearchOptions.RangeSpeed.Item2;
+            udMaxSpeed.Value = SearchOptions.RangeSpeed;
 
-            udMinFood.Value = SearchOptions.RangeFood.Item1;
-            udMaxFood.Value = SearchOptions.RangeFood.Item2;
+            udMaxFood.Value = SearchOptions.RangeFood;
 
-            udMinOxygen.Value = SearchOptions.RangeOxygen.Item1;
-            udMaxOxygen.Value = SearchOptions.RangeOxygen.Item2;
+            udMaxOxygen.Value = SearchOptions.RangeOxygen;
 
-            udMinCrafting.Value = SearchOptions.RangeCrafting.Item1;
-            udMaxCrafting.Value = SearchOptions.RangeCrafting.Item2;
+            udMaxCrafting.Value = SearchOptions.RangeCrafting;
 
             cboColours0.Items.Clear();
             foreach (var colourId in SearchOptions.ColoursRegion0)
@@ -132,14 +126,14 @@ namespace ARKViewer
 
         private void SaveOptions()
         {
-            SearchOptions.RangeHp = new Tuple<int, int>((int)udMinHp.Value, (int)udMaxHp.Value);
-            SearchOptions.RangeCrafting = new Tuple<int, int>((int)udMinCrafting.Value, (int)udMaxCrafting.Value);
-            SearchOptions.RangeFood = new Tuple<int, int>((int)udMinFood.Value, (int)udMaxFood.Value);
-            SearchOptions.RangeMelee = new Tuple<int, int>((int)udMinMelee.Value, (int)udMaxMelee.Value);
-            SearchOptions.RangeOxygen = new Tuple<int, int>((int)udMinOxygen.Value, (int)udMaxOxygen.Value);
-            SearchOptions.RangeSpeed = new Tuple<int, int>((int)udMinSpeed.Value, (int)udMaxSpeed.Value);
-            SearchOptions.RangeStamina = new Tuple<int, int>((int)udMinStamina.Value, (int)udMaxStamina.Value);
-            SearchOptions.RangeWeight = new Tuple<int, int>((int)udMinWeight.Value, (int)udMaxWeight.Value);
+            SearchOptions.RangeHp = (int)udMaxHp.Value;
+            SearchOptions.RangeCrafting = (int)udMaxCrafting.Value;
+            SearchOptions.RangeFood = (int)udMaxFood.Value;
+            SearchOptions.RangeMelee = (int)udMaxMelee.Value;
+            SearchOptions.RangeOxygen = (int)udMaxOxygen.Value;
+            SearchOptions.RangeSpeed = (int)udMaxSpeed.Value;
+            SearchOptions.RangeStamina = (int)udMaxStamina.Value;
+            SearchOptions.RangeWeight = (int)udMaxWeight.Value;
 
             SearchOptions.ColoursRegion0 = new List<int>();
             SearchOptions.ColoursRegion0.AddRange(cboColours0.Items.Cast<Object>().Select(s => int.Parse(s.ToString())).ToList());
@@ -170,11 +164,12 @@ namespace ARKViewer
             }
         }
 
-        public frmBreedingFindOptions(string className)
+        public frmBreedingFindOptions(ContentTamedCreature tamedCreature)
         {
             InitializeComponent();
             LoadWindowSettings();
-            LoadOptions(className);
+            SelectedTame = tamedCreature;
+            LoadOptions(tamedCreature.ClassName);
         }
 
         private void frmBreedingFindOptions_Load(object sender, EventArgs e)
@@ -191,6 +186,8 @@ namespace ARKViewer
         private void btnApply_Click(object sender, EventArgs e)
         {
             SaveOptions();
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void btnAddColour0_Click(object sender, EventArgs e)
@@ -222,8 +219,9 @@ namespace ARKViewer
             var item = selectedCombo.Items[e.Index];
             int.TryParse(item.ToString(), out int colourId);
 
+            Brush backBrush = new SolidBrush(Color.White);
             var map = Program.ProgramConfig.ColourMap.FirstOrDefault(c => c.Id == colourId);
-            Brush backBrush = new SolidBrush(map.Color);
+            if (map != null) backBrush = new SolidBrush(map.Color);
             e.Graphics.FillRectangle(backBrush, e.Bounds);
 
         }
@@ -316,6 +314,12 @@ namespace ARKViewer
         private void btnRemoveColour5_Click(object sender, EventArgs e)
         {
             cboColours5.Items.RemoveAt(cboColours5.SelectedIndex);
+        }
+
+        private void RangeEnter(object sender, EventArgs e)
+        {
+            NumericUpDown ud = (NumericUpDown)sender;
+            ud.Select(0, ((int)ud.Value).ToString("f0").Length);
         }
     }
 }

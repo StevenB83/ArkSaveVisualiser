@@ -30,20 +30,25 @@ namespace SavegameToolkit.Data {
 
                     for (int structIndex = 0; structIndex < structCount; structIndex++) {
                         string structName = archive.ReadString();
-                        StructPropertyList properties = new StructPropertyList(archive);
+                        if (!string.IsNullOrEmpty(structName))
+                        {
+                            StructPropertyList properties = new StructPropertyList(archive);
 
-                        int shouldBeZero2 = archive.ReadInt();
-                        if (shouldBeZero2 != 0) {
-                            throw new UnexpectedDataException($"Expected int after properties to be 0 but found {shouldBeZero2} at {(archive.Position - 4):X4}");
+                            int shouldBeZero2 = archive.ReadInt();
+                            if (shouldBeZero2 != 0)
+                            {
+                                throw new UnexpectedDataException($"Expected int after properties to be 0 but found {shouldBeZero2} at {(archive.Position - 4):X4}");
+                            }
+
+                            structMap[structName] = properties;
                         }
-
-                        structMap[structName] = properties;
+                        
                     }
 
                     structMapList.Add(structMap);
                 }
             } catch (UnreadablePropertyException upe) {
-                throw new UnexpectedDataException(upe);
+                //throw new UnexpectedDataException(upe);
             }
 
             ExtraDataFoliage extraDataFoliage = new ExtraDataFoliage {

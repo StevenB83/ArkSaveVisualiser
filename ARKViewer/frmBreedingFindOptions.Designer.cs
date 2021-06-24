@@ -31,31 +31,22 @@ namespace ARKViewer
         {
             this.grpStats = new System.Windows.Forms.GroupBox();
             this.udMaxCrafting = new System.Windows.Forms.NumericUpDown();
-            this.udMinCrafting = new System.Windows.Forms.NumericUpDown();
             this.lblCrafting = new System.Windows.Forms.Label();
             this.udMaxOxygen = new System.Windows.Forms.NumericUpDown();
-            this.udMinOxygen = new System.Windows.Forms.NumericUpDown();
             this.lblOxygen = new System.Windows.Forms.Label();
             this.udMaxFood = new System.Windows.Forms.NumericUpDown();
-            this.udMinFood = new System.Windows.Forms.NumericUpDown();
             this.lblFood = new System.Windows.Forms.Label();
             this.udMaxSpeed = new System.Windows.Forms.NumericUpDown();
-            this.udMinSpeed = new System.Windows.Forms.NumericUpDown();
             this.lblSpeed = new System.Windows.Forms.Label();
             this.udMaxWeight = new System.Windows.Forms.NumericUpDown();
-            this.udMinWeight = new System.Windows.Forms.NumericUpDown();
             this.lblWeight = new System.Windows.Forms.Label();
             this.udMaxMelee = new System.Windows.Forms.NumericUpDown();
-            this.udMinMelee = new System.Windows.Forms.NumericUpDown();
             this.lblMelee = new System.Windows.Forms.Label();
             this.udMaxStamina = new System.Windows.Forms.NumericUpDown();
-            this.udMinStamina = new System.Windows.Forms.NumericUpDown();
             this.lblStamina = new System.Windows.Forms.Label();
             this.udMaxHp = new System.Windows.Forms.NumericUpDown();
-            this.udMinHp = new System.Windows.Forms.NumericUpDown();
             this.lblHp = new System.Windows.Forms.Label();
             this.lblStatsMax = new System.Windows.Forms.Label();
-            this.lblStatsMin = new System.Windows.Forms.Label();
             this.lblBaseStats = new System.Windows.Forms.Label();
             this.lblHeaderStats = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -89,63 +80,46 @@ namespace ARKViewer
             this.lblHeaderColours = new System.Windows.Forms.Label();
             this.grpStats.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxCrafting)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinCrafting)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxOxygen)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinOxygen)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxFood)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinFood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxSpeed)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxWeight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxMelee)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinMelee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxStamina)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinStamina)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxHp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinHp)).BeginInit();
             this.grpColours.SuspendLayout();
             this.SuspendLayout();
             // 
             // grpStats
             // 
             this.grpStats.Controls.Add(this.udMaxCrafting);
-            this.grpStats.Controls.Add(this.udMinCrafting);
             this.grpStats.Controls.Add(this.lblCrafting);
             this.grpStats.Controls.Add(this.udMaxOxygen);
-            this.grpStats.Controls.Add(this.udMinOxygen);
             this.grpStats.Controls.Add(this.lblOxygen);
             this.grpStats.Controls.Add(this.udMaxFood);
-            this.grpStats.Controls.Add(this.udMinFood);
             this.grpStats.Controls.Add(this.lblFood);
             this.grpStats.Controls.Add(this.udMaxSpeed);
-            this.grpStats.Controls.Add(this.udMinSpeed);
             this.grpStats.Controls.Add(this.lblSpeed);
             this.grpStats.Controls.Add(this.udMaxWeight);
-            this.grpStats.Controls.Add(this.udMinWeight);
             this.grpStats.Controls.Add(this.lblWeight);
             this.grpStats.Controls.Add(this.udMaxMelee);
-            this.grpStats.Controls.Add(this.udMinMelee);
             this.grpStats.Controls.Add(this.lblMelee);
             this.grpStats.Controls.Add(this.udMaxStamina);
-            this.grpStats.Controls.Add(this.udMinStamina);
             this.grpStats.Controls.Add(this.lblStamina);
             this.grpStats.Controls.Add(this.udMaxHp);
-            this.grpStats.Controls.Add(this.udMinHp);
             this.grpStats.Controls.Add(this.lblHp);
             this.grpStats.Controls.Add(this.lblStatsMax);
-            this.grpStats.Controls.Add(this.lblStatsMin);
             this.grpStats.Controls.Add(this.lblBaseStats);
             this.grpStats.Controls.Add(this.lblHeaderStats);
             this.grpStats.Location = new System.Drawing.Point(10, 11);
             this.grpStats.Name = "grpStats";
-            this.grpStats.Size = new System.Drawing.Size(278, 247);
+            this.grpStats.Size = new System.Drawing.Size(225, 247);
             this.grpStats.TabIndex = 1;
             this.grpStats.TabStop = false;
             // 
             // udMaxCrafting
             // 
-            this.udMaxCrafting.Location = new System.Drawing.Point(211, 217);
+            this.udMaxCrafting.Location = new System.Drawing.Point(158, 217);
             this.udMaxCrafting.Name = "udMaxCrafting";
             this.udMaxCrafting.Size = new System.Drawing.Size(50, 20);
             this.udMaxCrafting.TabIndex = 27;
@@ -154,13 +128,8 @@ namespace ARKViewer
             0,
             0,
             0});
-            // 
-            // udMinCrafting
-            // 
-            this.udMinCrafting.Location = new System.Drawing.Point(147, 217);
-            this.udMinCrafting.Name = "udMinCrafting";
-            this.udMinCrafting.Size = new System.Drawing.Size(50, 20);
-            this.udMinCrafting.TabIndex = 26;
+            this.udMaxCrafting.Click += new System.EventHandler(this.RangeEnter);
+            this.udMaxCrafting.Enter += new System.EventHandler(this.RangeEnter);
             // 
             // lblCrafting
             // 
@@ -174,7 +143,7 @@ namespace ARKViewer
             // 
             // udMaxOxygen
             // 
-            this.udMaxOxygen.Location = new System.Drawing.Point(211, 191);
+            this.udMaxOxygen.Location = new System.Drawing.Point(158, 191);
             this.udMaxOxygen.Name = "udMaxOxygen";
             this.udMaxOxygen.Size = new System.Drawing.Size(50, 20);
             this.udMaxOxygen.TabIndex = 24;
@@ -183,13 +152,8 @@ namespace ARKViewer
             0,
             0,
             0});
-            // 
-            // udMinOxygen
-            // 
-            this.udMinOxygen.Location = new System.Drawing.Point(147, 191);
-            this.udMinOxygen.Name = "udMinOxygen";
-            this.udMinOxygen.Size = new System.Drawing.Size(50, 20);
-            this.udMinOxygen.TabIndex = 23;
+            this.udMaxOxygen.Click += new System.EventHandler(this.RangeEnter);
+            this.udMaxOxygen.Enter += new System.EventHandler(this.RangeEnter);
             // 
             // lblOxygen
             // 
@@ -203,7 +167,7 @@ namespace ARKViewer
             // 
             // udMaxFood
             // 
-            this.udMaxFood.Location = new System.Drawing.Point(211, 165);
+            this.udMaxFood.Location = new System.Drawing.Point(158, 165);
             this.udMaxFood.Name = "udMaxFood";
             this.udMaxFood.Size = new System.Drawing.Size(50, 20);
             this.udMaxFood.TabIndex = 21;
@@ -212,13 +176,8 @@ namespace ARKViewer
             0,
             0,
             0});
-            // 
-            // udMinFood
-            // 
-            this.udMinFood.Location = new System.Drawing.Point(147, 165);
-            this.udMinFood.Name = "udMinFood";
-            this.udMinFood.Size = new System.Drawing.Size(50, 20);
-            this.udMinFood.TabIndex = 20;
+            this.udMaxFood.Click += new System.EventHandler(this.RangeEnter);
+            this.udMaxFood.Enter += new System.EventHandler(this.RangeEnter);
             // 
             // lblFood
             // 
@@ -232,7 +191,7 @@ namespace ARKViewer
             // 
             // udMaxSpeed
             // 
-            this.udMaxSpeed.Location = new System.Drawing.Point(211, 139);
+            this.udMaxSpeed.Location = new System.Drawing.Point(158, 139);
             this.udMaxSpeed.Name = "udMaxSpeed";
             this.udMaxSpeed.Size = new System.Drawing.Size(50, 20);
             this.udMaxSpeed.TabIndex = 18;
@@ -241,13 +200,8 @@ namespace ARKViewer
             0,
             0,
             0});
-            // 
-            // udMinSpeed
-            // 
-            this.udMinSpeed.Location = new System.Drawing.Point(147, 139);
-            this.udMinSpeed.Name = "udMinSpeed";
-            this.udMinSpeed.Size = new System.Drawing.Size(50, 20);
-            this.udMinSpeed.TabIndex = 17;
+            this.udMaxSpeed.Click += new System.EventHandler(this.RangeEnter);
+            this.udMaxSpeed.Enter += new System.EventHandler(this.RangeEnter);
             // 
             // lblSpeed
             // 
@@ -261,7 +215,7 @@ namespace ARKViewer
             // 
             // udMaxWeight
             // 
-            this.udMaxWeight.Location = new System.Drawing.Point(211, 113);
+            this.udMaxWeight.Location = new System.Drawing.Point(158, 113);
             this.udMaxWeight.Name = "udMaxWeight";
             this.udMaxWeight.Size = new System.Drawing.Size(50, 20);
             this.udMaxWeight.TabIndex = 15;
@@ -270,13 +224,8 @@ namespace ARKViewer
             0,
             0,
             0});
-            // 
-            // udMinWeight
-            // 
-            this.udMinWeight.Location = new System.Drawing.Point(147, 113);
-            this.udMinWeight.Name = "udMinWeight";
-            this.udMinWeight.Size = new System.Drawing.Size(50, 20);
-            this.udMinWeight.TabIndex = 14;
+            this.udMaxWeight.Click += new System.EventHandler(this.RangeEnter);
+            this.udMaxWeight.Enter += new System.EventHandler(this.RangeEnter);
             // 
             // lblWeight
             // 
@@ -290,7 +239,7 @@ namespace ARKViewer
             // 
             // udMaxMelee
             // 
-            this.udMaxMelee.Location = new System.Drawing.Point(211, 87);
+            this.udMaxMelee.Location = new System.Drawing.Point(158, 87);
             this.udMaxMelee.Name = "udMaxMelee";
             this.udMaxMelee.Size = new System.Drawing.Size(50, 20);
             this.udMaxMelee.TabIndex = 12;
@@ -299,13 +248,8 @@ namespace ARKViewer
             0,
             0,
             0});
-            // 
-            // udMinMelee
-            // 
-            this.udMinMelee.Location = new System.Drawing.Point(147, 87);
-            this.udMinMelee.Name = "udMinMelee";
-            this.udMinMelee.Size = new System.Drawing.Size(50, 20);
-            this.udMinMelee.TabIndex = 11;
+            this.udMaxMelee.Click += new System.EventHandler(this.RangeEnter);
+            this.udMaxMelee.Enter += new System.EventHandler(this.RangeEnter);
             // 
             // lblMelee
             // 
@@ -319,7 +263,7 @@ namespace ARKViewer
             // 
             // udMaxStamina
             // 
-            this.udMaxStamina.Location = new System.Drawing.Point(211, 61);
+            this.udMaxStamina.Location = new System.Drawing.Point(158, 61);
             this.udMaxStamina.Name = "udMaxStamina";
             this.udMaxStamina.Size = new System.Drawing.Size(50, 20);
             this.udMaxStamina.TabIndex = 9;
@@ -328,13 +272,8 @@ namespace ARKViewer
             0,
             0,
             0});
-            // 
-            // udMinStamina
-            // 
-            this.udMinStamina.Location = new System.Drawing.Point(147, 61);
-            this.udMinStamina.Name = "udMinStamina";
-            this.udMinStamina.Size = new System.Drawing.Size(50, 20);
-            this.udMinStamina.TabIndex = 8;
+            this.udMaxStamina.Click += new System.EventHandler(this.RangeEnter);
+            this.udMaxStamina.Enter += new System.EventHandler(this.RangeEnter);
             // 
             // lblStamina
             // 
@@ -348,7 +287,7 @@ namespace ARKViewer
             // 
             // udMaxHp
             // 
-            this.udMaxHp.Location = new System.Drawing.Point(211, 35);
+            this.udMaxHp.Location = new System.Drawing.Point(158, 35);
             this.udMaxHp.Name = "udMaxHp";
             this.udMaxHp.Size = new System.Drawing.Size(50, 20);
             this.udMaxHp.TabIndex = 6;
@@ -357,13 +296,8 @@ namespace ARKViewer
             0,
             0,
             0});
-            // 
-            // udMinHp
-            // 
-            this.udMinHp.Location = new System.Drawing.Point(147, 35);
-            this.udMinHp.Name = "udMinHp";
-            this.udMinHp.Size = new System.Drawing.Size(50, 20);
-            this.udMinHp.TabIndex = 5;
+            this.udMaxHp.Click += new System.EventHandler(this.RangeEnter);
+            this.udMaxHp.Enter += new System.EventHandler(this.RangeEnter);
             // 
             // lblHp
             // 
@@ -379,21 +313,11 @@ namespace ARKViewer
             // 
             this.lblStatsMax.AutoSize = true;
             this.lblStatsMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatsMax.Location = new System.Drawing.Point(205, 13);
+            this.lblStatsMax.Location = new System.Drawing.Point(152, 13);
             this.lblStatsMax.Name = "lblStatsMax";
             this.lblStatsMax.Size = new System.Drawing.Size(34, 13);
             this.lblStatsMax.TabIndex = 3;
             this.lblStatsMax.Text = "Max.";
-            // 
-            // lblStatsMin
-            // 
-            this.lblStatsMin.AutoSize = true;
-            this.lblStatsMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblStatsMin.Location = new System.Drawing.Point(144, 13);
-            this.lblStatsMin.Name = "lblStatsMin";
-            this.lblStatsMin.Size = new System.Drawing.Size(31, 13);
-            this.lblStatsMin.TabIndex = 2;
-            this.lblStatsMin.Text = "Min.";
             // 
             // lblBaseStats
             // 
@@ -413,7 +337,7 @@ namespace ARKViewer
             this.lblHeaderStats.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHeaderStats.Location = new System.Drawing.Point(0, 0);
             this.lblHeaderStats.Name = "lblHeaderStats";
-            this.lblHeaderStats.Size = new System.Drawing.Size(280, 6);
+            this.lblHeaderStats.Size = new System.Drawing.Size(227, 6);
             this.lblHeaderStats.TabIndex = 0;
             this.lblHeaderStats.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
@@ -421,7 +345,7 @@ namespace ARKViewer
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(537, 266);
+            this.btnCancel.Location = new System.Drawing.Point(481, 266);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -431,9 +355,8 @@ namespace ARKViewer
             // btnApply
             // 
             this.btnApply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnApply.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnApply.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnApply.Location = new System.Drawing.Point(456, 266);
+            this.btnApply.Location = new System.Drawing.Point(400, 266);
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(75, 23);
             this.btnApply.TabIndex = 3;
@@ -469,7 +392,7 @@ namespace ARKViewer
             this.grpColours.Controls.Add(this.lblColours0);
             this.grpColours.Controls.Add(this.label2);
             this.grpColours.Controls.Add(this.lblHeaderColours);
-            this.grpColours.Location = new System.Drawing.Point(296, 12);
+            this.grpColours.Location = new System.Drawing.Point(243, 12);
             this.grpColours.Name = "grpColours";
             this.grpColours.Size = new System.Drawing.Size(314, 246);
             this.grpColours.TabIndex = 5;
@@ -774,14 +697,16 @@ namespace ARKViewer
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(620, 301);
+            this.ClientSize = new System.Drawing.Size(564, 301);
             this.Controls.Add(this.grpColours);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.grpStats);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(580, 340);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(580, 340);
             this.Name = "frmBreedingFindOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Breeding Rank Options";
@@ -790,21 +715,13 @@ namespace ARKViewer
             this.grpStats.ResumeLayout(false);
             this.grpStats.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxCrafting)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinCrafting)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxOxygen)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinOxygen)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxFood)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinFood)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxSpeed)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxWeight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxMelee)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinMelee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxStamina)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinStamina)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udMaxHp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udMinHp)).EndInit();
             this.grpColours.ResumeLayout(false);
             this.grpColours.PerformLayout();
             this.ResumeLayout(false);
@@ -822,10 +739,8 @@ namespace ARKViewer
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblHeaderColours;
         private System.Windows.Forms.NumericUpDown udMaxHp;
-        private System.Windows.Forms.NumericUpDown udMinHp;
         private System.Windows.Forms.Label lblHp;
         private System.Windows.Forms.Label lblStatsMax;
-        private System.Windows.Forms.Label lblStatsMin;
         private System.Windows.Forms.Label lblColours5;
         private System.Windows.Forms.Label lblColours4;
         private System.Windows.Forms.Label lblColours3;
@@ -851,25 +766,18 @@ namespace ARKViewer
         private System.Windows.Forms.Button btnRemoveColour0;
         private System.Windows.Forms.Button btnAddColour0;
         private System.Windows.Forms.NumericUpDown udMaxSpeed;
-        private System.Windows.Forms.NumericUpDown udMinSpeed;
         private System.Windows.Forms.Label lblSpeed;
         private System.Windows.Forms.NumericUpDown udMaxWeight;
-        private System.Windows.Forms.NumericUpDown udMinWeight;
         private System.Windows.Forms.Label lblWeight;
         private System.Windows.Forms.NumericUpDown udMaxMelee;
-        private System.Windows.Forms.NumericUpDown udMinMelee;
         private System.Windows.Forms.Label lblMelee;
         private System.Windows.Forms.NumericUpDown udMaxStamina;
-        private System.Windows.Forms.NumericUpDown udMinStamina;
         private System.Windows.Forms.Label lblStamina;
         private System.Windows.Forms.NumericUpDown udMaxCrafting;
-        private System.Windows.Forms.NumericUpDown udMinCrafting;
         private System.Windows.Forms.Label lblCrafting;
         private System.Windows.Forms.NumericUpDown udMaxOxygen;
-        private System.Windows.Forms.NumericUpDown udMinOxygen;
         private System.Windows.Forms.Label lblOxygen;
         private System.Windows.Forms.NumericUpDown udMaxFood;
-        private System.Windows.Forms.NumericUpDown udMinFood;
         private System.Windows.Forms.Label lblFood;
     }
 }

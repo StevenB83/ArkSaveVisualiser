@@ -102,7 +102,6 @@ namespace ASVPack.Models
 
 
 
-
                         if (!arkSavegame.HibernationEntries.Any())
                         {
                             objectContainer = arkSavegame;
@@ -229,8 +228,6 @@ namespace ASVPack.Models
                         long wildStart = DateTime.Now.Ticks;
 
                         //wilds
-                        var testWilds = objectContainer.Objects.Where(x => x.IsWild() && x.ClassString == null).ToList();
-
                         WildCreatures = objectContainer.Objects.Where(x => x.IsWild())
                             .Select(x =>
                             {

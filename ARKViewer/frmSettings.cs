@@ -26,26 +26,7 @@ namespace ARKViewer
         ASVDataManager cm = null;
         bool changesApplied = false;
 
-        Dictionary<string, string> mapFilenameMap = new Dictionary<string, string>
-            {
-                { "theisland.ark", "The Island" },
-                { "thecenter.ark", "The Center" },
-                { "scorchedearth_p.ark","Scorched Earth"},
-                { "aberration_p.ark", "Aberration"},
-                { "extinction.ark", "Extinction"},
-                { "ragnarok.ark", "Ragnarok"},
-                { "valguero_p.ark", "Valguero" },
-                { "crystalisles.ark", "Crystal Isles" },
-                { "genesis.ark", "Genesis" },
-                { "gen2.ark", "Genesis 2" },
-                { "astralark.ark", "AstralARK" },
-                { "hope.ark", "Hope"},
-                { "tunguska_p.ark", "Tunguska"},
-                { "caballus_p.ark", "Caballus"},
-                { "viking_p.ark", "Fjördur"},
-                { "tiamatprime.ark", "Tiamat Prime"},
-                { "glacius_p.ark", "Glacius"}
-};
+        
 
         public ViewerConfiguration SavedConfig { get; set; }
         public frmSettings(ASVDataManager manager)
@@ -477,11 +458,14 @@ namespace ARKViewer
                 //no directory found for steam from registry, ask user.
                 if (MessageBox.Show("Unable to determine Steam library folder.\n\nWould you like to select it yourself?", "Steam Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-
-                    //TODO://
-
-
-
+                    using(FolderBrowserDialog browse = new FolderBrowserDialog())
+                    {
+                        browse.Description = "Select Steam library folder containing SteamApps.";
+                        if(browse.ShowDialog() == DialogResult.OK)
+                        {
+                            directoryCheck = browse.SelectedPath;
+                        }
+                    }
                 }
             }
 
@@ -492,9 +476,9 @@ namespace ARKViewer
                 foreach (string saveFilename in saveFiles)
                 {
                     string fileName = Path.GetFileName(saveFilename);
-                    if (mapFilenameMap.ContainsKey(fileName.ToLower()))
+                    if (Program.MapFilenameMap.ContainsKey(fileName.ToLower()))
                     {
-                        string knownMapName = mapFilenameMap[fileName.ToLower()];
+                        string knownMapName = Program.MapFilenameMap[fileName.ToLower()];
                         if (knownMapName.Length > 0)
                         {
                             ASVComboValue comboValue = new ASVComboValue(saveFilename, knownMapName);
@@ -610,7 +594,7 @@ namespace ARKViewer
             }
 
             cboFtpMap.Items.Clear();
-            var orderedMap = mapFilenameMap.OrderBy(o => o.Value);
+            var orderedMap = Program.MapFilenameMap.OrderBy(o => o.Value);
             foreach (var knownMap in orderedMap)
             {
                 ASVComboValue comboValue = new ASVComboValue(knownMap.Key, knownMap.Value);
