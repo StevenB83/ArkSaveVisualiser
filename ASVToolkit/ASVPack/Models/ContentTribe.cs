@@ -19,6 +19,7 @@ namespace ASVPack.Models
         [DataMember] public string TribeName { get; set; } = "";
         [DataMember] public bool IsSolo { get; set; } = false;
 
+
         [DataMember] public ConcurrentBag<ContentPlayer> Players { get; set; } = new ConcurrentBag<ContentPlayer>();
         [DataMember] public ConcurrentBag<ContentStructure> Structures { get; set; } = new ConcurrentBag<ContentStructure>();
         [DataMember] public ConcurrentBag<ContentTamedCreature> Tames { get; set; } = new ConcurrentBag<ContentTamedCreature>();
@@ -30,12 +31,8 @@ namespace ASVPack.Models
         {
             get
             {
-                if (Players == null || Players.Count == 0)
-                {
-                    return TribeFileDate;
-                }
                 
-                return Players.Max(p => p.LastActiveDateTime);
+                return Players.Max(p => p.LastActiveDateTime) ?? TribeFileDate;
             }
         }
         public bool HasGameFile {get;set;} = false;
@@ -45,7 +42,9 @@ namespace ASVPack.Models
             PropertyStruct properties = (PropertyStruct)tribeObject.Properties[0];
             StructPropertyList propertyList = (StructPropertyList)properties.Value;
             
+            
             TribeId = propertyList.GetPropertyValue<int>("TribeId");
+            if (TribeId == 0) TribeId = propertyList.GetPropertyValue<int>("TribeID");
             TribeName = propertyList.GetPropertyValue<string>("TribeName");
 
             //players

@@ -644,6 +644,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ASV.ico" />
+    <None Include="Resources\map_lostisland.png" />
+    <None Include="Resources\map_antartika.png" />
     <None Include="Resources\map_glacius.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

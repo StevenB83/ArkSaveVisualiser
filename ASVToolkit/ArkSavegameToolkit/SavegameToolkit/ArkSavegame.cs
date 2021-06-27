@@ -99,18 +99,24 @@ namespace SavegameToolkit
                 readBinaryHibernation(archive, options);
             }
 
+
+            var storedCreatures = this.Objects.Where(x => x.ClassString.Contains("Cryop") || x.ClassString.Contains("SoulTrap_") || x.ClassString == "BP_Vivarium_C").ToList();
             // Parse creatures in cryopods and soultraps (from the mod DinoStorageV2)
-            foreach (var storedContainer in this.Objects.Where(x => x.ClassString.Contains("Cryop") || x.ClassString.Contains("SoulTrap_") || x.ClassString == "BP_Vivarium_C").ToList())
+
+            
+            foreach (var storedPod in storedCreatures)
+            //Parallel.ForEach(storedCreatures, storedPod => 
             {
-                ArkArrayStruct customItemDatas = storedContainer.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas");
+
+                ArkArrayStruct customItemDatas = storedPod.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas");
                 StructPropertyList customDinoData = (StructPropertyList)customItemDatas?.FirstOrDefault(cd => ((StructPropertyList)cd).GetTypedProperty<PropertyName>("CustomDataName").Value.Name == "Dino");
                 PropertyStruct customDataBytes = customDinoData?.Properties.FirstOrDefault(p => p.NameString == "CustomDataBytes") as PropertyStruct;
                 PropertyArray byteArrays = (customDataBytes?.Value as StructPropertyList)?.Properties.FirstOrDefault(property => property.NameString == "ByteArrays") as PropertyArray;
                 ArkArrayStruct byteArraysValue = byteArrays?.Value as ArkArrayStruct;
-                if (!(byteArraysValue?.Any() ?? false)) continue;
+                if (!(byteArraysValue?.Any() ?? false)) return;
 
                 ArkArrayUInt8 creatureBytes = ((byteArraysValue?[0] as StructPropertyList)?.Properties.FirstOrDefault(p => p.NameString == "Bytes") as PropertyArray)?.Value as ArkArrayUInt8;
-                if (creatureBytes == null) continue;
+                if (creatureBytes == null) return;
 
                 var cryoStream = new System.IO.MemoryStream(creatureBytes.ToArray<byte>());
 
@@ -118,7 +124,7 @@ namespace SavegameToolkit
                 {
                     // number of serialized objects
                     int objCount = cryoArchive.ReadInt();
-                    if (objCount == 0) continue;
+                    if (objCount == 0) return;
                     if (objCount == 3) objCount = 2; //only interested in creature and statuscomponent
 
                     var storedGameObjects = new List<GameObject>(objCount);
@@ -134,7 +140,7 @@ namespace SavegameToolkit
                     // assume the first object is the creature object
                     string creatureActorId = storedGameObjects[0].Names[0].ToString();
 
-                    switch (storedContainer.ClassString)
+                    switch (storedPod.ClassString)
                     {
                         case "BP_Vivarium_C":
                             //vivarium
@@ -152,25 +158,53 @@ namespace SavegameToolkit
 
                     // add cryopod object as parent to all child objects of the creature object (ActorIDs are not unique across cryopodded and non-cryopodded creatures)
                     // assume that child objects are stored after their parent objects
-                    foreach (var ob in storedGameObjects)
+
+                    var creatureObject = storedGameObjects[0];
+                    var statusObject = storedGameObjects[1];
+
+                    //get parent of cryopod owner inventory
+                    var podParentRef = storedPod.GetPropertyValue<ObjectReference>("OwnerInventory");
+                    var podParent = Objects.FirstOrDefault(o => o.GetPropertyValue<ObjectReference>("MyInventoryComponent")?.ObjectId == podParentRef.ObjectId);
+
+                    //determine if we need to re-team the podded animal
+                    if (podParent != null)
                     {
-                        int nIndex = ob.Names.FindIndex(n => n.ToString() == creatureActorId);
-                        if (nIndex != -1)
+                        creatureObject.Location = podParent.Location;
+
+                        int obTeam = creatureObject.GetPropertyValue<int>("TargetingTeam");
+                        int containerTeam = podParent.GetPropertyValue<int>("TargetingTeam");
+                        if (obTeam != containerTeam)
                         {
-                            ob.Names.Insert(nIndex + 1, storedContainer.Names[0]);
-                            addObject(ob, false);
+                            creatureObject.Properties.RemoveAt(creatureObject.Properties.FindIndex(i => i.NameString == "TargetingTeam"));
+                            creatureObject.Properties.Add(new PropertyInt("TargetingTeam", containerTeam));
+
+
+                            if (creatureObject.HasAnyProperty("TamingTeamID"))
+                            {
+                                creatureObject.Properties.RemoveAt(creatureObject.Properties.FindIndex(i => i.NameString == "TamingTeamID"));
+                                creatureObject.Properties.Add(new PropertyInt("TamingTeamID", containerTeam));
+                            }
+
                         }
                     }
 
-                    // assign the created ID of the dinoStatusComponent to the creature's property.
-                    var statusComponentObject = storedGameObjects.FirstOrDefault(ob => ob.ClassString?.StartsWith("DinoCharacterStatusComponent") ?? false);
-                    if (statusComponentObject != null)
+
+                    addObject(statusObject, false);
+
+                    if (statusObject != null)
                     {
                         var statusComponentRef = storedGameObjects[0].GetTypedProperty<PropertyObject>("MyCharacterStatusComponent");
-                        statusComponentRef.Value.ObjectId = statusComponentObject.Id;
+                        statusComponentRef.Value.ObjectId = statusObject.Id;
                     }
+
+
+                    addObject(creatureObject,false);
+
                 }
+
             }
+            //);
+
 
             OldNameList = archive.HasUnknownNames ? archive.NameTable : null;
             HasUnknownData = archive.HasUnknownData;

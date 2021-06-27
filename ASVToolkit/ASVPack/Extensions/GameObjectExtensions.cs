@@ -42,13 +42,31 @@ namespace ASVPack.Extensions
 
         public static ContentPlayer AsPlayer(this GameObject gameObject, GameObject statusObject)
         {
-            return new ContentPlayer(gameObject, statusObject);
+            return new ContentPlayer(gameObject,statusObject);
+        }
+
+
+        public static ContentPlayer AsPlayer(this ArkProfile gameObject)
+        {
+            return new ContentPlayer(gameObject);
         }
 
         public static ContentDroppedItem AsDroppedItem(this GameObject gameObject)
         {
             return new ContentDroppedItem(gameObject);
 
+        }
+
+        public static int GetFullLevel(GameObject characterComponent, GameObject statusComponent)
+        {
+            if (statusComponent == null)
+            {
+                return 1;
+            }
+
+            int baseLevel = statusComponent.GetPropertyValue<int>("BaseCharacterLevel", defaultValue: 1);
+            short extraLevel = statusComponent.GetPropertyValue<short>("ExtraCharacterLevel");
+            return baseLevel + extraLevel;
         }
 
 

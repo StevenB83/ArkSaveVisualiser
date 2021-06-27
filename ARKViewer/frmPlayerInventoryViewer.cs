@@ -141,7 +141,12 @@ namespace ARKViewer
 
         private void PopulateMissionScores()
         {
-
+            lvwPlayerScores.Items.Clear();
+            foreach(var score in currentPlayer.MissionScores)
+            {
+                ListViewItem item = lvwPlayerScores.Items.Add(score.MissionTag);
+                item.SubItems.Add(score.HighScore.ToString("f2"));
+            }
         }
 
         private void PopulateCreatureInventory()
@@ -243,66 +248,66 @@ namespace ARKViewer
             Parallel.ForEach(selectedContainers, container =>
             {
 
-                    foreach (var invItem in container.Inventory.Items)
+             Parallel.ForEach(container.Inventory.Items, invItem =>  
+            {
+                string itemName = invItem.ClassName;
+                string categoryName = "Misc.";
+                string containerName = container.ClassName;
+
+                var classMap = ARKViewer.Program.ProgramConfig.StructureMap.FirstOrDefault<StructureClassMap>(d => d.ClassName == container.ClassName);
+                if (classMap != null)
+                {
+                    containerName = classMap.FriendlyName;
+                }
+
+                int itemIcon = 0;
+
+                if (ARKViewer.Program.ProgramConfig.ItemMap != null)
+                {
+                    var itemMap = ARKViewer.Program.ProgramConfig.ItemMap.Where(i => i.ClassName == invItem.ClassName).FirstOrDefault<ItemClassMap>();
+                    if (itemMap != null && itemMap.DisplayName != null)
                     {
-                        string itemName = invItem.ClassName;
-                        string categoryName = "Misc.";
-                        string containerName = container.ClassName;
-
-                        var classMap = ARKViewer.Program.ProgramConfig.StructureMap.FirstOrDefault<StructureClassMap>(d => d.ClassName == container.ClassName);
-                        if (classMap != null)
-                        {
-                            containerName = classMap.FriendlyName;
-                        }
-
-                        int itemIcon = 0;
-
-                        if (ARKViewer.Program.ProgramConfig.ItemMap != null)
-                        {
-                            var itemMap = ARKViewer.Program.ProgramConfig.ItemMap.Where(i => i.ClassName == invItem.ClassName).FirstOrDefault<ItemClassMap>();
-                            if (itemMap != null && itemMap.DisplayName != null)
-                            {
-                                itemName = itemMap.DisplayName;
-                                categoryName = itemMap.Category;
-                            }
-                        }
-
-
-                        if (categoryName.ToLower().Contains(txtStorageFilter.Text.ToLower()) || itemName.ToLower().Contains(txtStorageFilter.Text.ToLower()))
-                        {
-                            if (!invItem.IsEngram)
-                            {
-
-                                string qualityName = "";
-                                Color backColor = SystemColors.Window;
-                                Color foreColor = SystemColors.WindowText;
-
-                                string craftedBy = "";
-                                if (invItem.CraftedByPlayer != null && invItem.CraftedByPlayer.Length > 0)
-                                {
-                                    craftedBy = $"{invItem.CraftedByPlayer} ({invItem.CraftedByTribe})";
-                                }
-
-
-                                ListViewItem newItem = new ListViewItem(itemName);
-                                newItem.BackColor = backColor;
-                                newItem.ForeColor = foreColor;
-
-                                newItem.SubItems.Add(categoryName);
-                                newItem.SubItems.Add(qualityName);
-                                newItem.SubItems.Add(craftedBy);
-                                newItem.SubItems.Add(containerName);
-                                newItem.SubItems.Add(container.Latitude.GetValueOrDefault(0).ToString("0.00"));
-                                newItem.SubItems.Add(container.Longitude.GetValueOrDefault(0).ToString("0.00"));
-                                newItem.SubItems.Add(invItem.Quantity.ToString());
-                                newItem.ImageIndex = itemIcon - 1;
-                                newItem.Tag = invItem;
-
-                                listItems.Add(newItem);
-                            }
-                        }
-
+                        itemName = itemMap.DisplayName;
+                        categoryName = itemMap.Category;
                     }
+                }
+
+
+                if (categoryName.ToLower().Contains(txtStorageFilter.Text.ToLower()) || itemName.ToLower().Contains(txtStorageFilter.Text.ToLower()))
+                {
+                    if (!invItem.IsEngram)
+                    {
+
+                        string qualityName = "";
+                        Color backColor = SystemColors.Window;
+                        Color foreColor = SystemColors.WindowText;
+
+                        string craftedBy = "";
+                        if (invItem.CraftedByPlayer != null && invItem.CraftedByPlayer.Length > 0)
+                        {
+                            craftedBy = $"{invItem.CraftedByPlayer} ({invItem.CraftedByTribe})";
+                        }
+
+
+                        ListViewItem newItem = new ListViewItem(itemName);
+                        newItem.BackColor = backColor;
+                        newItem.ForeColor = foreColor;
+
+                        newItem.SubItems.Add(categoryName);
+                        newItem.SubItems.Add(qualityName);
+                        newItem.SubItems.Add(craftedBy);
+                        newItem.SubItems.Add(containerName);
+                        newItem.SubItems.Add(container.Latitude.GetValueOrDefault(0).ToString("0.00"));
+                        newItem.SubItems.Add(container.Longitude.GetValueOrDefault(0).ToString("0.00"));
+                        newItem.SubItems.Add(invItem.Quantity.ToString());
+                        newItem.ImageIndex = itemIcon - 1;
+                        newItem.Tag = invItem;
+
+                        listItems.Add(newItem);
+                    }
+                }
+
+            });
                 
             });
 

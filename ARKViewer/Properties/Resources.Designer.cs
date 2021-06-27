@@ -323,6 +323,16 @@ namespace ARKViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap map_antartika {
+            get {
+                object obj = ResourceManager.GetObject("map_antartika", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap map_astralark {
             get {
                 object obj = ResourceManager.GetObject("map_astralark", resourceCulture);
@@ -406,6 +416,16 @@ namespace ARKViewer.Properties {
         internal static System.Drawing.Bitmap map_hope {
             get {
                 object obj = ResourceManager.GetObject("map_hope", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap map_lostisland {
+            get {
+                object obj = ResourceManager.GetObject("map_lostisland", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

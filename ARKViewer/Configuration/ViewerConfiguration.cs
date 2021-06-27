@@ -41,7 +41,9 @@ namespace ARKViewer.Configuration
             {"genesis.ark", "Genesis 1" },
             { "viking_p.ark", "Fjördur"},
             { "tiamatprime.ark", "Tiamat Prime"},
-            { "glacius_p.ark", "Glacius"}
+            { "glacius_p.ark", "Glacius"},
+            { "antartika.ark", "Antartika" },
+            { "lostisland.ark", "Lost Island" }
         };
 
         [DataMember] public string IV { get; set; }

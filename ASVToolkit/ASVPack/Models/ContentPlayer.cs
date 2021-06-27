@@ -1,9 +1,12 @@
 ﻿using SavegameToolkit;
+using SavegameToolkit.Arrays;
 using SavegameToolkit.Propertys;
 using SavegameToolkit.Structs;
 using SavegameToolkit.Types;
 using SavegameToolkitAdditions;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Runtime.Serialization;
 
 namespace ASVPack.Models
@@ -15,7 +18,7 @@ namespace ASVPack.Models
         [DataMember] public string CharacterName { get; set; } = "";
         [DataMember] public string Name { get; set; } = "";
         [DataMember] public string Gender { get; set; } = "Male";
-        [DataMember] public string SteamId { get; set; } = "";
+        [DataMember] public string NetworkId { get; set; } = "";
         [DataMember] public float? Latitude { get; set; } = null;
         [DataMember] public float? Longitude { get; set; } = null;
         [DataMember] public float? X { get; set; } = null;
@@ -23,10 +26,11 @@ namespace ASVPack.Models
         [DataMember] public float? Z { get; set; } = null;
         [DataMember] public ContentInventory Inventory { get; set; } = new ContentInventory();
         [DataMember] public int Level { get; set; } = 0;
-        [DataMember] public byte[] Stats { get; set; } = new byte[0];
+        [DataMember] public byte[] Stats { get; set; } = new byte[12];
         [DataMember] public double LastTimeInGame { get; set; } = 0;
         [DataMember] public DateTime? LastActiveDateTime { get; set; } = null;
         [DataMember] public int TargetingTeam { get; set; } = int.MinValue; //abandoned
+        [DataMember] public List<ContentMissionScore> MissionScores { get; set; } = new List<ContentMissionScore>();
 
         public bool HasGameFile { get; set; } = false;
 
@@ -38,14 +42,90 @@ namespace ASVPack.Models
         {
 
         }
+
+        public ContentPlayer(ArkProfile playerProfile)
+        {
+            var playerData = (StructPropertyList)playerProfile.GetTypedProperty<PropertyStruct>("MyData").Value;
+            var playerConfig = (StructPropertyList)playerData.GetTypedProperty<PropertyStruct>("MyPlayerCharacterConfig").Value;
+            var playerStatus = (StructPropertyList)playerData.GetTypedProperty<PropertyStruct>("MyPersistentCharacterStats").Value;
+
+
+
+
+            HasGameFile = true;
+            Id = playerData.GetPropertyValue<long>("PlayerDataID");
+
+            StructUniqueNetIdRepl netId = (StructUniqueNetIdRepl)playerData.GetTypedProperty<PropertyStruct>("UniqueID").Value;
+            NetworkId = netId.NetId;
+            Name = playerData.GetPropertyValue<string>("PlayerName");
+            CharacterName = playerConfig.GetPropertyValue<string>("PlayerCharacterName");
+            TargetingTeam = playerData.GetPropertyValue<int>("TribeId");
+            Gender = playerConfig.GetPropertyValue<bool>("bIsFemale") ? "Female" : "Male";
+
+            X = 0;
+            Y = 0;
+            Z = 0;
+            LastTimeInGame = playerData.GetPropertyValue<double>("LoginTime");
+            Level = playerStatus.GetPropertyValue<short>("CharacterStatusComponent_ExtraCharacterLevel") + 1;
+            Stats = new byte[12];
+            for (var i = 0; i < Stats.Length; i++)
+            {
+                var pointValue = playerStatus.GetTypedProperty<PropertyByte>("CharacterStatusComponent_NumberOfLevelUpPointsApplied", i);
+                Stats[i] = pointValue == null ? (byte)0 : pointValue.Value.ByteValue;
+            }
+
+
+
+
+            if (playerData.HasAnyProperty("LatestMissionScores"))
+            {
+                var missionScores = (ArkArrayStruct)playerData.GetTypedProperty<PropertyArray>("LatestMissionScores").Value;
+                foreach (StructPropertyList propertyList in missionScores)
+                {
+                    var bestScore = (StructPropertyList)propertyList.GetTypedProperty<PropertyStruct>("BestScore").Value;
+
+                    var newScore = new ContentMissionScore()
+                    {
+                        MissionTag = bestScore.GetTypedProperty<PropertyName>("MissionTag").Value.Name
+                    };
+
+                    float floatValue = bestScore.GetPropertyValue<float>("FloatValue");
+                    int intValue = bestScore.GetPropertyValue<int>("IntValue");
+
+                    string stringScore = floatValue.ToString($"f{intValue}");
+                    decimal.TryParse(stringScore, out decimal highScore);
+                    newScore.HighScore = (decimal)highScore;
+
+                    newScore.MissionTag = newScore.MissionTag.Substring(newScore.MissionTag.LastIndexOf(".") + 1);
+
+                    MissionScores.Add(newScore);
+                }
+            }
+
+        }
+
         public ContentPlayer(GameObject playerComponent, GameObject statusComponent)
         {
+            /*
+
+            StructProperty MyData
+            StructPropertList MyData.Value
+                long PlayerDataID
+                string PlayerName
+                PropertyStruct MyPlayerCharacterConfig
+                StructPropertList MyPlayerCharacterConfig.Value
+                PropertyStruct MyPersistentCharacterStats
+                StructPropertList MyPersistentCharacterStats.Value
+                int TribeId
 
 
+            */
+
+            
             //get data
+            HasGameFile = false;
             Id = playerComponent.HasAnyProperty("PlayerDataID")?playerComponent.GetPropertyValue<long>("PlayerDataID"):playerComponent.GetPropertyValue<long>("LinkedPlayerDataID");
             TargetingTeam = playerComponent.GetPropertyValue<int>("TargetingTeam");
-            SteamId = ((StructUniqueNetIdRepl)playerComponent.GetTypedProperty<PropertyStruct>("PlatformProfileID").Value).NetId;
             Stats = new byte[12];
             if(statusComponent!=null)
                 for (var i = 0; i < Stats.Length; i++) Stats[i] = statusComponent.GetPropertyValue<ArkByteValue>("NumberOfLevelUpPointsApplied", i)?.ByteValue ?? 0;
@@ -54,14 +134,14 @@ namespace ASVPack.Models
             Name = playerComponent.GetPropertyValue<string>("PlatformProfileName");
             CharacterName = playerComponent.GetPropertyValue<string>("PlayerName");
             Level = getFullLevel(statusComponent);
+
+
             if (playerComponent.Location != null)
             {
                 X = playerComponent.Location?.X;
                 Y = playerComponent.Location?.Y;
                 Z = playerComponent.Location?.Z;
             }
-            Gender = playerComponent.GetPropertyValue<bool>("bIsFemale", 0,false)?"Female": "Male";
-
 
 
         }

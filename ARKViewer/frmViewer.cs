@@ -446,12 +446,25 @@ namespace ARKViewer
 
         private void cboTribes_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LoadPlayerDetail();
             RefreshPlayerList();
         }
 
         private void cboPlayers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadPlayerDetail();
+            if (cboPlayers.SelectedItem == null) return;
+
+            //select tribe
+            ASVComboValue comboValue = (ASVComboValue)cboPlayers.SelectedItem;
+            long playerId = long.Parse(comboValue.Key);
+            if (playerId == 0) return;
+
+            var playerTribe = cm.GetPlayerTribe(playerId);
+            if (playerTribe != null)
+            {
+                var foundTribe = cboTribes.Items.Cast<ASVComboValue>().First(x => x.Key == playerTribe.TribeId.ToString());
+                cboTribes.SelectedIndex = cboTribes.Items.IndexOf(foundTribe);
+            }
         }
 
         private void lvwPlayers_SelectedIndexChanged(object sender, EventArgs e)
@@ -579,12 +592,25 @@ namespace ARKViewer
 
         private void cboStructureTribe_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LoadPlayerStructureDetail();
             RefreshStructurePlayerList();
         }
 
         private void cboStructurePlayer_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadPlayerStructureDetail();
+            if (cboStructurePlayer.SelectedItem == null) return;
+
+            //select tribe
+            ASVComboValue comboValue = (ASVComboValue)cboStructurePlayer.SelectedItem;
+            long playerId = long.Parse(comboValue.Key);
+            if (playerId == 0) return;
+
+            var playerTribe = cm.GetPlayerTribe(playerId);
+            if (playerTribe != null)
+            {
+                var foundTribe = cboStructureTribe.Items.Cast<ASVComboValue>().First(x => x.Key == playerTribe.TribeId.ToString());
+                cboStructureTribe.SelectedIndex = cboStructureTribe.Items.IndexOf(foundTribe);
+            }
         }
 
         private void lvwStructureLocations_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -741,7 +767,7 @@ namespace ARKViewer
                     ContentPlayer selectedPlayer = (ContentPlayer)selectedItem.Tag;
 
                     long selectedPlayerId = selectedPlayer.Id;
-                    string selectedSteamId = selectedPlayer.SteamId;
+                    string selectedSteamId = selectedPlayer.NetworkId;
 
                     var tribe = cm.GetPlayerTribe(selectedPlayer.Id);
                     long selectedTribeId = selectedPlayer.TargetingTeam;
@@ -842,11 +868,25 @@ namespace ARKViewer
         private void cboTameTribes_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefreshTamePlayerList();
+            LoadTameDetail();
         }
 
         private void cboTamePlayers_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadTameDetail();
+            if (cboTamePlayers.SelectedItem == null) return;
+
+            //select tribe
+            ASVComboValue comboValue = (ASVComboValue)cboTamePlayers.SelectedItem;
+            long playerId = long.Parse(comboValue.Key);
+            if (playerId == 0) return;
+
+            var playerTribe = cm.GetPlayerTribe(playerId);
+            if (playerTribe != null)
+            {
+                var foundTribe = cboTameTribes.Items.Cast<ASVComboValue>().First(x=> x.Key == playerTribe.TribeId.ToString());
+                cboTameTribes.SelectedIndex = cboTameTribes.Items.IndexOf(foundTribe);
+            }
+
         }
 
         private void cboTameClass_SelectedIndexChanged(object sender, EventArgs e)
@@ -1246,7 +1286,7 @@ namespace ARKViewer
                     if (lvwPlayers.SelectedItems.Count > 0)
                     {
                         ContentPlayer player = (ContentPlayer)lvwPlayers.SelectedItems[0].Tag;
-                        Clipboard.SetText(player.SteamId.ToString());
+                        Clipboard.SetText(player.NetworkId.ToString());
                         MessageBox.Show("Steam ID copied to the clipboard!", "Copy Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     }
@@ -2403,7 +2443,7 @@ namespace ARKViewer
                     DeletePlayerFtp(selectedPlayer);
                 }
 
-                string profileFileName = Directory.GetFiles(profilePathLocal, $"{selectedPlayer.SteamId}.arkprofile").FirstOrDefault();
+                string profileFileName = Directory.GetFiles(profilePathLocal, $"{selectedPlayer.NetworkId}.arkprofile").FirstOrDefault();
                 if (profileFileName != null)
                 {
                     try
@@ -3092,7 +3132,7 @@ namespace ARKViewer
 
 
             string profilePath = selectedServer.SaveGamePath.Substring(0, selectedServer.SaveGamePath.LastIndexOf("/"));
-            string playerProfileFilename = $"{player.SteamId}.arkprofile";
+            string playerProfileFilename = $"{player.NetworkId}.arkprofile";
             string ftpFilePath = $"{profilePath}/{playerProfileFilename}";
             string serverUsername = selectedServer.Username;
             string serverPassword = selectedServer.Password;
@@ -4306,8 +4346,8 @@ namespace ARKViewer
 
             List<ASVComboValue> newItems = new List<ASVComboValue>();
 
-
-            var tribes = cm.GetTribes(0);
+            if (selectedTribeId ==  -1) selectedTribeId = 0;
+            var tribes = cm.GetTribes(selectedTribeId);
             foreach (var tribe in tribes)
             {
                 foreach (var player in tribe.Players)
@@ -4363,7 +4403,8 @@ namespace ARKViewer
 
             List<ASVComboValue> newItems = new List<ASVComboValue>();
 
-            var tribes = cm.GetTribes(0);
+            if (selectedTribeId == -1) selectedTribeId = 0;
+            var tribes = cm.GetTribes(selectedTribeId);
             foreach (var tribe in tribes)
             {
 
@@ -4627,8 +4668,8 @@ namespace ARKViewer
 
                         if (!(player.Longitude == 0 && player.Latitude == 0))
                         {
-                            newItem.SubItems.Add(player.Latitude.Value.ToString("0.00"));
-                            newItem.SubItems.Add(player.Longitude.Value.ToString("0.00"));
+                            newItem.SubItems.Add(player?.Latitude.GetValueOrDefault(0).ToString("0.00"));
+                            newItem.SubItems.Add(player?.Longitude.GetValueOrDefault(0).ToString("0.00"));
 
                         }
                         else
@@ -4664,7 +4705,7 @@ namespace ARKViewer
 
                         newItem.SubItems.Add((!player.LastActiveDateTime.HasValue || player.LastActiveDateTime.Value == DateTime.MinValue) ? "n/a" : player.LastActiveDateTime.Value.ToString("dd MMM yy HH:mm:ss"));
                         newItem.SubItems.Add(player.Name);
-                        newItem.SubItems.Add(player.SteamId);
+                        newItem.SubItems.Add(player.NetworkId);
                         newItem.Tag = player;
 
 

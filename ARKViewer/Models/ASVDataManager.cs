@@ -127,6 +127,11 @@ namespace ARKViewer.Models
                     case "glacius_p":
                         return new Bitmap(ARKViewer.Properties.Resources.map_glacius, new Size(1024, 1024));
 
+                    case "antartika":
+                        return new Bitmap(ARKViewer.Properties.Resources.map_antartika, new Size(1024, 1024));
+                    case "lostisland":
+                        
+                        return new Bitmap(ARKViewer.Properties.Resources.map_lostisland, new Size(1024, 1024));
                     default:
                         return new Bitmap(1024, 1024);
                 }
@@ -1018,7 +1023,7 @@ namespace ARKViewer.Models
                                     jw.WriteValue(tribePlayer.Name);
 
                                     jw.WritePropertyName("steamid");
-                                    jw.WriteValue(tribePlayer.SteamId);
+                                    jw.WriteValue(tribePlayer.NetworkId);
 
                                     jw.WriteEndObject();
                                 }
@@ -1146,7 +1151,7 @@ namespace ARKViewer.Models
                                 jw.WriteValue($"{player.X} {player.Y} {player.Z}");
 
                                 jw.WritePropertyName("steamid");
-                                jw.WriteValue(player.SteamId);
+                                jw.WriteValue(player.NetworkId);
 
                                 if (Program.ProgramConfig.ExportInventories)
                                 {

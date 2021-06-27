@@ -53,8 +53,10 @@ namespace ARKViewer
                 { "caballus_p.ark", "Caballus"},
                 { "viking_p.ark", "Fjördur"},
                 { "tiamatprime.ark", "Tiamat Prime"},
-                { "glacius_p.ark", "Glacius"}
-};
+                { "glacius_p.ark", "Glacius"},
+                { "antartika.ark", "Anartika" },
+                { "lostisland.ark", "Lost Island" }
+            };
 
         /// <summary>
         /// The main entry point for the application.

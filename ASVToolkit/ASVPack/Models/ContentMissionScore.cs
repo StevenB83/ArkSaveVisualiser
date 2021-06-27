@@ -9,6 +9,8 @@ namespace ASVPack.Models
     public class ContentMissionScore
     {
         public string MissionTag { get; set; } = "";
+        public decimal HighScore { get; set; } = 0;
+
         
     }
 }

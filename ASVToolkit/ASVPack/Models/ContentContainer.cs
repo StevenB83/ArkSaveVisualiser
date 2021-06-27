@@ -14,6 +14,7 @@ using SavegameToolkit.Arrays;
 using System.Collections.Concurrent;
 using SavegameToolkit.Structs;
 using SavegameToolkit.Data;
+using System.Diagnostics;
 
 namespace ASVPack.Models
 {
@@ -44,7 +45,9 @@ namespace ASVPack.Models
             { "caballus_p", Tuple.Create(50.0f, 8125.0f,50.0f, 8125.0f)},
             { "viking_p", Tuple.Create(50.0f, 7140.0f,50.0f, 7140.0f)},
             { "tiamatprime", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
-            { "glacius_p", Tuple.Create(50.0f, 16250.0f,50.0f, 16250.0f)}
+            { "glacius_p", Tuple.Create(50.0f, 16250.0f,50.0f, 16250.0f)},
+            { "antartika", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
+            { "lostisland", Tuple.Create(48.7f, 16000.0f,50.0f, 15500.0f)}
         };
 
         Tuple<float, float, float, float> mapLatLonCalcs = new Tuple<float, float, float, float>(50.0f, 8000.0f, 50.0f, 8000.0f); //default to same as The Island map
@@ -76,6 +79,8 @@ namespace ASVPack.Models
             long startTicks = DateTime.Now.Ticks;
             try
             {
+               
+
                 latlonCalcs.TryGetValue(Path.GetFileNameWithoutExtension(fileName).ToLower(), out mapLatLonCalcs);
 
                 List<ContentTribe> tribeContentList = new List<ContentTribe>();
@@ -259,87 +264,9 @@ namespace ASVPack.Models
                         var playerStructures = objectContainer.Where(x => x.IsStructure() && x.GetPropertyValue<int>("TargetingTeam") >= 50_000).GroupBy(x=>x.Names[0]).Select(s=>s.First()).ToList();
 
 
-                        long tribeStart = DateTime.Now.Ticks;
-
-                        var test  = objectContainer.Where(o => o.IsPlayer()).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID"));
-
-                        //game tribes/players
-                        string tribeFilepath = Path.GetDirectoryName(fileName);
-                        var tribesAndPlayers = objectContainer.Where(o => o.IsPlayer()).GroupBy(x=> x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x=>x.First())
-                            .GroupBy(x => new
-                            {
-                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
-                                TribeName = x.HasAnyProperty("TribeName") ? x.GetPropertyValue<string>("TribeName") : $"Tribe of {x.GetPropertyValue<string>("PlatformProfileName") ?? x.GetPropertyValue<string>("PlayerName")}"
-                            })
-                            .Select(g => new
-                            {
-                                Key = g.Key,
-                                Players = g.ToList()
-                            })
-                            .ToList();
-
-                        //attempt to get missing tribe data from structures
-                        var missingStructureTribes = playerStructures
-                            .Where(x => !tribesAndPlayers.Any(t => t.Key.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
-                            .Select(x => new
-                            {
-                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
-                                TribeName = x.GetPropertyValue<string>("OwnerName")
-                            }).GroupBy(x=>x.TribeId)
-                            .Select(x=>x.First())
-                            .ToList();
-
-                        if (missingStructureTribes != null && missingStructureTribes.Count > 0)
-                        {
-                            missingStructureTribes.ForEach(s =>
-                            {
-                                tribesAndPlayers.Add(new 
-                                { 
-                                    Key = new 
-                                    { 
-                                        TribeId = s.TribeId, 
-                                        TribeName = s.TribeName 
-                                    }, 
-                                    Players = new List<GameObject>() 
-                                });
-                            });
-                            
-                        }
-
-                        //attempt to get missing tribe data from tames
-                        var missingTameTribes = playerStructures
-                            .Where(x => !tribesAndPlayers.Any(t => t.Key.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
-                            .Select(x => new
-                            {
-                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
-                                TribeName = x.GetPropertyValue<string>("OwnerName")
-                            }).GroupBy(x => x.TribeId)
-                            .Select(x => x.First())
-                            .ToList();
-
-                        if (missingTameTribes != null && missingTameTribes.Count > 0)
-                        {
-                            missingTameTribes.ForEach(s =>
-                            {
-                                tribesAndPlayers.Add(new
-                                {
-                                    Key = new
-                                    {
-                                        TribeId = s.TribeId,
-                                        TribeName = s.TribeName
-                                    },
-                                    Players = new List<GameObject>()
-                                });
-                            });
-                        }
-
-                        long tribeEnd = DateTime.Now.Ticks;
-                        var tribeTime = TimeSpan.FromTicks(tribeEnd - tribeStart);
-                        Console.WriteLine($"Tribes identified in: {tribeTime.TotalSeconds.ToString("f1")} seconds.");
-
                         long tribeLoadStart = DateTime.Now.Ticks;
-
                         ConcurrentBag<ContentTribe> cbTribes = new ConcurrentBag<ContentTribe>();
+
                         //ASV fake tribes
                         cbTribes.Add(new ContentTribe()
                         {
@@ -356,29 +283,110 @@ namespace ASVPack.Models
                         });
 
 
+                        //find player data in game file
+                        var gamePlayers = objectContainer.Where(o => o.IsPlayer()).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x => x.First());
 
-
-                        foreach (var tribe in tribesAndPlayers)
+                        //load .arkprofile(s) to create tribe and player containers
+                        string fileFolder = Path.GetDirectoryName(fileName);
+                        var profileFiles = Directory.GetFiles(fileFolder, "*.arkprofile");
+                        if (profileFiles != null && profileFiles.Length > 0)
                         {
-                            ContentTribe newTribe = null;
-
-                            string tribeFilename = Path.Combine(tribeFilepath, $"{tribe.Key.TribeId}.arktribe");
-                            bool hasGameFileAny = File.Exists(tribeFilename)
-                                                    || tribe.Players.Any(p => File.Exists(Path.Combine(tribeFilepath, ((StructUniqueNetIdRepl)p.GetTypedProperty<PropertyStruct>("PlatformProfileID").Value).NetId + ".arkprofile")))
-                                                    || File.Exists(Path.Combine(tribeFilepath, "LocalPlayer.arkprofile"))
-                                                    ;
-
-                            if (!hasGameFileAny)
+                            foreach (string profileFilename in profileFiles)
                             {
-                                //set to abandoned tribe
-                                newTribe = cbTribes.FirstOrDefault(t => t.TribeId == int.MinValue);
+                                using (Stream streamProfile = new FileStream(profileFilename, FileMode.Open))
+                                {
+                                    using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
+                                    {
+                                        ArkProfile arkProfile = new ArkProfile();
+                                        arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+
+                                        string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
+                                        if (profileMapName == Path.GetFileNameWithoutExtension(fileName).ToLower())
+                                        {
+
+                                            ContentPlayer contentPlayer = arkProfile.AsPlayer();
+
+                                            contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
+
+                                            ContentTribe contentTribe = cbTribes.FirstOrDefault(x => x.TribeId == contentPlayer.TargetingTeam || x.TribeId == contentPlayer.Id);
+                                            if (contentTribe == null)
+                                            {
+                                                //not yet added
+                                                contentTribe = new ContentTribe();
+
+                                                string tribeFilename = Path.Combine(fileFolder, $"{contentPlayer.TargetingTeam}.arktribe");
+                                                if (File.Exists(tribeFilename))
+                                                {
+                                                    using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
+                                                    {
+                                                        using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
+                                                        {
+                                                            ArkTribe arkTribe = new ArkTribe();
+                                                            arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+
+                                                            contentTribe = arkTribe.Tribe.AsTribe();
+
+                                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
+                                                            contentTribe.HasGameFile = true;
+
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    //solo tribe?
+                                                    contentTribe = new ContentTribe()
+                                                    {
+                                                        HasGameFile = false,
+                                                        IsSolo = true,
+                                                        Logs = new string[0],
+                                                        TribeName = $"Tribe of {contentPlayer.CharacterName}",
+                                                        TribeId = contentPlayer.Id
+                                                    };
+
+                                                }
+
+                                                cbTribes.Add(contentTribe);
+
+                                            }
+
+
+                                            //add player to tribe
+                                            contentTribe.Players.Add(contentPlayer);
+                                        }
+                                    }
+                                }
                             }
-                            else
-                            {
+                        }
 
+
+
+
+
+                        //in-game tribes/players not already read in
+                        var tribesAndPlayers = objectContainer
+                            .Where(o => o.IsPlayer() &!cbTribes.Any(t => t.TribeId == o.GetPropertyValue<int>("TargetingTeam")))
+                            .GroupBy(x=> x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x=>x.First()) //unique
+                            .GroupBy(x => new
+                            {
+                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
+                                TribeName = x.HasAnyProperty("TribeName") ? x.GetPropertyValue<string>("TribeName") : $"Tribe of {x.GetPropertyValue<string>("PlatformProfileName") ?? x.GetPropertyValue<string>("PlayerName")}"
+                            })
+                            .Select(g => new
+                            {
+                                Key = g.Key,
+                                Players = g.ToList()
+                            })
+                            .ToList();
+
+                        if(tribesAndPlayers!=null && tribesAndPlayers.Count > 0)
+                        {
+                            foreach(var tribe in tribesAndPlayers)
+                            {
+                                //we know there's no .arkprofile so check for .arktribe
+                                string tribeFilename = Path.Combine(fileFolder, $"{tribe.Key.TribeId}.arktribe");
                                 if (File.Exists(tribeFilename))
                                 {
-                                    //found .arktribe, load logs
                                     using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
                                     {
                                         using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
@@ -386,123 +394,201 @@ namespace ASVPack.Models
                                             ArkTribe arkTribe = new ArkTribe();
                                             arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
-                                            newTribe = arkTribe.Tribe.AsTribe();
-                                            newTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
-                                            newTribe.HasGameFile = true;
+                                            ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
+                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
+                                            contentTribe.HasGameFile = true;
 
-                                            cbTribes.Add(newTribe);
+                                            //players
+                                            foreach(GameObject arkPlayer in tribe.Players)
+                                            {
+                                                //get status component
+                                                var statusRef = arkPlayer.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent");
+                                                if (statusRef != null)
+                                                {
+                                                    objectContainer.TryGetValue(statusRef.ObjectId, out GameObject playerStatus);
+
+                                                    //convert to contentplayer
+                                                    ContentPlayer contentPlayer = arkPlayer.AsPlayer(playerStatus);
+                                                    contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
+                                                    
+
+                                                    contentTribe.Players.Add(contentPlayer);
+
+                                                }
+
+                                            }
+
+                                            cbTribes.Add(contentTribe);
                                         }
-                                    }
-
-
-                                }
-                                else
-                                {
-                                    //create tribe using first player
-                                    var playerList = tribe.Players.ToList<GameObject>();
-                                    if (playerList != null && playerList.Count > 0)
-                                    {
-                                        var firstPlayerObject = playerList.First();
-                                        int statusRefId = firstPlayerObject.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent").ObjectId;
-                                        objectContainer.TryGetValue(statusRefId, out GameObject statusObject);
-
-                                        //convert to ContentPlayer
-                                        var firstPlayer = firstPlayerObject.AsPlayer(statusObject);
-
-                                        //create fake ContentTribe for solo player
-                                        newTribe = new ContentTribe()
-                                        {
-                                            HasGameFile = false,
-                                            IsSolo = tribe.Players.ToList().Count == 1,
-                                            Logs = new string[0],
-                                            TribeName = tribe.Key.TribeName ?? $"Tribe of {firstPlayer.CharacterName ?? firstPlayer.Name}",
-                                            TribeId = firstPlayerObject.GetPropertyValue<int>("TargetingTeam")
-                                        };
-
-                                        cbTribes.Add(newTribe);
                                     }
                                 }
                             }
+                        }
 
-
-                            var tribePlayers = tribe.Players.ToList<GameObject>();
-
-                            if (tribePlayers != null && tribePlayers.Count > 0)
+                        //attempt to get missing tribe data from structures
+                        var missingStructureTribes = playerStructures
+                            .Where(x => !cbTribes.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .Select(x => new
                             {
-                                //get player data
-                                foreach (var player in tribePlayers)
+                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
+                                TribeName = x.GetPropertyValue<string>("OwnerName")
+                            }).GroupBy(x=>x.TribeId)
+                            .Select(x=>x.First())
+                            .ToList();
+
+                        if (missingStructureTribes != null && missingStructureTribes.Count > 0)
+                        {
+                            missingStructureTribes.ForEach(tribe =>
+                            {
+
+
+                                //we know there's no .arkprofile so check for .arktribe
+                                string tribeFilename = Path.Combine(fileFolder, $"{tribe.TribeId}.arktribe");
+                                if (File.Exists(tribeFilename))
                                 {
-                                    int statusRefId = player.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent").ObjectId;
-
-                                    objectContainer.TryGetValue(statusRefId, out GameObject statusObject);
-                                    ContentPlayer contentPlayer = player.AsPlayer(statusObject);
-
-                                    contentPlayer.Latitude = mapLatLonCalcs.Item1 + contentPlayer.Y / mapLatLonCalcs.Item2;
-                                    contentPlayer.Longitude = mapLatLonCalcs.Item3 + contentPlayer.X / mapLatLonCalcs.Item4;
-
-                                    contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
-                                    contentPlayer.HasGameFile = File.Exists(Path.Combine(tribeFilepath, $"{contentPlayer.SteamId}.arkprofile"));
-
-                                    if (player.HasAnyProperty("MyInventoryComponent"))
+                                    using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
                                     {
-                                        int inventoryRefId = player.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
-                                        objectContainer.TryGetValue(inventoryRefId, out GameObject inventoryComponent);
-
-                                        ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
-                                        if (inventoryComponent != null && inventoryComponent.HasAnyProperty("InventoryItems"))
+                                        using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
                                         {
-                                            PropertyArray inventoryItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("InventoryItems");
-                                            if (inventoryItemsArray != null)
-                                            {
-                                                ArkArrayObjectReference objectReferences = (ArkArrayObjectReference)inventoryItemsArray.Value;
+                                            ArkTribe arkTribe = new ArkTribe();
+                                            arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
-                                                Parallel.ForEach(objectReferences, objectReference =>
-                                                {
-                                                    objectContainer.TryGetValue(objectReference.ObjectId, out GameObject itemObject);
-                                                    if (itemObject != null)
-                                                    {
-                                                        var item = itemObject.AsItem();
-                                                        if (!item.IsEngram)
-                                                        {
-                                                            inventoryItems.Add(item);
-                                                        }
-                                                    }
-                                                });
-                                            }
+                                            ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
+                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
+                                            contentTribe.HasGameFile = true;
+                                            contentTribe.Players = new ConcurrentBag<ContentPlayer>();                                            
+
+                                            cbTribes.Add(contentTribe);
                                         }
+                                    }
+                                }
 
-                                        if (inventoryComponent.HasAnyProperty("EquippedItems"))
+                            });
+                            
+                        }
+
+                        //attempt to get missing tribe data from tames
+                        var missingTameTribes = allTames
+                            .Where(x => !cbTribes.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .Select(x => new
+                            {
+                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
+                                TribeName = x.GetPropertyValue<string>("OwnerName")
+                            }).GroupBy(x => x.TribeId)
+                            .Select(x => x.First())
+                            .ToList();
+
+                        if (missingTameTribes != null && missingTameTribes.Count > 0)
+                        {
+                            missingTameTribes.ForEach(tribe =>
+                            {
+                                //we know there's no .arkprofile so check for .arktribe
+                                string tribeFilename = Path.Combine(fileFolder, $"{tribe.TribeId}.arktribe");
+                                if (File.Exists(tribeFilename))
+                                {
+                                    using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
+                                    {
+                                        using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
                                         {
-                                            PropertyArray inventoryItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("EquippedItems");
-                                            if (inventoryItemsArray != null)
-                                            {
-                                                ArkArrayObjectReference objectReferences = (ArkArrayObjectReference)inventoryItemsArray.Value;
-                                                Parallel.ForEach(objectReferences, objectReference =>
-                                                {
-                                                    objectContainer.TryGetValue(objectReference.ObjectId, out GameObject itemObject);
-                                                    if (itemObject != null)
-                                                    {
-                                                        var item = itemObject.AsItem();
-                                                        if (!item.IsEngram)
-                                                        {
-                                                            inventoryItems.Add(item);
-                                                        }
-                                                    }
-                                                });
-                                            }
-                                        }
+                                            ArkTribe arkTribe = new ArkTribe();
+                                            arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
-                                        contentPlayer.Inventory = new ContentInventory() { Items = inventoryItems.ToList() };
+                                            ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
+                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
+                                            contentTribe.HasGameFile = true;
+                                            contentTribe.Players = new ConcurrentBag<ContentPlayer>();
+
+                                            cbTribes.Add(contentTribe);
+                                        }
+                                    }
+                                }
+                            });
+                        }
+
+
+                        //load inventories, locations etc.
+                        var allPlayers = cbTribes.SelectMany(t => t.Players);
+                        //Parallel.ForEach(allPlayers, player =>
+                        foreach(var player in allPlayers)
+                        {
+
+                            GameObject arkPlayer = gamePlayers.FirstOrDefault(x=>x.GetPropertyValue<long>("LinkedPlayerDataID") == player.Id);
+
+                            if (arkPlayer != null)
+                            {
+                                ObjectReference statusRef = arkPlayer.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent");
+                                objectContainer.TryGetValue(statusRef.ObjectId, out GameObject playerStatus);
+                                ContentPlayer contentPlayer = arkPlayer.AsPlayer(playerStatus);
+
+                                player.X = contentPlayer.X;
+                                player.Y = contentPlayer.Y;
+                                player.Z = contentPlayer.Z;
+                                player.Latitude = mapLatLonCalcs.Item1 + player.Y / mapLatLonCalcs.Item2;
+                                player.Longitude = mapLatLonCalcs.Item3 + player.X / mapLatLonCalcs.Item4;
+
+
+                                player.LastTimeInGame = contentPlayer.LastTimeInGame;
+                                player.LastActiveDateTime = GetApproxDateTimeOf(player.LastTimeInGame);
+                                player.Gender = contentPlayer.Gender;
+                                player.Level = contentPlayer.Level;
+                                player.Stats = contentPlayer.Stats;
+
+                                if (arkPlayer.GetPropertyValue<ObjectReference>("MyInventoryComponent")!=null)
+                                {
+                                    int inventoryRefId = arkPlayer.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
+                                    objectContainer.TryGetValue(inventoryRefId, out GameObject inventoryComponent);
+
+                                    ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
+                                    if (inventoryComponent != null && inventoryComponent.HasAnyProperty("InventoryItems"))
+                                    {
+                                        PropertyArray inventoryItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("InventoryItems");
+                                        if (inventoryItemsArray != null)
+                                        {
+                                            ArkArrayObjectReference objectReferences = (ArkArrayObjectReference)inventoryItemsArray.Value;
+
+                                            Parallel.ForEach(objectReferences, objectReference =>
+                                            {
+                                                objectContainer.TryGetValue(objectReference.ObjectId, out GameObject itemObject);
+                                                if (itemObject != null)
+                                                {
+                                                    var item = itemObject.AsItem();
+                                                    if (!item.IsEngram)
+                                                    {
+                                                        inventoryItems.Add(item);
+                                                    }
+                                                }
+                                            });
+                                        }
                                     }
 
-                                    //parse .arkprofile if it exists to determine mission scores?
+                                    if (inventoryComponent.HasAnyProperty("EquippedItems"))
+                                    {
+                                        PropertyArray inventoryItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("EquippedItems");
+                                        if (inventoryItemsArray != null)
+                                        {
+                                            ArkArrayObjectReference objectReferences = (ArkArrayObjectReference)inventoryItemsArray.Value;
+                                            Parallel.ForEach(objectReferences, objectReference =>
+                                            {
+                                                objectContainer.TryGetValue(objectReference.ObjectId, out GameObject itemObject);
+                                                if (itemObject != null)
+                                                {
+                                                    var item = itemObject.AsItem();
+                                                    if (!item.IsEngram)
+                                                    {
+                                                        inventoryItems.Add(item);
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
 
-
-
-                                    newTribe.Players.Add(contentPlayer);
+                                    player.Inventory = new ContentInventory() { Items = inventoryItems.ToList() };
                                 }
                             }
-                        };
+
+                        }
+                        //);
+
 
 
                         long tribeLoadEnd = DateTime.Now.Ticks;
@@ -510,13 +596,17 @@ namespace ASVPack.Models
                         Console.WriteLine($"Tribe players loaded in: {tribeLoadTime.TotalSeconds.ToString("f1")} seconds.");
 
 
-                        Parallel.ForEach(allTames, x =>
-                        //foreach(GameObject x in allTames)
+
+                        //Parallel.ForEach(allTames, x =>
+                        foreach(GameObject x in allTames)
                         {
                             //find appropriate tribe to add to
                             var teamId = x.GetPropertyValue<int>("TargetingTeam");
                             var tribe = cbTribes.FirstOrDefault(t => t.TribeId == teamId) ?? cbTribes.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
 
+
+
+                 
                             ObjectReference statusRef = x.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent") ?? x.GetPropertyValue<ObjectReference>("MyDinoStatusComponent");
                             if (statusRef != null)
                             {
@@ -531,7 +621,7 @@ namespace ASVPack.Models
                                 //get inventory items
                                 ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
 
-                                if (x.HasAnyProperty("MyInventoryComponent"))
+                                if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent") != null)
                                 {
                                     int inventoryRefId = x.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
                                     objectContainer.TryGetValue(inventoryRefId, out GameObject inventoryComponent);
@@ -589,7 +679,7 @@ namespace ASVPack.Models
                             }
 
                         }
-                        );
+                        //);
 
 
 
@@ -613,7 +703,7 @@ namespace ASVPack.Models
                             structure.CreatedDateTime = GetApproxDateTimeOf(structure.CreatedTimeInGame);
 
                             //inventory
-                            if (x.HasAnyProperty("MyInventoryComponent"))
+                            if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent")!=null)
                             {
                                 int inventoryRefId = x.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
                                 objectContainer.TryGetValue(inventoryRefId, out GameObject inventoryComponent);
@@ -704,7 +794,7 @@ namespace ASVPack.Models
                                 droppedItem.Latitude = mapLatLonCalcs.Item1 + droppedItem.Y / mapLatLonCalcs.Item2;
                                 droppedItem.Longitude = mapLatLonCalcs.Item3 + droppedItem.X / mapLatLonCalcs.Item4;
 
-                                if (x.HasAnyProperty("MyInventoryComponent"))
+                                if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent")!=null)
                                 {
                                     int inventoryRefId = x.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
                                     objectContainer.TryGetValue(inventoryRefId, out GameObject inventoryComponent);
@@ -784,7 +874,7 @@ namespace ASVPack.Models
                                 droppedItem.Latitude = mapLatLonCalcs.Item1 + droppedItem.Y / mapLatLonCalcs.Item2;
                                 droppedItem.Longitude = mapLatLonCalcs.Item3 + droppedItem.X / mapLatLonCalcs.Item4;
 
-                                if (x.HasAnyProperty("MyInventoryComponent"))
+                                if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent")!=null)
                                 {
                                     int inventoryRefId = x.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
                                     objectContainer.TryGetValue(inventoryRefId, out GameObject inventoryComponent);
