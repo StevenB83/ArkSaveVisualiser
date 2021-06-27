@@ -80,8 +80,11 @@ namespace ARKViewer
 
             //support quoted command line arguments which doesn't seem to be supported with Environment.GetCommandLineArgs() 
             string[] commandArguments = Regex.Split(Environment.CommandLine.Trim(), " (?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
+            commandArguments = commandArguments.Where(a => string.IsNullOrEmpty(a) == false).ToArray();
+
             if (commandArguments != null && commandArguments.Length > 1)
             {
+
                 ExportWithCommandLineOptions(commandArguments);
             }
             else

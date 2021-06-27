@@ -265,17 +265,17 @@ namespace ASVPack.Models
 
 
                         long tribeLoadStart = DateTime.Now.Ticks;
-                        ConcurrentBag<ContentTribe> cbTribes = new ConcurrentBag<ContentTribe>();
+                        List<ContentTribe> tribeList = new List<ContentTribe>();
 
                         //ASV fake tribes
-                        cbTribes.Add(new ContentTribe()
+                        tribeList.Add(new ContentTribe()
                         {
                             IsSolo = true,
                             TribeId = 2_000_000_000,
                             TribeName = "[ASV Unclaimed]"
                         });
 
-                        cbTribes.Add(new ContentTribe()
+                        tribeList.Add(new ContentTribe()
                         {
                             IsSolo = true,
                             TribeId = int.MinValue,
@@ -305,86 +305,74 @@ namespace ASVPack.Models
                                         {
 
                                             ContentPlayer contentPlayer = arkProfile.AsPlayer();
-
-                                            contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
-
-                                            ContentTribe contentTribe = cbTribes.FirstOrDefault(x => x.TribeId == contentPlayer.TargetingTeam || x.TribeId == contentPlayer.Id);
-                                            if (contentTribe == null)
+                                            if(contentPlayer.Id  != 0)
                                             {
-                                                //not yet added
-                                                contentTribe = new ContentTribe();
 
-                                                string tribeFilename = Path.Combine(fileFolder, $"{contentPlayer.TargetingTeam}.arktribe");
-                                                if (File.Exists(tribeFilename))
+                                                contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
+
+                                                ContentTribe contentTribe = tribeList.FirstOrDefault(x => x.TribeId == contentPlayer.TargetingTeam || x.TribeId == contentPlayer.Id);
+                                                if (contentTribe == null)
                                                 {
-                                                    using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
+                                                    //not yet added
+                                                    contentTribe = new ContentTribe();
+
+                                                    string tribeFilename = Path.Combine(fileFolder, $"{contentPlayer.TargetingTeam}.arktribe");
+                                                    if (File.Exists(tribeFilename))
                                                     {
-                                                        using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
+                                                        using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
                                                         {
-                                                            ArkTribe arkTribe = new ArkTribe();
-                                                            arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+                                                            using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
+                                                            {
+                                                                ArkTribe arkTribe = new ArkTribe();
+                                                                arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
-                                                            contentTribe = arkTribe.Tribe.AsTribe();
+                                                                contentTribe = arkTribe.Tribe.AsTribe();
 
-                                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
-                                                            contentTribe.HasGameFile = true;
+                                                                contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
+                                                                contentTribe.HasGameFile = true;
 
+                                                            }
                                                         }
                                                     }
-                                                }
-                                                else
-                                                {
-                                                    //solo tribe?
-                                                    contentTribe = new ContentTribe()
+                                                    else
                                                     {
-                                                        HasGameFile = false,
-                                                        IsSolo = true,
-                                                        Logs = new string[0],
-                                                        TribeName = $"Tribe of {contentPlayer.CharacterName}",
-                                                        TribeId = contentPlayer.Id
-                                                    };
+                                                        //solo tribe?
+                                                        contentTribe = new ContentTribe()
+                                                        {
+                                                            HasGameFile = false,
+                                                            IsSolo = true,
+                                                            Logs = new string[0],
+                                                            TribeName = $"Tribe of {contentPlayer.CharacterName}",
+                                                            TribeId = contentPlayer.Id
+                                                        };
+
+                                                    }
+
+                                                    tribeList.Add(contentTribe);
 
                                                 }
 
-                                                cbTribes.Add(contentTribe);
+
+                                                //add player to tribe
+                                                contentTribe.Players.Add(contentPlayer);
 
                                             }
-
-
-                                            //add player to tribe
-                                            contentTribe.Players.Add(contentPlayer);
                                         }
                                     }
                                 }
                             }
                         }
 
-
-
-
-
-                        //in-game tribes/players not already read in
-                        var tribesAndPlayers = objectContainer
-                            .Where(o => o.IsPlayer() &!cbTribes.Any(t => t.TribeId == o.GetPropertyValue<int>("TargetingTeam")))
-                            .GroupBy(x=> x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x=>x.First()) //unique
-                            .GroupBy(x => new
-                            {
-                                TribeId = x.GetPropertyValue<int>("TargetingTeam"),
-                                TribeName = x.HasAnyProperty("TribeName") ? x.GetPropertyValue<string>("TribeName") : $"Tribe of {x.GetPropertyValue<string>("PlatformProfileName") ?? x.GetPropertyValue<string>("PlayerName")}"
-                            })
-                            .Select(g => new
-                            {
-                                Key = g.Key,
-                                Players = g.ToList()
-                            })
-                            .ToList();
+                        var tribesAndPlayers = objectContainer.Where(x => x.IsPlayer())
+                            .Where(x=> !tribeList.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .GroupBy(x => x.GetPropertyValue<int>("TargetingTeam")).ToList();
 
                         if(tribesAndPlayers!=null && tribesAndPlayers.Count > 0)
                         {
                             foreach(var tribe in tribesAndPlayers)
                             {
                                 //we know there's no .arkprofile so check for .arktribe
-                                string tribeFilename = Path.Combine(fileFolder, $"{tribe.Key.TribeId}.arktribe");
+                                string tribeFilename = Path.Combine(fileFolder, $"{tribe.Key}.arktribe");
                                 if (File.Exists(tribeFilename))
                                 {
                                     using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
@@ -399,7 +387,7 @@ namespace ASVPack.Models
                                             contentTribe.HasGameFile = true;
 
                                             //players
-                                            foreach(GameObject arkPlayer in tribe.Players)
+                                            foreach(GameObject arkPlayer in tribe)
                                             {
                                                 //get status component
                                                 var statusRef = arkPlayer.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent");
@@ -418,7 +406,7 @@ namespace ASVPack.Models
 
                                             }
 
-                                            cbTribes.Add(contentTribe);
+                                            tribeList.Add(contentTribe);
                                         }
                                     }
                                 }
@@ -427,7 +415,7 @@ namespace ASVPack.Models
 
                         //attempt to get missing tribe data from structures
                         var missingStructureTribes = playerStructures
-                            .Where(x => !cbTribes.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .Where(x => !tribeList.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
                             .Select(x => new
                             {
                                 TribeId = x.GetPropertyValue<int>("TargetingTeam"),
@@ -458,7 +446,7 @@ namespace ASVPack.Models
                                             contentTribe.HasGameFile = true;
                                             contentTribe.Players = new ConcurrentBag<ContentPlayer>();                                            
 
-                                            cbTribes.Add(contentTribe);
+                                            tribeList.Add(contentTribe);
                                         }
                                     }
                                 }
@@ -467,9 +455,11 @@ namespace ASVPack.Models
                             
                         }
 
+
+
                         //attempt to get missing tribe data from tames
                         var missingTameTribes = allTames
-                            .Where(x => !cbTribes.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .Where(x => !tribeList.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
                             .Select(x => new
                             {
                                 TribeId = x.GetPropertyValue<int>("TargetingTeam"),
@@ -498,18 +488,17 @@ namespace ASVPack.Models
                                             contentTribe.HasGameFile = true;
                                             contentTribe.Players = new ConcurrentBag<ContentPlayer>();
 
-                                            cbTribes.Add(contentTribe);
+                                            tribeList.Add(contentTribe);
                                         }
                                     }
                                 }
                             });
                         }
 
-
                         //load inventories, locations etc.
-                        var allPlayers = cbTribes.SelectMany(t => t.Players);
-                        //Parallel.ForEach(allPlayers, player =>
-                        foreach(var player in allPlayers)
+                        var allPlayers = tribeList.SelectMany(t => t.Players);
+                        Parallel.ForEach(allPlayers, player =>
+                        //foreach(var player in allPlayers)
                         {
 
                             GameObject arkPlayer = gamePlayers.FirstOrDefault(x=>x.GetPropertyValue<long>("LinkedPlayerDataID") == player.Id);
@@ -587,7 +576,7 @@ namespace ASVPack.Models
                             }
 
                         }
-                        //);
+                        );
 
 
 
@@ -596,13 +585,12 @@ namespace ASVPack.Models
                         Console.WriteLine($"Tribe players loaded in: {tribeLoadTime.TotalSeconds.ToString("f1")} seconds.");
 
 
-
                         //Parallel.ForEach(allTames, x =>
                         foreach(GameObject x in allTames)
                         {
                             //find appropriate tribe to add to
                             var teamId = x.GetPropertyValue<int>("TargetingTeam");
-                            var tribe = cbTribes.FirstOrDefault(t => t.TribeId == teamId) ?? cbTribes.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
+                            var tribe = tribeList.FirstOrDefault(t => t.TribeId == teamId) ?? tribeList.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
 
 
 
@@ -692,7 +680,7 @@ namespace ASVPack.Models
                         {
 
                             var teamId = x.GetPropertyValue<int>("TargetingTeam");
-                            var tribe = cbTribes.FirstOrDefault(t => t.TribeId == teamId) ?? cbTribes.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
+                            var tribe = tribeList.FirstOrDefault(t => t.TribeId == teamId) ?? tribeList.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
 
                             ContentStructure structure = x.AsStructure();
                             ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
@@ -755,7 +743,7 @@ namespace ASVPack.Models
                             }
                             if (!tribe.Structures.Contains(structure)) tribe.Structures.Add(structure);
                         });
-                        if (cbTribes.Count > 0) Tribes.AddRange(cbTribes.ToList());
+                        if (tribeList.Count > 0) Tribes.AddRange(tribeList.ToList());
 
 
 

@@ -46,36 +46,44 @@ namespace ASVPack.Models
         public ContentPlayer(ArkProfile playerProfile)
         {
             var playerData = (StructPropertyList)playerProfile.GetTypedProperty<PropertyStruct>("MyData").Value;
-            var playerConfig = (StructPropertyList)playerData.GetTypedProperty<PropertyStruct>("MyPlayerCharacterConfig").Value;
-            var playerStatus = (StructPropertyList)playerData.GetTypedProperty<PropertyStruct>("MyPersistentCharacterStats").Value;
 
-
-
-
+ 
             HasGameFile = true;
             Id = playerData.GetPropertyValue<long>("PlayerDataID");
 
-            StructUniqueNetIdRepl netId = (StructUniqueNetIdRepl)playerData.GetTypedProperty<PropertyStruct>("UniqueID").Value;
-            NetworkId = netId.NetId;
-            Name = playerData.GetPropertyValue<string>("PlayerName");
-            CharacterName = playerConfig.GetPropertyValue<string>("PlayerCharacterName");
+            StructUniqueNetIdRepl netId = (StructUniqueNetIdRepl)playerData.GetTypedProperty<PropertyStruct>("UniqueID")?.Value;
+            NetworkId = netId == null ? "" : netId.NetId;
+            Name = playerData.GetPropertyValue<string>("PlayerName") ?? "Unknown";
+            CharacterName = Name;
             TargetingTeam = playerData.GetPropertyValue<int>("TribeId");
-            Gender = playerConfig.GetPropertyValue<bool>("bIsFemale") ? "Female" : "Male";
+            LastTimeInGame = playerData.GetPropertyValue<double>("LoginTime");
+
+            var characterConfig = playerData.GetTypedProperty<PropertyStruct>("MyPlayerCharacterConfig");
+            if (characterConfig != null)
+            {
+                var playerConfig = (StructPropertyList)characterConfig.Value;
+                CharacterName = playerConfig.GetPropertyValue<string>("PlayerCharacterName");
+                Gender = playerConfig.GetPropertyValue<bool>("bIsFemale") ? "Female" : "Male";
+            }
 
             X = 0;
             Y = 0;
             Z = 0;
-            LastTimeInGame = playerData.GetPropertyValue<double>("LoginTime");
-            Level = playerStatus.GetPropertyValue<short>("CharacterStatusComponent_ExtraCharacterLevel") + 1;
-            Stats = new byte[12];
-            for (var i = 0; i < Stats.Length; i++)
+
+            var characterStats = playerData.GetTypedProperty<PropertyStruct>("MyPersistentCharacterStats");
+            if (characterStats != null)
             {
-                var pointValue = playerStatus.GetTypedProperty<PropertyByte>("CharacterStatusComponent_NumberOfLevelUpPointsApplied", i);
-                Stats[i] = pointValue == null ? (byte)0 : pointValue.Value.ByteValue;
+                var playerStatus = (StructPropertyList)characterStats.Value;
+
+                Level = playerStatus.GetPropertyValue<short>("CharacterStatusComponent_ExtraCharacterLevel") + 1;
+                Stats = new byte[12];
+                for (var i = 0; i < Stats.Length; i++)
+                {
+                    var pointValue = playerStatus.GetTypedProperty<PropertyByte>("CharacterStatusComponent_NumberOfLevelUpPointsApplied", i);
+                    Stats[i] = pointValue == null ? (byte)0 : pointValue.Value.ByteValue;
+                }
+
             }
-
-
-
 
             if (playerData.HasAnyProperty("LatestMissionScores"))
             {
