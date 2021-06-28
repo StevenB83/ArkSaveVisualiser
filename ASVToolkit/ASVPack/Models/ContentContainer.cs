@@ -189,7 +189,7 @@ namespace ASVPack.Models
                                                 {
                                                     var item = itemObject.AsItem();
 
-                                                    if (!item.IsEngram)
+                                                    if (!item.IsEngram &!item.IsBlueprint)
                                                     {
                                                         inventoryItems.Add(item);
                                                     }

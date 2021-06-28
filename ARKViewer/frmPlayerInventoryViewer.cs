@@ -106,7 +106,6 @@ namespace ARKViewer
                         itemIcon = Program.GetItemImageIndex(itemMap.Image);
                     }
 
-                    if (invItem.IsBlueprint) itemName += " (Blueprint)";
 
                     if (itemName.ToLower().Contains(txtPlayerFilter.Text.ToLower()) || categoryName.ToLower().Contains(txtPlayerFilter.Text.ToLower()))
                     {
@@ -125,6 +124,7 @@ namespace ARKViewer
                             ListViewItem newItem = new ListViewItem(itemName);
                             newItem.ForeColor = foreColor;
                             newItem.BackColor = backColor;
+                            newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
                             newItem.SubItems.Add(craftedBy);
@@ -213,6 +213,7 @@ namespace ARKViewer
                             ListViewItem newItem = new ListViewItem(itemName);
                             newItem.BackColor = backColor;
                             newItem.ForeColor = foreColor;
+                            newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
                             newItem.SubItems.Add(craftedBy);
@@ -296,6 +297,7 @@ namespace ARKViewer
                             newItem.BackColor = backColor;
                             newItem.ForeColor = foreColor;
 
+                            newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
                             newItem.SubItems.Add(craftedBy);

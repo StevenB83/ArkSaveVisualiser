@@ -170,6 +170,7 @@
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpgPlayers = new System.Windows.Forms.TabPage();
+            this.btmMissionScoreboard = new System.Windows.Forms.Button();
             this.lblPlayerTotal = new System.Windows.Forms.Label();
             this.lblCommandPlayer = new System.Windows.Forms.Label();
             this.cboConsoleCommandsPlayerTribe = new System.Windows.Forms.ComboBox();
@@ -198,6 +199,7 @@
             this.lvwPlayers_SteamName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwPlayers_SteamId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpgDroppedItems = new System.Windows.Forms.TabPage();
+            this.chkDroppedBlueprints = new System.Windows.Forms.CheckBox();
             this.cboDroppedItem = new System.Windows.Forms.ComboBox();
             this.lblDroppedPlayer = new System.Windows.Forms.Label();
             this.cboDroppedPlayer = new System.Windows.Forms.ComboBox();
@@ -207,12 +209,14 @@
             this.lblDroppedItem = new System.Windows.Forms.Label();
             this.lvwDroppedItems = new System.Windows.Forms.ListView();
             this.lvwDroppedItems_Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwDroppedItems_Bp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwDroppedItems_DroppedBy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwDroppedItems_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwDroppedItems_Lon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwDroppedItems_Tribe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwDroppedItems_Player = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpgItemList = new System.Windows.Forms.TabPage();
+            this.chkItemSearchBlueprints = new System.Windows.Forms.CheckBox();
             this.cboItemListItem = new System.Windows.Forms.ComboBox();
             this.lblItemListTribe = new System.Windows.Forms.Label();
             this.cboItemListTribe = new System.Windows.Forms.ComboBox();
@@ -225,6 +229,7 @@
             this.lvwItemList_Tribe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Container = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwItemList_BP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Quantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Lon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -237,7 +242,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMap = new System.Windows.Forms.Label();
             this.cboSelectedMap = new System.Windows.Forms.ComboBox();
-            this.btmMissionScoreboard = new System.Windows.Forms.Button();
             this.mnuContext.SuspendLayout();
             this.tabFeatures.SuspendLayout();
             this.tpgWild.SuspendLayout();
@@ -1708,6 +1712,20 @@
             this.tpgPlayers.Text = "Players";
             this.tpgPlayers.UseVisualStyleBackColor = true;
             // 
+            // btmMissionScoreboard
+            // 
+            this.btmMissionScoreboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btmMissionScoreboard.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btmMissionScoreboard.Enabled = false;
+            this.btmMissionScoreboard.Image = ((System.Drawing.Image)(resources.GetObject("btmMissionScoreboard.Image")));
+            this.btmMissionScoreboard.Location = new System.Drawing.Point(758, 8);
+            this.btmMissionScoreboard.Name = "btmMissionScoreboard";
+            this.btmMissionScoreboard.Size = new System.Drawing.Size(40, 40);
+            this.btmMissionScoreboard.TabIndex = 12;
+            this.toolTip1.SetToolTip(this.btmMissionScoreboard, "View mission scoreboard");
+            this.btmMissionScoreboard.UseVisualStyleBackColor = true;
+            this.btmMissionScoreboard.Click += new System.EventHandler(this.btmMissionScoreboard_Click);
+            // 
             // lblPlayerTotal
             // 
             this.lblPlayerTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1947,6 +1965,7 @@
             // 
             // tpgDroppedItems
             // 
+            this.tpgDroppedItems.Controls.Add(this.chkDroppedBlueprints);
             this.tpgDroppedItems.Controls.Add(this.btnDropInventory);
             this.tpgDroppedItems.Controls.Add(this.cboDroppedItem);
             this.tpgDroppedItems.Controls.Add(this.lblDroppedPlayer);
@@ -1964,13 +1983,28 @@
             this.tpgDroppedItems.Text = "Dropped Items";
             this.tpgDroppedItems.UseVisualStyleBackColor = true;
             // 
+            // chkDroppedBlueprints
+            // 
+            this.chkDroppedBlueprints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkDroppedBlueprints.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkDroppedBlueprints.BackgroundImage = global::ARKViewer.Properties.Resources.blueprints_unchecked;
+            this.chkDroppedBlueprints.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.chkDroppedBlueprints.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkDroppedBlueprints.Location = new System.Drawing.Point(758, 5);
+            this.chkDroppedBlueprints.Name = "chkDroppedBlueprints";
+            this.chkDroppedBlueprints.Size = new System.Drawing.Size(40, 40);
+            this.chkDroppedBlueprints.TabIndex = 10;
+            this.toolTip1.SetToolTip(this.chkDroppedBlueprints, "Show / hide blueprints.");
+            this.chkDroppedBlueprints.UseVisualStyleBackColor = true;
+            this.chkDroppedBlueprints.CheckedChanged += new System.EventHandler(this.chkDroppedBlueprints_CheckedChanged);
+            // 
             // cboDroppedItem
             // 
             this.cboDroppedItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboDroppedItem.FormattingEnabled = true;
-            this.cboDroppedItem.Location = new System.Drawing.Point(414, 15);
+            this.cboDroppedItem.Location = new System.Drawing.Point(334, 15);
             this.cboDroppedItem.Name = "cboDroppedItem";
-            this.cboDroppedItem.Size = new System.Drawing.Size(304, 21);
+            this.cboDroppedItem.Size = new System.Drawing.Size(213, 21);
             this.cboDroppedItem.TabIndex = 3;
             this.cboDroppedItem.SelectedIndexChanged += new System.EventHandler(this.cboDroppedItem_SelectedIndexChanged);
             // 
@@ -1990,7 +2024,7 @@
             this.cboDroppedPlayer.FormattingEnabled = true;
             this.cboDroppedPlayer.Location = new System.Drawing.Point(69, 16);
             this.cboDroppedPlayer.Name = "cboDroppedPlayer";
-            this.cboDroppedPlayer.Size = new System.Drawing.Size(278, 21);
+            this.cboDroppedPlayer.Size = new System.Drawing.Size(218, 21);
             this.cboDroppedPlayer.TabIndex = 1;
             this.cboDroppedPlayer.SelectedIndexChanged += new System.EventHandler(this.cboDroppedPlayer_SelectedIndexChanged);
             // 
@@ -2033,7 +2067,7 @@
             // 
             this.lblDroppedItem.AutoSize = true;
             this.lblDroppedItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDroppedItem.Location = new System.Drawing.Point(373, 19);
+            this.lblDroppedItem.Location = new System.Drawing.Point(293, 19);
             this.lblDroppedItem.Name = "lblDroppedItem";
             this.lblDroppedItem.Size = new System.Drawing.Size(35, 13);
             this.lblDroppedItem.TabIndex = 2;
@@ -2046,6 +2080,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwDroppedItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.lvwDroppedItems_Item,
+            this.lvwDroppedItems_Bp,
             this.lvwDroppedItems_DroppedBy,
             this.lvwDroppedItems_Lat,
             this.lvwDroppedItems_Lon,
@@ -2066,7 +2101,11 @@
             // lvwDroppedItems_Item
             // 
             this.lvwDroppedItems_Item.Text = "Item";
-            this.lvwDroppedItems_Item.Width = 247;
+            this.lvwDroppedItems_Item.Width = 180;
+            // 
+            // lvwDroppedItems_Bp
+            // 
+            this.lvwDroppedItems_Bp.Text = "BP";
             // 
             // lvwDroppedItems_DroppedBy
             // 
@@ -2093,6 +2132,7 @@
             // 
             // tpgItemList
             // 
+            this.tpgItemList.Controls.Add(this.chkItemSearchBlueprints);
             this.tpgItemList.Controls.Add(this.cboItemListItem);
             this.tpgItemList.Controls.Add(this.lblItemListTribe);
             this.tpgItemList.Controls.Add(this.cboItemListTribe);
@@ -2109,13 +2149,28 @@
             this.tpgItemList.Text = "Item Search";
             this.tpgItemList.UseVisualStyleBackColor = true;
             // 
+            // chkItemSearchBlueprints
+            // 
+            this.chkItemSearchBlueprints.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.chkItemSearchBlueprints.Appearance = System.Windows.Forms.Appearance.Button;
+            this.chkItemSearchBlueprints.BackgroundImage = global::ARKViewer.Properties.Resources.blueprints_unchecked;
+            this.chkItemSearchBlueprints.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.chkItemSearchBlueprints.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.chkItemSearchBlueprints.Location = new System.Drawing.Point(758, 6);
+            this.chkItemSearchBlueprints.Name = "chkItemSearchBlueprints";
+            this.chkItemSearchBlueprints.Size = new System.Drawing.Size(40, 40);
+            this.chkItemSearchBlueprints.TabIndex = 11;
+            this.toolTip1.SetToolTip(this.chkItemSearchBlueprints, "Show / hide blueprints.");
+            this.chkItemSearchBlueprints.UseVisualStyleBackColor = true;
+            this.chkItemSearchBlueprints.CheckedChanged += new System.EventHandler(this.chkItemSearchBlueprints_CheckedChanged);
+            // 
             // cboItemListItem
             // 
             this.cboItemListItem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboItemListItem.FormattingEnabled = true;
-            this.cboItemListItem.Location = new System.Drawing.Point(414, 15);
+            this.cboItemListItem.Location = new System.Drawing.Point(334, 15);
             this.cboItemListItem.Name = "cboItemListItem";
-            this.cboItemListItem.Size = new System.Drawing.Size(304, 21);
+            this.cboItemListItem.Size = new System.Drawing.Size(216, 21);
             this.cboItemListItem.TabIndex = 3;
             this.cboItemListItem.SelectedIndexChanged += new System.EventHandler(this.cboItemListItem_SelectedIndexChanged);
             // 
@@ -2135,7 +2190,7 @@
             this.cboItemListTribe.FormattingEnabled = true;
             this.cboItemListTribe.Location = new System.Drawing.Point(69, 16);
             this.cboItemListTribe.Name = "cboItemListTribe";
-            this.cboItemListTribe.Size = new System.Drawing.Size(278, 21);
+            this.cboItemListTribe.Size = new System.Drawing.Size(218, 21);
             this.cboItemListTribe.TabIndex = 1;
             this.cboItemListTribe.SelectedIndexChanged += new System.EventHandler(this.cboItemListTribe_SelectedIndexChanged);
             // 
@@ -2191,7 +2246,7 @@
             // 
             this.lblItemListItem.AutoSize = true;
             this.lblItemListItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblItemListItem.Location = new System.Drawing.Point(373, 19);
+            this.lblItemListItem.Location = new System.Drawing.Point(293, 19);
             this.lblItemListItem.Name = "lblItemListItem";
             this.lblItemListItem.Size = new System.Drawing.Size(35, 13);
             this.lblItemListItem.TabIndex = 2;
@@ -2206,6 +2261,7 @@
             this.lvwItemList_Tribe,
             this.lvwItemList_Container,
             this.lvwItemList_Item,
+            this.lvwItemList_BP,
             this.lvwItemList_Quantity,
             this.lvwItemList_Lat,
             this.lvwItemList_Lon});
@@ -2218,6 +2274,7 @@
             this.lvwItemList.TabIndex = 4;
             this.lvwItemList.UseCompatibleStateImageBehavior = false;
             this.lvwItemList.View = System.Windows.Forms.View.Details;
+            this.lvwItemList.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwItemList_ColumnClick);
             this.lvwItemList.SelectedIndexChanged += new System.EventHandler(this.lvwItemList_SelectedIndexChanged);
             // 
             // lvwItemList_Tribe
@@ -2234,6 +2291,11 @@
             // 
             this.lvwItemList_Item.Text = "Item";
             this.lvwItemList_Item.Width = 175;
+            // 
+            // lvwItemList_BP
+            // 
+            this.lvwItemList_BP.Text = "BP";
+            this.lvwItemList_BP.Width = 40;
             // 
             // lvwItemList_Quantity
             // 
@@ -2335,20 +2397,6 @@
             this.cboSelectedMap.Size = new System.Drawing.Size(207, 21);
             this.cboSelectedMap.TabIndex = 26;
             this.cboSelectedMap.SelectedIndexChanged += new System.EventHandler(this.cboSelectedMap_SelectedIndexChanged);
-            // 
-            // btmMissionScoreboard
-            // 
-            this.btmMissionScoreboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btmMissionScoreboard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btmMissionScoreboard.Enabled = false;
-            this.btmMissionScoreboard.Image = ((System.Drawing.Image)(resources.GetObject("btmMissionScoreboard.Image")));
-            this.btmMissionScoreboard.Location = new System.Drawing.Point(758, 8);
-            this.btmMissionScoreboard.Name = "btmMissionScoreboard";
-            this.btmMissionScoreboard.Size = new System.Drawing.Size(40, 40);
-            this.btmMissionScoreboard.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.btmMissionScoreboard, "View mission scoreboard");
-            this.btmMissionScoreboard.UseVisualStyleBackColor = true;
-            this.btmMissionScoreboard.Click += new System.EventHandler(this.btmMissionScoreboard_Click);
             // 
             // frmViewer
             // 
@@ -2615,6 +2663,10 @@
         private System.Windows.Forms.Label lblMap;
         private System.Windows.Forms.ComboBox cboSelectedMap;
         private System.Windows.Forms.Button btmMissionScoreboard;
+        private System.Windows.Forms.ColumnHeader lvwDroppedItems_Bp;
+        private System.Windows.Forms.ColumnHeader lvwItemList_BP;
+        private System.Windows.Forms.CheckBox chkDroppedBlueprints;
+        private System.Windows.Forms.CheckBox chkItemSearchBlueprints;
     }
 }
 

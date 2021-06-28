@@ -645,6 +645,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ASV.ico" />
+    <None Include="Resources\blueprints.png" />
+    <None Include="Resources\blueprints_unchecked.png" />
     <None Include="Resources\map_lostisland.png" />
     <None Include="Resources\map_antartika.png" />
     <None Include="Resources\map_glacius.png" />

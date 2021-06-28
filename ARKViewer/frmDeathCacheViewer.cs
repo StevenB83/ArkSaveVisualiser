@@ -110,7 +110,6 @@ namespace ARKViewer
                         categoryName = itemMap.Category;
                     }
 
-                    if (invItem.IsBlueprint) itemName += " (Blueprint)";
 
 
                     if (itemName.ToLower().Contains(txtFilter.Text.ToLower()) || categoryName.ToLower().Contains(txtFilter.Text.ToLower()))
@@ -118,6 +117,7 @@ namespace ARKViewer
                         if (!invItem.IsEngram)
                         {
                             ListViewItem newItem = new ListViewItem(itemName);
+                            newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(invItem.Quantity.ToString());
                             newItem.ImageIndex = itemIcon - 1;

@@ -44,6 +44,7 @@
             this.lblTribeName = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.picWindowIcon)).BeginInit();
             this.pnlCreatureInventory.SuspendLayout();
             this.SuspendLayout();
@@ -124,6 +125,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwCreatureInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3,
+            this.columnHeader1,
             this.columnHeader8,
             this.columnHeader12});
             this.lvwCreatureInventory.FullRowSelect = true;
@@ -139,12 +141,12 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Item";
-            this.columnHeader3.Width = 226;
+            this.columnHeader3.Width = 200;
             // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Category";
-            this.columnHeader8.Width = 270;
+            this.columnHeader8.Width = 250;
             // 
             // columnHeader12
             // 
@@ -208,6 +210,11 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "BP";
+            this.columnHeader1.Width = 50;
+            // 
             // frmDinoInventoryViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -255,5 +262,6 @@
         private System.Windows.Forms.Label lblPlayerName;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.CheckBox chkApplyFilterDinos;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
     }
 }

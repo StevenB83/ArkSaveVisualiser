@@ -409,7 +409,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => x.ClassName).Select(g => new { ClassName = g.Key, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { ClassName = x.ClassName, IsBluePrint = x.IsBlueprint }).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBluePrint, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -431,7 +431,8 @@ namespace ARKViewer.Models
                                             X = (decimal)container.X,
                                             Y = (decimal)container.Y,
                                             Z = (decimal)container.Z,
-                                            Quantity = g.Qty
+                                            Quantity = g.Qty,
+                                            IsBlueprint = g.IsBlueprint
 
                                         });
 
@@ -464,7 +465,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => x.ClassName).Select(g => new { ClassName = g.Key, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -487,7 +488,8 @@ namespace ARKViewer.Models
                                             X = (decimal)container.X,
                                             Y = (decimal)container.Y,
                                             Z = (decimal)container.Z,
-                                            Quantity = g.Qty
+                                            Quantity = g.Qty,
+                                            IsBlueprint = g.IsBlueprint                                            
 
                                         });
 
@@ -521,7 +523,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => x.ClassName).Select(g => new { ClassName = g.Key, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -543,7 +545,8 @@ namespace ARKViewer.Models
                                             X = (decimal)container.X,
                                             Y = (decimal)container.Y,
                                             Z = (decimal)container.Z,
-                                            Quantity = g.Qty
+                                            Quantity = g.Qty,
+                                            IsBlueprint = g.IsBlueprint
 
                                         });
 

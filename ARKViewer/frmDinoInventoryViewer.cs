@@ -131,13 +131,13 @@ namespace ARKViewer
 
                     }
 
-                    if (invItem.IsBlueprint) itemName += " (Blueprint)";
 
                     if (itemName.ToLower().Contains(txtCreatureFilter.Text.ToLower()) || categoryName.ToLower().Contains(txtCreatureFilter.Text.ToLower()))
                     {
                         if (!invItem.IsEngram)
                         {
                             ListViewItem newItem = new ListViewItem(itemName);
+                            newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(invItem.Quantity.ToString());
                             newItem.ImageIndex = itemIcon - 1;

@@ -82,6 +82,9 @@
             this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpgMissions = new System.Windows.Forms.TabPage();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.lvwPlayerScores = new System.Windows.Forms.ListView();
             this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -89,9 +92,9 @@
             this.lblWindowTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblPlayerId = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlPlayerInventory.SuspendLayout();
             this.tabInventory.SuspendLayout();
             this.tpgPlayerInventory.SuspendLayout();
@@ -161,6 +164,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwPlayerInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader4,
+            this.columnHeader23,
             this.columnHeader2,
             this.columnHeader1,
             this.columnHeader5,
@@ -179,7 +183,7 @@
             // columnHeader4
             // 
             this.columnHeader4.Text = "Item";
-            this.columnHeader4.Width = 168;
+            this.columnHeader4.Width = 150;
             // 
             // columnHeader2
             // 
@@ -194,12 +198,12 @@
             // columnHeader5
             // 
             this.columnHeader5.Text = "Crafted By";
-            this.columnHeader5.Width = 163;
+            this.columnHeader5.Width = 155;
             // 
             // columnHeader7
             // 
             this.columnHeader7.Text = "Qty";
-            this.columnHeader7.Width = 55;
+            this.columnHeader7.Width = 45;
             // 
             // tabInventory
             // 
@@ -389,6 +393,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwCreatureInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader3,
+            this.columnHeader25,
             this.columnHeader8,
             this.columnHeader6,
             this.columnHeader19,
@@ -419,7 +424,6 @@
             // 
             // columnHeader6
             // 
-            this.columnHeader6.DisplayIndex = 3;
             this.columnHeader6.Text = "Quality";
             this.columnHeader6.Width = 0;
             // 
@@ -430,7 +434,6 @@
             // 
             // columnHeader9
             // 
-            this.columnHeader9.DisplayIndex = 0;
             this.columnHeader9.Text = "Name";
             this.columnHeader9.Width = 139;
             // 
@@ -445,7 +448,6 @@
             // 
             // columnHeader12
             // 
-            this.columnHeader12.DisplayIndex = 1;
             this.columnHeader12.Text = "Qty";
             this.columnHeader12.Width = 48;
             // 
@@ -545,6 +547,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwStorageInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader13,
+            this.columnHeader26,
             this.columnHeader14,
             this.columnHeader20,
             this.columnHeader21,
@@ -599,7 +602,6 @@
             // 
             // columnHeader18
             // 
-            this.columnHeader18.DisplayIndex = 1;
             this.columnHeader18.Text = "Qty";
             this.columnHeader18.Width = 48;
             // 
@@ -628,6 +630,36 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(684, 434);
             this.panel1.TabIndex = 0;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
+            this.checkBox1.Image = global::ARKViewer.Properties.Resources.button_filter;
+            this.checkBox1.Location = new System.Drawing.Point(624, 397);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(30, 30);
+            this.checkBox1.TabIndex = 6;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(26, 406);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(29, 13);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "Filter";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(72, 403);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(548, 20);
+            this.textBox1.TabIndex = 5;
             // 
             // lvwPlayerScores
             // 
@@ -702,35 +734,20 @@
             this.lblPlayerId.TabIndex = 0;
             this.lblPlayerId.Text = "Player Id:";
             // 
-            // checkBox1
+            // columnHeader23
             // 
-            this.checkBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBox1.Appearance = System.Windows.Forms.Appearance.Button;
-            this.checkBox1.Image = global::ARKViewer.Properties.Resources.button_filter;
-            this.checkBox1.Location = new System.Drawing.Point(624, 397);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(30, 30);
-            this.checkBox1.TabIndex = 6;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.columnHeader23.Text = "BP";
+            this.columnHeader23.Width = 50;
             // 
-            // label1
+            // columnHeader25
             // 
-            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(26, 406);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(29, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Filter";
+            this.columnHeader25.Text = "BP";
+            this.columnHeader25.Width = 50;
             // 
-            // textBox1
+            // columnHeader26
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(72, 403);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(548, 20);
-            this.textBox1.TabIndex = 5;
+            this.columnHeader26.Text = "BP";
+            this.columnHeader26.Width = 50;
             // 
             // frmPlayerInventoryViewer
             // 
@@ -840,5 +857,8 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
+        private System.Windows.Forms.ColumnHeader columnHeader26;
     }
 }

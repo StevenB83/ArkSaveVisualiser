@@ -4581,14 +4581,19 @@ namespace ARKViewer
             {
                 foreach (var foundItem in foundItems)
                 {
-                    ListViewItem newItem = new ListViewItem(foundItem.TribeName);
-                    newItem.SubItems.Add(foundItem.ContainerName);
-                    newItem.SubItems.Add(foundItem.DisplayName);
-                    newItem.SubItems.Add(foundItem.Quantity.ToString());
-                    newItem.SubItems.Add(foundItem.Latitude.ToString("f2"));
-                    newItem.SubItems.Add(foundItem.Longitude.ToString("f2"));
-                    newItem.Tag = foundItem;
-                    newItems.Add(newItem);
+                    if(chkItemSearchBlueprints.Checked || !chkItemSearchBlueprints.Checked &! foundItem.IsBlueprint)
+                    {
+                        ListViewItem newItem = new ListViewItem(foundItem.TribeName);
+                        newItem.SubItems.Add(foundItem.ContainerName);
+                        newItem.SubItems.Add(foundItem.DisplayName);
+                        newItem.SubItems.Add(foundItem.IsBlueprint ? "Yes" : "No");
+                        newItem.SubItems.Add(foundItem.Quantity.ToString());
+                        newItem.SubItems.Add(foundItem.Latitude.ToString("f2"));
+                        newItem.SubItems.Add(foundItem.Longitude.ToString("f2"));
+                        newItem.Tag = foundItem;
+                        newItems.Add(newItem);
+
+                    }
                 }
             }
 
@@ -4787,6 +4792,7 @@ namespace ARKViewer
 
                     ListViewItem newItem = new ListViewItem(itemName);
                     newItem.Tag = playerCache;
+                    newItem.SubItems.Add("No");
                     newItem.SubItems.Add(playerCache.DroppedByName);
                     newItem.SubItems.Add((playerCache.Latitude.GetValueOrDefault(0) == 0 && playerCache.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : playerCache.Latitude.Value.ToString("0.00"));
                     newItem.SubItems.Add((playerCache.Latitude.GetValueOrDefault(0) == 0 && playerCache.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : playerCache.Longitude.Value.ToString("0.00"));
@@ -4808,36 +4814,38 @@ namespace ARKViewer
 
                     Parallel.ForEach(droppedItems, droppedItem =>
                     {
-                        string itemName = droppedItem.ClassName;
-                        ItemClassMap itemMap = Program.ProgramConfig.ItemMap.Where(m => m.ClassName == droppedItem.ClassName).FirstOrDefault();
-                        if (itemMap != null)
+                        if(chkDroppedBlueprints.Checked || !chkDroppedBlueprints.Checked &! droppedItem.IsBlueprint)
                         {
-                            itemName = itemMap.DisplayName;
-                        }
+                            string itemName = droppedItem.ClassName;
+                            ItemClassMap itemMap = Program.ProgramConfig.ItemMap.Where(m => m.ClassName == droppedItem.ClassName).FirstOrDefault();
+                            if (itemMap != null)
+                            {
+                                itemName = itemMap.DisplayName;
+                            }
 
-                        //get tribe/player
-                        var playerTribe = cm.GetPlayerTribe(droppedItem.DroppedByPlayerId);
-                        if (playerTribe != null)
-                        {
-                            var player = playerTribe.Players.First(p => p.Id == droppedItem.DroppedByPlayerId);
-                            tribeName = playerTribe.TribeName;
-                            playerName = player.CharacterName;
-                        }
+                            //get tribe/player
+                            var playerTribe = cm.GetPlayerTribe(droppedItem.DroppedByPlayerId);
+                            if (playerTribe != null)
+                            {
+                                var player = playerTribe.Players.First(p => p.Id == droppedItem.DroppedByPlayerId);
+                                tribeName = playerTribe.TribeName;
+                                playerName = player.CharacterName;
+                            }
 
-                        ListViewItem newItem = new ListViewItem(itemName);
-                        newItem.Tag = droppedItem;
-                        newItem.SubItems.Add(droppedItem.DroppedByName);
-                        newItem.SubItems.Add((droppedItem.Latitude.GetValueOrDefault(0) == 0 && droppedItem.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : droppedItem.Latitude.Value.ToString("0.00"));
-                        newItem.SubItems.Add((droppedItem.Latitude.GetValueOrDefault(0) == 0 && droppedItem.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : droppedItem.Longitude.Value.ToString("0.00"));
-                        newItem.SubItems.Add(tribeName);
-                        newItem.SubItems.Add(playerName);
+                            ListViewItem newItem = new ListViewItem(itemName);
+                            newItem.Tag = droppedItem;
+                            newItem.SubItems.Add(droppedItem.IsBlueprint ? "Yes" : "No");
+                            newItem.SubItems.Add(droppedItem.DroppedByName);
+                            newItem.SubItems.Add((droppedItem.Latitude.GetValueOrDefault(0) == 0 && droppedItem.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : droppedItem.Latitude.Value.ToString("0.00"));
+                            newItem.SubItems.Add((droppedItem.Latitude.GetValueOrDefault(0) == 0 && droppedItem.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : droppedItem.Longitude.Value.ToString("0.00"));
+                            newItem.SubItems.Add(tribeName);
+                            newItem.SubItems.Add(playerName);
 
-                        listItems.Add(newItem);
+                            listItems.Add(newItem);
+                        }                        
 
                     });
-
                 }
-
             }
 
             lvwDroppedItems.Items.AddRange(listItems.ToArray());
@@ -5359,6 +5367,74 @@ namespace ARKViewer
         private void btmMissionScoreboard_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void chkItemSearchBlueprints_CheckedChanged(object sender, EventArgs e)
+        {
+            chkItemSearchBlueprints.BackgroundImage = chkItemSearchBlueprints.Checked ? Properties.Resources.blueprints : Properties.Resources.blueprints_unchecked;
+            LoadItemListDetail();
+        }
+
+        private void chkDroppedBlueprints_CheckedChanged(object sender, EventArgs e)
+        {
+            chkDroppedBlueprints.BackgroundImage = chkDroppedBlueprints.Checked ? Properties.Resources.blueprints : Properties.Resources.blueprints_unchecked;
+            LoadDroppedItemDetail();
+        }
+
+        private void lvwItemList_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Get the new sorting column.
+            ColumnHeader new_sorting_column = lvwItemList.Columns[e.Column];
+
+            // Figure out the new sorting order.
+            System.Windows.Forms.SortOrder sort_order;
+            if (SortingColumn_ItemList == null)
+            {
+                // New column. Sort ascending.
+                sort_order = SortOrder.Ascending;
+            }
+            else
+            {
+                // See if this is the same column.
+                if (new_sorting_column == SortingColumn_ItemList)
+                {
+                    // Same column. Switch the sort order.
+                    if (SortingColumn_ItemList.Text.StartsWith("> "))
+                    {
+                        sort_order = SortOrder.Descending;
+                    }
+                    else
+                    {
+                        sort_order = SortOrder.Ascending;
+                    }
+                }
+                else
+                {
+                    // New column. Sort ascending.
+                    sort_order = SortOrder.Ascending;
+                }
+
+                // Remove the old sort indicator.
+                SortingColumn_ItemList.Text = SortingColumn_ItemList.Text.Substring(2);
+            }
+
+            // Display the new sort order.
+            SortingColumn_ItemList = new_sorting_column;
+            if (sort_order == SortOrder.Ascending)
+            {
+                SortingColumn_ItemList.Text = "> " + SortingColumn_ItemList.Text;
+            }
+            else
+            {
+                SortingColumn_ItemList.Text = "< " + SortingColumn_ItemList.Text;
+            }
+
+            // Create a comparer.
+            lvwItemList.ListViewItemSorter =
+                new ListViewComparer(e.Column, sort_order);
+
+            // Sort.
+            lvwItemList.Sort();
         }
     }
 }

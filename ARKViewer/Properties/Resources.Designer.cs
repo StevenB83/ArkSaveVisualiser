@@ -63,6 +63,26 @@ namespace ARKViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blueprints {
+            get {
+                object obj = ResourceManager.GetObject("blueprints", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap blueprints_unchecked {
+            get {
+                object obj = ResourceManager.GetObject("blueprints_unchecked", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap button_add {
             get {
                 object obj = ResourceManager.GetObject("button_add", resourceCulture);
