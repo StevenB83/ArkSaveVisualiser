@@ -94,7 +94,7 @@ namespace ASVPack.Models
 
                     var newScore = new ContentMissionScore()
                     {
-                        MissionTag = bestScore.GetTypedProperty<PropertyName>("MissionTag").Value.Name
+                        FullTag = bestScore.GetTypedProperty<PropertyName>("MissionTag").Value.Name
                     };
 
                     float floatValue = bestScore.GetPropertyValue<float>("FloatValue");
@@ -103,8 +103,7 @@ namespace ASVPack.Models
                     string stringScore = floatValue.ToString($"f{intValue}");
                     decimal.TryParse(stringScore, out decimal highScore);
                     newScore.HighScore = (decimal)highScore;
-
-                    newScore.MissionTag = newScore.MissionTag.Substring(newScore.MissionTag.LastIndexOf(".") + 1);
+                    newScore.FullTag = newScore.FullTag.Substring(newScore.MissionTag.LastIndexOf(".") + 1);
 
                     MissionScores.Add(newScore);
                 }

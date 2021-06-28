@@ -229,6 +229,7 @@
     <Compile Include="Models\NameMap\ItemClassMap.cs" />
     <Compile Include="Models\NameMap\LogColourMap.cs" />
     <Compile Include="Models\NameMap\LogTextColourMap.cs" />
+    <Compile Include="Models\NameMap\MissionMap.cs" />
     <Compile Include="Models\NameMap\PlayerMap.cs" />
     <Compile Include="Models\NameMap\StructureClassMap.cs" />
     <Compile Include="Models\NameMap\TribeMap.cs" />

@@ -94,6 +94,8 @@ namespace ARKViewer.Configuration
 
         public List<ASVBreedingSearch> BreedingSearchOptions { get; set; } = new List<ASVBreedingSearch>();
 
+        public List<MissionMap> MissionMaps { get; set; } = new List<MissionMap>();
+
 
         public ViewerConfiguration()
         {
@@ -210,6 +212,14 @@ namespace ARKViewer.Configuration
                 string breedingOptionFilename = Path.Combine(AppContext.BaseDirectory, "breedingoptions.json");
                 string jsonOptions = JsonConvert.SerializeObject(BreedingSearchOptions);
                 File.WriteAllText(breedingOptionFilename, jsonOptions);
+            }
+
+            //save missionmaps
+            if (MissionMaps != null && MissionMaps.Count > 0)
+            {
+                string missionMapFilename = Path.Combine(AppContext.BaseDirectory, "missionmap.json");
+                string jsonOptions = JsonConvert.SerializeObject(MissionMaps);
+                File.WriteAllText(missionMapFilename, jsonOptions);
             }
 
             //re-load config now saved
@@ -376,6 +386,15 @@ JArray itemList = (JArray)itemFile.GetValue("colors");
                     dino.FriendlyName = dinoObject.Value<string>("FriendlyName");
                     DinoMap.Add(dino);
                 }
+            }
+
+            //load mission maps
+            MissionMaps = new List<MissionMap>();
+            string missionMapFilename = Path.Combine(savePath, "missionmap.json");
+            if (File.Exists(missionMapFilename))
+            {
+                string jsonFileContent = File.ReadAllText(missionMapFilename);
+                MissionMaps = JsonConvert.DeserializeObject<List<MissionMap>>(jsonFileContent); ;
             }
 
             //load breeding search options

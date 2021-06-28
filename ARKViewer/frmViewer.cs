@@ -446,8 +446,8 @@ namespace ARKViewer
 
         private void cboTribes_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadPlayerDetail();
             RefreshPlayerList();
+            LoadPlayerDetail();
         }
 
         private void cboPlayers_SelectedIndexChanged(object sender, EventArgs e)
@@ -5356,7 +5356,9 @@ namespace ARKViewer
 
         }
 
+        private void btmMissionScoreboard_Click(object sender, EventArgs e)
+        {
 
-
+        }
     }
 }

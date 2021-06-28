@@ -15,6 +15,7 @@ using System.Collections.Concurrent;
 using SavegameToolkit.Structs;
 using SavegameToolkit.Data;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace ASVPack.Models
 {
@@ -132,23 +133,26 @@ namespace ASVPack.Models
 
                         long structureStart = DateTime.Now.Ticks;
 
+               
                         //map structures we care about
                         MapStructures = objectContainer.Objects.Where(x =>
                             x.Location != null
                             & !x.HasAnyProperty("TargetingTeam")
-                            && (x.ClassName.Name.StartsWith("TributeTerminal_")
-                            || x.ClassName.Name.Contains("CityTerminal_")
-                            || x.ClassName.Name.StartsWith("PrimalItem_PowerNodeCharge")
-                            || x.ClassName.Name.StartsWith("BeaverDam_C")
-                            || x.ClassName.Name.StartsWith("WyvernNest_")
-                            || x.ClassName.Name.StartsWith("RockDrakeNest_C")
-                            || x.ClassName.Name.StartsWith("DeinonychusNest_C")
-                            || x.ClassName.Name.StartsWith("CherufeNest_C")
-                            || x.ClassName.Name.StartsWith("OilVein_")
-                            || x.ClassName.Name.StartsWith("WaterVein_")
-                            || x.ClassName.Name.StartsWith("GasVein_")
-                            || x.ClassName.Name.StartsWith("ArtifactCrate_")
-                            || x.ClassName.Name.StartsWith("Structure_PlantSpeciesZ")
+                            && (x.ClassString.StartsWith("TributeTerminal_")
+                            || x.ClassString.Contains("CityTerminal_")
+                            || x.ClassString.StartsWith("PrimalItem_PowerNodeCharge")
+                            || x.ClassString.StartsWith("BeaverDam_C")
+                            || x.ClassString.StartsWith("WyvernNest_")
+                            || x.ClassString.StartsWith("RockDrakeNest_C")
+                            || x.ClassString.StartsWith("DeinonychusNest_C")
+                            || x.ClassString.StartsWith("CherufeNest_C")
+                            || x.ClassString.StartsWith("OilVein_")
+                            || x.ClassString.StartsWith("WaterVein_")
+                            || x.ClassString.StartsWith("GasVein_")
+                            || x.ClassString.StartsWith("ArtifactCrate_")
+                            || x.ClassString.StartsWith("Structure_PlantSpeciesZ")
+
+
                             )
                         ).Select(s =>
                         {
@@ -159,8 +163,9 @@ namespace ASVPack.Models
 
                             ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
 
-                        //check for inventory
-                        ObjectReference inventoryRef = s.GetPropertyValue<ObjectReference>("MyInventoryComponent");
+
+                            //check for inventory
+                            ObjectReference inventoryRef = s.GetPropertyValue<ObjectReference>("MyInventoryComponent");
                             if (inventoryRef != null)
                             {
                                 structure.Inventory = new ContentInventory();
@@ -232,6 +237,7 @@ namespace ASVPack.Models
 
                         long wildStart = DateTime.Now.Ticks;
 
+                        
                         //wilds
                         WildCreatures = objectContainer.Objects.Where(x => x.IsWild())
                             .Select(x =>
