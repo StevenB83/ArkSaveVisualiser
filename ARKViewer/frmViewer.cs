@@ -18,6 +18,7 @@ using ARKViewer.Configuration;
 using ARKViewer.Models;
 using ASVPack.Models;
 using ARKViewer.Models.NameMap;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 
 namespace ARKViewer
 {
@@ -121,9 +122,22 @@ namespace ARKViewer
 
             try
             {
-                ContentContainer container = new ContentContainer();
-                container.LoadSaveGame(fileName);
-                cm = new ASVDataManager(container);
+                //determine if it's json or binary
+                if (fileName.EndsWith(".asv"))
+                {
+                    //asv pack (compressed)
+                    ContentPack pack = new ContentPack(File.ReadAllBytes(fileName));
+                    cm = new ASVDataManager(pack);
+
+                }
+                else
+                {
+                    //assume .ark
+                    ContentContainer container = new ContentContainer();
+                    container.LoadSaveGame(fileName);
+
+                    cm = new ASVDataManager(container);
+                }
 
                 try
                 {
@@ -196,6 +210,8 @@ namespace ARKViewer
             }
             catch(Exception ex)
             {
+                frmErrorReport errorReport = new frmErrorReport(ex.Message, ex.StackTrace);
+
                 //failed to load save game
                 UpdateProgress("Content failed to load.  Please check settings or refresh download to try again.");
             }

@@ -162,6 +162,14 @@ namespace ARKViewer
                             break;
                         default:
                             //direct command line export
+                            if (!File.Exists(inputFilename))
+                            {
+                                logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - File Not Found for: {inputFilename}");
+                                logWriter.Flush();
+                                Environment.ExitCode = -1;
+                                break;
+                            }
+
                             ContentContainer container = new ContentContainer();
                             container.LoadSaveGame(inputFilename);
                             ASVDataManager exportManger = new ASVDataManager(container);
@@ -218,6 +226,8 @@ namespace ARKViewer
                 {
 
                     logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Failed to export: \n{ex.Message.ToString()}");
+                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Trace: {ex.StackTrace}");
+
                     logWriter.Flush();
                     Environment.ExitCode = -1;
                 }

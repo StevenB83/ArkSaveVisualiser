@@ -135,7 +135,7 @@ namespace ASVPack.Models
             LoadJson(jsonContent);
         }
 
-        private void LoadJson(string jsonPack)
+        public void LoadJson(string jsonPack)
         {
             //load content from json
             try

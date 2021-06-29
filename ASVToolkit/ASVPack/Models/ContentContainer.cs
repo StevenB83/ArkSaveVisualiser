@@ -82,7 +82,6 @@ namespace ASVPack.Models
             {
                
 
-                latlonCalcs.TryGetValue(Path.GetFileNameWithoutExtension(fileName).ToLower(), out mapLatLonCalcs);
 
                 List<ContentTribe> tribeContentList = new List<ContentTribe>();
 
@@ -98,13 +97,12 @@ namespace ASVPack.Models
 
                         arkSavegame.ReadBinary(archive, ReadingOptions.Create()
                                 .WithThreadCount(int.MaxValue)
-                                .WithDataFiles(false)
+                                .WithDataFiles(true)
                                 .WithEmbeddedData(false)
                                 .WithDataFilesObjectMap(false)
                                 .WithBuildComponentTree(false));
 
 
-                        MapName = Path.GetFileNameWithoutExtension(fileName);
 
 
 
@@ -126,6 +124,12 @@ namespace ASVPack.Models
                             objectContainer = new GameObjectContainer(combinedObjects);
                             GameSeconds = arkSavegame.GameTime;
                         }
+
+                        //get map name from .ark file data
+                        MapName = arkSavegame.DataFiles[0];
+                        
+                        latlonCalcs.TryGetValue(MapName.ToLower(), out mapLatLonCalcs);
+
 
                         long saveLoadTime = DateTime.Now.Ticks;
                         TimeSpan timeTaken = TimeSpan.FromTicks(saveLoadTime - startTicks);
@@ -307,7 +311,7 @@ namespace ASVPack.Models
                                         arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
                                         string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
-                                        if (profileMapName == Path.GetFileNameWithoutExtension(fileName).ToLower())
+                                        if (profileMapName == MapName.ToLower())
                                         {
 
                                             ContentPlayer contentPlayer = arkProfile.AsPlayer();
