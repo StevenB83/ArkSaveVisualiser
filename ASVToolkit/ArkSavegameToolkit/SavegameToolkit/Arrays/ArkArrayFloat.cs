@@ -6,7 +6,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayFloat : ArkArrayBase<float> {
 
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("FloatProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("FloatProperty");
 
         //private static long serialVersionUID = 1L;
 

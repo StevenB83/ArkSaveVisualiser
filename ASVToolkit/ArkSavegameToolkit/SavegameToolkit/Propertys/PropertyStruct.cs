@@ -8,7 +8,7 @@ using SavegameToolkit.Types;
 namespace SavegameToolkit.Propertys {
 
     public class PropertyStruct : PropertyBase<IStruct> {
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("StructProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("StructProperty");
         public override ArkName Type => TYPE;
 
         private ArkName structType;

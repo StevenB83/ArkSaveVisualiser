@@ -8,7 +8,7 @@ using SavegameToolkit.Types;
 namespace SavegameToolkit.Arrays {
     public class ArkArrayName: ArkArrayBase<ArkName> {
 
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("NameProperty");
+         public static readonly ArkName TYPE = ArkName.ConstantPlain("NameProperty");
 
         //private static long serialVersionUID = 1L;
 

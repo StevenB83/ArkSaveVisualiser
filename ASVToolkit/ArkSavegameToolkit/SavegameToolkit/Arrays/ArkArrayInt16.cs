@@ -6,7 +6,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayInt16 : ArkArrayBase<short> {
 
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("Int16Property");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("Int16Property");
 
         //private static long serialVersionUID = 1L;
 

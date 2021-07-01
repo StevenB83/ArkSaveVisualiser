@@ -7,7 +7,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayByteHandler {
 
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("ByteProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("ByteProperty");
 
         public static IArkArray create(ArkArchive archive, PropertyArray property) {
             int size = archive.ReadInt();

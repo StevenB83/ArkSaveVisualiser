@@ -5,7 +5,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayUInt64 : ArkArrayInt64 {
 
-        [ThreadStatic] public new static readonly ArkName TYPE = ArkName.ConstantPlain("UInt64Property");
+        public new static readonly ArkName TYPE = ArkName.ConstantPlain("UInt64Property");
 
         //private static long serialVersionUID = 1L;
 

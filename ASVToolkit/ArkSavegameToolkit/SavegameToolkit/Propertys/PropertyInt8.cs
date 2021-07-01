@@ -5,7 +5,7 @@ using System;
 namespace SavegameToolkit.Propertys {
 
     public class PropertyInt8 : PropertyBase<sbyte> {
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("Int8Property");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("Int8Property");
         public override ArkName Type => TYPE;
 
         public PropertyInt8() { }

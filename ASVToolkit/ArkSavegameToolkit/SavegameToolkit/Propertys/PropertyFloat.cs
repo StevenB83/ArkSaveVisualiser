@@ -5,7 +5,7 @@ using System;
 namespace SavegameToolkit.Propertys {
 
     public class PropertyFloat : PropertyBase<float> {
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("FloatProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("FloatProperty");
         public override ArkName Type => TYPE;
 
         public PropertyFloat() { }

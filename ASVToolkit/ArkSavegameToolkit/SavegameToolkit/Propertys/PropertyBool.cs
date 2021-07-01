@@ -5,7 +5,7 @@ using System;
 namespace SavegameToolkit.Propertys {
 
     public class PropertyBool : PropertyBase<bool> {
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("BoolProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("BoolProperty");
         public override ArkName Type => TYPE;
 
         public PropertyBool() { }

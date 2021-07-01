@@ -6,7 +6,7 @@ using System;
 namespace SavegameToolkit.Propertys {
 
     public class PropertyByte : PropertyBase<ArkByteValue> {
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("ByteProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("ByteProperty");
 
         public override ArkName Type => TYPE;
 

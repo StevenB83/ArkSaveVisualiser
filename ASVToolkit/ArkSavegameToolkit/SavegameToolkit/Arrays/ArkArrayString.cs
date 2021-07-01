@@ -7,7 +7,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayString : ArkArrayBase<string> {
 
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("StrProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("StrProperty");
 
         //private static long serialVersionUID = 1L;
 

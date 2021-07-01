@@ -4,7 +4,7 @@ using System;
 namespace SavegameToolkit.Propertys {
 
     public class PropertyUInt16 : PropertyInt16 {
-        [ThreadStatic] public new static readonly ArkName TYPE = ArkName.ConstantPlain("UInt16Property");
+        public new static readonly ArkName TYPE = ArkName.ConstantPlain("UInt16Property");
         public override ArkName Type => TYPE;
 
         public PropertyUInt16() { }

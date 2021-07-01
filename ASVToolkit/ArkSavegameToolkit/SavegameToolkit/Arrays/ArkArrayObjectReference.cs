@@ -9,7 +9,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayObjectReference : ArkArrayBase<ObjectReference> {
 
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("ObjectProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("ObjectProperty");
 
         //private static long serialVersionUID = 1L;
 

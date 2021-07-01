@@ -6,7 +6,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayBool : ArkArrayBase<bool> {
 
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("BoolProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("BoolProperty");
 
        //private static long serialVersionUID = 1L;
 

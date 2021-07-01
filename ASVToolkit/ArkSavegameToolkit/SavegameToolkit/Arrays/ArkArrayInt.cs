@@ -5,7 +5,7 @@ using System;
 namespace SavegameToolkit.Arrays {
 
     public class ArkArrayInt : ArkArrayBase<int> {
-        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("IntProperty");
+        public static readonly ArkName TYPE = ArkName.ConstantPlain("IntProperty");
 
         //private static long serialVersionUID = 1L;
 
