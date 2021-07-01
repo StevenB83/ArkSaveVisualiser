@@ -328,6 +328,7 @@ namespace ASVPack.Models
                 var beaverHouses = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("BeaverDam_C")
+                        && s.Latitude!=null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -359,6 +360,7 @@ namespace ASVPack.Models
                 var wyvernNests = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("WyvernNest_")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -389,6 +391,7 @@ namespace ASVPack.Models
                 var drakeNests = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("RockDrakeNest_C")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -420,6 +423,7 @@ namespace ASVPack.Models
                 var deinoNests = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("DeinonychusNest_C")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -450,6 +454,7 @@ namespace ASVPack.Models
                 var magmaNests = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("CherufeNest_C")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -482,6 +487,7 @@ namespace ASVPack.Models
                 var oilVeins = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("OilVein_")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -509,6 +515,7 @@ namespace ASVPack.Models
                 var waterVeins = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("WaterVein_")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -536,6 +543,7 @@ namespace ASVPack.Models
                 var gasVeins = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("GasVein_")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -563,6 +571,7 @@ namespace ASVPack.Models
                 var artifacts = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("ArtifactCrate_")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -591,6 +600,7 @@ namespace ASVPack.Models
                 var plants = container.MapStructures
                     .Where(s =>
                         s.ClassName.StartsWith("Structure_PlantSpeciesZ")
+                        && s.Latitude != null
                         && (Math.Abs((decimal)s.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)s.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList();
@@ -627,7 +637,8 @@ namespace ASVPack.Models
                 //WildCreatures
                 WildCreatures = container.WildCreatures
                 .Where(w =>
-                    (Math.Abs((decimal)w.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
+                    w.Latitude != null
+                    && (Math.Abs((decimal)w.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                     && (Math.Abs((decimal)w.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                 ).ToList();
             }
@@ -668,6 +679,7 @@ namespace ASVPack.Models
                 DroppedItems.AddRange(container.DroppedItems
                     .Where(i =>
                         (i.DroppedByPlayerId == 0 || i.DroppedByPlayerId == ExportedForPlayer || ExportedForPlayer == 0)
+                        && i.Latitude != null
                         && (Math.Abs((decimal)i.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                         && (Math.Abs((decimal)i.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                     ).ToList());

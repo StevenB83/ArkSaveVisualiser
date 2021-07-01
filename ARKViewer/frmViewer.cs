@@ -44,6 +44,7 @@ namespace ARKViewer
 
         private void LoadWindowSettings()
         {
+
             var savedWindow = ARKViewer.Program.ProgramConfig.Windows.FirstOrDefault(w => w.Name == this.Name);
 
             if (savedWindow != null)
@@ -64,6 +65,7 @@ namespace ARKViewer
 
         private void UpdateWindowSettings()
         {
+
             //only save location if normal window, do not save location/size if minimized/maximized
             if (this.WindowState == FormWindowState.Normal)
             {
@@ -110,6 +112,8 @@ namespace ARKViewer
 
         public void LoadContent(string fileName)
         {
+            Program.LogWriter.Trace("BEGIN LoadContent()");
+
             this.Cursor = Cursors.WaitCursor;
 
             cm = null;
@@ -252,6 +256,7 @@ namespace ARKViewer
             isLoading = false;
             
             this.Cursor = Cursors.Default;
+            Program.LogWriter.Trace("END LoadContent()");
         }
 
 
@@ -2808,6 +2813,9 @@ namespace ARKViewer
         /**** FTP Servers ****/
         public string Download()
         {
+            Program.LogWriter.Trace("BEGIN Download()");
+
+
             ServerConfiguration selectedServer = ARKViewer.Program.ProgramConfig.ServerList.Where(s => s.Name == ARKViewer.Program.ProgramConfig.SelectedServer).FirstOrDefault();
             if (selectedServer == null) return "";
 
@@ -2823,15 +2831,21 @@ namespace ARKViewer
 
             }
 
+            Program.LogWriter.Trace("END Download()");
             return "";
-
         }
 
         private string DownloadSFtp()
         {
+            Program.LogWriter.Trace("BEGIN DownloadSFtp()");
+
             string downloadFilename = "";
             ServerConfiguration selectedServer = ARKViewer.Program.ProgramConfig.ServerList.Where(s => s.Name == ARKViewer.Program.ProgramConfig.SelectedServer).FirstOrDefault();
-            if (selectedServer == null) return downloadFilename;
+            if (selectedServer == null)
+            {
+                Program.LogWriter.Debug("No sFTP server selected in config.json");
+                return downloadFilename;
+            }
 
             string ftpServerUrl = $"{selectedServer.Address}";
             string serverUsername = selectedServer.Username;
@@ -2844,16 +2858,20 @@ namespace ARKViewer
 
             if (Program.ProgramConfig.FtpDownloadMode == 1)
             {
+                Program.LogWriter.Info($"Removing local files for a clean download.");
+
                 //clear any previous .arktribe, .arkprofile files
                 var profileFiles = Directory.GetFiles(downloadPath, "*.arkprofile");
                 foreach (var profileFile in profileFiles)
                 {
+                    Program.LogWriter.Debug($"Removing local file for a clean download: {profileFile}");
                     File.Delete(profileFile);
                 }
 
                 var tribeFiles = Directory.GetFiles(downloadPath, "*.arktribe");
                 foreach (var tribeFile in tribeFiles)
                 {
+                    Program.LogWriter.Debug($"Removing local file for a clean download: {tribeFile}");
                     File.Delete(tribeFile);
                 }
 
@@ -2863,13 +2881,21 @@ namespace ARKViewer
 
             try
             {
+                Program.LogWriter.Info($"Attempting to connect to sftp server: {selectedServer.Address}");
+
                 using (var sftp = new SftpClient(selectedServer.Address, selectedServer.Port, selectedServer.Username, selectedServer.Password))
                 {
                     sftp.Connect();
+
+
+                    Program.LogWriter.Debug($"Retrieving FTP server files in: {selectedServer.SaveGamePath}");
                     var files = sftp.ListDirectory(selectedServer.SaveGamePath).Where(f => f.IsRegularFile);
+
+                    Program.LogWriter.Debug($"{files.ToList().Count} entries found.");
+
                     foreach (var serverFile in files)
                     {
-
+                        Program.LogWriter.Debug($"Found: {serverFile}");
 
                         if (Path.GetExtension(serverFile.Name).StartsWith(".ark"))
                         {
@@ -2879,6 +2905,7 @@ namespace ARKViewer
 
                             if (File.Exists(localFilename) && Program.ProgramConfig.FtpDownloadMode == 1)
                             {
+                                Program.LogWriter.Debug($"Removing local file for a clean download: {localFilename}");
                                 File.Delete(localFilename);
                             }
 
@@ -2888,7 +2915,7 @@ namespace ARKViewer
                             {
                                 downloadFilename = localFilename;
 
-                                if (serverFile.Name.ToLower() != selectedServer.Map.ToLower())
+                                if (!selectedServer.Map.ToLower().StartsWith(serverFile.Name.ToLower()))
                                 {
                                     shouldDownload = false;
                                 }
@@ -2896,6 +2923,8 @@ namespace ARKViewer
                                 {
                                     if (File.Exists(localFilename) && Program.ProgramConfig.FtpDownloadMode == 0 && File.GetLastWriteTimeUtc(localFilename) >= serverFile.LastAccessTimeUtc)
                                     {
+
+
                                         shouldDownload = false;
                                     }
                                 }
@@ -2910,6 +2939,8 @@ namespace ARKViewer
 
                             if (shouldDownload)
                             {
+                                Program.LogWriter.Debug($"Downloading: {serverFile} as {localFilename}");
+
                                 //delete local if any
                                 if (File.Exists(localFilename))
                                 {
@@ -2933,18 +2964,25 @@ namespace ARKViewer
             }
             catch (Exception ex)
             {
+                Program.LogWriter.Error(ex,"Unable to download latest game data");
                 MessageBox.Show($"Unable to download latest game data.\n\n{ex.Message.ToString()}", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
 
+            Program.LogWriter.Trace("BEGIN DownloadSFtp()");
             return downloadFilename;
         }
 
         private string DownloadFtp()
         {
+            Program.LogWriter.Trace("BEGIN DownloadFtp()");
             string downloadedFilename = "";
             ServerConfiguration selectedServer = ARKViewer.Program.ProgramConfig.ServerList.Where(s => s.Name == ARKViewer.Program.ProgramConfig.SelectedServer).FirstOrDefault();
-            if (selectedServer == null) return downloadedFilename;
+            if (selectedServer == null)
+            {
+                Program.LogWriter.Debug("No FTP server selected in config.json");
+                return downloadedFilename;
+            }
 
             selectedServer.Address = selectedServer.Address.Trim();
             selectedServer.SaveGamePath = selectedServer.SaveGamePath.Trim();
@@ -2953,7 +2991,7 @@ namespace ARKViewer
                 selectedServer.SaveGamePath = selectedServer.SaveGamePath.Trim() + "/";
             }
 
-
+            Program.LogWriter.Info($"Attempting to connect to ftp server: {selectedServer.Address}");
             using (FtpClient ftpClient = new FtpClient(selectedServer.Address))
             {
 
@@ -2969,6 +3007,7 @@ namespace ARKViewer
 
                 if (Program.ProgramConfig.FtpDownloadMode == 1)
                 {
+                    Program.LogWriter.Info($"Removing local files for a clean download.");
                     //clean download
                     // ... arkprofile(s)
                     var profileFiles = Directory.GetFiles(downloadPath, "*.arkprofile");
@@ -2976,6 +3015,8 @@ namespace ARKViewer
                     {
                         try
                         {
+                            Program.LogWriter.Debug($"Removing local file for a clean download: {profileFilename}");
+
                             File.Delete(profileFilename);
                         }
                         finally
@@ -2990,6 +3031,8 @@ namespace ARKViewer
                     {
                         try
                         {
+                            Program.LogWriter.Debug($"Removing local file for a clean download: {tribeFilename}");
+
                             File.Delete(tribeFilename);
                         }
                         finally
@@ -3015,28 +3058,36 @@ namespace ARKViewer
                     ftpClient.EncryptionMode = FtpEncryptionMode.Explicit;
                     try
                     {
+                        Program.LogWriter.Debug($"Attempting secure connection (explicit)");
                         ftpClient.Connect();
                     }
                     catch (TimeoutException exTimeout)
                     {
                         //try implicit
+                        Program.LogWriter.Debug($"Attempting secure connection (implicit)");
                         ftpClient.EncryptionMode = FtpEncryptionMode.Implicit;
                         ftpClient.Connect();
                     }
                     catch (FtpSecurityNotAvailableException exSecurity)
                     {
                         //fail-back to plain text
+                        Program.LogWriter.Debug($"Attempting plain text connection");
                         ftpClient.EncryptionMode = FtpEncryptionMode.None;
                         ftpClient.Connect();
                     }
 
+                    Program.LogWriter.Debug($"Retrieving FTP server files in: {selectedServer.SaveGamePath}");
                     var serverFiles = ftpClient.GetListing(selectedServer.SaveGamePath);
+                    Program.LogWriter.Debug($"{serverFiles.Length-1} entries found.");
+
                     string localFilename = "";
 
                     //get correct casing for the selected map file
                     var serverSaveFile = serverFiles.Where(f => f.Name.ToLower() == selectedServer.Map.ToLower()).FirstOrDefault();
                     if (serverSaveFile != null)
                     {
+                        Program.LogWriter.Debug($"Found: {serverSaveFile}");
+
                         localFilename = Path.Combine(downloadPath, serverSaveFile.Name);
                         downloadedFilename = localFilename;
                         bool shouldDownload = true;
@@ -3046,6 +3097,8 @@ namespace ARKViewer
                         {
                             if (Program.ProgramConfig.FtpDownloadMode == 0)
                             {
+                                Program.LogWriter.Debug($"Local file already newer. Ignoring: {serverSaveFile}");
+
                                 shouldDownload = false;
                             }
 
@@ -3053,8 +3106,11 @@ namespace ARKViewer
 
                         if (shouldDownload)
                         {
+                            Program.LogWriter.Debug($"Downloading: {serverSaveFile} as {localFilename}");
+
                             using (FileStream outputStream = new FileStream(localFilename, FileMode.Create))
                             {
+                                Program.LogWriter.Debug($"Downloading: {serverSaveFile} as {localFilename}");
                                 ftpClient.Download(outputStream, serverSaveFile.FullName);
                                 outputStream.Flush();
                             }
@@ -3069,12 +3125,15 @@ namespace ARKViewer
                         {
                             foreach (var serverTribeFile in serverTribeFiles)
                             {
+                                Program.LogWriter.Debug($"Found: {serverTribeFile}");
+
                                 localFilename = Path.Combine(downloadPath, serverTribeFile.Name);
                                 shouldDownload = true;
                                 if (File.Exists(localFilename) && serverTribeFile.Modified.ToUniversalTime() <= File.GetLastWriteTimeUtc(localFilename))
                                 {
                                     if (Program.ProgramConfig.FtpDownloadMode == 0)
                                     {
+                                        Program.LogWriter.Debug($"Local file already newer. Ignoring: {serverTribeFile}");
                                         shouldDownload = false;
                                     }
 
@@ -3083,6 +3142,8 @@ namespace ARKViewer
 
                                 if (shouldDownload)
                                 {
+                                    Program.LogWriter.Debug($"Downloading: {serverTribeFile} as {localFilename}");
+
                                     using (FileStream outputStream = new FileStream(localFilename, FileMode.Create))
                                     {
                                         ftpClient.Download(outputStream, serverTribeFile.FullName);
@@ -3102,6 +3163,7 @@ namespace ARKViewer
                         {
                             foreach (var serverProfileFile in serverProfileFiles)
                             {
+                                Program.LogWriter.Debug($"Found: {serverProfileFile}");
 
                                 localFilename = Path.Combine(downloadPath, serverProfileFile.Name);
                                 shouldDownload = true;
@@ -3109,12 +3171,15 @@ namespace ARKViewer
                                 {
                                     if (Program.ProgramConfig.FtpDownloadMode == 0)
                                     {
+                                        Program.LogWriter.Debug($"Local file already newer. Ignoring: {serverProfileFile}");
                                         shouldDownload = false;
                                     }
 
                                 }
                                 if (shouldDownload)
                                 {
+                                    Program.LogWriter.Debug($"Downloading: {serverProfileFile} as {localFilename}");
+
                                     using (FileStream outputStream = new FileStream(localFilename, FileMode.Create))
                                     {
                                         ftpClient.Download(outputStream, serverProfileFile.FullName);
@@ -3129,17 +3194,19 @@ namespace ARKViewer
                 }
                 catch (Exception ex)
                 {
+                    Program.LogWriter.Error(ex,"Unable to download latest game data");
                     MessageBox.Show($"Unable to download latest game data.\n\n{ex.Message.ToString()}", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
 
+            Program.LogWriter.Trace("END DownloadFtp()");
             return downloadedFilename;
 
         }
 
         private bool DeletePlayerFtp(ContentPlayer player)
         {
-
+            Program.LogWriter.Trace("BEGIN DeletePlayerFtp()");
             ServerConfiguration selectedServer = ARKViewer.Program.ProgramConfig.ServerList.Where(s => s.Name == ARKViewer.Program.ProgramConfig.SelectedServer).FirstOrDefault();
             if (selectedServer == null) return false;
 
@@ -3224,7 +3291,7 @@ namespace ARKViewer
             }
 
 
-
+            Program.LogWriter.Trace("END DeletePlayerFtp()");
             return returnVal;
         }
 
@@ -3237,6 +3304,8 @@ namespace ARKViewer
         /***** Drawn Maps ******/
         private void RefreshMap(bool downloadData = false)
         {
+            Program.LogWriter.Trace("BEGIN RefreshMap()");
+
             this.Cursor = Cursors.WaitCursor;
             long downloadStartTicks = 0;
             if (ARKViewer.Program.ProgramConfig.Mode == ViewerModes.Mode_Ftp && downloadData)
@@ -3248,6 +3317,7 @@ namespace ARKViewer
                 long downloadEndTicks = DateTime.Now.Ticks;
                 if (File.Exists(downloadedFile))
                 {
+                    Program.LogWriter.Debug($"File downloaded to: {downloadedFile}");
                     Program.ProgramConfig.SelectedFile = downloadedFile;
                 }
 
@@ -3279,6 +3349,8 @@ namespace ARKViewer
             }
 
             this.Cursor = Cursors.Default;
+
+            Program.LogWriter.Trace("END RefreshMap()");
         }
 
         private void ShowMapViewer()

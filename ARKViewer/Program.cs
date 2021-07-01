@@ -3,6 +3,7 @@ using ARKViewer.Models;
 using ASVPack.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using NLog;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -34,6 +35,7 @@ namespace ARKViewer
         public static ViewerConfiguration ProgramConfig { get; set; }
         public static ApiConfiguration ApiConfig { get; set; }
 
+        public static ILogger LogWriter { get; internal set; } = LogManager.GetCurrentClassLogger();
 
         public static Dictionary<string, string> MapFilenameMap = new Dictionary<string, string>
             {
@@ -65,6 +67,11 @@ namespace ARKViewer
         static void Main()
         {
 
+            Application.ThreadException += Application_ThreadException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
+            LogWriter.Trace("BEGIN Main()");
+
             //param setup
             string appFolder = AppContext.BaseDirectory;
             string logFilename = Path.Combine(appFolder, @"ASV.log");
@@ -84,11 +91,12 @@ namespace ARKViewer
 
             if (commandArguments != null && commandArguments.Length > 1)
             {
-
+                LogWriter.Info("Running in command line mode.");
                 ExportWithCommandLineOptions(commandArguments);
             }
             else
             {
+                LogWriter.Info("Running in visual mode.");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
 
@@ -101,10 +109,40 @@ namespace ARKViewer
 
                 Application.Run(mainForm);
             }
+
+            LogWriter.Trace("END Main()");
+        }
+
+        private static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            Exception ex = (Exception)e.ExceptionObject;
+
+            LogWriter.Error(ex, "UnhandledException");
+
+            string traceLog = ex.StackTrace;
+            string errorMessage = ex.Message;
+
+            frmErrorReport report = new frmErrorReport(errorMessage, traceLog);
+
+            report.ShowDialog();
+        }
+
+        private static void Application_ThreadException(object sender, ThreadExceptionEventArgs e)
+        {
+            LogWriter.Error(e.Exception, "ThreadException");
+
+            Exception ex = e.Exception;
+            string traceLog = ex.StackTrace;
+            string errorMessage = ex.Message;
+
+            frmErrorReport report = new frmErrorReport(errorMessage, traceLog);
+            report.ShowDialog();
         }
 
         private static void ExportWithCommandLineOptions(string[] commandArguments)
         {
+            LogWriter.Trace("BEGIN ExportWithCommandLineOptions()");
+
             string logFilename = Path.Combine(AppContext.BaseDirectory, @"ASV.log");
 
             //used when exporting ASV pack data
@@ -113,130 +151,112 @@ namespace ARKViewer
             string exportFilename = Path.Combine(exportFilePath, "");
 
             //arguments provided, export and exit
-            using (TextWriter logWriter = new StreamWriter(logFilename))
+            LogWriter.Info($"ASV Command Line Started with {commandArguments.Length} parameters.");
+
+            int argIndex = 0;
+            foreach (string arg in commandArguments)
             {
-                logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - ASV Command Line Started: {commandArguments.Length}");
-                logWriter.Flush();
+                LogWriter.Debug($"CommandLineArg-{argIndex} = {arg}");
+                argIndex++;
+            }
 
-                int argIndex = 0;
-                foreach (string arg in commandArguments)
+            //command line, load save game data for export
+            string inputFilename = "";
+            if (commandArguments.Length > 2)
+            {
+                //config specified
+                inputFilename = commandArguments[2].ToString().Trim().Replace("\"", "");
+            }
+
+            if (commandArguments.Length > 3)
+            {
+                exportFilename = commandArguments[3].ToString().Trim().Replace("\"", "");
+                exportFilePath = Path.GetDirectoryName(exportFilename);
+            }
+
+            try
+            {
+                switch (commandOptionCheck)
                 {
-                    logWriter.WriteLine($"\tArg-{argIndex} = {arg}");
-                    argIndex++;
-                }
-                logWriter.Flush();
+                    case "pack":
+                        LogWriter.Info($"Exporting ASV pack for coniguration: {inputFilename}");
+                        
+                        ExportCommandLinePack(inputFilename);
 
+                        break;
 
-                //command line, load save game data for export
-                string inputFilename = "";
-                if (commandArguments.Length > 2)
-                {
-                    //config specified
-                    inputFilename = commandArguments[2].ToString().Trim().Replace("\"", "");
-                }
+                    case "json":
+                        LogWriter.Info($"Exporting JSON for configuration: {inputFilename}");
 
-                if (commandArguments.Length > 3)
-                {
-                    exportFilename = commandArguments[3].ToString().Trim().Replace("\"", "");
-                    exportFilePath = Path.GetDirectoryName(exportFilename);
-                }
+                        ExportCommandLine(inputFilename);
 
-                try
-                {
-                    switch (commandOptionCheck)
-                    {
-                        case "pack":
-                            logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Exporting ASV pack for coniguration: {inputFilename}");
-                            logWriter.Flush();
-
-                            ExportCommandLinePack(inputFilename);
-
+                        break;
+                    default:
+                        //direct command line export
+                        if (!File.Exists(inputFilename))
+                        {
+                            LogWriter.Info($"File Not Found for: {inputFilename}");
+                            
+                            Environment.ExitCode = -1;
                             break;
+                        }
 
-                        case "json":
-                            logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Exporting JSON for configuration: {inputFilename}");
-                            logWriter.Flush();
+                        ContentContainer container = new ContentContainer();
+                        container.LoadSaveGame(inputFilename);
+                        ASVDataManager exportManger = new ASVDataManager(container);
 
-                            ExportCommandLine(inputFilename);
+                        switch (commandOptionCheck)
+                        {
+                            case "all":
+                                LogWriter.Info($"Exporting JSON (all) for: {inputFilename}");
 
-                            break;
-                        default:
-                            //direct command line export
-                            if (!File.Exists(inputFilename))
-                            {
-                                logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - File Not Found for: {inputFilename}");
-                                logWriter.Flush();
-                                Environment.ExitCode = -1;
+                                exportManger.ExportAll(exportFilePath);
                                 break;
-                            }
+                            case "structures":
+                                LogWriter.Info($"Exporting JSON (structures) for: {inputFilename}");
 
-                            ContentContainer container = new ContentContainer();
-                            container.LoadSaveGame(inputFilename);
-                            ASVDataManager exportManger = new ASVDataManager(container);
+                                exportManger.ExportPlayerStructures(exportFilename);
+                                break;
+                            case "tribes":
+                                LogWriter.Info($"Exporting JSON (tribes) for: {inputFilename}");
 
-                            switch (commandOptionCheck)
-                            {
-                                case "all":
-                                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Exporting JSON (all) for: {inputFilename}");
-                                    logWriter.Flush();
+                                exportManger.ExportPlayerTribes(exportFilename);
+                                break;
+                            case "players":
+                                LogWriter.Info($"Exporting JSON (players) for: {inputFilename}");
+                                
+                                exportManger.ExportPlayers(exportFilename);
+                                break;
+                            case "wild":
+                                LogWriter.Info($"Exporting JSON (wild) for: {inputFilename}");
 
-                                    exportManger.ExportAll(exportFilePath);
-                                    break;
-                                case "structures":
-                                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Exporting JSON (structures) for: {inputFilename}");
-                                    logWriter.Flush();
+                                exportManger.ExportWild(exportFilename);
+                                break;
+                            case "tamed":
+                                LogWriter.Info($"Exporting JSON (tamed) for: {inputFilename}");
 
-                                    exportManger.ExportPlayerStructures(exportFilename);
-                                    break;
-                                case "tribes":
-                                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Exporting JSON (tribes) for: {inputFilename}");
-                                    logWriter.Flush();
+                                exportManger.ExportTamed(exportFilename);
+                                break;
+                        }
+                        exportManger = null;
 
-                                    exportManger.ExportPlayerTribes(exportFilename);
-                                    break;
-                                case "players":
-                                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Exporting JSON (players) for: {inputFilename}");
-                                    logWriter.Flush();
+                        LogWriter.Info($"Completed export for: {inputFilename}");
 
-                                    exportManger.ExportPlayers(exportFilename);
-                                    break;
-                                case "wild":
-                                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Exporting JSON (wild) for: {inputFilename}");
-                                    logWriter.Flush();
-
-                                    exportManger.ExportWild(exportFilename);
-                                    break;
-                                case "tamed":
-                                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Exporting JSON (tamed) for: {inputFilename}");
-                                    logWriter.Flush();
-
-                                    exportManger.ExportTamed(exportFilename);
-                                    break;
-                            }
-                            exportManger = null;
-
-                            logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Completed export for: {inputFilename}");
-
-                            break;
-                    }
-
-                    Environment.ExitCode = 0;
-                }
-                catch (Exception ex)
-                {
-
-                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Failed to export: \n{ex.Message.ToString()}");
-                    logWriter.WriteLine($"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")} - Trace: {ex.StackTrace}");
-
-                    logWriter.Flush();
-                    Environment.ExitCode = -1;
-                }
-                finally
-                {
-                    logWriter.Flush();
+                        break;
                 }
 
-            };
+                Environment.ExitCode = 0;
+            }
+            catch (Exception ex)
+            {
+
+                LogWriter.Error(ex,"ExportWithCommandLineOptions failed");
+
+                Environment.ExitCode = -1;
+            }
+
+
+            LogWriter.Trace("END ExportWithCommandLineOptions()");
 
             Application.Exit();
 
@@ -244,7 +264,7 @@ namespace ARKViewer
 
         private static void ExportCommandLinePack(string configFilename)
         {
-
+            LogWriter.Trace("BEGIN ExportCommandLinePack()");
             //defaults
             string mapFilename = "";
             string exportFilename = Path.Combine(AppContext.BaseDirectory, @"Export\ASV_ContentPack.asv");
@@ -265,6 +285,7 @@ namespace ARKViewer
             if (File.Exists(configFilename))
             {
                 //config found, load settings from file.
+                LogWriter.Debug($"Reading pack export configuation.");
                 string packConfigText = File.ReadAllText(configFilename);
                 try
                 {
@@ -289,6 +310,8 @@ namespace ARKViewer
                 }
                 catch
                 {
+                    LogWriter.Debug($"Unable to parse pack export configuration.");
+
                     //bad file data, ignore
                 }
             }
@@ -305,14 +328,22 @@ namespace ARKViewer
 
             //create pack and export
             ContentContainer exportPack = new ContentContainer();
+
+            LogWriter.Debug($"Loading .ark save file: {mapFilename}");
             exportPack.LoadSaveGame(mapFilename);
+
+            LogWriter.Debug($"Creating ContentPack");
             ContentPack pack = new ContentPack(exportPack, tribeId, playerId, filterLat, filterLon, filterRad,packStructureLocations, packStructureContent,packTribesPlayers,packTamed,packWild,packPlayerStructures,packDroppedItems);
+
+            LogWriter.Debug($"Exporting ContentPack");
             pack.ExportPack(exportFilename);
+
+            LogWriter.Trace("END ExportCommandLinePack()");
         }
 
         private static void ExportCommandLine(string configFilename)
         {
-
+            LogWriter.Trace("BEGIN ExportCommandLine()");
 
             long tribeId = 0;
             long playerId = 0;
@@ -349,6 +380,7 @@ namespace ARKViewer
 
             if (File.Exists(configFilename))
             {
+                LogWriter.Debug($"Reading export configuation.");
                 string configText = File.ReadAllText(configFilename);
                 try
                 {
@@ -433,12 +465,15 @@ namespace ARKViewer
 
             //load everything
             ContentContainer exportContainer = new ContentContainer();
+            LogWriter.Debug($"Loading .ark save file.");
             exportContainer.LoadSaveGame(mapFilename);
 
             //filter a pack for export
+            LogWriter.Debug($"Loading ContentPack.");
             ContentPack filteredPack = new ContentPack(exportContainer, tribeId, playerId, filterLat, filterLon, filterRad,true,mapStructureContent, tribePlayers, tribeTames, true, tribeStructures, false);
 
             //load manager from filtered pack
+            LogWriter.Debug($"Creating filtered ContentPack.");
             ASVDataManager exportManger = new ASVDataManager(filteredPack);
 
             //Export tribes
@@ -447,12 +482,14 @@ namespace ARKViewer
                 string exportFolder = Path.GetDirectoryName(tribeExportFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
 
+                LogWriter.Info($"Exporting Tribes.");
                 exportManger.ExportPlayerTribes(tribeExportFilename);
             }
             if (tribeImageFilename.Length > 0)
             {
                 string exportFolder = Path.GetDirectoryName(tribeImageFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                LogWriter.Info($"Exporting Tribes Image.");
 
                 var image = exportManger.GetMapImageTribes(tribeId, tribeStructures, tribePlayers, tribeTames, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
                 if (image != null)
@@ -469,7 +506,7 @@ namespace ARKViewer
             {
                 string exportFolder = Path.GetDirectoryName(structureExportFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-
+                LogWriter.Info($"Exporting Structures.");
                 exportManger.ExportPlayerStructures(structureExportFilename);
             }
 
@@ -477,7 +514,7 @@ namespace ARKViewer
             {
                 string exportFolder = Path.GetDirectoryName(structureImageFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-
+                LogWriter.Info($"Exporting Structures Image.");
                 var image = exportManger.GetMapImagePlayerStructures(structureImageFilename, tribeId, playerId, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
                 if (image != null)
                 {
@@ -492,7 +529,7 @@ namespace ARKViewer
             {
                 string exportFolder = Path.GetDirectoryName(playerExportFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-
+                LogWriter.Info($"Exporting Players.");
                 exportManger.ExportPlayers(playerExportFilename);
             }
 
@@ -500,7 +537,7 @@ namespace ARKViewer
             {
                 string exportFolder = Path.GetDirectoryName(playerImageFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-
+                LogWriter.Info($"Exporting Players Image.");
                 var image = exportManger.GetMapImagePlayers(tribeId, playerId, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
                 if (image != null)
                 {
@@ -513,14 +550,14 @@ namespace ARKViewer
             {
                 string exportFolder = Path.GetDirectoryName(wildExportFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-
+                LogWriter.Info($"Exporting Wilds.");
                 exportManger.ExportWild(wildExportFilename);
             }
             if (wildImageFilename.Length > 0)
             {
                 string exportFolder = Path.GetDirectoryName(wildImageFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-
+                LogWriter.Info($"Exporting Wilds Image.");
                 var image = exportManger.GetMapImageWild(wildClassName, wildMinLevel, wildMaxLevel, (float)filterLat, (float)filterLon, (float)filterRad, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
                 if (image != null)
                 {
@@ -533,21 +570,21 @@ namespace ARKViewer
             {
                 string exportFolder = Path.GetDirectoryName(tamedExportFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-
+                LogWriter.Info($"Exporting Tames.");
                 exportManger.ExportTamed(tamedExportFilename);
             }
             if (tamedImageFilename.Length > 0)
             {
                 string exportFolder = Path.GetDirectoryName(tamedImageFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-
+                LogWriter.Info($"Exporting Tames Image.");
                 var image = exportManger.GetMapImageTamed(tamedClassName, true, tribeId, playerId, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
                 if (image != null)
                 {
                     image.Save(tamedImageFilename);
                 }
             }
-
+            LogWriter.Trace("END ExportCommandLine()");
         }
 
 

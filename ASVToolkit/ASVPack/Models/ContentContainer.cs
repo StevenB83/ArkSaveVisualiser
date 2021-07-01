@@ -16,12 +16,15 @@ using SavegameToolkit.Structs;
 using SavegameToolkit.Data;
 using System.Diagnostics;
 using Newtonsoft.Json;
+using NLog;
 
 namespace ASVPack.Models
 {
     [DataContract]
     public class ContentContainer
     {
+
+        ILogger logWriter = LogManager.GetCurrentClassLogger();
 
         Dictionary<string, Tuple<float, float, float, float>> latlonCalcs = new Dictionary<string, Tuple<float, float, float, float>>
         {
@@ -75,18 +78,20 @@ namespace ASVPack.Models
 
         public void LoadSaveGame(string fileName)
         {
+            logWriter.Trace("BEGIN LoadSaveGame()");
+
+
             LoadDefaults();
 
             long startTicks = DateTime.Now.Ticks;
             try
             {
-               
-
-
                 List<ContentTribe> tribeContentList = new List<ContentTribe>();
 
                 GameObjectContainer objectContainer = null;
                 GameSaveTime = new FileInfo(fileName).LastWriteTimeUtc.ToLocalTime();
+
+                logWriter.Debug($"Reading game save data: {fileName}");
 
                 using (Stream stream = new MemoryStream(File.ReadAllBytes(fileName)))
                 {
@@ -126,18 +131,20 @@ namespace ASVPack.Models
                         }
 
                         //get map name from .ark file data
+                        logWriter.Debug($"Reading map name from: {fileName}");
                         MapName = arkSavegame.DataFiles[0];
-                        
+                        logWriter.Debug($"Map name returned: {MapName}");
                         latlonCalcs.TryGetValue(MapName.ToLower(), out mapLatLonCalcs);
 
 
                         long saveLoadTime = DateTime.Now.Ticks;
                         TimeSpan timeTaken = TimeSpan.FromTicks(saveLoadTime - startTicks);
-                        Console.WriteLine($"Game data loaded in: {timeTaken.TotalSeconds.ToString("f1")} seconds.");
+                        logWriter.Info($"Game data loaded in: {timeTaken.TotalSeconds.ToString("f1")} seconds.");
 
                         long structureStart = DateTime.Now.Ticks;
 
-               
+
+                        logWriter.Debug($"Identifying map structures");
                         //map structures we care about
                         MapStructures = objectContainer.Objects.Where(x =>
                             x.Location != null
@@ -169,9 +176,11 @@ namespace ASVPack.Models
 
 
                             //check for inventory
+                            logWriter.Debug($"Determining if structure has inventory: {s.ClassString}");
                             ObjectReference inventoryRef = s.GetPropertyValue<ObjectReference>("MyInventoryComponent");
                             if (inventoryRef != null)
                             {
+                                logWriter.Debug($"Populating structure inventory: {s.ClassString}");
                                 structure.Inventory = new ContentInventory();
 
 
@@ -208,6 +217,7 @@ namespace ASVPack.Models
                             //no inventory component, check for any "egg" within range of nest location
                             if (s.ClassName.Name.Contains("Nest"))
                                 {
+                                    logWriter.Debug($"Finding nearby eggs for: {s.ClassString}");
                                     var eggInRange = objectContainer.Objects.FirstOrDefault(x =>
                                         x.ClassName.Name.Contains("Egg")
                                         && x.Location != null
@@ -217,6 +227,7 @@ namespace ASVPack.Models
 
                                     if (eggInRange != null)
                                     {
+                                        logWriter.Debug($"Egg found: {eggInRange.ClassString} for {s.ClassString}");
                                         inventoryItems.Add(new ContentItem()
                                         {
                                             ClassName = eggInRange.ClassString,
@@ -237,18 +248,21 @@ namespace ASVPack.Models
 
                         long structureEnd = DateTime.Now.Ticks;
                         var structureTime = TimeSpan.FromTicks(structureEnd - structureStart);
-                        Console.WriteLine($"Structures loaded in: {structureTime.TotalSeconds.ToString("f1")} seconds.");
+                        logWriter.Info($"Structures loaded in: {structureTime.TotalSeconds.ToString("f1")} seconds.");
 
                         long wildStart = DateTime.Now.Ticks;
 
-                        
+
+                        logWriter.Debug($"Identifying wild creatures");
                         //wilds
                         WildCreatures = objectContainer.Objects.Where(x => x.IsWild())
                             .Select(x =>
                             {
+                                logWriter.Debug($"Determining character status for: {x.ClassString}");
                                 ObjectReference statusRef = x.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent") ?? x.GetPropertyValue<ObjectReference>("MyDinoStatusComponent");
                                 if (statusRef != null)
                                 {
+                                    logWriter.Debug($"Character status found for: {x.ClassString}");
                                     objectContainer.TryGetValue(statusRef.ObjectId, out GameObject statusObject);
                                     ContentWildCreature wild = x.AsWildCreature(statusObject);
                                     wild.Latitude = mapLatLonCalcs.Item1 + wild.Y / mapLatLonCalcs.Item2;
@@ -267,10 +281,16 @@ namespace ASVPack.Models
 
                         long wildEnd = DateTime.Now.Ticks;
                         var wildTime = TimeSpan.FromTicks(wildEnd - wildStart);
-                        Console.WriteLine($"Wilds loaded in: {wildTime.TotalSeconds.ToString("f1")} seconds.");
+                        logWriter.Info($"Wilds loaded in: {wildTime.TotalSeconds.ToString("f1")} seconds.");
 
 
+                        logWriter.Debug($"Identifying tamed creatures");
                         var allTames = objectContainer.Where(x => x.IsTamed() && x.ClassString != "MotorRaft_BP_C" && x.ClassString != "Raft_BP_C"); //exclude rafts.. no idea why these are "creatures"
+
+
+                        var cryoTames = objectContainer.Where(x => x.IsCryo).ToList();
+
+                        logWriter.Debug($"Identifying player structures");
                         var playerStructures = objectContainer.Where(x => x.IsStructure() && x.GetPropertyValue<int>("TargetingTeam") >= 50_000).GroupBy(x=>x.Names[0]).Select(s=>s.First()).ToList();
 
 
@@ -294,10 +314,14 @@ namespace ASVPack.Models
 
 
                         //find player data in game file
+                        logWriter.Debug($"Identifying in-game player data");
                         var gamePlayers = objectContainer.Where(o => o.IsPlayer()).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x => x.First());
 
                         //load .arkprofile(s) to create tribe and player containers
                         string fileFolder = Path.GetDirectoryName(fileName);
+
+
+                        logWriter.Debug($"Identifying .arkprofile data");
                         var profileFiles = Directory.GetFiles(fileFolder, "*.arkprofile");
                         if (profileFiles != null && profileFiles.Length > 0)
                         {
@@ -305,30 +329,37 @@ namespace ASVPack.Models
                             {
                                 using (Stream streamProfile = new FileStream(profileFilename, FileMode.Open))
                                 {
+                                    logWriter.Debug($"Reading profile data: {profileFilename}");
+
                                     using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
                                     {
                                         ArkProfile arkProfile = new ArkProfile();
                                         arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
                                         string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
+                                        logWriter.Debug($"Profile map identified as: {profileMapName}");
                                         if (profileMapName == MapName.ToLower())
                                         {
-
+                                            logWriter.Debug($"Converting to ContentPlayer: {profileFilename}");
                                             ContentPlayer contentPlayer = arkProfile.AsPlayer();
                                             if(contentPlayer.Id  != 0)
                                             {
 
                                                 contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
 
+                                                logWriter.Debug($"Identifying player tribe: {profileFilename}");
                                                 ContentTribe contentTribe = tribeList.FirstOrDefault(x => x.TribeId == contentPlayer.TargetingTeam || x.TribeId == contentPlayer.Id);
                                                 if (contentTribe == null)
                                                 {
+                                                    logWriter.Debug($"No loaded tribe found: {contentPlayer.TargetingTeam}");
+
                                                     //not yet added
                                                     contentTribe = new ContentTribe();
 
                                                     string tribeFilename = Path.Combine(fileFolder, $"{contentPlayer.TargetingTeam}.arktribe");
                                                     if (File.Exists(tribeFilename))
                                                     {
+                                                        logWriter.Debug($"Loading tribe data for: {tribeFilename}");
                                                         using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
                                                         {
                                                             using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
@@ -336,6 +367,7 @@ namespace ASVPack.Models
                                                                 ArkTribe arkTribe = new ArkTribe();
                                                                 arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
+                                                                logWriter.Debug($"Converting to ContentTribe for: {tribeFilename}");
                                                                 contentTribe = arkTribe.Tribe.AsTribe();
 
                                                                 contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
@@ -346,6 +378,8 @@ namespace ASVPack.Models
                                                     }
                                                     else
                                                     {
+                                                        logWriter.Debug($"No file found for: {tribeFilename} - adding to ASV solo tribe");
+
                                                         //solo tribe?
                                                         contentTribe = new ContentTribe()
                                                         {
@@ -373,7 +407,8 @@ namespace ASVPack.Models
                             }
                         }
 
-                        var tribesAndPlayers = objectContainer.Where(x => x.IsPlayer())
+                        logWriter.Debug($"Identifying in-game players with no .arkprofile");
+                        var tribesAndPlayers = gamePlayers
                             .Where(x=> !tribeList.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
                             .GroupBy(x => x.GetPropertyValue<int>("TargetingTeam")).ToList();
 
@@ -383,8 +418,10 @@ namespace ASVPack.Models
                             {
                                 //we know there's no .arkprofile so check for .arktribe
                                 string tribeFilename = Path.Combine(fileFolder, $"{tribe.Key}.arktribe");
+                                logWriter.Debug($"Checking for tribe file: {tribeFilename}");
                                 if (File.Exists(tribeFilename))
                                 {
+                                    logWriter.Debug($"Loading tribe file: {tribeFilename}");
                                     using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
                                     {
                                         using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
@@ -392,24 +429,29 @@ namespace ASVPack.Models
                                             ArkTribe arkTribe = new ArkTribe();
                                             arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
+                                            logWriter.Debug($"Converting to ContentTribe: {tribeFilename}");
                                             ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
                                             contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
                                             contentTribe.HasGameFile = true;
 
+                                            logWriter.Debug($"Loading tribe players ({tribe.ToList().Count}): {tribeFilename}");
                                             //players
-                                            foreach(GameObject arkPlayer in tribe)
+                                            foreach (GameObject arkPlayer in tribe)
                                             {
                                                 //get status component
+                                                logWriter.Debug($"Determining character status for: {arkPlayer.ClassString}");
                                                 var statusRef = arkPlayer.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent");
                                                 if (statusRef != null)
                                                 {
                                                     objectContainer.TryGetValue(statusRef.ObjectId, out GameObject playerStatus);
 
+                                                    logWriter.Debug($"Converting to ContentPlayer: {arkPlayer.ClassString}");
+
                                                     //convert to contentplayer
                                                     ContentPlayer contentPlayer = arkPlayer.AsPlayer(playerStatus);
                                                     contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
-                                                    
 
+                                                    logWriter.Debug($"Adding player to list: {contentPlayer.Id} - {contentPlayer.CharacterName}");
                                                     contentTribe.Players.Add(contentPlayer);
 
                                                 }
@@ -422,6 +464,8 @@ namespace ASVPack.Models
                                 }
                             }
                         }
+
+                        logWriter.Debug($"Identifying in-game missing tribes from player structures");
 
                         //attempt to get missing tribe data from structures
                         var missingStructureTribes = playerStructures
@@ -436,14 +480,17 @@ namespace ASVPack.Models
 
                         if (missingStructureTribes != null && missingStructureTribes.Count > 0)
                         {
+                            logWriter.Debug($"Identified player structure tribes: {missingStructureTribes.Count}");
                             missingStructureTribes.ForEach(tribe =>
                             {
-
-
                                 //we know there's no .arkprofile so check for .arktribe
                                 string tribeFilename = Path.Combine(fileFolder, $"{tribe.TribeId}.arktribe");
+
+
+                                logWriter.Debug($"Checking tribe file exists: {tribeFilename}");
                                 if (File.Exists(tribeFilename))
                                 {
+                                    logWriter.Debug($"Reading tribe file: {tribeFilename}");
                                     using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
                                     {
                                         using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
@@ -451,6 +498,7 @@ namespace ASVPack.Models
                                             ArkTribe arkTribe = new ArkTribe();
                                             arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
+                                            logWriter.Debug($"Converting to ContentTribe: {tribeFilename}");
                                             ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
                                             contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
                                             contentTribe.HasGameFile = true;
@@ -466,6 +514,7 @@ namespace ASVPack.Models
                         }
 
 
+                        logWriter.Debug($"Identifying in-game tribes from tames");
 
                         //attempt to get missing tribe data from tames
                         var missingTameTribes = allTames
@@ -480,12 +529,16 @@ namespace ASVPack.Models
 
                         if (missingTameTribes != null && missingTameTribes.Count > 0)
                         {
+                            logWriter.Debug($"Identified tame tribes: {missingStructureTribes.Count}");
+
                             missingTameTribes.ForEach(tribe =>
                             {
                                 //we know there's no .arkprofile so check for .arktribe
                                 string tribeFilename = Path.Combine(fileFolder, $"{tribe.TribeId}.arktribe");
+                                logWriter.Debug($"Checking tribe file exists: {tribeFilename}");
                                 if (File.Exists(tribeFilename))
                                 {
+                                    logWriter.Debug($"Reading tribe file: {tribeFilename}");
                                     using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
                                     {
                                         using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
@@ -493,6 +546,7 @@ namespace ASVPack.Models
                                             ArkTribe arkTribe = new ArkTribe();
                                             arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
+                                            logWriter.Debug($"Converting to ContentTribe: {tribeFilename}");
                                             ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
                                             contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
                                             contentTribe.HasGameFile = true;
@@ -505,6 +559,8 @@ namespace ASVPack.Models
                             });
                         }
 
+
+                        logWriter.Debug($"Populating player inventories");
                         //load inventories, locations etc.
                         var allPlayers = tribeList.SelectMany(t => t.Players);
                         Parallel.ForEach(allPlayers, player =>
@@ -532,6 +588,7 @@ namespace ASVPack.Models
                                 player.Level = contentPlayer.Level;
                                 player.Stats = contentPlayer.Stats;
 
+                                logWriter.Debug($"Retrieving player inventory: {player.Id} - {player.CharacterName}");
                                 if (arkPlayer.GetPropertyValue<ObjectReference>("MyInventoryComponent")!=null)
                                 {
                                     int inventoryRefId = arkPlayer.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
@@ -592,24 +649,24 @@ namespace ASVPack.Models
 
                         long tribeLoadEnd = DateTime.Now.Ticks;
                         var tribeLoadTime = TimeSpan.FromTicks(tribeLoadEnd - tribeLoadStart);
-                        Console.WriteLine($"Tribe players loaded in: {tribeLoadTime.TotalSeconds.ToString("f1")} seconds.");
+                        logWriter.Info($"Tribe players loaded in: {tribeLoadTime.TotalSeconds.ToString("f1")} seconds.");
 
+                        logWriter.Debug($"Populating tamed creature inventories");
 
                         //Parallel.ForEach(allTames, x =>
-                        foreach(GameObject x in allTames)
+                        foreach (GameObject x in allTames)
                         {
                             //find appropriate tribe to add to
                             var teamId = x.GetPropertyValue<int>("TargetingTeam");
                             var tribe = tribeList.FirstOrDefault(t => t.TribeId == teamId) ?? tribeList.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
 
-
-
-                 
+                            logWriter.Debug($"Determining character status for: {x.ClassString}");
                             ObjectReference statusRef = x.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent") ?? x.GetPropertyValue<ObjectReference>("MyDinoStatusComponent");
                             if (statusRef != null)
                             {
                                 objectContainer.TryGetValue(statusRef.ObjectId, out GameObject statusObject);
 
+                                logWriter.Debug($"Converting to ContentTamedCreature: {x.ClassString}");
                                 ContentTamedCreature creature = x.AsTamedCreature(statusObject);
 
                                 creature.Latitude = mapLatLonCalcs.Item1 + creature.Y / mapLatLonCalcs.Item2;
@@ -619,8 +676,11 @@ namespace ASVPack.Models
                                 //get inventory items
                                 ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
 
+                                logWriter.Debug($"Determining inventory status for: {creature.Id} - {creature.Name}");
                                 if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent") != null)
                                 {
+                                    logWriter.Debug($"Retrieving inventory for: {creature.Id} - {creature.Name}");
+
                                     int inventoryRefId = x.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
                                     objectContainer.TryGetValue(inventoryRefId, out GameObject inventoryComponent);
                                     if (inventoryComponent != null && inventoryComponent.HasAnyProperty("InventoryItems"))
@@ -686,11 +746,14 @@ namespace ASVPack.Models
 
 
                         //structures
+                        logWriter.Debug($"Populating player structure inventories");
                         Parallel.ForEach(playerStructures, x =>
                         {
 
                             var teamId = x.GetPropertyValue<int>("TargetingTeam");
                             var tribe = tribeList.FirstOrDefault(t => t.TribeId == teamId) ?? tribeList.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
+
+                            logWriter.Debug($"Converting to ContentStructure: {x.ClassString}");
 
                             ContentStructure structure = x.AsStructure();
                             ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
@@ -701,8 +764,10 @@ namespace ASVPack.Models
                             structure.CreatedDateTime = GetApproxDateTimeOf(structure.CreatedTimeInGame);
 
                             //inventory
+                            logWriter.Debug($"Determining inventory status for: {structure.ClassName}");
                             if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent")!=null)
                             {
+                                logWriter.Debug($"Retrieving inventory for: {structure.ClassName}");
                                 int inventoryRefId = x.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
                                 objectContainer.TryGetValue(inventoryRefId, out GameObject inventoryComponent);
                                 if (inventoryComponent != null && inventoryComponent.HasAnyProperty("InventoryItems"))
@@ -758,6 +823,7 @@ namespace ASVPack.Models
 
 
                         //dropped 
+                        logWriter.Debug($"Identifying dropped items");
                         DroppedItems = new List<ContentDroppedItem>();
 
                         //..items
@@ -780,6 +846,7 @@ namespace ASVPack.Models
                         );
 
                         //.. corpses
+                        logWriter.Debug($"Identifying any corpse");
                         DroppedItems.AddRange(objectContainer.Where(x => x.IsPlayer() && x.HasAnyProperty("MyDeathHarvestingComponent"))
                             .Select(x =>
                             {
@@ -860,6 +927,7 @@ namespace ASVPack.Models
                         );
 
                         //.. bags
+                        logWriter.Debug($"Identifying drop bags");
                         DroppedItems.AddRange(objectContainer.Where(x => x.IsDeathItemCache())
                             .Select(x =>
                             {
@@ -938,28 +1006,22 @@ namespace ASVPack.Models
                             }).ToList()
                         );
 
-
-
-
                     }
                 }
 
                 long endTicks = DateTime.Now.Ticks;
                 var duration = TimeSpan.FromTicks(endTicks - startTicks);
 
-                Console.WriteLine($"Loaded in: {duration.TotalSeconds.ToString("f1")} seconds.");
+                logWriter.Info($"Loaded in: {duration.TotalSeconds.ToString("f1")} seconds.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to load: {ex.Message}");
+                logWriter.Error(ex,"LoadSaveGame failed");
                 throw;
             }
 
-            
 
-
-
-
+            logWriter.Trace("END LoadSaveGame()");
         }
 
         public DateTime? GetApproxDateTimeOf(double? objectTime)
