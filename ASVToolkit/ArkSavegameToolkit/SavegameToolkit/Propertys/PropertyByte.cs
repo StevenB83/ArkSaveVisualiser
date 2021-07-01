@@ -1,11 +1,12 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SavegameToolkit.Types;
+using System;
 
 namespace SavegameToolkit.Propertys {
 
     public class PropertyByte : PropertyBase<ArkByteValue> {
-        public static readonly ArkName TYPE = ArkName.ConstantPlain("ByteProperty");
+        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("ByteProperty");
 
         public override ArkName Type => TYPE;
 

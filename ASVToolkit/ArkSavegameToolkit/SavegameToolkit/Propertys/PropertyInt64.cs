@@ -1,10 +1,11 @@
 ﻿using Newtonsoft.Json.Linq;
 using SavegameToolkit.Types;
+using System;
 
 namespace SavegameToolkit.Propertys {
 
     public class PropertyInt64 : PropertyBase<long> {
-        public static readonly ArkName TYPE = ArkName.ConstantPlain("Int64Property");
+        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("Int64Property");
         public override ArkName Type => TYPE;
 
         public PropertyInt64() { }

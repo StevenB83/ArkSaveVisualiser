@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using SavegameToolkit.Propertys;
 using SavegameToolkit.Types;
 
@@ -6,7 +7,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayString : ArkArrayBase<string> {
 
-        public static readonly ArkName TYPE = ArkName.ConstantPlain("StrProperty");
+        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("StrProperty");
 
         //private static long serialVersionUID = 1L;
 

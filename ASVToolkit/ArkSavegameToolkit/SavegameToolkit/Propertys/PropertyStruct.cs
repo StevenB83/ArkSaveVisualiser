@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SavegameToolkit.Structs;
@@ -7,7 +8,7 @@ using SavegameToolkit.Types;
 namespace SavegameToolkit.Propertys {
 
     public class PropertyStruct : PropertyBase<IStruct> {
-        public static readonly ArkName TYPE = ArkName.ConstantPlain("StructProperty");
+        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("StructProperty");
         public override ArkName Type => TYPE;
 
         private ArkName structType;

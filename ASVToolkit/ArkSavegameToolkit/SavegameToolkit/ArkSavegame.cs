@@ -103,22 +103,25 @@ namespace SavegameToolkit
                     (o.ClassName.Name.Contains("Cryopod") || o.ClassString.Contains("SoulTrap_") ||  o.ClassString.Contains("BP_Vivarium_C"))
                     && o.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas") is ArkArrayStruct customItemDatas
                     && customItemDatas?.FirstOrDefault(cd => ((StructPropertyList)cd).GetTypedProperty<PropertyName>("CustomDataName").Value.Name == "Dino") is StructPropertyList customDinoData
-                    && customDinoData?.GetTypedProperty<PropertyStruct>("CustomDataBytes").Value is StructPropertyList customDataBytes
+                    && customDinoData?.GetTypedProperty<PropertyStruct>("CustomDataBytes")?.Value is StructPropertyList customDataBytes 
+                    && customDataBytes?.GetTypedProperty<PropertyArray>("ByteArrays")?.Value != null
             ).ToList();
 
 
 
-            // Parse creatures in cryopods and soultraps (from the mod DinoStorageV2)
-            foreach (var storedPod in validStored)
-            //Parallel.ForEach(validStored, storedPod => 
+            ConcurrentBag<Tuple<GameObject, GameObject>> cbStored = new ConcurrentBag<Tuple<GameObject, GameObject>>();
+
+            //foreach (var storedPod in validStored)
+            Parallel.ForEach(validStored, storedPod => 
             {
                 ArkArrayStruct customItemDatas = storedPod.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas");
                 StructPropertyList customDinoData = (StructPropertyList)customItemDatas?.FirstOrDefault(cd => ((StructPropertyList)cd).GetTypedProperty<PropertyName>("CustomDataName").Value.Name == "Dino");
                 PropertyStruct customDataBytes = customDinoData?.Properties.FirstOrDefault(p => p.NameString == "CustomDataBytes") as PropertyStruct;
+
                 PropertyArray byteArrays = (customDataBytes?.Value as StructPropertyList)?.Properties.FirstOrDefault(property => property.NameString == "ByteArrays") as PropertyArray;
                 ArkArrayStruct byteArraysValue = byteArrays?.Value as ArkArrayStruct;
                 if ((byteArraysValue?.Any() ?? false))
-                {
+                {  
                     ArkArrayUInt8 creatureBytes = ((byteArraysValue?[0] as StructPropertyList)?.Properties.FirstOrDefault(p => p.NameString == "Bytes") as PropertyArray)?.Value as ArkArrayUInt8;
                     if (creatureBytes != null)
                     {
@@ -195,16 +198,8 @@ namespace SavegameToolkit
                                     }
                                 }
 
+                                cbStored.Add(new Tuple<GameObject, GameObject>(creatureObject, statusObject));
 
-                                addObject(statusObject, false);
-
-                                if (statusObject != null)
-                                {
-                                    var statusComponentRef = storedGameObjects[0].GetTypedProperty<PropertyObject>("MyCharacterStatusComponent");
-                                    statusComponentRef.Value.ObjectId = statusObject.Id;
-                                }
-
-                                addObject(creatureObject, false);
                             }
                             
                         }
@@ -213,7 +208,28 @@ namespace SavegameToolkit
                 }
 
             }
-            //);
+            );
+
+            if(cbStored!=null && cbStored.Count > 0)
+            {
+                foreach(var t in cbStored)
+                {
+                    var creatureObject = t.Item1;
+                    var statusObject = t.Item2;
+
+
+                    addObject(statusObject, false);
+
+                    if (statusObject != null)
+                    {
+                        var statusComponentRef = creatureObject.GetTypedProperty<PropertyObject>("MyCharacterStatusComponent");
+                        statusComponentRef.Value.ObjectId = statusObject.Id;
+                    }
+
+                    addObject(creatureObject, false);
+                }
+
+            }
 
 
             OldNameList = archive.HasUnknownNames ? archive.NameTable : null;

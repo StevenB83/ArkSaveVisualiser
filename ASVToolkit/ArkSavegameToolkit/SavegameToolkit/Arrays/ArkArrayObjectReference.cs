@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SavegameToolkit.Propertys;
@@ -8,7 +9,7 @@ namespace SavegameToolkit.Arrays {
 
     public class ArkArrayObjectReference : ArkArrayBase<ObjectReference> {
 
-        public static readonly ArkName TYPE = ArkName.ConstantPlain("ObjectProperty");
+        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("ObjectProperty");
 
         //private static long serialVersionUID = 1L;
 

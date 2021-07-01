@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using SavegameToolkit.Propertys;
 using SavegameToolkit.Types;
@@ -30,6 +31,8 @@ namespace SavegameToolkit.Arrays {
         }
 
         static ArkArrayRegistry() {
+            types = new Dictionary<ArkName, ArkArrayConstructor>();
+
             addType(ArkArrayInt8.TYPE, binaryConstructorFunction<ArkArrayInt8>(), jsonConstructorFunction<ArkArrayInt8>());
             addType(ArkArrayByteHandler.TYPE, ArkArrayByteHandler.create, ArkArrayByteHandler.create);
             addType(ArkArrayInt16.TYPE, binaryConstructorFunction<ArkArrayInt16>(), jsonConstructorFunction<ArkArrayInt16>());

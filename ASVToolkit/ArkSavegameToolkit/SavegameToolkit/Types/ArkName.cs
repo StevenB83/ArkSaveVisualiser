@@ -18,7 +18,7 @@ namespace SavegameToolkit.Types {
 
         private static readonly Regex nameIndexPattern = new Regex("^(.*)_([0-9]+)$");
 
-        private static Dictionary<string, ArkName> nameCache = new Dictionary<string, ArkName>();
+        [ThreadStatic] private static Dictionary<string, ArkName> nameCache = new Dictionary<string, ArkName>();
 
         private static readonly Dictionary<string, ArkName> constantNameCache = new Dictionary<string, ArkName>();
 
@@ -50,6 +50,8 @@ namespace SavegameToolkit.Types {
         /// <param name="name"></param>
         /// <returns></returns>
         public static ArkName From(string name) {
+            if (nameCache == null) nameCache = new Dictionary<string, ArkName>();
+
             if (name == null || !nameCache.TryGetValue(name, out ArkName value)) {
                 value = new ArkName(name);
                 nameCache.Add(name, value);

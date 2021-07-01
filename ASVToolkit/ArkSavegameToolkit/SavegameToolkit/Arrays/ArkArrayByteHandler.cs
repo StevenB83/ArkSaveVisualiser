@@ -1,12 +1,13 @@
 ﻿using Newtonsoft.Json.Linq;
 using SavegameToolkit.Propertys;
 using SavegameToolkit.Types;
+using System;
 
 namespace SavegameToolkit.Arrays {
 
     public class ArkArrayByteHandler {
 
-        public static readonly ArkName TYPE = ArkName.ConstantPlain("ByteProperty");
+        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("ByteProperty");
 
         public static IArkArray create(ArkArchive archive, PropertyArray property) {
             int size = archive.ReadInt();

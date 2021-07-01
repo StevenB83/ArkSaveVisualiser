@@ -1,11 +1,12 @@
 ﻿using SavegameToolkit.Propertys;
 using SavegameToolkit.Types;
+using System;
 
 namespace SavegameToolkit.Arrays {
 
     public class ArkArrayDouble : ArkArrayBase<double> {
 
-        public static readonly ArkName TYPE = ArkName.ConstantPlain("DoubleProperty");
+        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("DoubleProperty");
 
         //private static long serialVersionUID = 1L;
 

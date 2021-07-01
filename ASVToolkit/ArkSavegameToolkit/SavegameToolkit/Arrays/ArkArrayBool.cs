@@ -1,11 +1,12 @@
 ﻿using SavegameToolkit.Propertys;
 using SavegameToolkit.Types;
+using System;
 
 namespace SavegameToolkit.Arrays {
 
     public class ArkArrayBool : ArkArrayBase<bool> {
 
-        public static readonly ArkName TYPE = ArkName.ConstantPlain("BoolProperty");
+        [ThreadStatic] public static readonly ArkName TYPE = ArkName.ConstantPlain("BoolProperty");
 
        //private static long serialVersionUID = 1L;
 

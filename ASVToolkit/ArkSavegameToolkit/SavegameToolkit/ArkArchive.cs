@@ -435,6 +435,7 @@ namespace SavegameToolkit {
         /// </summary>
         /// <param name="value">The string to get the size of</param>
         /// <returns>The amount of bytes needed to store <code>value</code></returns>
+        
         public static int GetStringLength(string value) {
             if (value == null) {
                 return 4;
