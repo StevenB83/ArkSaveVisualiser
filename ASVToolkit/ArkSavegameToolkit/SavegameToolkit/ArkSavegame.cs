@@ -100,7 +100,7 @@ namespace SavegameToolkit
             }
 
             var validStored = Objects.Where(o => 
-                    (o.ClassName.Name.Contains("Cryopod") || o.ClassString.Contains("SoulTrap_") ||  o.ClassString.Contains("BP_Vivarium_C"))
+                    (o.ClassName.Name.Contains("Cryopod") || o.ClassString.Contains("SoulTrap_") ||  o.ClassString.Contains("Vivarium_"))
                     && o.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas") is ArkArrayStruct customItemDatas
                     && customItemDatas?.FirstOrDefault(cd => ((StructPropertyList)cd).GetTypedProperty<PropertyName>("CustomDataName").Value.Name == "Dino") is StructPropertyList customDinoData
                     && customDinoData?.GetTypedProperty<PropertyStruct>("CustomDataBytes")?.Value is StructPropertyList customDataBytes 
@@ -150,16 +150,14 @@ namespace SavegameToolkit
                                 // assume the first object is the creature object
                                 string creatureActorId = storedGameObjects[0].Names[0].ToString();
 
-                                switch (storedPod.ClassString)
+                                if (storedPod.ClassString.Contains("Vivarium_"))
                                 {
-                                    case "BP_Vivarium_C":
-                                        //vivarium
-                                        storedGameObjects[0].IsVivarium = true;
-                                        break;
-                                    default:
-                                        //cryopod
-                                        storedGameObjects[0].IsCryo = true;
-                                        break;
+                                    //vivarium
+                                    storedGameObjects[0].IsVivarium = true;
+                                }
+                                else
+                                {
+                                    storedGameObjects[0].IsCryo = true;
                                 }
 
                                 // the tribe name is stored in `TamerString`, non-cryoed creatures have the property `TribeName` for that.
