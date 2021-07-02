@@ -203,7 +203,7 @@ namespace ARKViewer
                 DrawMap(0, 0);
 
                 var timeLoaded = TimeSpan.FromTicks(DateTime.Now.Ticks - startLoadTicks);
-                UpdateProgress($"Content pack loaded in {timeLoaded.TotalSeconds.ToString("f0")} seconds.");
+                UpdateProgress($"Content pack loaded in {timeLoaded.ToString(@"mm\:ss")}.");
 
                 if (cm.ContentDate == null || cm.ContentDate.Equals(new DateTime()))
                 {
@@ -3321,7 +3321,7 @@ namespace ARKViewer
                     Program.ProgramConfig.SelectedFile = downloadedFile;
                 }
 
-                UpdateProgress($"Downloaded from server in {TimeSpan.FromTicks(downloadEndTicks - downloadStartTicks).TotalSeconds.ToString("f1")} seconds. Loading content pack...");
+                UpdateProgress($"Downloaded from server in {TimeSpan.FromTicks(downloadEndTicks - downloadStartTicks).ToString(@":mm\:ss")} seconds. Loading content pack...");
             }
             else
             {
@@ -3345,7 +3345,7 @@ namespace ARKViewer
             }
             else
             {
-                UpdateProgress($"Content loaded and refreshed in {TimeSpan.FromTicks(endContentTicks - startContentTicks).TotalSeconds.ToString("f1")} seconds.");
+                UpdateProgress($"Content loaded and refreshed in {TimeSpan.FromTicks(endContentTicks - startContentTicks).ToString(@":mm\:ss")} seconds.");
             }
 
             this.Cursor = Cursors.Default;

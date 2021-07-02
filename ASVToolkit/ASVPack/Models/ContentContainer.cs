@@ -139,7 +139,7 @@ namespace ASVPack.Models
 
                         long saveLoadTime = DateTime.Now.Ticks;
                         TimeSpan timeTaken = TimeSpan.FromTicks(saveLoadTime - startTicks);
-                        logWriter.Info($"Game data loaded in: {timeTaken.TotalSeconds.ToString("f1")} seconds.");
+                        logWriter.Info($"Game data loaded in: {timeTaken.ToString(@"mm\:ss")}.");
 
                         long structureStart = DateTime.Now.Ticks;
 
@@ -248,7 +248,7 @@ namespace ASVPack.Models
 
                         long structureEnd = DateTime.Now.Ticks;
                         var structureTime = TimeSpan.FromTicks(structureEnd - structureStart);
-                        logWriter.Info($"Structures loaded in: {structureTime.TotalSeconds.ToString("f1")} seconds.");
+                        logWriter.Info($"Structures loaded in: {structureTime.ToString(@"mm\:ss")}.");
 
                         long wildStart = DateTime.Now.Ticks;
 
@@ -281,7 +281,7 @@ namespace ASVPack.Models
 
                         long wildEnd = DateTime.Now.Ticks;
                         var wildTime = TimeSpan.FromTicks(wildEnd - wildStart);
-                        logWriter.Info($"Wilds loaded in: {wildTime.TotalSeconds.ToString("f1")} seconds.");
+                        logWriter.Info($"Wilds loaded in: {wildTime.ToString(@"mm\:ss")}.");
 
 
                         logWriter.Debug($"Identifying tamed creatures");
@@ -558,6 +558,12 @@ namespace ASVPack.Models
                         }
 
 
+
+
+
+
+
+
                         logWriter.Debug($"Populating player inventories");
                         //load inventories, locations etc.
                         var allPlayers = tribeList.SelectMany(t => t.Players);
@@ -647,7 +653,7 @@ namespace ASVPack.Models
 
                         long tribeLoadEnd = DateTime.Now.Ticks;
                         var tribeLoadTime = TimeSpan.FromTicks(tribeLoadEnd - tribeLoadStart);
-                        logWriter.Info($"Tribe players loaded in: {tribeLoadTime.TotalSeconds.ToString("f1")} seconds.");
+                        logWriter.Info($"Tribe players loaded in: {tribeLoadTime.ToString(@"mm\:ss")}.");
 
                         logWriter.Debug($"Populating tamed creature inventories");
 
@@ -1010,7 +1016,7 @@ namespace ASVPack.Models
                 long endTicks = DateTime.Now.Ticks;
                 var duration = TimeSpan.FromTicks(endTicks - startTicks);
 
-                logWriter.Info($"Loaded in: {duration.TotalSeconds.ToString("f1")} seconds.");
+                logWriter.Info($"Loaded in: {duration.ToString(@"mm\:ss")}.");
             }
             catch (Exception ex)
             {
