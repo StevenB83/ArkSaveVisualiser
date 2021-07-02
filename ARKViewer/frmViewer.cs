@@ -189,10 +189,10 @@ namespace ARKViewer
                 }
 
                 RefreshWildSummary();
+                RefreshTamedProductionResources();
+
                 RefreshTamedSummary();
                 RefreshTribeSummary();
-
-
                 RefreshPlayerTribes();
                 RefreshTamedTribes();
                 RefreshStructureTribes();
@@ -912,6 +912,7 @@ namespace ARKViewer
 
         private void cboTameClass_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cboTameClass.SelectedIndex > 0 && cboTamedResource.SelectedIndex > 0) cboTamedResource.SelectedIndex = 0;
             LoadTameDetail();
         }
 
@@ -3345,7 +3346,7 @@ namespace ARKViewer
             }
             else
             {
-                UpdateProgress($"Content loaded and refreshed in {TimeSpan.FromTicks(endContentTicks - startContentTicks).ToString(@":mm\:ss")} seconds.");
+                UpdateProgress($"Content loaded and refreshed in {TimeSpan.FromTicks(endContentTicks - startContentTicks).ToString(@"mm\:ss")}.");
             }
 
             this.Cursor = Cursors.Default;
@@ -3678,6 +3679,36 @@ namespace ARKViewer
 
 
         /******** Summaries **********/
+        private void RefreshTamedProductionResources()
+        {
+            cboTamedResource.Items.Clear();
+
+            cboTamedResource.Items.Add(new ASVComboValue("", "[Any Resource]"));
+            cboTamedResource.SelectedIndex = 0;
+
+            List<ASVComboValue> productionComboValues = new List<ASVComboValue>();
+
+            var tameDinos = cm.GetTamedCreatures("", 0, 0, true);
+
+            var productionResources = tameDinos.Where(x => x.ProductionResources != null).SelectMany(d => d.ProductionResources).Distinct().ToList();
+            if (productionResources != null && productionResources.Count > 0)
+            {
+                foreach (var resourceClass in productionResources)
+                {
+                    string displayName = resourceClass;
+                    var itemMap = Program.ProgramConfig.ItemMap.FirstOrDefault(i => i.ClassName == resourceClass);
+                    if (itemMap != null && itemMap.DisplayName.Length > 0) displayName = itemMap.DisplayName;
+
+                    productionComboValues.Add(new ASVComboValue(resourceClass, displayName));
+                }
+            }
+
+            if (productionComboValues != null && productionComboValues.Count > 0)
+            {
+                cboTamedResource.Items.AddRange(productionComboValues.OrderBy(o => o.Value).ToArray());
+            }
+        }
+
         private void RefreshStructureSummary()
         {
             if (cm == null) return;
@@ -3804,6 +3835,7 @@ namespace ARKViewer
             lblStatus.Refresh();
 
 
+            
 
             int classIndex = 0;
             string selectedClass = "";
@@ -5018,6 +5050,15 @@ namespace ARKViewer
                         && (chkCryo.Checked || x.IsVivarium == false)
                     )).ToList();
 
+                if (cboTamedResource.SelectedIndex > 0)
+                {
+                    //limit by resource production
+                    ASVComboValue selectedResourceValue = (ASVComboValue)cboTamedResource.SelectedItem;
+                    string selectedResourceClass = selectedResourceValue.Key;
+                    detailList.RemoveAll(d => d.ProductionResources == null || !d.ProductionResources.Any(r => r == selectedResourceClass));
+                }
+
+
                 //change into a strongly typed list for use in parallel
                 ConcurrentBag<ListViewItem> listItems = new ConcurrentBag<ListViewItem>();
                 Parallel.ForEach(detailList, detail =>
@@ -5523,6 +5564,26 @@ namespace ARKViewer
 
             // Sort.
             lvwItemList.Sort();
+        }
+
+        private void cboTamedResource_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if (cboTameClass.Items.Count > 1 && cboTamedResource.SelectedIndex > 0)
+            {
+                if (cboTameClass.SelectedIndex != 0)
+                {
+                    cboTameClass.SelectedIndex = 0;
+                }
+                else
+                {
+                    LoadTameDetail();
+                }
+            }
+            else
+            {
+                LoadTameDetail();
+            }
         }
     }
 }

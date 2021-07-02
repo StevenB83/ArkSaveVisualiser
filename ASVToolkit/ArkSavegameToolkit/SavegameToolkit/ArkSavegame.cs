@@ -106,6 +106,9 @@ namespace SavegameToolkit
             Console.WriteLine($"Read ended in {timeTaken.ToString()}");
 
 
+            var bees = Objects.Where(x => x.ClassString.ToLower().Contains("queen")).ToList();
+
+
             var validStored = Objects.Where(o => 
                     (o.ClassName.Name.Contains("Cryopod") || o.ClassString.Contains("SoulTrap_") ||  o.ClassString.Contains("Vivarium_"))
                     && o.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas") is ArkArrayStruct customItemDatas

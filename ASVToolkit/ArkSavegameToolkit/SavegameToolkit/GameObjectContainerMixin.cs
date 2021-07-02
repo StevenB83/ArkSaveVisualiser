@@ -9,6 +9,7 @@ namespace SavegameToolkit {
         public Dictionary<int, Dictionary<int, GameObject>> ObjectMap { get; } = new Dictionary<int, Dictionary<int, GameObject>>();
 
         protected void addObject(GameObject gameObject, bool processNames) {
+            
             if (processNames) {
                 if (ObjectMap.TryGetValue(gameObject.FromDataFile ? gameObject.DataFileIndex : -1, out Dictionary<int, GameObject> map)) {
                     if (gameObject.HasParentNames) {

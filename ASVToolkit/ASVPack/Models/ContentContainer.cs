@@ -91,6 +91,121 @@ namespace ASVPack.Models
                 GameObjectContainer objectContainer = null;
                 GameSaveTime = new FileInfo(fileName).LastWriteTimeUtc.ToLocalTime();
 
+
+                var filePath = Path.GetDirectoryName(fileName);
+                long profileStart = DateTime.Now.Ticks;
+                logWriter.Debug($"Reading .arkprofile(s)");
+                ConcurrentBag<ContentPlayer> fileProfiles = new ConcurrentBag<ContentPlayer>();
+                var profileFilenames = Directory.GetFiles(filePath, "*.arkprofile");
+                profileFilenames.AsParallel().ForAll(x =>
+                {
+
+                    using (Stream streamProfile = new FileStream(x, FileMode.Open))
+                    {
+                        logWriter.Debug($"Reading profile data: {x}");
+
+                        using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
+                        {
+                            ArkProfile arkProfile = new ArkProfile();
+                            arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+
+                            string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
+                            logWriter.Debug($"Profile map identified as: {profileMapName}");
+                            if (profileMapName == MapName.ToLower())
+                            {
+                                logWriter.Debug($"Converting to ContentPlayer: {x}");
+                                ContentPlayer contentPlayer = arkProfile.AsPlayer();
+                                if (contentPlayer.Id != 0)
+                                {
+                                    contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
+                                }
+                                fileProfiles.Add(contentPlayer);
+                            }
+                        }
+                    }
+
+
+                });
+                long profileEnd = DateTime.Now.Ticks;
+
+
+
+
+
+                ConcurrentBag<ContentTribe> fileTribes = new ConcurrentBag<ContentTribe>();
+                long tribeStart = DateTime.Now.Ticks;
+                logWriter.Debug($"Reading .arktribe(s)");
+
+                var tribeFilenames = Directory.GetFiles(filePath, "*.arktribe");
+                tribeFilenames.AsParallel().ForAll(x =>
+                {
+
+                    using (Stream streamProfile = new FileStream(x, FileMode.Open))
+                    {
+                        logWriter.Debug($"Reading tribe data: {x}");
+
+                        using (ArkArchive archiveTribe = new ArkArchive(streamProfile))
+                        {
+                            ArkTribe arkTribe = new ArkTribe();
+                            arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+
+                            logWriter.Debug($"Converting to ContentTribe for: {x}");
+                            var contentTribe = arkTribe.Tribe.AsTribe();
+                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(x).ToLocalTime();
+                            contentTribe.HasGameFile = true;
+                            fileTribes.Add(contentTribe);    
+                        }
+                    }
+
+
+                });
+
+                //add fake tribes for abandoned and unclaimed
+                fileTribes.Add(new ContentTribe()
+                {
+                    IsSolo = true,
+                    TribeId = 2_000_000_000,
+                    TribeName = "[ASV Unclaimed]"
+                });
+
+                fileTribes.Add(new ContentTribe()
+                {
+                    IsSolo = true,
+                    TribeId = int.MinValue,
+                    TribeName = "[ASV Abandoned]"
+                });
+
+
+                long tribeEnd = DateTime.Now.Ticks;
+
+
+                logWriter.Debug($"Allocating players to tribes");
+
+                //allocate players to tribes
+                fileProfiles.AsParallel().ForAll(p =>
+                {
+                    var playerTribe = fileTribes.FirstOrDefault(t => t.TribeId == p.TargetingTeam);
+                    if (playerTribe == null)
+                    {
+                        playerTribe = new ContentTribe()
+                        {
+                            IsSolo = true,
+                            HasGameFile = false,
+                            TribeId = p.Id,
+                            TribeName = $"Tribe of {p.CharacterName}"
+                        };
+
+                        fileTribes.Add(playerTribe);
+                    }
+
+
+                    playerTribe.Players.Add(p);
+                });
+                long allocationEnd = DateTime.Now.Ticks;
+
+
+
+
                 logWriter.Debug($"Reading game save data: {fileName}");
 
                 using (Stream stream = new MemoryStream(File.ReadAllBytes(fileName)))
@@ -105,7 +220,7 @@ namespace ASVPack.Models
                                 .WithDataFiles(true)
                                 .WithEmbeddedData(false)
                                 .WithDataFilesObjectMap(false)
-                                .WithBuildComponentTree(false));
+                                .WithBuildComponentTree(true));
 
 
 
@@ -129,6 +244,8 @@ namespace ASVPack.Models
                             objectContainer = new GameObjectContainer(combinedObjects);
                             GameSeconds = arkSavegame.GameTime;
                         }
+
+                        var bees = objectContainer.Objects.Where(x => x.ClassString.ToLower().Contains("queen")).ToList();
 
                         //get map name from .ark file data
                         logWriter.Debug($"Reading map name from: {fileName}");
@@ -293,187 +410,54 @@ namespace ASVPack.Models
 
 
                         long tribeLoadStart = DateTime.Now.Ticks;
-                        List<ContentTribe> tribeList = new List<ContentTribe>();
-
-                        //ASV fake tribes
-                        tribeList.Add(new ContentTribe()
-                        {
-                            IsSolo = true,
-                            TribeId = 2_000_000_000,
-                            TribeName = "[ASV Unclaimed]"
-                        });
-
-                        tribeList.Add(new ContentTribe()
-                        {
-                            IsSolo = true,
-                            TribeId = int.MinValue,
-                            TribeName = "[ASV Abandoned]"
-                        });
 
 
                         //find player data in game file
+
+
+
                         logWriter.Debug($"Identifying in-game player data");
                         var gamePlayers = objectContainer.AsParallel().Where(o => o.IsPlayer()).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x => x.First());
-
-                        //load .arkprofile(s) to create tribe and player containers
-                        string fileFolder = Path.GetDirectoryName(fileName);
-
-
-                        logWriter.Debug($"Identifying .arkprofile data");
-                        var profileFiles = Directory.GetFiles(fileFolder, "*.arkprofile");
-                        if (profileFiles != null && profileFiles.Length > 0)
-                        {
-                            foreach (string profileFilename in profileFiles)
-                            {
-                                using (Stream streamProfile = new FileStream(profileFilename, FileMode.Open))
-                                {
-                                    logWriter.Debug($"Reading profile data: {profileFilename}");
-
-                                    using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
-                                    {
-                                        ArkProfile arkProfile = new ArkProfile();
-                                        arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
-
-                                        string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
-                                        logWriter.Debug($"Profile map identified as: {profileMapName}");
-                                        if (profileMapName == MapName.ToLower())
-                                        {
-                                            logWriter.Debug($"Converting to ContentPlayer: {profileFilename}");
-                                            ContentPlayer contentPlayer = arkProfile.AsPlayer();
-                                            if(contentPlayer.Id  != 0)
-                                            {
-
-                                                contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
-
-                                                logWriter.Debug($"Identifying player tribe: {profileFilename}");
-                                                ContentTribe contentTribe = tribeList.FirstOrDefault(x => x.TribeId == contentPlayer.TargetingTeam || x.TribeId == contentPlayer.Id);
-                                                if (contentTribe == null)
-                                                {
-                                                    logWriter.Debug($"No loaded tribe found: {contentPlayer.TargetingTeam}");
-
-                                                    //not yet added
-                                                    contentTribe = new ContentTribe();
-
-                                                    string tribeFilename = Path.Combine(fileFolder, $"{contentPlayer.TargetingTeam}.arktribe");
-                                                    if (File.Exists(tribeFilename))
-                                                    {
-                                                        logWriter.Debug($"Loading tribe data for: {tribeFilename}");
-                                                        using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
-                                                        {
-                                                            using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
-                                                            {
-                                                                ArkTribe arkTribe = new ArkTribe();
-                                                                arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
-
-                                                                logWriter.Debug($"Converting to ContentTribe for: {tribeFilename}");
-                                                                contentTribe = arkTribe.Tribe.AsTribe();
-
-                                                                contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
-                                                                contentTribe.HasGameFile = true;
-
-                                                            }
-                                                        }
-                                                    }
-                                                    else
-                                                    {
-                                                        logWriter.Debug($"No file found for: {tribeFilename} - adding to ASV solo tribe");
-
-                                                        //solo tribe?
-                                                        contentTribe = new ContentTribe()
-                                                        {
-                                                            HasGameFile = false,
-                                                            IsSolo = true,
-                                                            Logs = new string[0],
-                                                            TribeName = $"Tribe of {contentPlayer.CharacterName}",
-                                                            TribeId = contentPlayer.Id
-                                                        };
-
-                                                    }
-
-                                                    tribeList.Add(contentTribe);
-
-                                                }
-
-
-                                                //add player to tribe
-                                                contentTribe.Players.Add(contentPlayer);
-
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                        var tribesAndPlayers = gamePlayers.GroupBy(x => x.GetPropertyValue<int>("TargetingTeam")).ToList();
 
                         logWriter.Debug($"Identifying in-game players with no .arkprofile");
-                        var tribesAndPlayers = gamePlayers
-                            .Where(x=> !tribeList.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
-                            .GroupBy(x => x.GetPropertyValue<int>("TargetingTeam")).ToList();
 
-                        if(tribesAndPlayers!=null && tribesAndPlayers.Count > 0)
+                        var abandonedGamePlayers = tribesAndPlayers.Where(x => !fileTribes.Any(t => t.TribeId == (long)x.Key)).ToList();
+                        if(abandonedGamePlayers!=null && abandonedGamePlayers.Count > 0)
                         {
-                            foreach(var tribe in tribesAndPlayers)
+                            foreach(var abandonedTribe in abandonedGamePlayers)
                             {
-                                //we know there's no .arkprofile so check for .arktribe
-                                string tribeFilename = Path.Combine(fileFolder, $"{tribe.Key}.arktribe");
-                                logWriter.Debug($"Checking for tribe file: {tribeFilename}");
-                                if (File.Exists(tribeFilename))
+                                var abandonedPlayers = abandonedTribe.ToList();
+                                var newTribe = new ContentTribe()
                                 {
-                                    logWriter.Debug($"Loading tribe file: {tribeFilename}");
-                                    using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
-                                    {
-                                        using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
-                                        {
-                                            ArkTribe arkTribe = new ArkTribe();
-                                            arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+                                    IsSolo = abandonedPlayers.Count == 1,
+                                    HasGameFile = false,
+                                    TribeId = abandonedTribe.Key,
+                                    TribeName = abandonedTribe.First().GetPropertyValue<string>("TribeName")??"Tribe of " + abandonedTribe.First().GetPropertyValue<string>("PlayerName")
+                                };
 
-                                            logWriter.Debug($"Converting to ContentTribe: {tribeFilename}");
-                                            ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
-                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
-                                            contentTribe.HasGameFile = true;
+                                abandonedPlayers.Select(x => x.AsPlayer(x.CharacterStatusComponent())).ToList().ForEach(x =>
+                                {
+                                    newTribe.Players.Add(x);
+                                });
 
-                                            logWriter.Debug($"Loading tribe players ({tribe.ToList().Count}): {tribeFilename}");
-                                            //players
-                                            foreach (GameObject arkPlayer in tribe)
-                                            {
-                                                //get status component
-                                                logWriter.Debug($"Determining character status for: {arkPlayer.ClassString}");
-                                                var statusRef = arkPlayer.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent");
-                                                if (statusRef != null)
-                                                {
-                                                    objectContainer.TryGetValue(statusRef.ObjectId, out GameObject playerStatus);
-
-                                                    logWriter.Debug($"Converting to ContentPlayer: {arkPlayer.ClassString}");
-
-                                                    //convert to contentplayer
-                                                    ContentPlayer contentPlayer = arkPlayer.AsPlayer(playerStatus);
-                                                    contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
-
-                                                    logWriter.Debug($"Adding player to list: {contentPlayer.Id} - {contentPlayer.CharacterName}");
-                                                    contentTribe.Players.Add(contentPlayer);
-
-                                                }
-
-                                            }
-
-                                            tribeList.Add(contentTribe);
-                                        }
-                                    }
-                                }
+                                fileTribes.Add(newTribe);
                             }
                         }
+
+
 
                         logWriter.Debug($"Identifying in-game missing tribes from player structures");
 
                         //attempt to get missing tribe data from structures
                         var missingStructureTribes = playerStructures
-                            .Where(x => !tribeList.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .Where(x => !fileTribes.Any(t => t.TribeId == (long)x.GetPropertyValue<int>("TargetingTeam")))
                             .Select(x => new
                             {
                                 TribeId = x.GetPropertyValue<int>("TargetingTeam"),
-                                TribeName = x.GetPropertyValue<string>("OwnerName")
-                            }).GroupBy(x=>x.TribeId)
-                            .Select(x=>x.First())
+                                TribeName = x.GetPropertyValue<string>("OwnerName")?? x.GetPropertyValue<string>("TamerString")
+                            }).GroupBy(x => x.TribeId)
+                            .Select(x => x.First())
                             .ToList();
 
                         if (missingStructureTribes != null && missingStructureTribes.Count > 0)
@@ -481,46 +465,29 @@ namespace ASVPack.Models
                             logWriter.Debug($"Identified player structure tribes: {missingStructureTribes.Count}");
                             missingStructureTribes.ForEach(tribe =>
                             {
-                                //we know there's no .arkprofile so check for .arktribe
-                                string tribeFilename = Path.Combine(fileFolder, $"{tribe.TribeId}.arktribe");
-
-
-                                logWriter.Debug($"Checking tribe file exists: {tribeFilename}");
-                                if (File.Exists(tribeFilename))
+                                fileTribes.Add(new ContentTribe()
                                 {
-                                    logWriter.Debug($"Reading tribe file: {tribeFilename}");
-                                    using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
-                                    {
-                                        using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
-                                        {
-                                            ArkTribe arkTribe = new ArkTribe();
-                                            arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
-
-                                            logWriter.Debug($"Converting to ContentTribe: {tribeFilename}");
-                                            ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
-                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
-                                            contentTribe.HasGameFile = true;
-                                            contentTribe.Players = new ConcurrentBag<ContentPlayer>();                                            
-
-                                            tribeList.Add(contentTribe);
-                                        }
-                                    }
-                                }
-
+                                    TribeId = tribe.TribeId,
+                                    TribeName = tribe.TribeName,
+                                    HasGameFile=false
+                                });
                             });
-                            
+
                         }
 
 
                         logWriter.Debug($"Identifying in-game tribes from tames");
 
+                        var missingTameTribes1 = allTames
+                            .Where(x => !fileTribes.Any(t => t.TribeId == (long)x.GetPropertyValue<int>("TargetingTeam"))).ToList();
+
                         //attempt to get missing tribe data from tames
                         var missingTameTribes = allTames
-                            .Where(x => !tribeList.Any(t => t.TribeId == x.GetPropertyValue<int>("TargetingTeam")))
+                            .Where(x => !fileTribes.Any(t => t.TribeId == (long)x.GetPropertyValue<int>("TargetingTeam")))
                             .Select(x => new
                             {
                                 TribeId = x.GetPropertyValue<int>("TargetingTeam"),
-                                TribeName = x.GetPropertyValue<string>("OwnerName")
+                                TribeName = x.GetPropertyValue<string>("TamerString")
                             }).GroupBy(x => x.TribeId)
                             .Select(x => x.First())
                             .ToList();
@@ -531,42 +498,23 @@ namespace ASVPack.Models
 
                             missingTameTribes.ForEach(tribe =>
                             {
-                                //we know there's no .arkprofile so check for .arktribe
-                                string tribeFilename = Path.Combine(fileFolder, $"{tribe.TribeId}.arktribe");
-                                logWriter.Debug($"Checking tribe file exists: {tribeFilename}");
-                                if (File.Exists(tribeFilename))
+                                //we know there's no .arktribe
+                                fileTribes.Add(new ContentTribe()
                                 {
-                                    logWriter.Debug($"Reading tribe file: {tribeFilename}");
-                                    using (Stream streamTribe = new FileStream(tribeFilename, FileMode.Open))
-                                    {
-                                        using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
-                                        {
-                                            ArkTribe arkTribe = new ArkTribe();
-                                            arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+                                    TribeId = tribe.TribeId,
+                                    TribeName = tribe.TribeName,
+                                    HasGameFile = false
+                                });
 
-                                            logWriter.Debug($"Converting to ContentTribe: {tribeFilename}");
-                                            ContentTribe contentTribe = arkTribe.Tribe.AsTribe();
-                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(tribeFilename).ToLocalTime();
-                                            contentTribe.HasGameFile = true;
-                                            contentTribe.Players = new ConcurrentBag<ContentPlayer>();
-
-                                            tribeList.Add(contentTribe);
-                                        }
-                                    }
-                                }
                             });
                         }
 
 
 
 
-
-
-
-
                         logWriter.Debug($"Populating player inventories");
                         //load inventories, locations etc.
-                        var allPlayers = tribeList.SelectMany(t => t.Players);
+                        var allPlayers = fileTribes.SelectMany(t => t.Players);
                         Parallel.ForEach(allPlayers, player =>
                         //foreach(var player in allPlayers)
                         {
@@ -662,7 +610,7 @@ namespace ASVPack.Models
                         {
                             //find appropriate tribe to add to
                             var teamId = x.GetPropertyValue<int>("TargetingTeam");
-                            var tribe = tribeList.FirstOrDefault(t => t.TribeId == teamId) ?? tribeList.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
+                            var tribe = fileTribes.FirstOrDefault(t => t.TribeId == teamId) ?? fileTribes.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
 
                             logWriter.Debug($"Determining character status for: {x.ClassString}");
                             ObjectReference statusRef = x.GetPropertyValue<ObjectReference>("MyCharacterStatusComponent") ?? x.GetPropertyValue<ObjectReference>("MyDinoStatusComponent");
@@ -755,7 +703,7 @@ namespace ASVPack.Models
                         {
 
                             var teamId = x.GetPropertyValue<int>("TargetingTeam");
-                            var tribe = tribeList.FirstOrDefault(t => t.TribeId == teamId) ?? tribeList.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
+                            var tribe = fileTribes.FirstOrDefault(t => t.TribeId == teamId) ?? fileTribes.FirstOrDefault(t => t.TribeId == int.MinValue); //tribe or abandoned
 
                             logWriter.Debug($"Converting to ContentStructure: {x.ClassString}");
 
@@ -822,7 +770,7 @@ namespace ASVPack.Models
                             }
                             if (!tribe.Structures.Contains(structure)) tribe.Structures.Add(structure);
                         });
-                        if (tribeList.Count > 0) Tribes.AddRange(tribeList.ToList());
+                        if (fileTribes.Count > 0) Tribes.AddRange(fileTribes.ToList());
 
 
 

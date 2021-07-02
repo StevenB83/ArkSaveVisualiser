@@ -242,6 +242,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMap = new System.Windows.Forms.Label();
             this.cboSelectedMap = new System.Windows.Forms.ComboBox();
+            this.cboTamedResource = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.mnuContext.SuspendLayout();
             this.tabFeatures.SuspendLayout();
             this.tpgWild.SuspendLayout();
@@ -641,7 +643,7 @@
             this.chkCryo.BackgroundImage = global::ARKViewer.Properties.Resources.button_cryooff;
             this.chkCryo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.chkCryo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkCryo.Location = new System.Drawing.Point(757, 8);
+            this.chkCryo.Location = new System.Drawing.Point(757, 21);
             this.chkCryo.Name = "chkCryo";
             this.chkCryo.Size = new System.Drawing.Size(40, 40);
             this.chkCryo.TabIndex = 6;
@@ -1006,6 +1008,8 @@
             // 
             // tpgTamed
             // 
+            this.tpgTamed.Controls.Add(this.cboTamedResource);
+            this.tpgTamed.Controls.Add(this.label1);
             this.tpgTamed.Controls.Add(this.chkCryo);
             this.tpgTamed.Controls.Add(this.btnCopyCommandTamed);
             this.tpgTamed.Controls.Add(this.lblTamedCommand);
@@ -1059,9 +1063,9 @@
             // 
             this.cboTameTribes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTameTribes.FormattingEnabled = true;
-            this.cboTameTribes.Location = new System.Drawing.Point(57, 16);
+            this.cboTameTribes.Location = new System.Drawing.Point(76, 16);
             this.cboTameTribes.Name = "cboTameTribes";
-            this.cboTameTribes.Size = new System.Drawing.Size(166, 21);
+            this.cboTameTribes.Size = new System.Drawing.Size(199, 21);
             this.cboTameTribes.TabIndex = 1;
             this.cboTameTribes.SelectedIndexChanged += new System.EventHandler(this.cboTameTribes_SelectedIndexChanged);
             // 
@@ -1069,17 +1073,18 @@
             // 
             this.cboTamePlayers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTamePlayers.FormattingEnabled = true;
-            this.cboTamePlayers.Location = new System.Drawing.Point(281, 16);
+            this.cboTamePlayers.Location = new System.Drawing.Point(76, 43);
             this.cboTamePlayers.Name = "cboTamePlayers";
-            this.cboTamePlayers.Size = new System.Drawing.Size(178, 21);
+            this.cboTamePlayers.Size = new System.Drawing.Size(199, 21);
             this.cboTamePlayers.TabIndex = 3;
             this.cboTamePlayers.SelectedIndexChanged += new System.EventHandler(this.cboTamePlayers_SelectedIndexChanged);
             // 
             // lblTameCreature
             // 
+            this.lblTameCreature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTameCreature.AutoSize = true;
             this.lblTameCreature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTameCreature.Location = new System.Drawing.Point(467, 18);
+            this.lblTameCreature.Location = new System.Drawing.Point(442, 18);
             this.lblTameCreature.Name = "lblTameCreature";
             this.lblTameCreature.Size = new System.Drawing.Size(59, 13);
             this.lblTameCreature.TabIndex = 4;
@@ -1089,7 +1094,7 @@
             // 
             this.lblTamePlayer.AutoSize = true;
             this.lblTamePlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTamePlayer.Location = new System.Drawing.Point(229, 18);
+            this.lblTamePlayer.Location = new System.Drawing.Point(18, 45);
             this.lblTamePlayer.Name = "lblTamePlayer";
             this.lblTamePlayer.Size = new System.Drawing.Size(46, 13);
             this.lblTamePlayer.TabIndex = 2;
@@ -1099,7 +1104,7 @@
             // 
             this.lblTameTribe.AutoSize = true;
             this.lblTameTribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTameTribe.Location = new System.Drawing.Point(14, 18);
+            this.lblTameTribe.Location = new System.Drawing.Point(18, 18);
             this.lblTameTribe.Name = "lblTameTribe";
             this.lblTameTribe.Size = new System.Drawing.Size(40, 13);
             this.lblTameTribe.TabIndex = 0;
@@ -1143,10 +1148,10 @@
             this.lvwTameDetail.ContextMenuStrip = this.mnuContext;
             this.lvwTameDetail.FullRowSelect = true;
             this.lvwTameDetail.HideSelection = false;
-            this.lvwTameDetail.Location = new System.Drawing.Point(11, 51);
+            this.lvwTameDetail.Location = new System.Drawing.Point(11, 79);
             this.lvwTameDetail.MultiSelect = false;
             this.lvwTameDetail.Name = "lvwTameDetail";
-            this.lvwTameDetail.Size = new System.Drawing.Size(786, 353);
+            this.lvwTameDetail.Size = new System.Drawing.Size(786, 325);
             this.lvwTameDetail.TabIndex = 7;
             this.lvwTameDetail.UseCompatibleStateImageBehavior = false;
             this.lvwTameDetail.View = System.Windows.Forms.View.Details;
@@ -1352,9 +1357,10 @@
             // 
             // cboTameClass
             // 
+            this.cboTameClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboTameClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTameClass.FormattingEnabled = true;
-            this.cboTameClass.Location = new System.Drawing.Point(532, 16);
+            this.cboTameClass.Location = new System.Drawing.Point(520, 16);
             this.cboTameClass.Name = "cboTameClass";
             this.cboTameClass.Size = new System.Drawing.Size(216, 21);
             this.cboTameClass.TabIndex = 5;
@@ -2398,6 +2404,28 @@
             this.cboSelectedMap.TabIndex = 26;
             this.cboSelectedMap.SelectedIndexChanged += new System.EventHandler(this.cboSelectedMap_SelectedIndexChanged);
             // 
+            // cboTamedResource
+            // 
+            this.cboTamedResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboTamedResource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTamedResource.FormattingEnabled = true;
+            this.cboTamedResource.Location = new System.Drawing.Point(520, 43);
+            this.cboTamedResource.Name = "cboTamedResource";
+            this.cboTamedResource.Size = new System.Drawing.Size(216, 21);
+            this.cboTamedResource.TabIndex = 16;
+            this.cboTamedResource.SelectedIndexChanged += new System.EventHandler(this.cboTamedResource_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(442, 46);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Resource:";
+            // 
             // frmViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2667,6 +2695,8 @@
         private System.Windows.Forms.ColumnHeader lvwItemList_BP;
         private System.Windows.Forms.CheckBox chkDroppedBlueprints;
         private System.Windows.Forms.CheckBox chkItemSearchBlueprints;
+        private System.Windows.Forms.ComboBox cboTamedResource;
+        private System.Windows.Forms.Label label1;
     }
 }
 

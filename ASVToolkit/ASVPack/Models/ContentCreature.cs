@@ -83,6 +83,7 @@ namespace ASVPack.Models
             for (var i = 0; i < Colors.Length; i++) Colors[i] = creatureObject.GetPropertyValue<ArkByteValue>("ColorSetIndices", i)?.ByteValue ?? 0;
 
             //resource production
+
             List<string> productionItems = new List<string>();
             PropertyArray productionSlots = creatureObject.GetTypedProperty<PropertyArray>("ResourceProduction"); 
             if (productionSlots != null)
@@ -95,16 +96,13 @@ namespace ASVPack.Models
                         if (itemQuantity.Properties.Count > 0)
                         {
                             PropertyObject itemRef = (PropertyObject)itemQuantity.Properties[0];
-                            if (itemRef != null)
+                            if (itemRef != null && itemRef.Value?.ObjectId >=0)
                             {
-                                if(itemRef.Value?.ObjectId > 0)
+                                string classString = itemRef.Value.ObjectString.Name.ToString();
+                                if (classString.Contains("."))
                                 {
-                                    string classString = itemRef.Value.ObjectString.Name.ToString();
-                                    if (classString.Contains("."))
-                                    {
-                                        classString = classString.Substring(classString.LastIndexOf(".") + 1);
-                                        productionItems.Add(ClassName);
-                                    }
+                                    classString = classString.Substring(classString.LastIndexOf(".") + 1);
+                                    productionItems.Add(classString);
                                 }
                             }
 
