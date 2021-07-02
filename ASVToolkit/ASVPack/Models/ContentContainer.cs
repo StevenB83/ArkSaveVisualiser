@@ -285,13 +285,11 @@ namespace ASVPack.Models
 
 
                         logWriter.Debug($"Identifying tamed creatures");
-                        var allTames = objectContainer.Where(x => x.IsTamed() && x.ClassString != "MotorRaft_BP_C" && x.ClassString != "Raft_BP_C"); //exclude rafts.. no idea why these are "creatures"
+                        var allTames = objectContainer.AsParallel().Where(x => x.IsTamed() && x.ClassString != "MotorRaft_BP_C" && x.ClassString != "Raft_BP_C"); //exclude rafts.. no idea why these are "creatures"
 
-
-                        var cryoTames = objectContainer.Where(x => x.IsCryo).ToList();
 
                         logWriter.Debug($"Identifying player structures");
-                        var playerStructures = objectContainer.Where(x => x.IsStructure() && x.GetPropertyValue<int>("TargetingTeam") >= 50_000).GroupBy(x=>x.Names[0]).Select(s=>s.First()).ToList();
+                        var playerStructures = objectContainer.AsParallel().Where(x => x.IsStructure() && x.GetPropertyValue<int>("TargetingTeam") >= 50_000).GroupBy(x=>x.Names[0]).Select(s=>s.First()).ToList();
 
 
                         long tribeLoadStart = DateTime.Now.Ticks;
@@ -315,7 +313,7 @@ namespace ASVPack.Models
 
                         //find player data in game file
                         logWriter.Debug($"Identifying in-game player data");
-                        var gamePlayers = objectContainer.Where(o => o.IsPlayer()).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x => x.First());
+                        var gamePlayers = objectContainer.AsParallel().Where(o => o.IsPlayer()).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x => x.First());
 
                         //load .arkprofile(s) to create tribe and player containers
                         string fileFolder = Path.GetDirectoryName(fileName);

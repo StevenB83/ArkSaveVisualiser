@@ -80,6 +80,8 @@ namespace SavegameToolkit
 
         public void ReadBinary(ArkArchive archive, ReadingOptions options)
         {
+            long startRead = DateTime.Now.Ticks;
+
             readBinaryHeader(archive);
 
             if (SaveVersion > 5)
@@ -99,6 +101,11 @@ namespace SavegameToolkit
                 readBinaryHibernation(archive, options);
             }
 
+            long endRead = DateTime.Now.Ticks;
+            var timeTaken = TimeSpan.FromTicks(endRead - startRead);
+            Console.WriteLine($"Read ended in {timeTaken.ToString()}");
+
+
             var validStored = Objects.Where(o => 
                     (o.ClassName.Name.Contains("Cryopod") || o.ClassString.Contains("SoulTrap_") ||  o.ClassString.Contains("Vivarium_"))
                     && o.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas") is ArkArrayStruct customItemDatas
@@ -107,10 +114,16 @@ namespace SavegameToolkit
                     && customDataBytes?.GetTypedProperty<PropertyArray>("ByteArrays")?.Value != null
             ).ToList();
 
+            long identifyEnd = DateTime.Now.Ticks;
+            var timeTaken2 = TimeSpan.FromTicks(identifyEnd - endRead);
+            Console.WriteLine($"Stored containers identified in {timeTaken2.ToString()}");
 
 
+            //narrow our search list down for inventory components to help improve performance
+            var inventoryContainers = Objects.Where(x => x.GetPropertyValue<ObjectReference>("MyInventoryComponent") != null).ToList();
+            
+            
             ConcurrentBag<Tuple<GameObject, GameObject>> cbStored = new ConcurrentBag<Tuple<GameObject, GameObject>>();
-
             //foreach (var storedPod in validStored)
             Parallel.ForEach(validStored, storedPod => 
             {
@@ -142,6 +155,7 @@ namespace SavegameToolkit
                                 {
                                     storedGameObjects.Add(new GameObject(cryoArchive));
                                 }
+
                                 foreach (var ob in storedGameObjects)
                                 {
                                     ob.LoadProperties(cryoArchive, new GameObject(), 0);
@@ -161,7 +175,7 @@ namespace SavegameToolkit
                                 }
 
                                 // the tribe name is stored in `TamerString`, non-cryoed creatures have the property `TribeName` for that.
-                                if (!storedGameObjects[0].HasAnyProperty("TribeName") && storedGameObjects[0].HasAnyProperty("TamerString"))
+                                if (storedGameObjects[0].GetPropertyValue<string>("TribeName")?.Length == 0 && storedGameObjects[0].GetPropertyValue<string>("TamerString")?.Length > 0)
                                     storedGameObjects[0].Properties.Add(new PropertyString("TribeName", storedGameObjects[0].GetPropertyValue<string>("TamerString")));
 
                                 // add cryopod object as parent to all child objects of the creature object (ActorIDs are not unique across cryopodded and non-cryopodded creatures)
@@ -172,7 +186,7 @@ namespace SavegameToolkit
 
                                 //get parent of cryopod owner inventory
                                 var podParentRef = storedPod.GetPropertyValue<ObjectReference>("OwnerInventory");
-                                var podParent = Objects.FirstOrDefault(o => o.GetPropertyValue<ObjectReference>("MyInventoryComponent")?.ObjectId == podParentRef.ObjectId);
+                                var podParent = inventoryContainers.FirstOrDefault(o => o.GetPropertyValue<ObjectReference>("MyInventoryComponent")?.ObjectId == podParentRef.ObjectId);
 
                                 //determine if we need to re-team the podded animal
                                 if (podParent != null)
@@ -208,7 +222,13 @@ namespace SavegameToolkit
             }
             );
 
-            if(cbStored!=null && cbStored.Count > 0)
+            long propertyEnd = DateTime.Now.Ticks;
+            var timeTaken3 = TimeSpan.FromTicks(propertyEnd - identifyEnd);
+            Console.WriteLine($"Properties loaded in {timeTaken3.ToString()}");
+
+
+
+            if (cbStored!=null && cbStored.Count > 0)
             {
                 foreach(var t in cbStored)
                 {
@@ -228,7 +248,9 @@ namespace SavegameToolkit
                 }
 
             }
-
+            long addEnd = DateTime.Now.Ticks;
+            var timeTaken4 = TimeSpan.FromTicks(addEnd - propertyEnd);
+            Console.WriteLine($"Objects added in {timeTaken4.ToString()}");
 
             OldNameList = archive.HasUnknownNames ? archive.NameTable : null;
             HasUnknownData = archive.HasUnknownData;
