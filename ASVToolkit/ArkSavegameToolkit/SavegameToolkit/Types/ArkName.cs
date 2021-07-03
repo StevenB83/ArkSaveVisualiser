@@ -54,6 +54,7 @@ namespace SavegameToolkit.Types {
         /// <param name="name"></param>
         /// <returns></returns>
         public static ArkName From(string name) {
+            if(nameCache==null) nameCache = new Dictionary<string, ArkName>();
 
             if (name == null || !nameCache.TryGetValue(name, out ArkName value)) {
                 value = new ArkName(name);
@@ -69,7 +70,7 @@ namespace SavegameToolkit.Types {
         /// <param name="instance"></param>
         /// <returns></returns>
         public static ArkName From(string name, int instance) {
-            
+            if (nameCache == null) nameCache = new Dictionary<string, ArkName>();
             string instanceName = instance == 0 ? name : $"{name}_{instance - 1}";
 
             if (instanceName == null || !nameCache.TryGetValue(instanceName, out ArkName value)) {
@@ -92,7 +93,7 @@ namespace SavegameToolkit.Types {
         /// <param name="name"></param>
         /// <returns></returns>
         public static ArkName Constant(string name) {
-            
+            if (nameCache == null) nameCache = new Dictionary<string, ArkName>();
             if (name == null || !nameCache.TryGetValue(name, out ArkName value)) {
                 value = new ArkName(name);
                 nameCache.Add(name, value);
@@ -108,6 +109,7 @@ namespace SavegameToolkit.Types {
         /// <param name="instance"></param>
         /// <returns></returns>
         public static ArkName Constant(string name, int instance) {
+            if (nameCache == null) nameCache = new Dictionary<string, ArkName>();
             string instanceName = instance == 0 ? name : $"{name}_{instance - 1}";
             if (instanceName == null || !nameCache.TryGetValue(instanceName, out ArkName value)) {
                 value = new ArkName(name, instance, instanceName);
