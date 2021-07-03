@@ -3322,7 +3322,7 @@ namespace ARKViewer
                     Program.ProgramConfig.SelectedFile = downloadedFile;
                 }
 
-                UpdateProgress($"Downloaded from server in {TimeSpan.FromTicks(downloadEndTicks - downloadStartTicks).ToString(@":mm\:ss")} seconds. Loading content pack...");
+                UpdateProgress($"Downloaded from server in {TimeSpan.FromTicks(downloadEndTicks - downloadStartTicks).ToString(@"mm\:ss")}. Loading content pack...");
             }
             else
             {
