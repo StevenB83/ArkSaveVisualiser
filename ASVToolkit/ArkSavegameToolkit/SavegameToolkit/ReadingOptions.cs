@@ -58,8 +58,16 @@ namespace SavegameToolkit {
 
         public bool BuildComponentTree { get; private set; }
 
+        public bool StoredCreatures { get; set; } = false;
+
         public new static ReadingOptions Create() {
             return new ReadingOptions();
+        }
+
+        public ReadingOptions WithStoredCreatures(bool storedCreatures)
+        {
+            StoredCreatures = storedCreatures;
+            return this;
         }
 
         /// <summary>

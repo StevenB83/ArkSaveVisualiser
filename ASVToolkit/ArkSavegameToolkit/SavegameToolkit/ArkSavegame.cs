@@ -76,59 +76,31 @@ namespace SavegameToolkit
 
         private HashSet<string> nameTableForWriteBinary;
 
-        #region readBinary
+        #region storedCreatures
 
-        public void ReadBinary(ArkArchive archive, ReadingOptions options)
+        private void extractBinaryObjectStoredCreatures(ReadingOptions options)
         {
-            long startRead = DateTime.Now.Ticks;
+            if (!options.StoredCreatures) return;
 
-            readBinaryHeader(archive);
-
-            if (SaveVersion > 5)
-            {
-                // Name table is located after the objects block, but will be needed to read the objects block
-                readBinaryNameTable(archive);
-            }
-
-            readBinaryDataFiles(archive, options);
-            readBinaryEmbeddedData(archive, options);
-            readBinaryDataFilesObjectMap(archive, options);
-            readBinaryObjects(archive, options);
-            readBinaryObjectProperties(archive, options);
-
-            if (SaveVersion > 6)
-            {
-                readBinaryHibernation(archive, options);
-            }
-
-            long endRead = DateTime.Now.Ticks;
-            var timeTaken = TimeSpan.FromTicks(endRead - startRead);
-            Console.WriteLine($"Read ended in {timeTaken.ToString()}");
-
-
-            var bees = Objects.Where(x => x.ClassString.ToLower().Contains("queen")).ToList();
-
-
-            var validStored = Objects.Where(o => 
-                    (o.ClassName.Name.Contains("Cryopod") || o.ClassString.Contains("SoulTrap_") ||  o.ClassString.Contains("Vivarium_"))
+            long identifyStart = DateTime.Now.Ticks;
+            var validStored = Objects.Where(o =>
+                    (o.ClassName.Name.Contains("Cryopod") || o.ClassString.Contains("SoulTrap_") || o.ClassString.Contains("Vivarium_"))
                     && o.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas") is ArkArrayStruct customItemDatas
                     && customItemDatas?.FirstOrDefault(cd => ((StructPropertyList)cd).GetTypedProperty<PropertyName>("CustomDataName").Value.Name == "Dino") is StructPropertyList customDinoData
-                    && customDinoData?.GetTypedProperty<PropertyStruct>("CustomDataBytes")?.Value is StructPropertyList customDataBytes 
+                    && customDinoData?.GetTypedProperty<PropertyStruct>("CustomDataBytes")?.Value is StructPropertyList customDataBytes
                     && customDataBytes?.GetTypedProperty<PropertyArray>("ByteArrays")?.Value != null
             ).ToList();
 
             long identifyEnd = DateTime.Now.Ticks;
-            var timeTaken2 = TimeSpan.FromTicks(identifyEnd - endRead);
+            var timeTaken2 = TimeSpan.FromTicks(identifyEnd - identifyStart);
             Console.WriteLine($"Stored containers identified in {timeTaken2.ToString()}");
-
 
             //narrow our search list down for inventory components to help improve performance
             var inventoryContainers = Objects.Where(x => x.GetPropertyValue<ObjectReference>("MyInventoryComponent") != null).ToList();
-            
-            
+
             ConcurrentBag<Tuple<GameObject, GameObject>> cbStored = new ConcurrentBag<Tuple<GameObject, GameObject>>();
             //foreach (var storedPod in validStored)
-            Parallel.ForEach(validStored, storedPod => 
+            Parallel.ForEach(validStored, storedPod =>
             {
                 ArkArrayStruct customItemDatas = storedPod.GetPropertyValue<IArkArray, ArkArrayStruct>("CustomItemDatas");
                 StructPropertyList customDinoData = (StructPropertyList)customItemDatas?.FirstOrDefault(cd => ((StructPropertyList)cd).GetTypedProperty<PropertyName>("CustomDataName").Value.Name == "Dino");
@@ -137,7 +109,7 @@ namespace SavegameToolkit
                 PropertyArray byteArrays = (customDataBytes?.Value as StructPropertyList)?.Properties.FirstOrDefault(property => property.NameString == "ByteArrays") as PropertyArray;
                 ArkArrayStruct byteArraysValue = byteArrays?.Value as ArkArrayStruct;
                 if ((byteArraysValue?.Any() ?? false))
-                {  
+                {
                     ArkArrayUInt8 creatureBytes = ((byteArraysValue?[0] as StructPropertyList)?.Properties.FirstOrDefault(p => p.NameString == "Bytes") as PropertyArray)?.Value as ArkArrayUInt8;
                     if (creatureBytes != null)
                     {
@@ -151,8 +123,6 @@ namespace SavegameToolkit
                             int objCount = cryoArchive.ReadInt();
                             if (objCount != 0)
                             {
-                                if (objCount == 3) objCount = 2; //only interested in creature and statuscomponent
-
                                 var storedGameObjects = new List<GameObject>(objCount);
                                 for (int oi = 0; oi < objCount; oi++)
                                 {
@@ -164,28 +134,26 @@ namespace SavegameToolkit
                                     ob.LoadProperties(cryoArchive, new GameObject(), 0);
                                 }
 
+                                var creatureObject = storedGameObjects[0];
+                                var statusObject = storedGameObjects[1];
+
                                 // assume the first object is the creature object
-                                string creatureActorId = storedGameObjects[0].Names[0].ToString();
+                                string creatureActorId = creatureObject.Names[0].ToString();
 
                                 if (storedPod.ClassString.Contains("Vivarium_"))
                                 {
                                     //vivarium
-                                    storedGameObjects[0].IsVivarium = true;
+                                    creatureObject.IsVivarium = true;
                                 }
                                 else
                                 {
-                                    storedGameObjects[0].IsCryo = true;
+                                    creatureObject.IsCryo = true;
                                 }
 
                                 // the tribe name is stored in `TamerString`, non-cryoed creatures have the property `TribeName` for that.
-                                if (storedGameObjects[0].GetPropertyValue<string>("TribeName")?.Length == 0 && storedGameObjects[0].GetPropertyValue<string>("TamerString")?.Length > 0)
-                                    storedGameObjects[0].Properties.Add(new PropertyString("TribeName", storedGameObjects[0].GetPropertyValue<string>("TamerString")));
+                                if (creatureObject.GetPropertyValue<string>("TribeName")?.Length == 0 && creatureObject.GetPropertyValue<string>("TamerString")?.Length > 0)
+                                    creatureObject.Properties.Add(new PropertyString("TribeName", creatureObject.GetPropertyValue<string>("TamerString")));
 
-                                // add cryopod object as parent to all child objects of the creature object (ActorIDs are not unique across cryopodded and non-cryopodded creatures)
-                                // assume that child objects are stored after their parent objects
-
-                                var creatureObject = storedGameObjects[0];
-                                var statusObject = storedGameObjects[1];
 
                                 //get parent of cryopod owner inventory
                                 var podParentRef = storedPod.GetPropertyValue<ObjectReference>("OwnerInventory");
@@ -216,7 +184,7 @@ namespace SavegameToolkit
                                 cbStored.Add(new Tuple<GameObject, GameObject>(creatureObject, statusObject));
 
                             }
-                            
+
                         }
 
                     }
@@ -229,11 +197,9 @@ namespace SavegameToolkit
             var timeTaken3 = TimeSpan.FromTicks(propertyEnd - identifyEnd);
             Console.WriteLine($"Properties loaded in {timeTaken3.ToString()}");
 
-
-
-            if (cbStored!=null && cbStored.Count > 0)
+            if (cbStored != null && cbStored.Count > 0)
             {
-                foreach(var t in cbStored)
+                foreach (var t in cbStored)
                 {
                     var creatureObject = t.Item1;
                     var statusObject = t.Item2;
@@ -254,6 +220,43 @@ namespace SavegameToolkit
             long addEnd = DateTime.Now.Ticks;
             var timeTaken4 = TimeSpan.FromTicks(addEnd - propertyEnd);
             Console.WriteLine($"Objects added in {timeTaken4.ToString()}");
+        }
+
+
+        #endregion
+
+
+        #region readBinary
+
+        public void ReadBinary(ArkArchive archive, ReadingOptions options)
+        {
+            long startRead = DateTime.Now.Ticks;
+
+            readBinaryHeader(archive);
+
+            if (SaveVersion > 5)
+            {
+                // Name table is located after the objects block, but will be needed to read the objects block
+                readBinaryNameTable(archive);
+            }
+
+            readBinaryDataFiles(archive, options);
+            readBinaryEmbeddedData(archive, options);
+            readBinaryDataFilesObjectMap(archive, options);
+            readBinaryObjects(archive, options);
+            readBinaryObjectProperties(archive, options);
+
+            if (SaveVersion > 6)
+            {
+                readBinaryHibernation(archive, options);
+            }
+
+            long endRead = DateTime.Now.Ticks;
+            var timeTaken = TimeSpan.FromTicks(endRead - startRead);
+            Console.WriteLine($"Read ended in {timeTaken.ToString()}");
+
+            extractBinaryObjectStoredCreatures(options);
+            
 
             OldNameList = archive.HasUnknownNames ? archive.NameTable : null;
             HasUnknownData = archive.HasUnknownData;

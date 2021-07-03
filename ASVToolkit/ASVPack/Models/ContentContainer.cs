@@ -105,12 +105,11 @@ namespace ASVPack.Models
 
                         arkSavegame.ReadBinary(archive, ReadingOptions.Create()
                                 .WithThreadCount(int.MaxValue)
+                                .WithStoredCreatures(true)
                                 .WithDataFiles(true)
                                 .WithEmbeddedData(false)
                                 .WithDataFilesObjectMap(false)
                                 .WithBuildComponentTree(true));
-
-
 
 
 
@@ -265,7 +264,7 @@ namespace ASVPack.Models
 
                         logWriter.Debug($"Identifying map structures");
                         //map structures we care about
-                        MapStructures = objectContainer.Objects.AsParallel().Where(x =>
+                        MapStructures = objectContainer.Objects.Where(x =>
                             x.Location != null
                             & !x.HasAnyProperty("TargetingTeam")
                             && (x.ClassString.StartsWith("TributeTerminal_")
@@ -424,10 +423,11 @@ namespace ASVPack.Models
 
                         logWriter.Debug($"Identifying in-game players with no .arkprofile");
 
-                        var abandonedGamePlayers = tribesAndPlayers.AsParallel().Where(x => !fileTribes.AsParallel().Any(t => t.TribeId == (long)x.Key)).ToList();
+                        var abandonedGamePlayers = tribesAndPlayers.AsParallel().Where(x => !fileTribes.Any(t => t.TribeId == (long)x.Key)).ToList();
                         if(abandonedGamePlayers!=null && abandonedGamePlayers.Count > 0)
                         {
-                            foreach(var abandonedTribe in abandonedGamePlayers)
+                            abandonedGamePlayers.AsParallel().ForAll(abandonedTribe =>
+                            //foreach(var abandonedTribe in abandonedGamePlayers)
                             {
                                 var abandonedPlayers = abandonedTribe.ToList();
                                 var newTribe = new ContentTribe()
@@ -435,16 +435,17 @@ namespace ASVPack.Models
                                     IsSolo = abandonedPlayers.Count == 1,
                                     HasGameFile = false,
                                     TribeId = abandonedTribe.Key,
-                                    TribeName = abandonedTribe.First().GetPropertyValue<string>("TribeName")??"Tribe of " + abandonedTribe.First().GetPropertyValue<string>("PlayerName")
+                                    TribeName = abandonedTribe.First().GetPropertyValue<string>("TribeName") ?? "Tribe of " + abandonedTribe.First().GetPropertyValue<string>("PlayerName")
                                 };
 
-                                abandonedPlayers.Select(x => x.AsPlayer(x.CharacterStatusComponent())).ToList().ForEach(x =>
+                                abandonedPlayers.AsParallel().Select(x => x.AsPlayer(x.CharacterStatusComponent())).ToList().ForEach(x =>
                                 {
                                     newTribe.Players.Add(x);
                                 });
 
                                 fileTribes.Add(newTribe);
                             }
+                            );
                         }
 
 
@@ -453,7 +454,7 @@ namespace ASVPack.Models
 
                         //attempt to get missing tribe data from structures
                         var missingStructureTribes = playerStructures.AsParallel()
-                            .Where(x => !fileTribes.AsParallel().Any(t => t.TribeId == (long)x.GetPropertyValue<int>("TargetingTeam")))
+                            .Where(x => !fileTribes.Any(t => t.TribeId == (long)x.GetPropertyValue<int>("TargetingTeam")))
                             .Select(x => new
                             {
                                 TribeId = x.GetPropertyValue<int>("TargetingTeam"),
@@ -482,7 +483,7 @@ namespace ASVPack.Models
 
                         //attempt to get missing tribe data from tames
                         var missingTameTribes = allTames.AsParallel()
-                            .Where(x => !fileTribes.AsParallel().Any(t => t.TribeId == (long)x.GetPropertyValue<int>("TargetingTeam")))
+                            .Where(x => !fileTribes.Any(t => t.TribeId == (long)x.GetPropertyValue<int>("TargetingTeam")))
                             .Select(x => new
                             {
                                 TribeId = x.GetPropertyValue<int>("TargetingTeam"),
@@ -513,7 +514,7 @@ namespace ASVPack.Models
 
                         logWriter.Debug($"Populating player inventories");
                         //load inventories, locations etc.
-                        var allPlayers = fileTribes.AsParallel().SelectMany(t => t.Players);
+                        var allPlayers = fileTribes.SelectMany(t => t.Players);
                         Parallel.ForEach(allPlayers, player =>
                         //foreach(var player in allPlayers)
                         {
@@ -680,11 +681,8 @@ namespace ASVPack.Models
                                     creature.Inventory = new ContentInventory() { Items = inventoryItems.ToList() };
                                 }
 
-                                if (tribe.Tames.Count(t => t.Id == creature.Id) == 0)
-                                {
-                                    tribe.Tames.Add(creature);
-                                }
-
+                                tribe.Tames.Add(creature);
+     
                             }
 
                         }
