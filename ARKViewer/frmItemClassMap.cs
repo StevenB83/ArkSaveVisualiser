@@ -113,17 +113,45 @@ namespace ARKViewer
 
         private void picIcon_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                dialog.Filter = "All Supported Images|*.ico;*.png;*.jpg;*.bmp";
+                dialog.Title = "Select Marker Icon";
+                dialog.InitialDirectory = imageFolder;
 
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (Image img = Image.FromFile(dialog.FileName))
+                    {
+                        string fileName = dialog.FileName;
+                        var mapIcon = img.GetThumbnailImage(30, 30, () => { return true; }, IntPtr.Zero);
+                        picIcon.Image = mapIcon;
+
+                        if (Path.GetDirectoryName(fileName) != Path.GetDirectoryName(imageFolder))
+                        {
+                            //not already in image folder, save for future use
+                            var newFilename = Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".png";
+                            fileName = Path.Combine(imageFolder, newFilename);
+                            mapIcon.Save(fileName, System.Drawing.Imaging.ImageFormat.Png);
+                        }
+
+                        var fileNameOnly = Path.GetFileName(fileName);
+                        ClassMap.Image = fileNameOnly;
+                    }
+                }
+
+            }
         }
+
 
         private void txtDisplayName_Validating(object sender, CancelEventArgs e)
         {
-
+            ClassMap.DisplayName = txtDisplayName.Text.Trim();
         }
 
         private void txtCategory_Validating(object sender, CancelEventArgs e)
         {
-
+            ClassMap.Category = txtCategory.Text.Trim();
         }
 
         private void frmItemClassMap_FormClosed(object sender, FormClosedEventArgs e)
@@ -142,7 +170,26 @@ namespace ARKViewer
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            bool canUse = txtClassName.Text.Trim().ToLower() == loadedClassName.ToLower() || !Program.ProgramConfig.ItemMap.Any(m => m.ClassName.ToLower() == txtClassName.Text.Trim().ToLower());
 
+            if (!canUse)
+            {
+                MessageBox.Show("Class name already in use.\n\nPlease edit the class name or close and edit the existing class map.", "Duplicate Entry", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtClassName.Focus();
+                txtClassName.SelectAll();
+                return;
+            }
+            ClassMap.ClassName = txtClassName.Text.Trim();
+
+            if (txtDisplayName.TextLength == 0)
+            {
+                MessageBox.Show("Please enter a display name for this class.", "Missing Value", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                txtDisplayName.Focus();
+                return;
+            }
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
     }
 }

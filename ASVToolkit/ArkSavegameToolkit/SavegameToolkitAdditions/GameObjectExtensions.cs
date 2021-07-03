@@ -17,8 +17,10 @@ namespace SavegameToolkitAdditions {
                             || gameObject.ClassString == "CherufeNest_C"
                             || gameObject.ClassString == "MotorRaft_BP_C" 
                             || gameObject.ClassString == "Raft_BP_C"
-                        ) 
-                        &! gameObject.ClassString.StartsWith("DeathItemCache_")
+                            || gameObject.ClassString == "TekHoverSkiff_Character_BP_C"
+                        )
+                        && gameObject.ClassString != "Structure_LoadoutDummy_Hotbar_C"
+                        & ! gameObject.ClassString.StartsWith("DeathItemCache_")
                    );
         }
 

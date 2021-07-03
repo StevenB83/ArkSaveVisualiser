@@ -42,14 +42,9 @@ namespace ASVPack.Models
             PropertyStruct properties = (PropertyStruct)tribeObject.Properties[0];
             StructPropertyList propertyList = (StructPropertyList)properties.Value;
             
-            
             TribeId = propertyList.GetPropertyValue<int>("TribeId");
             if (TribeId == 0) TribeId = propertyList.GetPropertyValue<int>("TribeID");
             TribeName = propertyList.GetPropertyValue<string>("TribeName");
-
-            //players
-            var memberIds = (IArkArray<int>)propertyList.GetTypedProperty<PropertyArray>("MembersPlayerDataID").Value;
-            IsSolo = memberIds.Count == 1;
 
             //logs
             if (propertyList.HasAnyProperty("TribeLog"))

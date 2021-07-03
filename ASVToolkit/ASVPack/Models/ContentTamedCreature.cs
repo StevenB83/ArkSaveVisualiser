@@ -91,7 +91,7 @@ namespace ASVPack.Models
 
             if(IsCryo || IsVivarium)
             {
-                //stored creatures don't have unique DinoId properties.  Negate to make them unique
+                //stored creatures don't have unique DinoId properties.  Negate to make them unique from non cryo tames.
                 Id = -Id;
             }
 

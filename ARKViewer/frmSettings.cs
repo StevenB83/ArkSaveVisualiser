@@ -1466,7 +1466,7 @@ namespace ARKViewer
                 else
                 {
                     //not found, add new
-                    SavedConfig.DinoMap.Add((DinoClassMap)mapEditor.ClassMap);
+                    SavedConfig.StructureMap.Add((StructureClassMap)mapEditor.ClassMap);
                 }
 
                 PopulateStructureClassMap(mapEditor.ClassMap.ClassName);
