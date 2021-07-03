@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Newtonsoft.Json;
 
 namespace SavegameToolkit.Types {
@@ -18,14 +19,24 @@ namespace SavegameToolkit.Types {
 
         private static readonly Regex nameIndexPattern = new Regex("^(.*)_([0-9]+)$");
 
-        [ThreadStatic] private static Dictionary<string, ArkName> nameCache = null;
+        //[ThreadStatic] private static Dictionary<string, ArkName> nameCache = null;
+
+
+        private static ThreadLocal<IDictionary<string, ArkName>> _nameCache = new ThreadLocal<IDictionary<string, ArkName>>(() =>
+        {
+            return new Dictionary<string, ArkName>();
+        });
+        
+        ThreadLocal<int> local = new ThreadLocal<int>(() =>
+        {
+            return 10;
+        });
 
         private static readonly Dictionary<string, ArkName> constantNameCache = new Dictionary<string, ArkName>();
 
         public static readonly ArkName NameNone = ConstantPlain("None");
 
         private ArkName(string content) {
-            nameCache = new Dictionary<string, ArkName>();
 
             Match matcher = nameIndexPattern.Match(content);
             if (matcher.Success) {
@@ -39,7 +50,6 @@ namespace SavegameToolkit.Types {
         }
 
         private ArkName(string name, int instance, string content) {
-            nameCache = new Dictionary<string, ArkName>();
             
             Name = name;
             Instance = instance;
@@ -54,11 +64,10 @@ namespace SavegameToolkit.Types {
         /// <param name="name"></param>
         /// <returns></returns>
         public static ArkName From(string name) {
-            if(nameCache==null) nameCache = new Dictionary<string, ArkName>();
 
-            if (name == null || !nameCache.TryGetValue(name, out ArkName value)) {
+            if (name == null || !_nameCache.Value.TryGetValue(name, out ArkName value)) {
                 value = new ArkName(name);
-                nameCache.Add(name, value);
+                _nameCache.Value.Add(name, value);
             }
             return value;
         }
@@ -70,12 +79,11 @@ namespace SavegameToolkit.Types {
         /// <param name="instance"></param>
         /// <returns></returns>
         public static ArkName From(string name, int instance) {
-            if (nameCache == null) nameCache = new Dictionary<string, ArkName>();
             string instanceName = instance == 0 ? name : $"{name}_{instance - 1}";
 
-            if (instanceName == null || !nameCache.TryGetValue(instanceName, out ArkName value)) {
+            if (instanceName == null || !_nameCache.Value.TryGetValue(instanceName, out ArkName value)) {
                 value = new ArkName(name, instance, instanceName);
-                nameCache.Add(instanceName, value);
+                _nameCache.Value.Add(instanceName, value);
             }
             return value;
         }
@@ -93,10 +101,10 @@ namespace SavegameToolkit.Types {
         /// <param name="name"></param>
         /// <returns></returns>
         public static ArkName Constant(string name) {
-            if (nameCache == null) nameCache = new Dictionary<string, ArkName>();
-            if (name == null || !nameCache.TryGetValue(name, out ArkName value)) {
+            if (name == null || !_nameCache.Value.TryGetValue(name, out ArkName value))
+            {
                 value = new ArkName(name);
-                nameCache.Add(name, value);
+                _nameCache.Value.Add(name, value);
             }
             constantNameCache[name] = value;
             return value;
@@ -109,11 +117,10 @@ namespace SavegameToolkit.Types {
         /// <param name="instance"></param>
         /// <returns></returns>
         public static ArkName Constant(string name, int instance) {
-            if (nameCache == null) nameCache = new Dictionary<string, ArkName>();
             string instanceName = instance == 0 ? name : $"{name}_{instance - 1}";
-            if (instanceName == null || !nameCache.TryGetValue(instanceName, out ArkName value)) {
+            if (instanceName == null || !_nameCache.Value.TryGetValue(instanceName, out ArkName value)) {
                 value = new ArkName(name, instance, instanceName);
-                nameCache.Add(instanceName, value);
+                _nameCache.Value.Add(instanceName, value);
             }
             constantNameCache[instanceName] = value;
             return value;
@@ -129,7 +136,7 @@ namespace SavegameToolkit.Types {
         #endregion
 
         public static void ClearCache() {
-            nameCache = new Dictionary<string, ArkName>(constantNameCache);
+            _nameCache = new ThreadLocal<IDictionary<string, ArkName>>() { Value = new Dictionary<string, ArkName>() };
         }
 
         public override string ToString() => content;
