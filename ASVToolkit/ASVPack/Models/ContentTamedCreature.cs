@@ -87,6 +87,13 @@ namespace ASVPack.Models
 
 
             IsCryo = creatureObject.IsCryo;
+            IsVivarium = creatureObject.IsVivarium;
+
+            if(IsCryo || IsVivarium)
+            {
+                //stored creatures don't have unique DinoId properties.  Negate to make them unique
+                Id = -Id;
+            }
 
             RandomMutationsFemale = creatureObject.GetPropertyValue<int>("RandomMutationsFemale");
             RandomMutationsMale = creatureObject.GetPropertyValue<int>("RandomMutationsMale");
