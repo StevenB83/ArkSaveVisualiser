@@ -33,7 +33,7 @@ namespace ASVPack.Models
         [DataMember] public float? Y { get; set; }
         [DataMember] public float? Z { get; set; }
 
-
+        public float WildScale { get; set; } = 1;
 
         public override bool Equals(object obj)
         {
@@ -67,6 +67,8 @@ namespace ASVPack.Models
             }
 
             ClassName = creatureObject.ClassString;
+
+            WildScale = creatureObject.GetPropertyValue<float>("WildRandomScale",0,1);
 
     
             Gender = creatureObject.IsFemale() ? "Female" : "Male";

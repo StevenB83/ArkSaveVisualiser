@@ -172,6 +172,8 @@ namespace ASVPack.Models
                                         ContentPlayer contentPlayer = arkProfile.AsPlayer();
                                         if (contentPlayer.Id != 0)
                                         {
+
+
                                             contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
                                         }
                                         fileProfiles.Add(contentPlayer);
@@ -206,7 +208,7 @@ namespace ASVPack.Models
 
                                     logWriter.Debug($"Converting to ContentTribe for: {x}");
                                     var contentTribe = arkTribe.Tribe.AsTribe();
-                                    if (contentTribe != null)
+                                    if (contentTribe != null && contentTribe.TribeName != null)
                                     {
                                         contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(x).ToLocalTime();
                                         contentTribe.HasGameFile = true;
@@ -419,12 +421,15 @@ namespace ASVPack.Models
                         //player and tribe data
                         long tribeLoadStart = DateTime.Now.Ticks;
                         logWriter.Debug($"Identifying in-game player data");
-                        var gamePlayers = objectContainer.Where(o => o.IsPlayer()).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x => x.First());
+                        var gamePlayers = objectContainer.Where(o => o.IsPlayer() &!o.HasAnyProperty("MyDeathHarvestingComponent")).GroupBy(x => x.GetPropertyValue<long>("LinkedPlayerDataID")).Select(x => x.First());
                         var tribesAndPlayers = gamePlayers.GroupBy(x => x.GetPropertyValue<int>("TargetingTeam")).ToList();
+
+
+
 
                         logWriter.Debug($"Identifying in-game players with no .arkprofile");
 
-                        var abandonedGamePlayers = tribesAndPlayers.Where(x => !fileTribes.Any(t => t.TribeId == (long)x.Key)).ToList();
+                        var abandonedGamePlayers = tribesAndPlayers.Where(x => !fileTribes.Any(t => t.TribeId == (long)x.Key) &! fileProfiles.Any(p=>p.Id == (long)x.Key)).ToList();
                         if(abandonedGamePlayers!=null && abandonedGamePlayers.Count > 0)
                         {
                             abandonedGamePlayers.AsParallel().ForAll(abandonedTribe =>
@@ -439,8 +444,9 @@ namespace ASVPack.Models
                                     TribeName = abandonedTribe.First().GetPropertyValue<string>("TribeName") ?? "Tribe of " + abandonedTribe.First().GetPropertyValue<string>("PlayerName")
                                 };
 
-                                abandonedPlayers.AsParallel().Select(x => x.AsPlayer(x.CharacterStatusComponent())).ToList().ForEach(x =>
+                                abandonedPlayers.Select(x => x.AsPlayer(x.CharacterStatusComponent())).ToList().ForEach(x =>
                                 {
+
                                     newTribe.Players.Add(x);
                                 });
 
@@ -469,6 +475,8 @@ namespace ASVPack.Models
                             logWriter.Debug($"Identified player structure tribes: {missingStructureTribes.Count}");
                             missingStructureTribes.ForEach(tribe =>
                             {
+                                
+
                                 fileTribes.Add(new ContentTribe()
                                 {
                                     TribeId = tribe.TribeId,
@@ -499,6 +507,7 @@ namespace ASVPack.Models
 
                             missingTameTribes.ForEach(tribe =>
                             {
+                   
                                 //we know there's no .arktribe
                                 fileTribes.Add(new ContentTribe()
                                 {
@@ -607,7 +616,7 @@ namespace ASVPack.Models
 
                         });
 
-                        
+
 
 
 

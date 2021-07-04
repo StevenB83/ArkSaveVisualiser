@@ -40,6 +40,8 @@ namespace ARKViewer
 
         private string savePath = Path.GetDirectoryName(Application.ExecutablePath);
 
+        Random rndChartColor = new Random();
+
         //wrapper for the information we need from ARK save data
         ASVDataManager cm = null;
 
@@ -3844,7 +3846,9 @@ namespace ARKViewer
 
         private void DrawTribeChartPlayers()
         {
-            Random rnd = new Random();
+
+            chartTribePlayers.Series[0].Points.Clear();
+
             var allTribes = cm.GetTribes(0);
             var topTribes = allTribes.OrderByDescending(x => x.Players.Count).Take((int)udChartTopPlayers.Value).ToList();
             var otherTribes = allTribes.OrderByDescending(x => x.Players.Count).Skip((int)udChartTopPlayers.Value).ToList();
@@ -3854,7 +3858,7 @@ namespace ARKViewer
                 foreach (var t in topTribes.OrderByDescending(x => x.Players.Count))
                 {
                     int pointId = chartTribePlayers.Series[0].Points.AddXY(t.TribeName, t.Players.Count);
-                    chartTribePlayers.Series[0].Points[pointId].Color = ColorTranslator.FromHtml(getRandomColor(rnd));
+                    chartTribePlayers.Series[0].Points[pointId].Color = ColorTranslator.FromHtml(getRandomColor());
                 };
 
             }
@@ -3866,7 +3870,8 @@ namespace ARKViewer
 
 
             chartTribePlayers.Series[0].ChartType = SeriesChartType.Doughnut;
-            chartTribePlayers.Titles[0].Text = "Tribe Tames";
+            chartTribePlayers.Titles[0].Text = "Tribe Players";
+            chartTribePlayers.Titles[0].Font = new Font(chartTribePlayers.Titles[0].Font, FontStyle.Bold);
             chartTribePlayers.Titles[0].Visible = true;
             chartTribePlayers.Series[0]["PieLabelStyle"] = "Disabled";
             chartTribePlayers.Legends[0].Enabled = true;
@@ -3876,7 +3881,8 @@ namespace ARKViewer
         
         private void DrawTribeChartStructures()
         {
-            Random rnd = new Random();
+
+            chartTribeStructures.Series[0].Points.Clear();
 
             var allTribes = cm.GetTribes(0);
             var topTribes = allTribes.OrderByDescending(x => x.Structures.Count).Take((int)udChartTopStructures.Value).ToList();
@@ -3889,7 +3895,7 @@ namespace ARKViewer
                 {
 
                     int pointId = chartTribeStructures.Series[0].Points.AddXY(t.TribeName, t.Structures.Count);
-                    chartTribeStructures.Series[0].Points[pointId].Color = ColorTranslator.FromHtml(getRandomColor(rnd));
+                    chartTribeStructures.Series[0].Points[pointId].Color = ColorTranslator.FromHtml(getRandomColor());
                 };
 
             }
@@ -3901,21 +3907,27 @@ namespace ARKViewer
 
 
             chartTribeStructures.Series[0].ChartType = SeriesChartType.Doughnut;
-            chartTribeStructures.Titles[0].Text = "Tribe Tames";
+            chartTribeStructures.Titles[0].Text = "Tribe Structures";
+            chartTribeStructures.Titles[0].Font = new Font(chartTribeStructures.Titles[0].Font, FontStyle.Bold);
+
             chartTribeStructures.Titles[0].Visible = true;
             chartTribeStructures.Series[0]["PieLabelStyle"] = "Disabled";
             chartTribeStructures.Legends[0].Enabled = true;
 
         }
 
-        private string getRandomColor(Random rnd)
+        private string getRandomColor()
         {
-            
+
             var letters = "0123456789ABCDEF".ToCharArray();
             var color = "#";
             for (var i = 0; i < 6; i++)
             {
-                long r = (long)Math.Floor((rnd.NextDouble() * 16));
+                int nextRand = rndChartColor.Next();
+                Random rndNew = new Random(nextRand);
+                
+
+                long r = (long)Math.Floor((rndNew.NextDouble() * 16));
                 color += letters[r];
             }
             return color;
@@ -3923,8 +3935,8 @@ namespace ARKViewer
 
         private void DrawTribeChartTames()
         {
-            Random rnd = new Random();
 
+            chartTribeTames.Series[0].Points.Clear();
             var allTribes = cm.GetTribes(0);
             var topTribes = allTribes.OrderByDescending(x => x.Tames.Count).Take((int)udChartTopTames.Value).ToList();
             var otherTribes = allTribes.OrderByDescending(x => x.Tames.Count).Skip((int)udChartTopTames.Value).ToList();
@@ -3935,7 +3947,7 @@ namespace ARKViewer
                 {
 
                     int pointId = chartTribeTames.Series[0].Points.AddXY(t.TribeName, t.Tames.Count);
-                    chartTribeTames.Series[0].Points[pointId].Color = ColorTranslator.FromHtml(getRandomColor(rnd));
+                    chartTribeTames.Series[0].Points[pointId].Color = ColorTranslator.FromHtml(getRandomColor());
                 };
                 
             }
@@ -3948,6 +3960,8 @@ namespace ARKViewer
 
             chartTribeTames.Series[0].ChartType = SeriesChartType.Doughnut;
             chartTribeTames.Titles[0].Text = "Tribe Tames";
+            chartTribeTames.Titles[0].Font = new Font(chartTribeTames.Titles[0].Font, FontStyle.Bold);
+
             chartTribeTames.Titles[0].Visible = true;
             chartTribeTames.Series[0]["PieLabelStyle"] = "Disabled";
             chartTribeTames.Legends[0].Enabled = true;
@@ -5383,7 +5397,7 @@ namespace ARKViewer
                     item.SubItems.Add(detail.RandomMutationsMale.ToString());
 
                     item.SubItems.Add(detail.Id.ToString());
-
+                    item.SubItems.Add(Math.Round(detail.WildScale, 1).ToString("f1"));
 
                     if (detail.Id == selectedId)
                     {
@@ -5572,6 +5586,7 @@ namespace ARKViewer
                     }
 
                     item.SubItems.Add(detail.Id.ToString());
+                    item.SubItems.Add(Math.Round(detail.WildScale,1).ToString("f1"));
 
                     if (detail.Id == selectedId)
                     {
