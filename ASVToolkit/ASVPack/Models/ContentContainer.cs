@@ -847,6 +847,9 @@ namespace ASVPack.Models
 
                                 droppedItem.ClassName = x.ClassString;
                                 droppedItem.IsDeathCache = true;
+                                droppedItem.DroppedByTribeId = x.GetPropertyValue<int>("TargetingTeam", 0, 0);
+                                droppedItem.DroppedByPlayerId = x.GetPropertyValue<long>("LinkedPlayerDataID",0,0);
+                                droppedItem.DroppedByName = x.GetPropertyValue<string>("PlayerName");
                                 droppedItem.Latitude = mapLatLonCalcs.Item1 + droppedItem.Y / mapLatLonCalcs.Item2;
                                 droppedItem.Longitude = mapLatLonCalcs.Item3 + droppedItem.X / mapLatLonCalcs.Item4;
 
@@ -919,6 +922,7 @@ namespace ASVPack.Models
 
                         //.. bags
                         logWriter.Debug($"Identifying drop bags");
+
                         DroppedItems.AddRange(objectContainer.Where(x => x.IsDeathItemCache())
                             .Select(x =>
                             {

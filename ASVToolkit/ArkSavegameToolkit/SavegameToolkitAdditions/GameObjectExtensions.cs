@@ -65,7 +65,7 @@ namespace SavegameToolkitAdditions {
         }
 
         public static bool IsDeathItemCache(this GameObject gameObject) {
-            return gameObject.ClassString == "DeathItemCache_C";
+            return gameObject.ClassString.StartsWith("DeathItemCache_");
         }
 
         public static bool IsFemale(this GameObject gameObject) {
