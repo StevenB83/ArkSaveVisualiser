@@ -50,7 +50,7 @@ namespace ARKViewer
             // 
             // pnlZoom
             // 
-            this.pnlZoom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlZoom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlZoom.BackColor = System.Drawing.Color.MintCream;
             this.pnlZoom.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -62,7 +62,7 @@ namespace ARKViewer
             // 
             // trackZoom
             // 
-            this.trackZoom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.trackZoom.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.trackZoom.AutoSize = false;
             this.trackZoom.LargeChange = 10;
@@ -79,8 +79,8 @@ namespace ARKViewer
             // 
             // pnlMap
             // 
-            this.pnlMap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.pnlMap.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlMap.AutoScroll = true;
             this.pnlMap.BackColor = System.Drawing.Color.MintCream;
@@ -137,7 +137,8 @@ namespace ARKViewer
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(60, 16);
+            this.lblTitle.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblTitle.Location = new System.Drawing.Point(50, 12);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(140, 31);
             this.lblTitle.TabIndex = 49;
@@ -148,7 +149,7 @@ namespace ARKViewer
             this.pictureBox1.Image = global::ARKViewer.Properties.Resources.ModernXP_73_Globe_icon;
             this.pictureBox1.Location = new System.Drawing.Point(4, 8);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.Size = new System.Drawing.Size(40, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 50;
             this.pictureBox1.TabStop = false;

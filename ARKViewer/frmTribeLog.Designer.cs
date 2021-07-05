@@ -59,7 +59,7 @@
             // 
             this.lblPlayerLevel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPlayerLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerLevel.ForeColor = System.Drawing.Color.Black;
+            this.lblPlayerLevel.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerLevel.Location = new System.Drawing.Point(764, 27);
             this.lblPlayerLevel.Name = "lblPlayerLevel";
             this.lblPlayerLevel.Size = new System.Drawing.Size(62, 31);
@@ -83,7 +83,7 @@
             // 
             this.lblPlayerName.AutoSize = true;
             this.lblPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerName.ForeColor = System.Drawing.Color.Black;
+            this.lblPlayerName.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerName.Location = new System.Drawing.Point(72, 8);
             this.lblPlayerName.Name = "lblPlayerName";
             this.lblPlayerName.Size = new System.Drawing.Size(163, 29);

@@ -37,6 +37,7 @@
             this.txtCreatureFilter = new System.Windows.Forms.TextBox();
             this.lvwCreatureInventory = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblPlayerLevelLabel = new System.Windows.Forms.Label();
@@ -44,7 +45,6 @@
             this.lblTribeName = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.picWindowIcon)).BeginInit();
             this.pnlCreatureInventory.SuspendLayout();
             this.SuspendLayout();
@@ -53,7 +53,7 @@
             // 
             this.lblWindowTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWindowTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWindowTitle.ForeColor = System.Drawing.Color.Black;
+            this.lblWindowTitle.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWindowTitle.Location = new System.Drawing.Point(410, 10);
             this.lblWindowTitle.Name = "lblWindowTitle";
             this.lblWindowTitle.Size = new System.Drawing.Size(178, 31);
@@ -143,6 +143,11 @@
             this.columnHeader3.Text = "Item";
             this.columnHeader3.Width = 200;
             // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "BP";
+            this.columnHeader1.Width = 50;
+            // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Category";
@@ -166,7 +171,7 @@
             // lblPlayerLevel
             // 
             this.lblPlayerLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerLevel.ForeColor = System.Drawing.Color.Black;
+            this.lblPlayerLevel.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerLevel.Location = new System.Drawing.Point(13, 30);
             this.lblPlayerLevel.Name = "lblPlayerLevel";
             this.lblPlayerLevel.Size = new System.Drawing.Size(62, 19);
@@ -190,7 +195,7 @@
             // 
             this.lblPlayerName.AutoSize = true;
             this.lblPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerName.ForeColor = System.Drawing.Color.Black;
+            this.lblPlayerName.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerName.Location = new System.Drawing.Point(90, 8);
             this.lblPlayerName.Name = "lblPlayerName";
             this.lblPlayerName.Size = new System.Drawing.Size(170, 25);
@@ -209,11 +214,6 @@
             this.btnClose.TabIndex = 6;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "BP";
-            this.columnHeader1.Width = 50;
             // 
             // frmDinoInventoryViewer
             // 

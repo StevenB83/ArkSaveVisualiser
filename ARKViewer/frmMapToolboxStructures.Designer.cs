@@ -570,7 +570,7 @@ namespace ARKViewer
             this.lvwStructureLocations.Location = new System.Drawing.Point(12, 303);
             this.lvwStructureLocations.MultiSelect = false;
             this.lvwStructureLocations.Name = "lvwStructureLocations";
-            this.lvwStructureLocations.Size = new System.Drawing.Size(358, 62);
+            this.lvwStructureLocations.Size = new System.Drawing.Size(358, 115);
             this.lvwStructureLocations.TabIndex = 1;
             this.lvwStructureLocations.UseCompatibleStateImageBehavior = false;
             this.lvwStructureLocations.View = System.Windows.Forms.View.Details;
@@ -598,7 +598,7 @@ namespace ARKViewer
             this.chkGroup.AutoSize = true;
             this.chkGroup.Checked = true;
             this.chkGroup.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkGroup.Location = new System.Drawing.Point(279, 407);
+            this.chkGroup.Location = new System.Drawing.Point(279, 457);
             this.chkGroup.Name = "chkGroup";
             this.chkGroup.Size = new System.Drawing.Size(91, 17);
             this.chkGroup.TabIndex = 5;
@@ -609,20 +609,20 @@ namespace ARKViewer
             // 
             this.txtContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContents.Location = new System.Drawing.Point(16, 430);
+            this.txtContents.Location = new System.Drawing.Point(16, 480);
             this.txtContents.Multiline = true;
             this.txtContents.Name = "txtContents";
             this.txtContents.ReadOnly = true;
             this.txtContents.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtContents.Size = new System.Drawing.Size(354, 154);
+            this.txtContents.Size = new System.Drawing.Size(354, 104);
             this.txtContents.TabIndex = 6;
             // 
             // lblInventory
             // 
             this.lblInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInventory.ForeColor = System.Drawing.Color.Black;
-            this.lblInventory.Location = new System.Drawing.Point(13, 402);
+            this.lblInventory.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblInventory.Location = new System.Drawing.Point(13, 452);
             this.lblInventory.Name = "lblInventory";
             this.lblInventory.Size = new System.Drawing.Size(125, 25);
             this.lblInventory.TabIndex = 4;
@@ -633,7 +633,7 @@ namespace ARKViewer
             // 
             this.btnCopyCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopyCommand.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnCopyCommand.Location = new System.Drawing.Point(340, 367);
+            this.btnCopyCommand.Location = new System.Drawing.Point(340, 424);
             this.btnCopyCommand.Name = "btnCopyCommand";
             this.btnCopyCommand.Size = new System.Drawing.Size(30, 30);
             this.btnCopyCommand.TabIndex = 3;
@@ -648,7 +648,7 @@ namespace ARKViewer
             this.cboConsoleCommands.FormattingEnabled = true;
             this.cboConsoleCommands.Items.AddRange(new object[] {
             "SetPlayerPos  <x> <y> <z>"});
-            this.cboConsoleCommands.Location = new System.Drawing.Point(15, 371);
+            this.cboConsoleCommands.Location = new System.Drawing.Point(15, 428);
             this.cboConsoleCommands.Name = "cboConsoleCommands";
             this.cboConsoleCommands.Size = new System.Drawing.Size(319, 21);
             this.cboConsoleCommands.TabIndex = 2;

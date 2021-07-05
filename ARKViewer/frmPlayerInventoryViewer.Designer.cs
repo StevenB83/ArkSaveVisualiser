@@ -35,6 +35,7 @@
             this.txtPlayerFilter = new System.Windows.Forms.TextBox();
             this.lvwPlayerInventory = new System.Windows.Forms.ListView();
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -56,6 +57,7 @@
             this.txtCreatureFilter = new System.Windows.Forms.TextBox();
             this.lvwCreatureInventory = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -73,6 +75,7 @@
             this.txtStorageFilter = new System.Windows.Forms.TextBox();
             this.lvwStorageInventory = new System.Windows.Forms.ListView();
             this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -92,9 +95,6 @@
             this.lblWindowTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblPlayerId = new System.Windows.Forms.Label();
-            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlPlayerInventory.SuspendLayout();
             this.tabInventory.SuspendLayout();
             this.tpgPlayerInventory.SuspendLayout();
@@ -185,6 +185,11 @@
             this.columnHeader4.Text = "Item";
             this.columnHeader4.Width = 150;
             // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "BP";
+            this.columnHeader23.Width = 50;
+            // 
             // columnHeader2
             // 
             this.columnHeader2.Text = "Category";
@@ -251,7 +256,7 @@
             // 
             this.lblPlayerLevel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPlayerLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerLevel.ForeColor = System.Drawing.Color.Black;
+            this.lblPlayerLevel.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerLevel.Location = new System.Drawing.Point(617, 37);
             this.lblPlayerLevel.Name = "lblPlayerLevel";
             this.lblPlayerLevel.Size = new System.Drawing.Size(62, 31);
@@ -277,7 +282,7 @@
             this.lblPlayerName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerName.ForeColor = System.Drawing.Color.Black;
+            this.lblPlayerName.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerName.Location = new System.Drawing.Point(95, 18);
             this.lblPlayerName.Name = "lblPlayerName";
             this.lblPlayerName.Size = new System.Drawing.Size(466, 31);
@@ -334,6 +339,7 @@
             // 
             this.lblCreatureType.AutoSize = true;
             this.lblCreatureType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCreatureType.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblCreatureType.Location = new System.Drawing.Point(104, 25);
             this.lblCreatureType.Name = "lblCreatureType";
             this.lblCreatureType.Size = new System.Drawing.Size(87, 13);
@@ -417,6 +423,11 @@
             this.columnHeader3.Text = "Item";
             this.columnHeader3.Width = 153;
             // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "BP";
+            this.columnHeader25.Width = 50;
+            // 
             // columnHeader8
             // 
             this.columnHeader8.Text = "Category";
@@ -488,6 +499,7 @@
             // 
             this.lblStorageType.AutoSize = true;
             this.lblStorageType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStorageType.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblStorageType.Location = new System.Drawing.Point(104, 25);
             this.lblStorageType.Name = "lblStorageType";
             this.lblStorageType.Size = new System.Drawing.Size(93, 13);
@@ -570,6 +582,11 @@
             // 
             this.columnHeader13.Text = "Item";
             this.columnHeader13.Width = 153;
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "BP";
+            this.columnHeader26.Width = 50;
             // 
             // columnHeader14
             // 
@@ -704,7 +721,7 @@
             // 
             this.lblWindowTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWindowTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWindowTitle.ForeColor = System.Drawing.Color.Black;
+            this.lblWindowTitle.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWindowTitle.Location = new System.Drawing.Point(400, 6);
             this.lblWindowTitle.Name = "lblWindowTitle";
             this.lblWindowTitle.Size = new System.Drawing.Size(301, 31);
@@ -733,21 +750,6 @@
             this.lblPlayerId.Size = new System.Drawing.Size(51, 13);
             this.lblPlayerId.TabIndex = 0;
             this.lblPlayerId.Text = "Player Id:";
-            // 
-            // columnHeader23
-            // 
-            this.columnHeader23.Text = "BP";
-            this.columnHeader23.Width = 50;
-            // 
-            // columnHeader25
-            // 
-            this.columnHeader25.Text = "BP";
-            this.columnHeader25.Width = 50;
-            // 
-            // columnHeader26
-            // 
-            this.columnHeader26.Text = "BP";
-            this.columnHeader26.Width = 50;
             // 
             // frmPlayerInventoryViewer
             // 

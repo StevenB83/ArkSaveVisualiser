@@ -31,8 +31,8 @@ namespace ASVPack.Models
         {
             get
             {
-                
-                return Players.Max(p => p.LastActiveDateTime) ?? TribeFileDate;
+                var maxPlayer = Players.Max(p => p.LastActiveDateTime);
+                return maxPlayer.GetValueOrDefault(DateTime.MinValue) > TribeFileDate? maxPlayer.Value : TribeFileDate;
             }
         }
         public bool HasGameFile {get;set;} = false;

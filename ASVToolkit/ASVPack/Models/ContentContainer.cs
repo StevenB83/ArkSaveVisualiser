@@ -154,34 +154,39 @@ namespace ASVPack.Models
                         var profileFilenames = Directory.GetFiles(filePath, "*.arkprofile");
                         profileFilenames.AsParallel().ForAll(x =>
                         {
-
-                            using (Stream streamProfile = new FileStream(x, FileMode.Open))
+                            try
                             {
                                 logWriter.Debug($"Reading profile data: {x}");
-
-                                using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
+                                using (Stream streamProfile = new FileStream(x, FileMode.Open))
                                 {
-                                    ArkProfile arkProfile = new ArkProfile();
-                                    arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
-                                    string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
-                                    logWriter.Debug($"Profile map identified as: {profileMapName}");
-                                    if (profileMapName == MapName.ToLower())
+
+                                    using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
                                     {
-                                        logWriter.Debug($"Converting to ContentPlayer: {x}");
-                                        ContentPlayer contentPlayer = arkProfile.AsPlayer();
-                                        if (contentPlayer.Id != 0)
+                                        ArkProfile arkProfile = new ArkProfile();
+                                        arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+
+                                        string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
+                                        logWriter.Debug($"Profile map identified as: {profileMapName}");
+                                        if (profileMapName == MapName.ToLower())
                                         {
+                                            logWriter.Debug($"Converting to ContentPlayer: {x}");
+                                            ContentPlayer contentPlayer = arkProfile.AsPlayer();
+                                            if (contentPlayer.Id != 0)
+                                            {
 
 
-                                            contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
+                                                contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
+                                            }
+                                            fileProfiles.Add(contentPlayer);
                                         }
-                                        fileProfiles.Add(contentPlayer);
                                     }
                                 }
                             }
-
-
+                            catch(Exception ex)
+                            {
+                                logWriter.Debug($"Failed to read profile data: {x}");
+                            }
                         });
                         long profileEnd = DateTime.Now.Ticks;
 
@@ -196,28 +201,34 @@ namespace ASVPack.Models
                         var tribeFilenames = Directory.GetFiles(filePath, "*.arktribe");
                         tribeFilenames.AsParallel().ForAll(x =>
                         {
-
-                            using (Stream streamProfile = new FileStream(x, FileMode.Open))
+                            try
                             {
                                 logWriter.Debug($"Reading tribe data: {x}");
-
-                                using (ArkArchive archiveTribe = new ArkArchive(streamProfile))
+                                using (Stream streamTribe = new FileStream(x, FileMode.Open))
                                 {
-                                    ArkTribe arkTribe = new ArkTribe();
-                                    arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+                                 
 
-                                    logWriter.Debug($"Converting to ContentTribe for: {x}");
-                                    var contentTribe = arkTribe.Tribe.AsTribe();
-                                    if (contentTribe != null && contentTribe.TribeName != null)
+                                    using (ArkArchive archiveTribe = new ArkArchive(streamTribe))
                                     {
-                                        contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(x).ToLocalTime();
-                                        contentTribe.HasGameFile = true;
-                                        fileTribes.Add(contentTribe);
+                                        ArkTribe arkTribe = new ArkTribe();
+                                        arkTribe.ReadBinary(archiveTribe, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
+                                        logWriter.Debug($"Converting to ContentTribe for: {x}");
+                                        var contentTribe = arkTribe.Tribe.AsTribe();
+                                        if (contentTribe != null && contentTribe.TribeName != null)
+                                        {
+                                            contentTribe.TribeFileDate = File.GetLastWriteTimeUtc(x).ToLocalTime();
+                                            contentTribe.HasGameFile = true;
+                                            fileTribes.Add(contentTribe);
+
+                                        }
                                     }
                                 }
                             }
-
+                            catch(Exception ex)
+                            {
+                                logWriter.Debug($"Failed to read tribe data: {x}");
+                            }
 
                         });
 

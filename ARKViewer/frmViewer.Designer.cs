@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewer));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.lvwWildDetail = new System.Windows.Forms.ListView();
             this.lvwWildDetail_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -264,7 +264,6 @@
             this.lvwItemList_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Lon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblStatus = new System.Windows.Forms.Label();
-            this.picIcon = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSubTitle = new System.Windows.Forms.Label();
             this.lblMapTypeName = new System.Windows.Forms.Label();
@@ -301,7 +300,6 @@
             this.tpgPlayers.SuspendLayout();
             this.tpgDroppedItems.SuspendLayout();
             this.tpgItemList.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // lvwWildDetail
@@ -492,8 +490,9 @@
             // lblWildTotal
             // 
             this.lblWildTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblWildTotal.BackColor = System.Drawing.Color.PowderBlue;
+            this.lblWildTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblWildTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWildTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWildTotal.Location = new System.Drawing.Point(668, 422);
             this.lblWildTotal.Name = "lblWildTotal";
             this.lblWildTotal.Size = new System.Drawing.Size(130, 30);
@@ -504,8 +503,9 @@
             // lblMapDate
             // 
             this.lblMapDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMapDate.BackColor = System.Drawing.Color.Transparent;
             this.lblMapDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMapDate.ForeColor = System.Drawing.Color.CadetBlue;
+            this.lblMapDate.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblMapDate.Location = new System.Drawing.Point(498, 10);
             this.lblMapDate.Name = "lblMapDate";
             this.lblMapDate.Size = new System.Drawing.Size(328, 18);
@@ -858,6 +858,7 @@
             this.lblResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblResource.AutoSize = true;
             this.lblResource.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResource.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblResource.Location = new System.Drawing.Point(540, 48);
             this.lblResource.Name = "lblResource";
             this.lblResource.Size = new System.Drawing.Size(65, 13);
@@ -868,6 +869,7 @@
             // 
             this.lblWildRadius.AutoSize = true;
             this.lblWildRadius.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWildRadius.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWildRadius.Location = new System.Drawing.Point(420, 17);
             this.lblWildRadius.Name = "lblWildRadius";
             this.lblWildRadius.Size = new System.Drawing.Size(50, 13);
@@ -894,6 +896,7 @@
             // 
             this.lblWildLon.AutoSize = true;
             this.lblWildLon.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWildLon.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWildLon.Location = new System.Drawing.Point(318, 17);
             this.lblWildLon.Name = "lblWildLon";
             this.lblWildLon.Size = new System.Drawing.Size(32, 13);
@@ -920,6 +923,7 @@
             // 
             this.lblWildLat.AutoSize = true;
             this.lblWildLat.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWildLat.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWildLat.Location = new System.Drawing.Point(215, 17);
             this.lblWildLat.Name = "lblWildLat";
             this.lblWildLat.Size = new System.Drawing.Size(29, 13);
@@ -946,6 +950,7 @@
             // 
             this.lblWildMin.AutoSize = true;
             this.lblWildMin.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWildMin.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWildMin.Location = new System.Drawing.Point(42, 17);
             this.lblWildMin.Name = "lblWildMin";
             this.lblWildMin.Size = new System.Drawing.Size(31, 13);
@@ -956,6 +961,7 @@
             // 
             this.lblWildMax.AutoSize = true;
             this.lblWildMax.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWildMax.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWildMax.Location = new System.Drawing.Point(124, 17);
             this.lblWildMax.Name = "lblWildMax";
             this.lblWildMax.Size = new System.Drawing.Size(34, 13);
@@ -1007,6 +1013,7 @@
             this.lblWildCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblWildCommand.AutoSize = true;
             this.lblWildCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWildCommand.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWildCommand.Location = new System.Drawing.Point(14, 429);
             this.lblWildCommand.Name = "lblWildCommand";
             this.lblWildCommand.Size = new System.Drawing.Size(65, 13);
@@ -1030,8 +1037,9 @@
             // lblSelectedWildTotal
             // 
             this.lblSelectedWildTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSelectedWildTotal.BackColor = System.Drawing.Color.PowderBlue;
+            this.lblSelectedWildTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblSelectedWildTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedWildTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblSelectedWildTotal.Location = new System.Drawing.Point(541, 422);
             this.lblSelectedWildTotal.Name = "lblSelectedWildTotal";
             this.lblSelectedWildTotal.Size = new System.Drawing.Size(123, 30);
@@ -1043,6 +1051,7 @@
             // 
             this.lblWildClass.AutoSize = true;
             this.lblWildClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblWildClass.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWildClass.Location = new System.Drawing.Point(14, 48);
             this.lblWildClass.Name = "lblWildClass";
             this.lblWildClass.Size = new System.Drawing.Size(59, 13);
@@ -1091,6 +1100,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.label1.Location = new System.Drawing.Point(442, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 13);
@@ -1102,6 +1112,7 @@
             this.lblTamedCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTamedCommand.AutoSize = true;
             this.lblTamedCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTamedCommand.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblTamedCommand.Location = new System.Drawing.Point(192, 427);
             this.lblTamedCommand.Name = "lblTamedCommand";
             this.lblTamedCommand.Size = new System.Drawing.Size(65, 13);
@@ -1149,6 +1160,7 @@
             this.lblTameCreature.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblTameCreature.AutoSize = true;
             this.lblTameCreature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTameCreature.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblTameCreature.Location = new System.Drawing.Point(442, 18);
             this.lblTameCreature.Name = "lblTameCreature";
             this.lblTameCreature.Size = new System.Drawing.Size(59, 13);
@@ -1159,6 +1171,7 @@
             // 
             this.lblTamePlayer.AutoSize = true;
             this.lblTamePlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTamePlayer.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblTamePlayer.Location = new System.Drawing.Point(18, 45);
             this.lblTamePlayer.Name = "lblTamePlayer";
             this.lblTamePlayer.Size = new System.Drawing.Size(46, 13);
@@ -1169,6 +1182,7 @@
             // 
             this.lblTameTribe.AutoSize = true;
             this.lblTameTribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTameTribe.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblTameTribe.Location = new System.Drawing.Point(18, 18);
             this.lblTameTribe.Name = "lblTameTribe";
             this.lblTameTribe.Size = new System.Drawing.Size(40, 13);
@@ -1368,8 +1382,9 @@
             // lblTameTotal
             // 
             this.lblTameTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblTameTotal.BackColor = System.Drawing.Color.PowderBlue;
+            this.lblTameTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblTameTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTameTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblTameTotal.Location = new System.Drawing.Point(674, 420);
             this.lblTameTotal.Name = "lblTameTotal";
             this.lblTameTotal.Size = new System.Drawing.Size(123, 30);
@@ -1457,8 +1472,9 @@
             // lblStructureTotal
             // 
             this.lblStructureTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblStructureTotal.BackColor = System.Drawing.Color.PowderBlue;
+            this.lblStructureTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblStructureTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStructureTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblStructureTotal.Location = new System.Drawing.Point(675, 417);
             this.lblStructureTotal.Name = "lblStructureTotal";
             this.lblStructureTotal.Size = new System.Drawing.Size(123, 30);
@@ -1499,6 +1515,7 @@
             // 
             this.lblStructureStructure.AutoSize = true;
             this.lblStructureStructure.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStructureStructure.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblStructureStructure.Location = new System.Drawing.Point(483, 18);
             this.lblStructureStructure.Name = "lblStructureStructure";
             this.lblStructureStructure.Size = new System.Drawing.Size(63, 13);
@@ -1521,6 +1538,7 @@
             // 
             this.lblStructurePlayer.AutoSize = true;
             this.lblStructurePlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStructurePlayer.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblStructurePlayer.Location = new System.Drawing.Point(229, 18);
             this.lblStructurePlayer.Name = "lblStructurePlayer";
             this.lblStructurePlayer.Size = new System.Drawing.Size(46, 13);
@@ -1531,6 +1549,7 @@
             // 
             this.lblStructureTribe.AutoSize = true;
             this.lblStructureTribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStructureTribe.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblStructureTribe.Location = new System.Drawing.Point(14, 18);
             this.lblStructureTribe.Name = "lblStructureTribe";
             this.lblStructureTribe.Size = new System.Drawing.Size(40, 13);
@@ -1701,22 +1720,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeTames.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea1.Name = "ChartArea1";
-            this.chartTribeTames.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartTribeTames.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chartTribeTames.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartTribeTames.Legends.Add(legend4);
             this.chartTribeTames.Location = new System.Drawing.Point(4, 3);
             this.chartTribeTames.Name = "chartTribeTames";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartTribeTames.Series.Add(series1);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartTribeTames.Series.Add(series4);
             this.chartTribeTames.Size = new System.Drawing.Size(247, 159);
             this.chartTribeTames.TabIndex = 8;
             this.chartTribeTames.Text = "Tribe Players";
-            title1.Name = "Tribe Players";
-            this.chartTribeTames.Titles.Add(title1);
+            title4.Name = "Tribe Players";
+            this.chartTribeTames.Titles.Add(title4);
             // 
             // panel2
             // 
@@ -1778,22 +1797,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeStructures.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea2.Name = "ChartArea1";
-            this.chartTribeStructures.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartTribeStructures.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            this.chartTribeStructures.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chartTribeStructures.Legends.Add(legend5);
             this.chartTribeStructures.Location = new System.Drawing.Point(4, 3);
             this.chartTribeStructures.Name = "chartTribeStructures";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartTribeStructures.Series.Add(series2);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chartTribeStructures.Series.Add(series5);
             this.chartTribeStructures.Size = new System.Drawing.Size(246, 159);
             this.chartTribeStructures.TabIndex = 8;
             this.chartTribeStructures.Text = "Tribe Players";
-            title2.Name = "Tribe Players";
-            this.chartTribeStructures.Titles.Add(title2);
+            title5.Name = "Tribe Players";
+            this.chartTribeStructures.Titles.Add(title5);
             // 
             // panel1
             // 
@@ -1855,22 +1874,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribePlayers.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea3.Name = "ChartArea1";
-            this.chartTribePlayers.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartTribePlayers.Legends.Add(legend3);
+            chartArea6.Name = "ChartArea1";
+            this.chartTribePlayers.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chartTribePlayers.Legends.Add(legend6);
             this.chartTribePlayers.Location = new System.Drawing.Point(4, 3);
             this.chartTribePlayers.Name = "chartTribePlayers";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartTribePlayers.Series.Add(series3);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chartTribePlayers.Series.Add(series6);
             this.chartTribePlayers.Size = new System.Drawing.Size(245, 159);
             this.chartTribePlayers.TabIndex = 8;
             this.chartTribePlayers.Text = "Tribe Players";
-            title3.Name = "Tribe Players";
-            this.chartTribePlayers.Titles.Add(title3);
+            title6.Name = "Tribe Players";
+            this.chartTribePlayers.Titles.Add(title6);
             // 
             // chkTribeStructures
             // 
@@ -1933,6 +1952,7 @@
             this.lblTribeCopyCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblTribeCopyCommand.AutoSize = true;
             this.lblTribeCopyCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTribeCopyCommand.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblTribeCopyCommand.Location = new System.Drawing.Point(14, 427);
             this.lblTribeCopyCommand.Name = "lblTribeCopyCommand";
             this.lblTribeCopyCommand.Size = new System.Drawing.Size(65, 13);
@@ -2054,8 +2074,9 @@
             // lblPlayerTotal
             // 
             this.lblPlayerTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPlayerTotal.BackColor = System.Drawing.Color.PowderBlue;
+            this.lblPlayerTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblPlayerTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayerTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerTotal.Location = new System.Drawing.Point(675, 417);
             this.lblPlayerTotal.Name = "lblPlayerTotal";
             this.lblPlayerTotal.Size = new System.Drawing.Size(123, 30);
@@ -2068,6 +2089,7 @@
             this.lblCommandPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCommandPlayer.AutoSize = true;
             this.lblCommandPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCommandPlayer.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblCommandPlayer.Location = new System.Drawing.Point(14, 423);
             this.lblCommandPlayer.Name = "lblCommandPlayer";
             this.lblCommandPlayer.Size = new System.Drawing.Size(65, 13);
@@ -2121,6 +2143,7 @@
             // 
             this.lblPlayersPlayer.AutoSize = true;
             this.lblPlayersPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayersPlayer.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayersPlayer.Location = new System.Drawing.Point(347, 18);
             this.lblPlayersPlayer.Name = "lblPlayersPlayer";
             this.lblPlayersPlayer.Size = new System.Drawing.Size(46, 13);
@@ -2131,6 +2154,7 @@
             // 
             this.lblPlayersTribe.AutoSize = true;
             this.lblPlayersTribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPlayersTribe.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayersTribe.Location = new System.Drawing.Point(14, 18);
             this.lblPlayersTribe.Name = "lblPlayersTribe";
             this.lblPlayersTribe.Size = new System.Drawing.Size(40, 13);
@@ -2337,6 +2361,7 @@
             // 
             this.lblDroppedPlayer.AutoSize = true;
             this.lblDroppedPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDroppedPlayer.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblDroppedPlayer.Location = new System.Drawing.Point(17, 18);
             this.lblDroppedPlayer.Name = "lblDroppedPlayer";
             this.lblDroppedPlayer.Size = new System.Drawing.Size(46, 13);
@@ -2358,6 +2383,7 @@
             this.lblCopyCommandDropped.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCopyCommandDropped.AutoSize = true;
             this.lblCopyCommandDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCopyCommandDropped.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblCopyCommandDropped.Location = new System.Drawing.Point(14, 425);
             this.lblCopyCommandDropped.Name = "lblCopyCommandDropped";
             this.lblCopyCommandDropped.Size = new System.Drawing.Size(65, 13);
@@ -2379,8 +2405,9 @@
             // lblCountDropped
             // 
             this.lblCountDropped.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblCountDropped.BackColor = System.Drawing.Color.PowderBlue;
+            this.lblCountDropped.BackColor = System.Drawing.Color.AliceBlue;
             this.lblCountDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCountDropped.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblCountDropped.Location = new System.Drawing.Point(675, 417);
             this.lblCountDropped.Name = "lblCountDropped";
             this.lblCountDropped.Size = new System.Drawing.Size(123, 30);
@@ -2392,6 +2419,7 @@
             // 
             this.lblDroppedItem.AutoSize = true;
             this.lblDroppedItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDroppedItem.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblDroppedItem.Location = new System.Drawing.Point(293, 19);
             this.lblDroppedItem.Name = "lblDroppedItem";
             this.lblDroppedItem.Size = new System.Drawing.Size(35, 13);
@@ -2503,6 +2531,7 @@
             // 
             this.lblItemListTribe.AutoSize = true;
             this.lblItemListTribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblItemListTribe.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblItemListTribe.Location = new System.Drawing.Point(17, 18);
             this.lblItemListTribe.Name = "lblItemListTribe";
             this.lblItemListTribe.Size = new System.Drawing.Size(40, 13);
@@ -2537,6 +2566,7 @@
             this.lblItemListCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblItemListCommand.AutoSize = true;
             this.lblItemListCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblItemListCommand.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblItemListCommand.Location = new System.Drawing.Point(14, 425);
             this.lblItemListCommand.Name = "lblItemListCommand";
             this.lblItemListCommand.Size = new System.Drawing.Size(65, 13);
@@ -2558,8 +2588,9 @@
             // lblItemListCount
             // 
             this.lblItemListCount.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblItemListCount.BackColor = System.Drawing.Color.PowderBlue;
+            this.lblItemListCount.BackColor = System.Drawing.Color.AliceBlue;
             this.lblItemListCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblItemListCount.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblItemListCount.Location = new System.Drawing.Point(675, 417);
             this.lblItemListCount.Name = "lblItemListCount";
             this.lblItemListCount.Size = new System.Drawing.Size(123, 30);
@@ -2571,6 +2602,7 @@
             // 
             this.lblItemListItem.AutoSize = true;
             this.lblItemListItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblItemListItem.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblItemListItem.Location = new System.Drawing.Point(293, 19);
             this.lblItemListItem.Name = "lblItemListItem";
             this.lblItemListItem.Size = new System.Drawing.Size(35, 13);
@@ -2639,7 +2671,7 @@
             this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblStatus.AutoEllipsis = true;
-            this.lblStatus.BackColor = System.Drawing.Color.PowderBlue;
+            this.lblStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.CadetBlue;
             this.lblStatus.Location = new System.Drawing.Point(16, 564);
@@ -2649,21 +2681,13 @@
             this.lblStatus.Text = "Loading...";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // picIcon
-            // 
-            this.picIcon.Image = ((System.Drawing.Image)(resources.GetObject("picIcon.Image")));
-            this.picIcon.Location = new System.Drawing.Point(15, 8);
-            this.picIcon.Name = "picIcon";
-            this.picIcon.Size = new System.Drawing.Size(71, 55);
-            this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picIcon.TabIndex = 24;
-            this.picIcon.TabStop = false;
-            // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(89, 11);
+            this.lblTitle.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblTitle.Location = new System.Drawing.Point(13, 9);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(71, 31);
             this.lblTitle.TabIndex = 0;
@@ -2672,8 +2696,10 @@
             // lblSubTitle
             // 
             this.lblSubTitle.AutoSize = true;
+            this.lblSubTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblSubTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSubTitle.Location = new System.Drawing.Point(92, 45);
+            this.lblSubTitle.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblSubTitle.Location = new System.Drawing.Point(16, 44);
             this.lblSubTitle.Name = "lblSubTitle";
             this.lblSubTitle.Size = new System.Drawing.Size(190, 16);
             this.lblSubTitle.TabIndex = 2;
@@ -2682,8 +2708,9 @@
             // lblMapTypeName
             // 
             this.lblMapTypeName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblMapTypeName.BackColor = System.Drawing.Color.Transparent;
             this.lblMapTypeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMapTypeName.ForeColor = System.Drawing.Color.CadetBlue;
+            this.lblMapTypeName.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblMapTypeName.Location = new System.Drawing.Point(322, 31);
             this.lblMapTypeName.Name = "lblMapTypeName";
             this.lblMapTypeName.Size = new System.Drawing.Size(504, 18);
@@ -2694,8 +2721,10 @@
             // lblVersion
             // 
             this.lblVersion.AutoSize = true;
+            this.lblVersion.BackColor = System.Drawing.Color.Transparent;
             this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(155, 24);
+            this.lblVersion.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblVersion.Location = new System.Drawing.Point(79, 24);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(32, 16);
             this.lblVersion.TabIndex = 1;
@@ -2705,8 +2734,10 @@
             // 
             this.lblMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblMap.AutoSize = true;
+            this.lblMap.BackColor = System.Drawing.Color.Transparent;
             this.lblMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMap.Location = new System.Drawing.Point(530, 68);
+            this.lblMap.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblMap.Location = new System.Drawing.Point(530, 71);
             this.lblMap.Name = "lblMap";
             this.lblMap.Size = new System.Drawing.Size(89, 13);
             this.lblMap.TabIndex = 25;
@@ -2717,7 +2748,7 @@
             this.cboSelectedMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSelectedMap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSelectedMap.FormattingEnabled = true;
-            this.cboSelectedMap.Location = new System.Drawing.Point(619, 64);
+            this.cboSelectedMap.Location = new System.Drawing.Point(619, 67);
             this.cboSelectedMap.Name = "cboSelectedMap";
             this.cboSelectedMap.Size = new System.Drawing.Size(207, 21);
             this.cboSelectedMap.TabIndex = 26;
@@ -2745,17 +2776,17 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.PowderBlue;
+            this.BackColor = System.Drawing.Color.LightBlue;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(840, 625);
+            this.Controls.Add(this.lblVersion);
+            this.Controls.Add(this.lblSubTitle);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.lblMap);
             this.Controls.Add(this.cboSelectedMap);
-            this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblMapTypeName);
             this.Controls.Add(this.lblMapDate);
             this.Controls.Add(this.btnViewMap);
-            this.Controls.Add(this.lblSubTitle);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.picIcon);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnSettings);
             this.Controls.Add(this.lblStatus);
@@ -2804,7 +2835,6 @@
             this.tpgDroppedItems.PerformLayout();
             this.tpgItemList.ResumeLayout(false);
             this.tpgItemList.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2991,7 +3021,6 @@
         private System.Windows.Forms.ColumnHeader lvwTameDetail_Id;
         private System.Windows.Forms.ColumnHeader lvwPlayers_SteamId;
         private System.Windows.Forms.Button btnDropInventory;
-        private System.Windows.Forms.PictureBox picIcon;
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblSubTitle;
         private System.Windows.Forms.Button btnViewMap;

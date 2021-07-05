@@ -211,7 +211,7 @@ namespace ARKViewer
             // lblPlayerLevel
             // 
             this.lblPlayerLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerLevel.ForeColor = System.Drawing.Color.Black;
+            this.lblPlayerLevel.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerLevel.Location = new System.Drawing.Point(13, 29);
             this.lblPlayerLevel.Name = "lblPlayerLevel";
             this.lblPlayerLevel.Size = new System.Drawing.Size(62, 19);
@@ -239,7 +239,7 @@ namespace ARKViewer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPlayerName.AutoSize = true;
             this.lblPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerName.ForeColor = System.Drawing.Color.Black;
+            this.lblPlayerName.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblPlayerName.Location = new System.Drawing.Point(98, 9);
             this.lblPlayerName.Name = "lblPlayerName";
             this.lblPlayerName.Size = new System.Drawing.Size(170, 25);
@@ -252,7 +252,7 @@ namespace ARKViewer
             this.lblWindowTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblWindowTitle.AutoSize = true;
             this.lblWindowTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblWindowTitle.ForeColor = System.Drawing.Color.Black;
+            this.lblWindowTitle.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblWindowTitle.Location = new System.Drawing.Point(722, 9);
             this.lblWindowTitle.Name = "lblWindowTitle";
             this.lblWindowTitle.Size = new System.Drawing.Size(170, 25);
