@@ -11,6 +11,11 @@ namespace ASVPack.Models
     [DataContract]
     public class ContentWildCreature: ContentCreature
     {
+        public ContentWildCreature(): base()
+        {
+
+        }
+
         public ContentWildCreature(GameObject gameObject, GameObject statusObject) : base(gameObject, statusObject)
         {
 

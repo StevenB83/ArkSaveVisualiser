@@ -155,7 +155,8 @@ namespace ASVPack.Models
 
         public override bool Equals(object obj)
         {
-            return ((ContentPlayer)obj).Id == Id;
+            if (obj is ContentPlayer) return ((ContentPlayer)obj).Id == Id;
+            return false;
         }
         public override int GetHashCode()
         {

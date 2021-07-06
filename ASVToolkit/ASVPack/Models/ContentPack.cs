@@ -182,10 +182,14 @@ namespace ASVPack.Models
             string filePath = Path.GetDirectoryName(fileName);
             if (!Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
 
-            string jsonContent = JsonConvert.SerializeObject(this);
-            var compressedContent = Zip(jsonContent);
+
             try
             {
+                ContentPack pack = this;
+
+                string jsonContent = JsonConvert.SerializeObject(pack);
+                var compressedContent = Zip(jsonContent);
+
                 if (File.Exists(fileName)) File.Delete(fileName);
 
                 using(var writer = new FileStream(fileName,FileMode.CreateNew))
@@ -194,9 +198,9 @@ namespace ASVPack.Models
                     writer.Flush();
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                throw;
+                throw ex;
             }
             
         }
@@ -821,11 +825,12 @@ namespace ASVPack.Models
                 if (ExportedForPlayer != 0)
                 {
                     //specific player, dont give data for all tribe members
-                    Tribes.ForEach(t => {
-                            
-                            t.Players.ToList().RemoveAll(p => p.Id != ExportedForPlayer);
+                    Tribes.ForEach(t => 
+                    {
+
+                        t.Players.ToList().RemoveAll(p => p.Id != ExportedForPlayer);
                         
-                        });
+                    });
                 }
             }
 

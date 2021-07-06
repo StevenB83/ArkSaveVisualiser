@@ -21,8 +21,8 @@ namespace ARKViewer.Models
 
         //cached image params
         Tuple<long, bool, bool, bool> cacheImageTribes = null;
-        Tuple<string, int, int, float, float, float> cacheImageWild = null;
-        Tuple<string, bool, long, long> cacheImageTamed = null;
+        Tuple<string, string, int, int, float, float, float> cacheImageWild = null;
+        Tuple<string, string, bool, long, long> cacheImageTamed = null;
         Tuple<long, string> cacheImageDroppedItems = null;
         Tuple<long> cacheImageDropBags = null;
         Tuple<string, long, long> cacheImagePlayerStructures = null;
@@ -586,11 +586,14 @@ namespace ARKViewer.Models
         public void ExportAll(string exportPath)
         {
             if (!Directory.Exists(exportPath)) Directory.CreateDirectory(exportPath);
-            ExportWild(Path.Combine(exportPath, "ASV_Wild.json"));
-            ExportTamed(Path.Combine(exportPath, "ASV_Tamed.json"));
-            ExportPlayerTribes(Path.Combine(exportPath, "ASV_Tribes.json"));
-            ExportPlayers(Path.Combine(exportPath, "ASV_Players.json"));
-            ExportPlayerStructures(Path.Combine(exportPath, "ASV_Structures.json"));
+            Task.WaitAll(
+                Task.Run(() => ExportWild(Path.Combine(exportPath, "ASV_Wild.json"))),
+                Task.Run(() => ExportPlayerTribes(Path.Combine(exportPath, "ASV_Tribes.json"))),
+                Task.Run(() => ExportTamed(Path.Combine(exportPath, "ASV_Tamed.json"))),
+                Task.Run(() => ExportPlayers(Path.Combine(exportPath, "ASV_Players.json"))),
+                Task.Run(() => ExportPlayerStructures(Path.Combine(exportPath, "ASV_Structures.json")))
+                )
+            ;
         }
 
         public void ExportWild(string exportFilename)
@@ -1269,7 +1272,7 @@ namespace ARKViewer.Models
         }
 
         /**** Map & Overlays ****/
-        public Bitmap GetMapImageWild(string className, int minLevel, int maxLevel, float filterLat, float filterLon, float filterRadius, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImageWild(string className, string productionClassName, int minLevel, int maxLevel, float filterLat, float filterLon, float filterRadius, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -1279,11 +1282,12 @@ namespace ARKViewer.Models
 
             if (cacheImageWild != null
                 && cacheImageWild.Item1 == className
-                && cacheImageWild.Item2 == minLevel
-                && cacheImageWild.Item3 == maxLevel
-                && cacheImageWild.Item4 == filterLat
-                && cacheImageWild.Item5 == filterLon
-                && cacheImageWild.Item6 == filterRadius
+                && cacheImageWild.Item2 == productionClassName
+                && cacheImageWild.Item3 == minLevel
+                && cacheImageWild.Item4 == maxLevel
+                && cacheImageWild.Item5 == filterLat
+                && cacheImageWild.Item6 == filterLon
+                && cacheImageWild.Item7 == filterRadius
                 && lastDrawRequest == "wild")
             {
                 //if all match, return cached content image
@@ -1292,11 +1296,16 @@ namespace ARKViewer.Models
             else
             {
                 lastDrawRequest = "wild";
-                cacheImageWild = new Tuple<string, int, int, float, float, float>(className, minLevel, maxLevel, filterLat, filterLon, filterRadius);
+                cacheImageWild = new Tuple<string, string, int, int, float, float, float>(className, productionClassName, minLevel, maxLevel, filterLat, filterLon, filterRadius);
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
 
                 var filteredWilds = GetWildCreatures(minLevel, maxLevel, filterLat, filterLon, filterRadius, className);
+                
+                //remove any not matching productionClass
+                if(productionClassName.Length > 0) filteredWilds.RemoveAll(d => d.ProductionResources == null || !d.ProductionResources.Any(r => r == productionClassName));
+
+
                 foreach (var wild in filteredWilds)
                 {
                     var markerX = (decimal)(wild.Longitude.GetValueOrDefault(0)) * 1024 / 100;
@@ -1328,7 +1337,7 @@ namespace ARKViewer.Models
             return bitmap;
         }
 
-        public Bitmap GetMapImageTamed(string className, bool includeStored, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImageTamed(string className, string productionClassName, bool includeStored, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -1337,9 +1346,10 @@ namespace ARKViewer.Models
 
             if (cacheImageTamed != null
                 && cacheImageTamed.Item1 == className
-                && cacheImageTamed.Item2 == includeStored
-                && cacheImageTamed.Item3 == tribeId
-                && cacheImageTamed.Item4 == playerId
+                && cacheImageTamed.Item2 == productionClassName
+                && cacheImageTamed.Item3 == includeStored
+                && cacheImageTamed.Item4 == tribeId
+                && cacheImageTamed.Item5 == playerId
                 && lastDrawRequest == "tamed")
             {
                 //if all match, return cached content image
@@ -1348,12 +1358,15 @@ namespace ARKViewer.Models
             else
             {
                 lastDrawRequest = "tamed";
-                cacheImageTamed = new Tuple<string, bool, long, long>(className, includeStored, tribeId, playerId);
+                cacheImageTamed = new Tuple<string, string, bool, long, long>(className, productionClassName, includeStored, tribeId, playerId);
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
 
 
                 var filteredTames = GetTamedCreatures(className, tribeId, playerId, includeStored);
+                //remove any not matching productionClass
+                if (productionClassName.Length > 0) filteredTames.RemoveAll(d => d.ProductionResources == null || !d.ProductionResources.Any(r => r == productionClassName));
+
                 foreach (var wild in filteredTames)
                 {
                     var markerX = (decimal)(wild.Longitude.GetValueOrDefault(0)) * 1024 / 100;

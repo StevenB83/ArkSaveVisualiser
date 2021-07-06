@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 
 namespace ASVPack.Models
 {
+    [DataContract]
     public abstract class ContentCreature
     {
         [DataMember] public int BaseLevel { get; set; } = 0;
@@ -33,11 +34,12 @@ namespace ASVPack.Models
         [DataMember] public float? Y { get; set; }
         [DataMember] public float? Z { get; set; }
 
-        public float WildScale { get; set; } = 1;
+        [DataMember] public float WildScale { get; set; } = 1;
 
         public override bool Equals(object obj)
         {
-            return ((ContentCreature)obj).Id == Id;
+            if(obj is ContentCreature) return ((ContentCreature)obj).Id == Id;
+            return false;
         }
         public override int GetHashCode()
         {

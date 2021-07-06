@@ -102,15 +102,15 @@ namespace ARKViewer
         }
 
 
-        public void DrawMapImageWild(string className, int minLevel, int maxLevel, float filterLat, float filterLon, float filterRadius, decimal? selectedLat, decimal? selectedLon)
+        public void DrawMapImageWild(string className, string productionClassName, int minLevel, int maxLevel, float filterLat, float filterLon, float filterRadius, decimal? selectedLat, decimal? selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImageWild(className, minLevel, maxLevel, filterLat, filterLon, filterRadius, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            DrawMapImage(cm.GetMapImageWild(className, productionClassName, minLevel, maxLevel, filterLat, filterLon, filterRadius, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
         }
-        public void DrawMapImageTamed(string className, bool includeStored, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon)
+        public void DrawMapImageTamed(string className, string productionClassName, bool includeStored, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImageTamed(className, includeStored, tribeId, playerId, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            DrawMapImage(cm.GetMapImageTamed(className, productionClassName, includeStored, tribeId, playerId, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
 
         }
         public void DrawMapImageDroppedItems(long droppedPlayerId, string droppedClass, decimal? selectedLat, decimal? selectedLon)

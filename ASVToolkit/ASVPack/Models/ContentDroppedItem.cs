@@ -28,6 +28,10 @@ namespace ASVPack.Models
         [DataMember] public DateTime? CreatedDateTime { get; set; } = null;
 
 
+        public ContentDroppedItem()
+        {
+
+        }
 
         public ContentDroppedItem(GameObject itemObject)
         {

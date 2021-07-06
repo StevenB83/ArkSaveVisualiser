@@ -34,6 +34,11 @@ namespace ARKViewer
             InitializeComponent();
 
             cm = manager;
+            btnExportContentPack.Enabled = cm != null;
+            btnJsonExportAll.Enabled = cm != null;
+            btnJsonExportPlayers.Enabled = cm != null;
+            btnJsonExportTamed.Enabled = cm != null;
+            btnJsonExportWild.Enabled = cm != null;
 
             lvwItemMap.LargeImageList = Program.ItemImageList;
             lvwItemMap.SmallImageList = Program.ItemImageList;
@@ -1621,6 +1626,8 @@ namespace ARKViewer
 
         private void btnExportContentPack_Click(object sender, EventArgs e)
         {
+            if (cm == null) return;
+
             btnExportContentPack.Enabled = false;
 
             using (SaveFileDialog dialog = new SaveFileDialog())
@@ -1665,9 +1672,10 @@ namespace ARKViewer
 
                         try
                         {
-                            ContentContainer exportContainer = new ContentContainer();
-                            exportContainer.LoadSaveGame(contentFile);
-                            ContentPack contentPack = new ContentPack(exportContainer, tribeId, playerId, udExportLat.Value, udExportLon.Value, udExportRadius.Value, includeGameStructures, includeGameStructureContent, includeTribesPlayers, includeTamed, includeWild, includePlayerStructures, includeGameStructureContent);
+
+                            //ContentContainer exportContainer = new ContentContainer();
+                            //exportContainer.LoadSaveGame(contentFile);
+                            ContentPack contentPack = new ContentPack(cm.GetPack(), tribeId, playerId, udExportLat.Value, udExportLon.Value, udExportRadius.Value, includeGameStructures, includeGameStructureContent, includeTribesPlayers, includeTamed, includeWild, includePlayerStructures, includeGameStructureContent);
                             ASVDataManager exportManager = new ASVDataManager(contentPack);
                             exportManager.ExportContentPack(dialog.FileName);
                             MessageBox.Show("Content pack exported successfully.", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);

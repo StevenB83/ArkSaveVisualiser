@@ -60,7 +60,8 @@ namespace ASVPack.Models
 
         public override bool Equals(object obj)
         {
-            return ((ContentTribe)obj).TribeId == TribeId;
+            if(obj is ContentTribe) return ((ContentTribe)obj).TribeId == TribeId;
+            return false;
         }
         public override int GetHashCode()
         {

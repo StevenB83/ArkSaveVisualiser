@@ -3379,6 +3379,11 @@ namespace ARKViewer
                 return;
             }
 
+            if(selectedX!=0 || selectedY != 0)
+            {
+                MapViewer.BringToFront();
+            }
+
             lblStatus.Text = "Updating selections...";
             lblStatus.Refresh();
 
@@ -3387,23 +3392,39 @@ namespace ARKViewer
             {
                 case "tpgWild":
                     string wildClass = "";
+                    string wildProduction = "";
                     if (cboWildClass.SelectedItem != null)
                     {
                         ASVCreatureSummary selectedValue = (ASVCreatureSummary)cboWildClass.SelectedItem;
                         wildClass = selectedValue.ClassName;
                     }
 
-                    MapViewer.DrawMapImageWild(wildClass, (int)udWildMin.Value, (int)udWildMax.Value, (float)udWildLat.Value, (float)udWildLon.Value, (float)udWildRadius.Value, selectedY, selectedX);
+                    if (cboWildResource.SelectedItem != null)
+                    {
+                        ASVComboValue selectedValue = (ASVComboValue)cboWildResource.SelectedItem;
+                        wildProduction = selectedValue.Key;
+                    }
+
+
+
+                    MapViewer.DrawMapImageWild(wildClass, wildProduction, (int)udWildMin.Value, (int)udWildMax.Value, (float)udWildLat.Value, (float)udWildLon.Value, (float)udWildRadius.Value, selectedY, selectedX);
 
                     break;
                 case "tpgTamed":
 
                     string tameClass = "";
+                    string tameProduction = "";
                     if (cboTameClass.SelectedItem != null)
                     {
                         ASVCreatureSummary selectedValue = (ASVCreatureSummary)cboTameClass.SelectedItem;
                         tameClass = selectedValue.ClassName;
                     }
+                    if (cboTamedResource.SelectedItem != null)
+                    {
+                        ASVComboValue selectedValue = (ASVComboValue)cboTamedResource.SelectedItem;
+                        tameProduction = selectedValue.Key;
+                    }
+
 
                     long tribeId = 0;
                     if (cboTameTribes.SelectedItem != null)
@@ -3419,7 +3440,7 @@ namespace ARKViewer
                         long.TryParse(selectedPlayer.Key, out playerId);
                     }
 
-                    MapViewer.DrawMapImageTamed(tameClass, chkCryo.Checked, tribeId, playerId, selectedY, selectedX);
+                    MapViewer.DrawMapImageTamed(tameClass, tameProduction, chkCryo.Checked, tribeId, playerId, selectedY, selectedX);
 
 
                     break;
@@ -3545,7 +3566,7 @@ namespace ARKViewer
 
         private void AttemptReverseMapSelection(decimal latitude, decimal longitude)
         {
-
+            this.BringToFront();
             switch (tabFeatures.SelectedTab.Name)
             {
                 case "tpgWild":

@@ -558,7 +558,7 @@ namespace ARKViewer
                 string exportFolder = Path.GetDirectoryName(wildImageFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
                 LogWriter.Info($"Exporting Wilds Image.");
-                var image = exportManger.GetMapImageWild(wildClassName, wildMinLevel, wildMaxLevel, (float)filterLat, (float)filterLon, (float)filterRad, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
+                var image = exportManger.GetMapImageWild(wildClassName,"", wildMinLevel, wildMaxLevel, (float)filterLat, (float)filterLon, (float)filterRad, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
                 if (image != null)
                 {
                     image.Save(tamedImageFilename);
@@ -578,7 +578,7 @@ namespace ARKViewer
                 string exportFolder = Path.GetDirectoryName(tamedImageFilename);
                 if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
                 LogWriter.Info($"Exporting Tames Image.");
-                var image = exportManger.GetMapImageTamed(tamedClassName, true, tribeId, playerId, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
+                var image = exportManger.GetMapImageTamed(tamedClassName, "", true, tribeId, playerId, 0, 0, false, false, false, false, false, false, false, false, false, false, false, false, new List<ContentMarker>());
                 if (image != null)
                 {
                     image.Save(tamedImageFilename);
