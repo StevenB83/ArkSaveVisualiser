@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.btnCancel = new System.Windows.Forms.Button();
-            this.pnlCreatureInventory = new System.Windows.Forms.Panel();
+            this.pnlWrapper = new System.Windows.Forms.Panel();
             this.lstStructureFilter = new System.Windows.Forms.CheckedListBox();
             this.chkApplyFilter = new System.Windows.Forms.CheckBox();
-            this.lblCreatureFilter = new System.Windows.Forms.Label();
+            this.lblFilter = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.lblWindowTitle = new System.Windows.Forms.Label();
             this.btnApply = new System.Windows.Forms.Button();
-            this.pnlCreatureInventory.SuspendLayout();
+            this.pnlWrapper.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -51,20 +51,20 @@
             this.btnCancel.Text = "Close";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // pnlCreatureInventory
+            // pnlWrapper
             // 
-            this.pnlCreatureInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlCreatureInventory.BackColor = System.Drawing.Color.PowderBlue;
-            this.pnlCreatureInventory.Controls.Add(this.lstStructureFilter);
-            this.pnlCreatureInventory.Controls.Add(this.chkApplyFilter);
-            this.pnlCreatureInventory.Controls.Add(this.lblCreatureFilter);
-            this.pnlCreatureInventory.Controls.Add(this.txtFilter);
-            this.pnlCreatureInventory.Location = new System.Drawing.Point(12, 46);
-            this.pnlCreatureInventory.Name = "pnlCreatureInventory";
-            this.pnlCreatureInventory.Size = new System.Drawing.Size(380, 365);
-            this.pnlCreatureInventory.TabIndex = 0;
+            this.pnlWrapper.BackColor = System.Drawing.Color.PowderBlue;
+            this.pnlWrapper.Controls.Add(this.lstStructureFilter);
+            this.pnlWrapper.Controls.Add(this.chkApplyFilter);
+            this.pnlWrapper.Controls.Add(this.lblFilter);
+            this.pnlWrapper.Controls.Add(this.txtFilter);
+            this.pnlWrapper.Location = new System.Drawing.Point(12, 46);
+            this.pnlWrapper.Name = "pnlWrapper";
+            this.pnlWrapper.Size = new System.Drawing.Size(380, 365);
+            this.pnlWrapper.TabIndex = 0;
             // 
             // lstStructureFilter
             // 
@@ -83,22 +83,22 @@
             this.chkApplyFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkApplyFilter.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkApplyFilter.Image = global::ARKViewer.Properties.Resources.button_filter;
-            this.chkApplyFilter.Location = new System.Drawing.Point(327, 330);
+            this.chkApplyFilter.Location = new System.Drawing.Point(325, 325);
             this.chkApplyFilter.Name = "chkApplyFilter";
-            this.chkApplyFilter.Size = new System.Drawing.Size(33, 27);
+            this.chkApplyFilter.Size = new System.Drawing.Size(35, 35);
             this.chkApplyFilter.TabIndex = 3;
             this.chkApplyFilter.UseVisualStyleBackColor = true;
             this.chkApplyFilter.CheckedChanged += new System.EventHandler(this.chkApplyFilter_CheckedChanged);
             // 
-            // lblCreatureFilter
+            // lblFilter
             // 
-            this.lblCreatureFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblCreatureFilter.AutoSize = true;
-            this.lblCreatureFilter.Location = new System.Drawing.Point(15, 336);
-            this.lblCreatureFilter.Name = "lblCreatureFilter";
-            this.lblCreatureFilter.Size = new System.Drawing.Size(29, 13);
-            this.lblCreatureFilter.TabIndex = 1;
-            this.lblCreatureFilter.Text = "Filter";
+            this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Location = new System.Drawing.Point(15, 336);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(29, 13);
+            this.lblFilter.TabIndex = 1;
+            this.lblFilter.Text = "Filter";
             // 
             // txtFilter
             // 
@@ -142,15 +142,15 @@
             this.Controls.Add(this.btnApply);
             this.Controls.Add(this.lblWindowTitle);
             this.Controls.Add(this.btnCancel);
-            this.Controls.Add(this.pnlCreatureInventory);
+            this.Controls.Add(this.pnlWrapper);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MinimumSize = new System.Drawing.Size(265, 300);
             this.Name = "frmStructureExclusionFilter";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Structure Exclusions";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmStructureExclusionFilter_FormClosed);
-            this.pnlCreatureInventory.ResumeLayout(false);
-            this.pnlCreatureInventory.PerformLayout();
+            this.pnlWrapper.ResumeLayout(false);
+            this.pnlWrapper.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -158,9 +158,9 @@
         #endregion
 
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.Panel pnlCreatureInventory;
+        private System.Windows.Forms.Panel pnlWrapper;
         private System.Windows.Forms.CheckBox chkApplyFilter;
-        private System.Windows.Forms.Label lblCreatureFilter;
+        private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox txtFilter;
         private System.Windows.Forms.Label lblWindowTitle;
         private System.Windows.Forms.Button btnApply;

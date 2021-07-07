@@ -127,6 +127,7 @@ namespace ARKViewer
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
+                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
                             newItem.SubItems.Add(craftedBy);
                             newItem.SubItems.Add(invItem.Quantity.ToString());
                             newItem.ImageIndex = itemIcon - 1;
@@ -216,6 +217,7 @@ namespace ARKViewer
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
+                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
                             newItem.SubItems.Add(craftedBy);
 
                             newItem.SubItems.Add(creatureName);
@@ -300,6 +302,7 @@ namespace ARKViewer
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
+                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
                             newItem.SubItems.Add(craftedBy);
                             newItem.SubItems.Add(containerName);
                             newItem.SubItems.Add(container.Latitude.GetValueOrDefault(0).ToString("0.00"));

@@ -115,9 +115,12 @@ namespace ARKViewer
                         if (!invItem.IsEngram)
                         {
                             ListViewItem newItem = new ListViewItem(itemName);
+
                             newItem.SubItems.Add(categoryName);
-                            newItem.SubItems.Add(invItem.Quantity.ToString());
                             newItem.SubItems.Add(invItem.Quality);
+                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
+                            newItem.SubItems.Add(invItem.Quantity.ToString());
+
                             newItem.ImageIndex = itemIcon - 1;
 
                             listItems.Add(newItem);

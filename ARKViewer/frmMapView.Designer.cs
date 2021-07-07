@@ -38,14 +38,14 @@ namespace ARKViewer
             this.btnMapMarkers = new System.Windows.Forms.Button();
             this.btnMapStructures = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picIcon = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlZoom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             this.pnlMap.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picMap)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlZoom
@@ -144,15 +144,15 @@ namespace ARKViewer
             this.lblTitle.TabIndex = 49;
             this.lblTitle.Text = "Map View";
             // 
-            // pictureBox1
+            // picIcon
             // 
-            this.pictureBox1.Image = global::ARKViewer.Properties.Resources.ModernXP_73_Globe_icon;
-            this.pictureBox1.Location = new System.Drawing.Point(4, 8);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(40, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 50;
-            this.pictureBox1.TabStop = false;
+            this.picIcon.Image = global::ARKViewer.Properties.Resources.ModernXP_73_Globe_icon;
+            this.picIcon.Location = new System.Drawing.Point(4, 8);
+            this.picIcon.Name = "picIcon";
+            this.picIcon.Size = new System.Drawing.Size(40, 50);
+            this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon.TabIndex = 50;
+            this.picIcon.TabStop = false;
             // 
             // btnSave
             // 
@@ -176,7 +176,7 @@ namespace ARKViewer
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(560, 594);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picIcon);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnMapMarkers);
             this.Controls.Add(this.btnMapStructures);
@@ -192,7 +192,7 @@ namespace ARKViewer
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
             this.pnlMap.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picMap)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -206,7 +206,7 @@ namespace ARKViewer
         private System.Windows.Forms.Button btnMapMarkers;
         private System.Windows.Forms.Button btnMapStructures;
         private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picIcon;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolTip toolTip1;
     }

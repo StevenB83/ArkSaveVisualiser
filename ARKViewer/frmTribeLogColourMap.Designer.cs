@@ -35,20 +35,20 @@ namespace ARKViewer
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblBackgroundColour = new System.Windows.Forms.Label();
+            this.lblForegroundColour = new System.Windows.Forms.Label();
             this.pnlGameColour = new System.Windows.Forms.Panel();
             this.pnlCustomColour = new System.Windows.Forms.Panel();
             this.pnlBackground = new System.Windows.Forms.Panel();
             this.pnlForeground = new System.Windows.Forms.Panel();
             this.btnAddUpdate = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.grpOptions = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.grpOptions.SuspendLayout();
+            this.lblTextColours = new System.Windows.Forms.Label();
+            this.picIcon = new System.Windows.Forms.PictureBox();
+            this.grpWrapper = new System.Windows.Forms.GroupBox();
+            this.lblLogColourOptions = new System.Windows.Forms.Label();
+            this.lblHeaderWrapper = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
+            this.grpWrapper.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvwTextColours
@@ -104,25 +104,25 @@ namespace ARKViewer
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lblBackgroundColour
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(20, 54);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(119, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Background Colour:";
+            this.lblBackgroundColour.AutoSize = true;
+            this.lblBackgroundColour.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBackgroundColour.Location = new System.Drawing.Point(20, 54);
+            this.lblBackgroundColour.Name = "lblBackgroundColour";
+            this.lblBackgroundColour.Size = new System.Drawing.Size(119, 13);
+            this.lblBackgroundColour.TabIndex = 0;
+            this.lblBackgroundColour.Text = "Background Colour:";
             // 
-            // label2
+            // lblForegroundColour
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(20, 110);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(115, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Foreground Colour:";
+            this.lblForegroundColour.AutoSize = true;
+            this.lblForegroundColour.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblForegroundColour.Location = new System.Drawing.Point(20, 110);
+            this.lblForegroundColour.Name = "lblForegroundColour";
+            this.lblForegroundColour.Size = new System.Drawing.Size(115, 13);
+            this.lblForegroundColour.TabIndex = 2;
+            this.lblForegroundColour.Text = "Foreground Colour:";
             // 
             // pnlGameColour
             // 
@@ -181,73 +181,73 @@ namespace ARKViewer
             this.btnAddUpdate.UseVisualStyleBackColor = true;
             this.btnAddUpdate.Click += new System.EventHandler(this.btnAddUpdate_Click);
             // 
-            // label3
+            // lblTextColours
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(23, 186);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Text Colours";
+            this.lblTextColours.AutoSize = true;
+            this.lblTextColours.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTextColours.Location = new System.Drawing.Point(23, 186);
+            this.lblTextColours.Name = "lblTextColours";
+            this.lblTextColours.Size = new System.Drawing.Size(78, 13);
+            this.lblTextColours.TabIndex = 4;
+            this.lblTextColours.Text = "Text Colours";
             // 
-            // pictureBox1
+            // picIcon
             // 
-            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(440, 18);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(60, 49);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 37;
-            this.pictureBox1.TabStop = false;
+            this.picIcon.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.picIcon.Image = ((System.Drawing.Image)(resources.GetObject("picIcon.Image")));
+            this.picIcon.Location = new System.Drawing.Point(440, 18);
+            this.picIcon.Name = "picIcon";
+            this.picIcon.Size = new System.Drawing.Size(60, 49);
+            this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon.TabIndex = 37;
+            this.picIcon.TabStop = false;
             // 
-            // grpOptions
+            // grpWrapper
             // 
-            this.grpOptions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grpWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpOptions.Controls.Add(this.label4);
-            this.grpOptions.Controls.Add(this.pictureBox1);
-            this.grpOptions.Controls.Add(this.label22);
-            this.grpOptions.Controls.Add(this.label3);
-            this.grpOptions.Controls.Add(this.label1);
-            this.grpOptions.Controls.Add(this.btnAddUpdate);
-            this.grpOptions.Controls.Add(this.lvwTextColours);
-            this.grpOptions.Controls.Add(this.pnlForeground);
-            this.grpOptions.Controls.Add(this.label2);
-            this.grpOptions.Controls.Add(this.pnlBackground);
-            this.grpOptions.Controls.Add(this.pnlGameColour);
-            this.grpOptions.Controls.Add(this.pnlCustomColour);
-            this.grpOptions.Location = new System.Drawing.Point(11, 11);
-            this.grpOptions.Name = "grpOptions";
-            this.grpOptions.Size = new System.Drawing.Size(517, 502);
-            this.grpOptions.TabIndex = 0;
-            this.grpOptions.TabStop = false;
+            this.grpWrapper.Controls.Add(this.lblLogColourOptions);
+            this.grpWrapper.Controls.Add(this.picIcon);
+            this.grpWrapper.Controls.Add(this.lblHeaderWrapper);
+            this.grpWrapper.Controls.Add(this.lblTextColours);
+            this.grpWrapper.Controls.Add(this.lblBackgroundColour);
+            this.grpWrapper.Controls.Add(this.btnAddUpdate);
+            this.grpWrapper.Controls.Add(this.lvwTextColours);
+            this.grpWrapper.Controls.Add(this.pnlForeground);
+            this.grpWrapper.Controls.Add(this.lblForegroundColour);
+            this.grpWrapper.Controls.Add(this.pnlBackground);
+            this.grpWrapper.Controls.Add(this.pnlGameColour);
+            this.grpWrapper.Controls.Add(this.pnlCustomColour);
+            this.grpWrapper.Location = new System.Drawing.Point(11, 11);
+            this.grpWrapper.Name = "grpWrapper";
+            this.grpWrapper.Size = new System.Drawing.Size(517, 502);
+            this.grpWrapper.TabIndex = 0;
+            this.grpWrapper.TabStop = false;
             // 
-            // label4
+            // lblLogColourOptions
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(9, 12);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(130, 15);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Log Colour Options";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLogColourOptions.AutoSize = true;
+            this.lblLogColourOptions.BackColor = System.Drawing.Color.Transparent;
+            this.lblLogColourOptions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLogColourOptions.Location = new System.Drawing.Point(9, 12);
+            this.lblLogColourOptions.Name = "lblLogColourOptions";
+            this.lblLogColourOptions.Size = new System.Drawing.Size(130, 15);
+            this.lblLogColourOptions.TabIndex = 1;
+            this.lblLogColourOptions.Text = "Log Colour Options";
+            this.lblLogColourOptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label22
+            // lblHeaderWrapper
             // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblHeaderWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.BackColor = System.Drawing.Color.Aqua;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(0, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(519, 6);
-            this.label22.TabIndex = 0;
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHeaderWrapper.BackColor = System.Drawing.Color.Aqua;
+            this.lblHeaderWrapper.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderWrapper.Location = new System.Drawing.Point(0, 0);
+            this.lblHeaderWrapper.Name = "lblHeaderWrapper";
+            this.lblHeaderWrapper.Size = new System.Drawing.Size(519, 6);
+            this.lblHeaderWrapper.TabIndex = 0;
+            this.lblHeaderWrapper.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // frmTribeLogColourMap
             // 
@@ -255,7 +255,7 @@ namespace ARKViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(540, 555);
-            this.Controls.Add(this.grpOptions);
+            this.Controls.Add(this.grpWrapper);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -267,9 +267,9 @@ namespace ARKViewer
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tribe Log Colour Options";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmTribeLogColourMap_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.grpOptions.ResumeLayout(false);
-            this.grpOptions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
+            this.grpWrapper.ResumeLayout(false);
+            this.grpWrapper.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -281,17 +281,17 @@ namespace ARKViewer
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblBackgroundColour;
+        private System.Windows.Forms.Label lblForegroundColour;
         private System.Windows.Forms.Panel pnlGameColour;
         private System.Windows.Forms.Panel pnlCustomColour;
         private System.Windows.Forms.Panel pnlBackground;
         private System.Windows.Forms.Panel pnlForeground;
         private System.Windows.Forms.Button btnAddUpdate;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.GroupBox grpOptions;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label lblTextColours;
+        private System.Windows.Forms.PictureBox picIcon;
+        private System.Windows.Forms.GroupBox grpWrapper;
+        private System.Windows.Forms.Label lblLogColourOptions;
+        private System.Windows.Forms.Label lblHeaderWrapper;
     }
 }

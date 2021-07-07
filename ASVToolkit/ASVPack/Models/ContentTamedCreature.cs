@@ -42,6 +42,11 @@ namespace ASVPack.Models
         public ContentTamedCreature(GameObject creatureObject, GameObject statusObject): base(creatureObject, statusObject)
         {
 
+            if(creatureObject.ClassString == "")
+            {
+
+            }
+
             TamedTimeInGame = creatureObject.GetPropertyValue<double>("TamedAtTime");
             
             int testTarget = creatureObject.GetPropertyValue<int>("TargetingTeam");

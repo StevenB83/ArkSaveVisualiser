@@ -30,42 +30,42 @@ namespace ARKViewer
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMapToolboxStructures));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.layoutStructures = new System.Windows.Forms.TableLayoutPanel();
+            this.pnlContainer6 = new System.Windows.Forms.Panel();
+            this.picIcon6 = new System.Windows.Forms.PictureBox();
             this.chkMapArtifacts = new System.Windows.Forms.CheckBox();
-            this.panel12 = new System.Windows.Forms.Panel();
-            this.pictureBox12 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer12 = new System.Windows.Forms.Panel();
+            this.picIcon12 = new System.Windows.Forms.PictureBox();
             this.chkMapGlitches = new System.Windows.Forms.CheckBox();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer5 = new System.Windows.Forms.Panel();
+            this.picIcon5 = new System.Windows.Forms.PictureBox();
             this.chkMapChargeNodes = new System.Windows.Forms.CheckBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer11 = new System.Windows.Forms.Panel();
+            this.picIcon11 = new System.Windows.Forms.PictureBox();
             this.chkMapBeaverDams = new System.Windows.Forms.CheckBox();
-            this.panel9 = new System.Windows.Forms.Panel();
-            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer4 = new System.Windows.Forms.Panel();
+            this.picIcon4 = new System.Windows.Forms.PictureBox();
             this.chkMapWaterVeins = new System.Windows.Forms.CheckBox();
-            this.panel8 = new System.Windows.Forms.Panel();
+            this.pnlContainer10 = new System.Windows.Forms.Panel();
             this.chkMapMagmaNests = new System.Windows.Forms.CheckBox();
-            this.pictureBox8 = new System.Windows.Forms.PictureBox();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.picIcon10 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer3 = new System.Windows.Forms.Panel();
             this.chkMapGasVeins = new System.Windows.Forms.CheckBox();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.panel6 = new System.Windows.Forms.Panel();
+            this.picIcon3 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer9 = new System.Windows.Forms.Panel();
             this.chkMapDrakeNests = new System.Windows.Forms.CheckBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.picIcon9 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer2 = new System.Windows.Forms.Panel();
             this.chkMapOilVeins = new System.Windows.Forms.CheckBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.picIcon2 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer8 = new System.Windows.Forms.Panel();
             this.chkMapDeinoNests = new System.Windows.Forms.CheckBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.picIcon8 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer1 = new System.Windows.Forms.Panel();
+            this.picIcon1 = new System.Windows.Forms.PictureBox();
             this.chkMapTerminals = new System.Windows.Forms.CheckBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pnlContainer7 = new System.Windows.Forms.Panel();
+            this.picIcon7 = new System.Windows.Forms.PictureBox();
             this.chkMapWyvernNests = new System.Windows.Forms.CheckBox();
             this.lvwStructureLocations = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -73,92 +73,92 @@ namespace ARKViewer
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.chkGroup = new System.Windows.Forms.CheckBox();
             this.txtContents = new System.Windows.Forms.TextBox();
-            this.lblInventory = new System.Windows.Forms.Label();
+            this.lblSelectedContent = new System.Windows.Forms.Label();
             this.btnCopyCommand = new System.Windows.Forms.Button();
             this.cboConsoleCommands = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
-            this.panel12.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
-            this.panel11.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
-            this.panel10.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
-            this.panel9.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
-            this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
-            this.panel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
-            this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.layoutStructures.SuspendLayout();
+            this.pnlContainer6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon6)).BeginInit();
+            this.pnlContainer12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon12)).BeginInit();
+            this.pnlContainer5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon5)).BeginInit();
+            this.pnlContainer11.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon11)).BeginInit();
+            this.pnlContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon4)).BeginInit();
+            this.pnlContainer10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon10)).BeginInit();
+            this.pnlContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon3)).BeginInit();
+            this.pnlContainer9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon9)).BeginInit();
+            this.pnlContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon2)).BeginInit();
+            this.pnlContainer8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon8)).BeginInit();
+            this.pnlContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon1)).BeginInit();
+            this.pnlContainer7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon7)).BeginInit();
             this.SuspendLayout();
             // 
-            // tableLayoutPanel1
+            // layoutStructures
             // 
-            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.layoutStructures.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.BackColor = System.Drawing.Color.PaleTurquoise;
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.panel13, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel12, 0, 5);
-            this.tableLayoutPanel1.Controls.Add(this.panel11, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel10, 0, 4);
-            this.tableLayoutPanel1.Controls.Add(this.panel9, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panel8, 0, 3);
-            this.tableLayoutPanel1.Controls.Add(this.panel7, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel6, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.panel4, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel3, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(361, 280);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.layoutStructures.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.layoutStructures.ColumnCount = 2;
+            this.layoutStructures.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutStructures.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.layoutStructures.Controls.Add(this.pnlContainer6, 0, 5);
+            this.layoutStructures.Controls.Add(this.pnlContainer12, 0, 5);
+            this.layoutStructures.Controls.Add(this.pnlContainer5, 0, 4);
+            this.layoutStructures.Controls.Add(this.pnlContainer11, 0, 4);
+            this.layoutStructures.Controls.Add(this.pnlContainer4, 0, 3);
+            this.layoutStructures.Controls.Add(this.pnlContainer10, 0, 3);
+            this.layoutStructures.Controls.Add(this.pnlContainer3, 0, 2);
+            this.layoutStructures.Controls.Add(this.pnlContainer9, 0, 2);
+            this.layoutStructures.Controls.Add(this.pnlContainer2, 0, 1);
+            this.layoutStructures.Controls.Add(this.pnlContainer8, 0, 1);
+            this.layoutStructures.Controls.Add(this.pnlContainer1, 0, 0);
+            this.layoutStructures.Controls.Add(this.pnlContainer7, 0, 0);
+            this.layoutStructures.Location = new System.Drawing.Point(12, 12);
+            this.layoutStructures.Name = "layoutStructures";
+            this.layoutStructures.RowCount = 6;
+            this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.layoutStructures.Size = new System.Drawing.Size(361, 280);
+            this.layoutStructures.TabIndex = 0;
             // 
-            // panel13
+            // pnlContainer6
             // 
-            this.panel13.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel13.Controls.Add(this.pictureBox11);
-            this.panel13.Controls.Add(this.chkMapArtifacts);
-            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel13.Location = new System.Drawing.Point(3, 233);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(174, 44);
-            this.panel13.TabIndex = 10;
+            this.pnlContainer6.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer6.Controls.Add(this.picIcon6);
+            this.pnlContainer6.Controls.Add(this.chkMapArtifacts);
+            this.pnlContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer6.Location = new System.Drawing.Point(3, 233);
+            this.pnlContainer6.Name = "pnlContainer6";
+            this.pnlContainer6.Size = new System.Drawing.Size(174, 44);
+            this.pnlContainer6.TabIndex = 10;
             // 
-            // pictureBox11
+            // picIcon6
             // 
-            this.pictureBox11.BackColor = System.Drawing.Color.Cornsilk;
-            this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox11.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox11.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox11.Image")));
-            this.pictureBox11.Location = new System.Drawing.Point(12, 4);
-            this.pictureBox11.Name = "pictureBox11";
-            this.pictureBox11.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox11.TabIndex = 17;
-            this.pictureBox11.TabStop = false;
+            this.picIcon6.BackColor = System.Drawing.Color.Cornsilk;
+            this.picIcon6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon6.Image = ((System.Drawing.Image)(resources.GetObject("picIcon6.Image")));
+            this.picIcon6.Location = new System.Drawing.Point(12, 4);
+            this.picIcon6.Name = "picIcon6";
+            this.picIcon6.Size = new System.Drawing.Size(32, 32);
+            this.picIcon6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon6.TabIndex = 17;
+            this.picIcon6.TabStop = false;
             // 
             // chkMapArtifacts
             // 
@@ -171,29 +171,29 @@ namespace ARKViewer
             this.chkMapArtifacts.UseVisualStyleBackColor = true;
             this.chkMapArtifacts.CheckedChanged += new System.EventHandler(this.chkMapArtifacts_CheckedChanged);
             // 
-            // panel12
+            // pnlContainer12
             // 
-            this.panel12.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel12.Controls.Add(this.pictureBox12);
-            this.panel12.Controls.Add(this.chkMapGlitches);
-            this.panel12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel12.Location = new System.Drawing.Point(183, 233);
-            this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(175, 44);
-            this.panel12.TabIndex = 11;
+            this.pnlContainer12.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer12.Controls.Add(this.picIcon12);
+            this.pnlContainer12.Controls.Add(this.chkMapGlitches);
+            this.pnlContainer12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer12.Location = new System.Drawing.Point(183, 233);
+            this.pnlContainer12.Name = "pnlContainer12";
+            this.pnlContainer12.Size = new System.Drawing.Size(175, 44);
+            this.pnlContainer12.TabIndex = 11;
             // 
-            // pictureBox12
+            // picIcon12
             // 
-            this.pictureBox12.BackColor = System.Drawing.Color.White;
-            this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox12.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox12.Image = global::ARKViewer.Properties.Resources.structure_marker_glitch;
-            this.pictureBox12.Location = new System.Drawing.Point(11, 4);
-            this.pictureBox12.Name = "pictureBox12";
-            this.pictureBox12.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox12.TabIndex = 29;
-            this.pictureBox12.TabStop = false;
+            this.picIcon12.BackColor = System.Drawing.Color.White;
+            this.picIcon12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon12.Image = global::ARKViewer.Properties.Resources.structure_marker_glitch;
+            this.picIcon12.Location = new System.Drawing.Point(11, 4);
+            this.picIcon12.Name = "picIcon12";
+            this.picIcon12.Size = new System.Drawing.Size(32, 32);
+            this.picIcon12.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon12.TabIndex = 29;
+            this.picIcon12.TabStop = false;
             // 
             // chkMapGlitches
             // 
@@ -206,29 +206,29 @@ namespace ARKViewer
             this.chkMapGlitches.UseVisualStyleBackColor = true;
             this.chkMapGlitches.CheckedChanged += new System.EventHandler(this.chkMapGlitches_CheckedChanged);
             // 
-            // panel11
+            // pnlContainer5
             // 
-            this.panel11.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel11.Controls.Add(this.pictureBox9);
-            this.panel11.Controls.Add(this.chkMapChargeNodes);
-            this.panel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel11.Location = new System.Drawing.Point(3, 187);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(174, 40);
-            this.panel11.TabIndex = 8;
+            this.pnlContainer5.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer5.Controls.Add(this.picIcon5);
+            this.pnlContainer5.Controls.Add(this.chkMapChargeNodes);
+            this.pnlContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer5.Location = new System.Drawing.Point(3, 187);
+            this.pnlContainer5.Name = "pnlContainer5";
+            this.pnlContainer5.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer5.TabIndex = 8;
             // 
-            // pictureBox9
+            // picIcon5
             // 
-            this.pictureBox9.BackColor = System.Drawing.Color.White;
-            this.pictureBox9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox9.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox9.Image = global::ARKViewer.Properties.Resources.structure_marker_battery;
-            this.pictureBox9.Location = new System.Drawing.Point(12, 3);
-            this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox9.TabIndex = 19;
-            this.pictureBox9.TabStop = false;
+            this.picIcon5.BackColor = System.Drawing.Color.White;
+            this.picIcon5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon5.Image = global::ARKViewer.Properties.Resources.structure_marker_battery;
+            this.picIcon5.Location = new System.Drawing.Point(12, 3);
+            this.picIcon5.Name = "picIcon5";
+            this.picIcon5.Size = new System.Drawing.Size(32, 32);
+            this.picIcon5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon5.TabIndex = 19;
+            this.picIcon5.TabStop = false;
             // 
             // chkMapChargeNodes
             // 
@@ -241,29 +241,29 @@ namespace ARKViewer
             this.chkMapChargeNodes.UseVisualStyleBackColor = true;
             this.chkMapChargeNodes.CheckedChanged += new System.EventHandler(this.chkMapChargeNodes_CheckedChanged);
             // 
-            // panel10
+            // pnlContainer11
             // 
-            this.panel10.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel10.Controls.Add(this.pictureBox10);
-            this.panel10.Controls.Add(this.chkMapBeaverDams);
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel10.Location = new System.Drawing.Point(183, 187);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(175, 40);
-            this.panel10.TabIndex = 9;
+            this.pnlContainer11.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer11.Controls.Add(this.picIcon11);
+            this.pnlContainer11.Controls.Add(this.chkMapBeaverDams);
+            this.pnlContainer11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer11.Location = new System.Drawing.Point(183, 187);
+            this.pnlContainer11.Name = "pnlContainer11";
+            this.pnlContainer11.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer11.TabIndex = 9;
             // 
-            // pictureBox10
+            // picIcon11
             // 
-            this.pictureBox10.BackColor = System.Drawing.Color.White;
-            this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox10.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox10.Image = global::ARKViewer.Properties.Resources.structure_marker_beaver;
-            this.pictureBox10.Location = new System.Drawing.Point(11, 3);
-            this.pictureBox10.Name = "pictureBox10";
-            this.pictureBox10.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox10.TabIndex = 3;
-            this.pictureBox10.TabStop = false;
+            this.picIcon11.BackColor = System.Drawing.Color.White;
+            this.picIcon11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon11.Image = global::ARKViewer.Properties.Resources.structure_marker_beaver;
+            this.picIcon11.Location = new System.Drawing.Point(11, 3);
+            this.picIcon11.Name = "picIcon11";
+            this.picIcon11.Size = new System.Drawing.Size(32, 32);
+            this.picIcon11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon11.TabIndex = 3;
+            this.picIcon11.TabStop = false;
             // 
             // chkMapBeaverDams
             // 
@@ -276,29 +276,29 @@ namespace ARKViewer
             this.chkMapBeaverDams.UseVisualStyleBackColor = true;
             this.chkMapBeaverDams.CheckedChanged += new System.EventHandler(this.chkMapBeaverDams_CheckedChanged);
             // 
-            // panel9
+            // pnlContainer4
             // 
-            this.panel9.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel9.Controls.Add(this.pictureBox7);
-            this.panel9.Controls.Add(this.chkMapWaterVeins);
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel9.Location = new System.Drawing.Point(3, 141);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(174, 40);
-            this.panel9.TabIndex = 6;
+            this.pnlContainer4.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer4.Controls.Add(this.picIcon4);
+            this.pnlContainer4.Controls.Add(this.chkMapWaterVeins);
+            this.pnlContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer4.Location = new System.Drawing.Point(3, 141);
+            this.pnlContainer4.Name = "pnlContainer4";
+            this.pnlContainer4.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer4.TabIndex = 6;
             // 
-            // pictureBox7
+            // picIcon4
             // 
-            this.pictureBox7.BackColor = System.Drawing.Color.White;
-            this.pictureBox7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox7.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox7.Image = global::ARKViewer.Properties.Resources.structure_marker_water;
-            this.pictureBox7.Location = new System.Drawing.Point(12, 4);
-            this.pictureBox7.Name = "pictureBox7";
-            this.pictureBox7.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox7.TabIndex = 11;
-            this.pictureBox7.TabStop = false;
+            this.picIcon4.BackColor = System.Drawing.Color.White;
+            this.picIcon4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon4.Image = global::ARKViewer.Properties.Resources.structure_marker_water;
+            this.picIcon4.Location = new System.Drawing.Point(12, 4);
+            this.picIcon4.Name = "picIcon4";
+            this.picIcon4.Size = new System.Drawing.Size(32, 32);
+            this.picIcon4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon4.TabIndex = 11;
+            this.picIcon4.TabStop = false;
             // 
             // chkMapWaterVeins
             // 
@@ -311,16 +311,16 @@ namespace ARKViewer
             this.chkMapWaterVeins.UseVisualStyleBackColor = true;
             this.chkMapWaterVeins.CheckedChanged += new System.EventHandler(this.chkMapWaterVeins_CheckedChanged);
             // 
-            // panel8
+            // pnlContainer10
             // 
-            this.panel8.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel8.Controls.Add(this.chkMapMagmaNests);
-            this.panel8.Controls.Add(this.pictureBox8);
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel8.Location = new System.Drawing.Point(183, 141);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(175, 40);
-            this.panel8.TabIndex = 7;
+            this.pnlContainer10.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer10.Controls.Add(this.chkMapMagmaNests);
+            this.pnlContainer10.Controls.Add(this.picIcon10);
+            this.pnlContainer10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer10.Location = new System.Drawing.Point(183, 141);
+            this.pnlContainer10.Name = "pnlContainer10";
+            this.pnlContainer10.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer10.TabIndex = 7;
             // 
             // chkMapMagmaNests
             // 
@@ -333,29 +333,29 @@ namespace ARKViewer
             this.chkMapMagmaNests.UseVisualStyleBackColor = true;
             this.chkMapMagmaNests.CheckedChanged += new System.EventHandler(this.chkMapMagmaNests_CheckedChanged);
             // 
-            // pictureBox8
+            // picIcon10
             // 
-            this.pictureBox8.BackColor = System.Drawing.Color.White;
-            this.pictureBox8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox8.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox8.Image = global::ARKViewer.Properties.Resources.structure_marker_magmasaur;
-            this.pictureBox8.Location = new System.Drawing.Point(11, 4);
-            this.pictureBox8.Name = "pictureBox8";
-            this.pictureBox8.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox8.TabIndex = 27;
-            this.pictureBox8.TabStop = false;
+            this.picIcon10.BackColor = System.Drawing.Color.White;
+            this.picIcon10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon10.Image = global::ARKViewer.Properties.Resources.structure_marker_magmasaur;
+            this.picIcon10.Location = new System.Drawing.Point(11, 4);
+            this.picIcon10.Name = "picIcon10";
+            this.picIcon10.Size = new System.Drawing.Size(32, 32);
+            this.picIcon10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon10.TabIndex = 27;
+            this.picIcon10.TabStop = false;
             // 
-            // panel7
+            // pnlContainer3
             // 
-            this.panel7.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel7.Controls.Add(this.chkMapGasVeins);
-            this.panel7.Controls.Add(this.pictureBox5);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel7.Location = new System.Drawing.Point(3, 95);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(174, 40);
-            this.panel7.TabIndex = 4;
+            this.pnlContainer3.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer3.Controls.Add(this.chkMapGasVeins);
+            this.pnlContainer3.Controls.Add(this.picIcon3);
+            this.pnlContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer3.Location = new System.Drawing.Point(3, 95);
+            this.pnlContainer3.Name = "pnlContainer3";
+            this.pnlContainer3.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer3.TabIndex = 4;
             // 
             // chkMapGasVeins
             // 
@@ -368,29 +368,29 @@ namespace ARKViewer
             this.chkMapGasVeins.UseVisualStyleBackColor = true;
             this.chkMapGasVeins.CheckedChanged += new System.EventHandler(this.chkMapGasVeins_CheckedChanged);
             // 
-            // pictureBox5
+            // picIcon3
             // 
-            this.pictureBox5.BackColor = System.Drawing.Color.White;
-            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox5.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox5.Image = global::ARKViewer.Properties.Resources.structure_marker_gas;
-            this.pictureBox5.Location = new System.Drawing.Point(12, 4);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox5.TabIndex = 7;
-            this.pictureBox5.TabStop = false;
+            this.picIcon3.BackColor = System.Drawing.Color.White;
+            this.picIcon3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon3.Image = global::ARKViewer.Properties.Resources.structure_marker_gas;
+            this.picIcon3.Location = new System.Drawing.Point(12, 4);
+            this.picIcon3.Name = "picIcon3";
+            this.picIcon3.Size = new System.Drawing.Size(32, 32);
+            this.picIcon3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon3.TabIndex = 7;
+            this.picIcon3.TabStop = false;
             // 
-            // panel6
+            // pnlContainer9
             // 
-            this.panel6.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel6.Controls.Add(this.chkMapDrakeNests);
-            this.panel6.Controls.Add(this.pictureBox6);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel6.Location = new System.Drawing.Point(183, 95);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(175, 40);
-            this.panel6.TabIndex = 5;
+            this.pnlContainer9.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer9.Controls.Add(this.chkMapDrakeNests);
+            this.pnlContainer9.Controls.Add(this.picIcon9);
+            this.pnlContainer9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer9.Location = new System.Drawing.Point(183, 95);
+            this.pnlContainer9.Name = "pnlContainer9";
+            this.pnlContainer9.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer9.TabIndex = 5;
             // 
             // chkMapDrakeNests
             // 
@@ -403,29 +403,29 @@ namespace ARKViewer
             this.chkMapDrakeNests.UseVisualStyleBackColor = true;
             this.chkMapDrakeNests.CheckedChanged += new System.EventHandler(this.chkMapDrakeNests_CheckedChanged);
             // 
-            // pictureBox6
+            // picIcon9
             // 
-            this.pictureBox6.BackColor = System.Drawing.Color.White;
-            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox6.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox6.Image = global::ARKViewer.Properties.Resources.structure_marker_rockdrake;
-            this.pictureBox6.Location = new System.Drawing.Point(11, 4);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox6.TabIndex = 25;
-            this.pictureBox6.TabStop = false;
+            this.picIcon9.BackColor = System.Drawing.Color.White;
+            this.picIcon9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon9.Image = global::ARKViewer.Properties.Resources.structure_marker_rockdrake;
+            this.picIcon9.Location = new System.Drawing.Point(11, 4);
+            this.picIcon9.Name = "picIcon9";
+            this.picIcon9.Size = new System.Drawing.Size(32, 32);
+            this.picIcon9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon9.TabIndex = 25;
+            this.picIcon9.TabStop = false;
             // 
-            // panel4
+            // pnlContainer2
             // 
-            this.panel4.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel4.Controls.Add(this.chkMapOilVeins);
-            this.panel4.Controls.Add(this.pictureBox4);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(3, 49);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(174, 40);
-            this.panel4.TabIndex = 2;
+            this.pnlContainer2.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer2.Controls.Add(this.chkMapOilVeins);
+            this.pnlContainer2.Controls.Add(this.picIcon2);
+            this.pnlContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer2.Location = new System.Drawing.Point(3, 49);
+            this.pnlContainer2.Name = "pnlContainer2";
+            this.pnlContainer2.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer2.TabIndex = 2;
             // 
             // chkMapOilVeins
             // 
@@ -438,29 +438,29 @@ namespace ARKViewer
             this.chkMapOilVeins.UseVisualStyleBackColor = true;
             this.chkMapOilVeins.CheckedChanged += new System.EventHandler(this.chkMapOilVeins_CheckedChanged);
             // 
-            // pictureBox4
+            // picIcon2
             // 
-            this.pictureBox4.BackColor = System.Drawing.Color.White;
-            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox4.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox4.Image = global::ARKViewer.Properties.Resources.structure_marker_oil;
-            this.pictureBox4.Location = new System.Drawing.Point(12, 4);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox4.TabIndex = 9;
-            this.pictureBox4.TabStop = false;
+            this.picIcon2.BackColor = System.Drawing.Color.White;
+            this.picIcon2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon2.Image = global::ARKViewer.Properties.Resources.structure_marker_oil;
+            this.picIcon2.Location = new System.Drawing.Point(12, 4);
+            this.picIcon2.Name = "picIcon2";
+            this.picIcon2.Size = new System.Drawing.Size(32, 32);
+            this.picIcon2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon2.TabIndex = 9;
+            this.picIcon2.TabStop = false;
             // 
-            // panel3
+            // pnlContainer8
             // 
-            this.panel3.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel3.Controls.Add(this.chkMapDeinoNests);
-            this.panel3.Controls.Add(this.pictureBox3);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(183, 49);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(175, 40);
-            this.panel3.TabIndex = 3;
+            this.pnlContainer8.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer8.Controls.Add(this.chkMapDeinoNests);
+            this.pnlContainer8.Controls.Add(this.picIcon8);
+            this.pnlContainer8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer8.Location = new System.Drawing.Point(183, 49);
+            this.pnlContainer8.Name = "pnlContainer8";
+            this.pnlContainer8.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer8.TabIndex = 3;
             // 
             // chkMapDeinoNests
             // 
@@ -473,42 +473,42 @@ namespace ARKViewer
             this.chkMapDeinoNests.UseVisualStyleBackColor = true;
             this.chkMapDeinoNests.CheckedChanged += new System.EventHandler(this.chkMapDeinoNests_CheckedChanged);
             // 
-            // pictureBox3
+            // picIcon8
             // 
-            this.pictureBox3.BackColor = System.Drawing.Color.White;
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox3.Image = global::ARKViewer.Properties.Resources.structure_marker_deino;
-            this.pictureBox3.Location = new System.Drawing.Point(11, 4);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox3.TabIndex = 5;
-            this.pictureBox3.TabStop = false;
+            this.picIcon8.BackColor = System.Drawing.Color.White;
+            this.picIcon8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon8.Image = global::ARKViewer.Properties.Resources.structure_marker_deino;
+            this.picIcon8.Location = new System.Drawing.Point(11, 4);
+            this.picIcon8.Name = "picIcon8";
+            this.picIcon8.Size = new System.Drawing.Size(32, 32);
+            this.picIcon8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon8.TabIndex = 5;
+            this.picIcon8.TabStop = false;
             // 
-            // panel2
+            // pnlContainer1
             // 
-            this.panel2.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel2.Controls.Add(this.pictureBox2);
-            this.panel2.Controls.Add(this.chkMapTerminals);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(174, 40);
-            this.panel2.TabIndex = 0;
+            this.pnlContainer1.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer1.Controls.Add(this.picIcon1);
+            this.pnlContainer1.Controls.Add(this.chkMapTerminals);
+            this.pnlContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer1.Location = new System.Drawing.Point(3, 3);
+            this.pnlContainer1.Name = "pnlContainer1";
+            this.pnlContainer1.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer1.TabIndex = 0;
             // 
-            // pictureBox2
+            // picIcon1
             // 
-            this.pictureBox2.BackColor = System.Drawing.Color.Green;
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(12, 4);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox2.TabIndex = 13;
-            this.pictureBox2.TabStop = false;
+            this.picIcon1.BackColor = System.Drawing.Color.Green;
+            this.picIcon1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon1.Image = ((System.Drawing.Image)(resources.GetObject("picIcon1.Image")));
+            this.picIcon1.Location = new System.Drawing.Point(12, 4);
+            this.picIcon1.Name = "picIcon1";
+            this.picIcon1.Size = new System.Drawing.Size(32, 32);
+            this.picIcon1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon1.TabIndex = 13;
+            this.picIcon1.TabStop = false;
             // 
             // chkMapTerminals
             // 
@@ -521,29 +521,29 @@ namespace ARKViewer
             this.chkMapTerminals.UseVisualStyleBackColor = true;
             this.chkMapTerminals.CheckedChanged += new System.EventHandler(this.chkMapTerminals_CheckedChanged);
             // 
-            // panel1
+            // pnlContainer7
             // 
-            this.panel1.BackColor = System.Drawing.Color.CadetBlue;
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Controls.Add(this.chkMapWyvernNests);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(183, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(175, 40);
-            this.panel1.TabIndex = 1;
+            this.pnlContainer7.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer7.Controls.Add(this.picIcon7);
+            this.pnlContainer7.Controls.Add(this.chkMapWyvernNests);
+            this.pnlContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlContainer7.Location = new System.Drawing.Point(183, 3);
+            this.pnlContainer7.Name = "pnlContainer7";
+            this.pnlContainer7.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer7.TabIndex = 1;
             // 
-            // pictureBox1
+            // picIcon7
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.White;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.pictureBox1.Image = global::ARKViewer.Properties.Resources.structure_marker_wyvern;
-            this.pictureBox1.Location = new System.Drawing.Point(11, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(32, 32);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
+            this.picIcon7.BackColor = System.Drawing.Color.White;
+            this.picIcon7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picIcon7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon7.Image = global::ARKViewer.Properties.Resources.structure_marker_wyvern;
+            this.picIcon7.Location = new System.Drawing.Point(11, 4);
+            this.picIcon7.Name = "picIcon7";
+            this.picIcon7.Size = new System.Drawing.Size(32, 32);
+            this.picIcon7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon7.TabIndex = 15;
+            this.picIcon7.TabStop = false;
             // 
             // chkMapWyvernNests
             // 
@@ -617,17 +617,17 @@ namespace ARKViewer
             this.txtContents.Size = new System.Drawing.Size(354, 104);
             this.txtContents.TabIndex = 6;
             // 
-            // lblInventory
+            // lblSelectedContent
             // 
-            this.lblInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblInventory.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInventory.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblInventory.Location = new System.Drawing.Point(13, 452);
-            this.lblInventory.Name = "lblInventory";
-            this.lblInventory.Size = new System.Drawing.Size(125, 25);
-            this.lblInventory.TabIndex = 4;
-            this.lblInventory.Text = "Selected  Content(s)";
-            this.lblInventory.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblSelectedContent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblSelectedContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSelectedContent.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblSelectedContent.Location = new System.Drawing.Point(13, 452);
+            this.lblSelectedContent.Name = "lblSelectedContent";
+            this.lblSelectedContent.Size = new System.Drawing.Size(125, 25);
+            this.lblSelectedContent.TabIndex = 4;
+            this.lblSelectedContent.Text = "Selected  Content(s)";
+            this.lblSelectedContent.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCopyCommand
             // 
@@ -674,54 +674,54 @@ namespace ARKViewer
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.chkGroup);
             this.Controls.Add(this.txtContents);
-            this.Controls.Add(this.lblInventory);
+            this.Controls.Add(this.lblSelectedContent);
             this.Controls.Add(this.btnCopyCommand);
             this.Controls.Add(this.cboConsoleCommands);
             this.Controls.Add(this.lvwStructureLocations);
-            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.layoutStructures);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MinimumSize = new System.Drawing.Size(400, 650);
             this.Name = "frmMapToolboxStructures";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Map Structures";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMapToolboxStructures_FormClosed);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.panel13.ResumeLayout(false);
-            this.panel13.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
-            this.panel12.ResumeLayout(false);
-            this.panel12.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
-            this.panel10.ResumeLayout(false);
-            this.panel10.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
-            this.panel8.ResumeLayout(false);
-            this.panel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
-            this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.layoutStructures.ResumeLayout(false);
+            this.pnlContainer6.ResumeLayout(false);
+            this.pnlContainer6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon6)).EndInit();
+            this.pnlContainer12.ResumeLayout(false);
+            this.pnlContainer12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon12)).EndInit();
+            this.pnlContainer5.ResumeLayout(false);
+            this.pnlContainer5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon5)).EndInit();
+            this.pnlContainer11.ResumeLayout(false);
+            this.pnlContainer11.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon11)).EndInit();
+            this.pnlContainer4.ResumeLayout(false);
+            this.pnlContainer4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon4)).EndInit();
+            this.pnlContainer10.ResumeLayout(false);
+            this.pnlContainer10.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon10)).EndInit();
+            this.pnlContainer3.ResumeLayout(false);
+            this.pnlContainer3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon3)).EndInit();
+            this.pnlContainer9.ResumeLayout(false);
+            this.pnlContainer9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon9)).EndInit();
+            this.pnlContainer2.ResumeLayout(false);
+            this.pnlContainer2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon2)).EndInit();
+            this.pnlContainer8.ResumeLayout(false);
+            this.pnlContainer8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon8)).EndInit();
+            this.pnlContainer1.ResumeLayout(false);
+            this.pnlContainer1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon1)).EndInit();
+            this.pnlContainer7.ResumeLayout(false);
+            this.pnlContainer7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon7)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -729,42 +729,42 @@ namespace ARKViewer
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Panel panel13;
-        private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.TableLayoutPanel layoutStructures;
+        private System.Windows.Forms.Panel pnlContainer6;
+        private System.Windows.Forms.PictureBox picIcon6;
         private System.Windows.Forms.CheckBox chkMapArtifacts;
-        private System.Windows.Forms.Panel panel12;
-        private System.Windows.Forms.PictureBox pictureBox12;
+        private System.Windows.Forms.Panel pnlContainer12;
+        private System.Windows.Forms.PictureBox picIcon12;
         private System.Windows.Forms.CheckBox chkMapGlitches;
-        private System.Windows.Forms.Panel panel11;
-        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.Panel pnlContainer5;
+        private System.Windows.Forms.PictureBox picIcon5;
         private System.Windows.Forms.CheckBox chkMapChargeNodes;
-        private System.Windows.Forms.Panel panel10;
-        private System.Windows.Forms.PictureBox pictureBox10;
+        private System.Windows.Forms.Panel pnlContainer11;
+        private System.Windows.Forms.PictureBox picIcon11;
         private System.Windows.Forms.CheckBox chkMapBeaverDams;
-        private System.Windows.Forms.Panel panel9;
-        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Panel pnlContainer4;
+        private System.Windows.Forms.PictureBox picIcon4;
         private System.Windows.Forms.CheckBox chkMapWaterVeins;
-        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel pnlContainer10;
         private System.Windows.Forms.CheckBox chkMapMagmaNests;
-        private System.Windows.Forms.PictureBox pictureBox8;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.PictureBox picIcon10;
+        private System.Windows.Forms.Panel pnlContainer3;
         private System.Windows.Forms.CheckBox chkMapGasVeins;
-        private System.Windows.Forms.PictureBox pictureBox5;
-        private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.PictureBox picIcon3;
+        private System.Windows.Forms.Panel pnlContainer9;
         private System.Windows.Forms.CheckBox chkMapDrakeNests;
-        private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.PictureBox picIcon9;
+        private System.Windows.Forms.Panel pnlContainer2;
         private System.Windows.Forms.CheckBox chkMapOilVeins;
-        private System.Windows.Forms.PictureBox pictureBox4;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.PictureBox picIcon2;
+        private System.Windows.Forms.Panel pnlContainer8;
         private System.Windows.Forms.CheckBox chkMapDeinoNests;
-        private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox picIcon8;
+        private System.Windows.Forms.Panel pnlContainer1;
+        private System.Windows.Forms.PictureBox picIcon1;
         private System.Windows.Forms.CheckBox chkMapTerminals;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel pnlContainer7;
+        private System.Windows.Forms.PictureBox picIcon7;
         private System.Windows.Forms.CheckBox chkMapWyvernNests;
         private System.Windows.Forms.ListView lvwStructureLocations;
         private System.Windows.Forms.ColumnHeader columnHeader1;
@@ -772,7 +772,7 @@ namespace ARKViewer
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.CheckBox chkGroup;
         private System.Windows.Forms.TextBox txtContents;
-        private System.Windows.Forms.Label lblInventory;
+        private System.Windows.Forms.Label lblSelectedContent;
         private System.Windows.Forms.Button btnCopyCommand;
         private System.Windows.Forms.ComboBox cboConsoleCommands;
         private System.Windows.Forms.Label lblStatus;

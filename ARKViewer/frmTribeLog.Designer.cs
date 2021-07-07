@@ -34,14 +34,14 @@
             this.lblTribeName = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
             this.picPlayerGender = new System.Windows.Forms.PictureBox();
-            this.pnlPlayerInventory = new System.Windows.Forms.Panel();
+            this.pnlWrapper = new System.Windows.Forms.Panel();
             this.lvwLog = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSettings = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerGender)).BeginInit();
-            this.pnlPlayerInventory.SuspendLayout();
+            this.pnlWrapper.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblPlayerLevelLabel
@@ -102,17 +102,17 @@
             this.picPlayerGender.TabIndex = 11;
             this.picPlayerGender.TabStop = false;
             // 
-            // pnlPlayerInventory
+            // pnlWrapper
             // 
-            this.pnlPlayerInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlPlayerInventory.BackColor = System.Drawing.Color.PowderBlue;
-            this.pnlPlayerInventory.Controls.Add(this.lvwLog);
-            this.pnlPlayerInventory.Location = new System.Drawing.Point(12, 73);
-            this.pnlPlayerInventory.Name = "pnlPlayerInventory";
-            this.pnlPlayerInventory.Size = new System.Drawing.Size(816, 318);
-            this.pnlPlayerInventory.TabIndex = 4;
+            this.pnlWrapper.BackColor = System.Drawing.Color.PowderBlue;
+            this.pnlWrapper.Controls.Add(this.lvwLog);
+            this.pnlWrapper.Location = new System.Drawing.Point(12, 73);
+            this.pnlWrapper.Name = "pnlWrapper";
+            this.pnlWrapper.Size = new System.Drawing.Size(816, 318);
+            this.pnlWrapper.TabIndex = 4;
             // 
             // lvwLog
             // 
@@ -181,7 +181,7 @@
             this.Controls.Add(this.lblTribeName);
             this.Controls.Add(this.lblPlayerName);
             this.Controls.Add(this.picPlayerGender);
-            this.Controls.Add(this.pnlPlayerInventory);
+            this.Controls.Add(this.pnlWrapper);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(350, 350);
@@ -190,7 +190,7 @@
             this.Text = "Tribe Log Viewer";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmTribeLog_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.picPlayerGender)).EndInit();
-            this.pnlPlayerInventory.ResumeLayout(false);
+            this.pnlWrapper.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,7 +203,7 @@
         private System.Windows.Forms.Label lblTribeName;
         private System.Windows.Forms.Label lblPlayerName;
         private System.Windows.Forms.PictureBox picPlayerGender;
-        private System.Windows.Forms.Panel pnlPlayerInventory;
+        private System.Windows.Forms.Panel pnlWrapper;
         private System.Windows.Forms.ListView lvwLog;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.Button btnClose;

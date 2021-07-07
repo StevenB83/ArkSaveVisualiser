@@ -29,36 +29,36 @@ namespace ARKViewer
         /// </summary>
         private void InitializeComponent()
         {
-            this.pnlCreatureInventory = new System.Windows.Forms.Panel();
+            this.pnlBagInventory = new System.Windows.Forms.Panel();
             this.chkApplyFilter = new System.Windows.Forms.CheckBox();
-            this.lblCreatureFilter = new System.Windows.Forms.Label();
+            this.lblFilter = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.lvwInventory = new System.Windows.Forms.ListView();
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblWindowTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblPlayerName = new System.Windows.Forms.Label();
-            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.pnlCreatureInventory.SuspendLayout();
+            this.pnlBagInventory.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pnlCreatureInventory
+            // pnlBagInventory
             // 
-            this.pnlCreatureInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.pnlBagInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlCreatureInventory.BackColor = System.Drawing.Color.PowderBlue;
-            this.pnlCreatureInventory.Controls.Add(this.chkApplyFilter);
-            this.pnlCreatureInventory.Controls.Add(this.lblCreatureFilter);
-            this.pnlCreatureInventory.Controls.Add(this.txtFilter);
-            this.pnlCreatureInventory.Controls.Add(this.lvwInventory);
-            this.pnlCreatureInventory.Location = new System.Drawing.Point(12, 45);
-            this.pnlCreatureInventory.Name = "pnlCreatureInventory";
-            this.pnlCreatureInventory.Size = new System.Drawing.Size(608, 303);
-            this.pnlCreatureInventory.TabIndex = 2;
+            this.pnlBagInventory.BackColor = System.Drawing.Color.PowderBlue;
+            this.pnlBagInventory.Controls.Add(this.chkApplyFilter);
+            this.pnlBagInventory.Controls.Add(this.lblFilter);
+            this.pnlBagInventory.Controls.Add(this.txtFilter);
+            this.pnlBagInventory.Controls.Add(this.lvwInventory);
+            this.pnlBagInventory.Location = new System.Drawing.Point(12, 45);
+            this.pnlBagInventory.Name = "pnlBagInventory";
+            this.pnlBagInventory.Size = new System.Drawing.Size(608, 303);
+            this.pnlBagInventory.TabIndex = 2;
             // 
             // chkApplyFilter
             // 
@@ -72,15 +72,15 @@ namespace ARKViewer
             this.chkApplyFilter.UseVisualStyleBackColor = true;
             this.chkApplyFilter.CheckedChanged += new System.EventHandler(this.chkApplyFilterDinos_CheckedChanged);
             // 
-            // lblCreatureFilter
+            // lblFilter
             // 
-            this.lblCreatureFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblCreatureFilter.AutoSize = true;
-            this.lblCreatureFilter.Location = new System.Drawing.Point(26, 274);
-            this.lblCreatureFilter.Name = "lblCreatureFilter";
-            this.lblCreatureFilter.Size = new System.Drawing.Size(29, 13);
-            this.lblCreatureFilter.TabIndex = 1;
-            this.lblCreatureFilter.Text = "Filter";
+            this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Location = new System.Drawing.Point(26, 274);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(29, 13);
+            this.lblFilter.TabIndex = 1;
+            this.lblFilter.Text = "Filter";
             // 
             // txtFilter
             // 
@@ -127,6 +127,11 @@ namespace ARKViewer
             this.columnHeader8.Text = "Category";
             this.columnHeader8.Width = 200;
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Quality";
+            this.columnHeader2.Width = 80;
+            // 
             // columnHeader12
             // 
             this.columnHeader12.Text = "Qty";
@@ -168,11 +173,6 @@ namespace ARKViewer
             this.lblPlayerName.Text = "Player Name";
             this.lblPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Quality";
-            this.columnHeader2.Width = 80;
-            // 
             // frmDeathCacheViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -180,7 +180,7 @@ namespace ARKViewer
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(632, 394);
-            this.Controls.Add(this.pnlCreatureInventory);
+            this.Controls.Add(this.pnlBagInventory);
             this.Controls.Add(this.lblWindowTitle);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lblPlayerName);
@@ -192,8 +192,8 @@ namespace ARKViewer
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Death Cache Inventory";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmDeathCacheViewer_FormClosed);
-            this.pnlCreatureInventory.ResumeLayout(false);
-            this.pnlCreatureInventory.PerformLayout();
+            this.pnlBagInventory.ResumeLayout(false);
+            this.pnlBagInventory.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,9 +201,9 @@ namespace ARKViewer
 
         #endregion
 
-        private System.Windows.Forms.Panel pnlCreatureInventory;
+        private System.Windows.Forms.Panel pnlBagInventory;
         private System.Windows.Forms.CheckBox chkApplyFilter;
-        private System.Windows.Forms.Label lblCreatureFilter;
+        private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox txtFilter;
         private System.Windows.Forms.ListView lvwInventory;
         private System.Windows.Forms.ColumnHeader columnHeader3;

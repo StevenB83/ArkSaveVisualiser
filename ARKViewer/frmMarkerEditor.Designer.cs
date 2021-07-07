@@ -39,20 +39,20 @@
             this.udLat = new System.Windows.Forms.NumericUpDown();
             this.lblLat = new System.Windows.Forms.Label();
             this.udLon = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblLon = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.btnSave = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
             this.pnlBorderColour = new System.Windows.Forms.Panel();
             this.pnlBackgroundColour = new System.Windows.Forms.Panel();
-            this.grpMarker = new System.Windows.Forms.GroupBox();
+            this.grpWrapper = new System.Windows.Forms.GroupBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.lblHeaderWrapper = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udBorderSize)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLat)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLon)).BeginInit();
-            this.grpMarker.SuspendLayout();
+            this.grpWrapper.SuspendLayout();
             this.SuspendLayout();
             // 
             // picIcon
@@ -155,7 +155,6 @@
             this.udLat.Size = new System.Drawing.Size(235, 22);
             this.udLat.TabIndex = 10;
             this.udLat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            
             // 
             // lblLat
             // 
@@ -178,19 +177,18 @@
             this.udLon.Size = new System.Drawing.Size(235, 22);
             this.udLon.TabIndex = 12;
             this.udLon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            
             // 
-            // label7
+            // lblLon
             // 
-            this.label7.BackColor = System.Drawing.SystemColors.Control;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.DimGray;
-            this.label7.Location = new System.Drawing.Point(24, 430);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(238, 23);
-            this.label7.TabIndex = 11;
-            this.label7.Text = "Longitude";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLon.BackColor = System.Drawing.SystemColors.Control;
+            this.lblLon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLon.ForeColor = System.Drawing.Color.DimGray;
+            this.lblLon.Location = new System.Drawing.Point(24, 430);
+            this.lblLon.Name = "lblLon";
+            this.lblLon.Size = new System.Drawing.Size(238, 23);
+            this.lblLon.TabIndex = 11;
+            this.lblLon.Text = "Longitude";
+            this.lblLon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnSave
             // 
@@ -235,32 +233,32 @@
             this.pnlBackgroundColour.TabIndex = 7;
             this.pnlBackgroundColour.Click += new System.EventHandler(this.pnlBackgroundColour_Click);
             // 
-            // grpMarker
+            // grpWrapper
             // 
-            this.grpMarker.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grpWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpMarker.Controls.Add(this.label2);
-            this.grpMarker.Controls.Add(this.pnlBackgroundColour);
-            this.grpMarker.Controls.Add(this.label22);
-            this.grpMarker.Controls.Add(this.pnlBorderColour);
-            this.grpMarker.Controls.Add(this.lblName);
-            this.grpMarker.Controls.Add(this.picIcon);
-            this.grpMarker.Controls.Add(this.lblBorderSize);
-            this.grpMarker.Controls.Add(this.udLon);
-            this.grpMarker.Controls.Add(this.lblBorderColour);
-            this.grpMarker.Controls.Add(this.label7);
-            this.grpMarker.Controls.Add(this.lblBackgroundColour);
-            this.grpMarker.Controls.Add(this.udLat);
-            this.grpMarker.Controls.Add(this.lblIcon);
-            this.grpMarker.Controls.Add(this.lblLat);
-            this.grpMarker.Controls.Add(this.txtName);
-            this.grpMarker.Controls.Add(this.udBorderSize);
-            this.grpMarker.Location = new System.Drawing.Point(12, 12);
-            this.grpMarker.Name = "grpMarker";
-            this.grpMarker.Size = new System.Drawing.Size(287, 500);
-            this.grpMarker.TabIndex = 0;
-            this.grpMarker.TabStop = false;
+            this.grpWrapper.Controls.Add(this.label2);
+            this.grpWrapper.Controls.Add(this.pnlBackgroundColour);
+            this.grpWrapper.Controls.Add(this.lblHeaderWrapper);
+            this.grpWrapper.Controls.Add(this.pnlBorderColour);
+            this.grpWrapper.Controls.Add(this.lblName);
+            this.grpWrapper.Controls.Add(this.picIcon);
+            this.grpWrapper.Controls.Add(this.lblBorderSize);
+            this.grpWrapper.Controls.Add(this.udLon);
+            this.grpWrapper.Controls.Add(this.lblBorderColour);
+            this.grpWrapper.Controls.Add(this.lblLon);
+            this.grpWrapper.Controls.Add(this.lblBackgroundColour);
+            this.grpWrapper.Controls.Add(this.udLat);
+            this.grpWrapper.Controls.Add(this.lblIcon);
+            this.grpWrapper.Controls.Add(this.lblLat);
+            this.grpWrapper.Controls.Add(this.txtName);
+            this.grpWrapper.Controls.Add(this.udBorderSize);
+            this.grpWrapper.Location = new System.Drawing.Point(12, 12);
+            this.grpWrapper.Name = "grpWrapper";
+            this.grpWrapper.Size = new System.Drawing.Size(287, 500);
+            this.grpWrapper.TabIndex = 0;
+            this.grpWrapper.TabStop = false;
             // 
             // label2
             // 
@@ -274,17 +272,17 @@
             this.label2.Text = "Custom Marker";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label22
+            // lblHeaderWrapper
             // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblHeaderWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.BackColor = System.Drawing.Color.Aqua;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(0, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(289, 6);
-            this.label22.TabIndex = 0;
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHeaderWrapper.BackColor = System.Drawing.Color.Aqua;
+            this.lblHeaderWrapper.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderWrapper.Location = new System.Drawing.Point(0, 0);
+            this.lblHeaderWrapper.Name = "lblHeaderWrapper";
+            this.lblHeaderWrapper.Size = new System.Drawing.Size(289, 6);
+            this.lblHeaderWrapper.TabIndex = 0;
+            this.lblHeaderWrapper.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // frmMarkerEditor
             // 
@@ -293,7 +291,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(314, 555);
-            this.Controls.Add(this.grpMarker);
+            this.Controls.Add(this.grpWrapper);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
@@ -305,8 +303,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.udBorderSize)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLat)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLon)).EndInit();
-            this.grpMarker.ResumeLayout(false);
-            this.grpMarker.PerformLayout();
+            this.grpWrapper.ResumeLayout(false);
+            this.grpWrapper.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -323,14 +321,14 @@
         private System.Windows.Forms.NumericUpDown udLat;
         private System.Windows.Forms.Label lblLat;
         private System.Windows.Forms.NumericUpDown udLon;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblLon;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Panel pnlBorderColour;
         private System.Windows.Forms.Panel pnlBackgroundColour;
-        private System.Windows.Forms.GroupBox grpMarker;
+        private System.Windows.Forms.GroupBox grpWrapper;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label lblHeaderWrapper;
     }
 }

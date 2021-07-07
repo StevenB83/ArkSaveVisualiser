@@ -26,8 +26,7 @@ namespace ASVPack.Models
         [DataMember] public ContentInventory Inventory { get; set; } = new ContentInventory();
         [DataMember] public double CreatedTimeInGame { get; set; } = 0;
         [DataMember] public DateTime? CreatedDateTime { get; set; } = null;
-        [DataMember] public string Quality { get; set; } = "";
-
+        
         public ContentDroppedItem()
         {
 

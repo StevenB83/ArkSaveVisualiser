@@ -20,6 +20,7 @@ namespace ASVPack.Models
         [DataMember] public bool IsBlueprint { get; set; } = false;
         [DataMember] public bool IsEngram { get; set; } = false;
         [DataMember] public string Quality { get; set; } = "";
+        [DataMember] public float? Rating { get; set; } = null;
 
         public ContentItem(GameObject itemObject)
         {
@@ -31,30 +32,37 @@ namespace ASVPack.Models
             CraftedByTribe = itemObject.GetPropertyValue<string>("CrafterTribeName");
             CraftedByPlayer = itemObject.GetPropertyValue<string>("CrafterCharacterName");
 
+            if (itemObject.HasAnyProperty("ItemRating"))
+            {
+                Rating = itemObject.GetTypedProperty<PropertyFloat>("ItemRating").Value;
+                if (Rating.HasValue) Rating = (float)Math.Round(Rating.Value, 2);
+            }
+
+
             if (itemObject.HasAnyProperty("ItemQualityIndex"))
             {
-                var itemRating = (byte)itemObject.GetTypedProperty<PropertyByte>("ItemQualityIndex").Value.ByteValue;
-                if (itemRating <= 1)
+                var itemQual = (byte)itemObject.GetTypedProperty<PropertyByte>("ItemQualityIndex").Value.ByteValue;
+                if (itemQual <= 1)
                 {
                     Quality = "Primitive";
                 }
-                else if (itemRating > 1 && itemRating <= 1.25)
+                else if (itemQual > 1 && itemQual <= 1.25)
                 {
                     Quality = "Ramshackle";
                 }
-                else if (itemRating > 1.25 && itemRating <= 2.5)
+                else if (itemQual > 1.25 && itemQual <= 2.5)
                 {
                     Quality = "Apprentice";
                 }
-                else if (itemRating > 2.5 && itemRating <= 4.5)
+                else if (itemQual > 2.5 && itemQual <= 4.5)
                 {
                     Quality = "Journeyman";
                 }
-                else if (itemRating > 4.5 && itemRating <= 7)
+                else if (itemQual > 4.5 && itemQual <= 7)
                 {
                     Quality = "Mastercraft";
                 }
-                else if (itemRating > 7)
+                else if (itemQual > 7)
                 {
                     Quality = "Ascendant";
                 }

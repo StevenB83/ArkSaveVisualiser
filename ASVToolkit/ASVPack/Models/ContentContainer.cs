@@ -735,27 +735,32 @@ namespace ASVPack.Models
                                                 }
                                             }
                                         });
-                                    }
-                                    
 
-                                    PropertyArray equippedItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("EquippedItems");
-                                    if (equippedItemsArray != null)
-                                    {
-                                        ArkArrayObjectReference objectReferences = (ArkArrayObjectReference)equippedItemsArray.Value;
-                                        Parallel.ForEach(objectReferences, objectReference =>
+                                        if (x.ClassString == "TekStrider_Character_BP_C")
                                         {
-                                            objectContainer.TryGetValue(objectReference.ObjectId, out GameObject itemObject);
-                                            if (itemObject != null)
+                                            
+                                            PropertyArray equippedItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("EquippedItems");
+
+                                            if (equippedItemsArray != null)
                                             {
-                                                var item = itemObject.AsItem();
-                                                if (!item.IsEngram)
+                                                ArkArrayObjectReference equippedReferences = (ArkArrayObjectReference)equippedItemsArray.Value;
+                                                if (equippedReferences != null && equippedReferences.Count == 2)
                                                 {
-                                                    
-                                                    inventoryItems.Add(item);
+                                                    objectContainer.TryGetValue(equippedReferences[0].ObjectId, out GameObject rig1Object);
+                                                    var itemRig1 = rig1Object.AsItem();
+                                                    creature.Rig1 = itemRig1.ClassName;
+
+                                                    objectContainer.TryGetValue(equippedReferences[1].ObjectId, out GameObject rig2Object);
+                                                    var itemRig2 = rig2Object.AsItem();
+                                                    creature.Rig2 = itemRig2.ClassName;
                                                 }
                                             }
-                                        });
+
+                                        }
                                     }
+
+
+                                    
 
                                     creature.Inventory = new ContentInventory() { Items = inventoryItems.ToList() };
                                 }

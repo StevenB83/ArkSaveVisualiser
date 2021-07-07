@@ -409,7 +409,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { ClassName = x.ClassName, IsBluePrint = x.IsBlueprint, Quality=x.Quality }).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBluePrint, Quality=g.Key.Quality, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { ClassName = x.ClassName, IsBluePrint = x.IsBlueprint, Quality=x.Quality, x.Rating }).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBluePrint, Quality=g.Key.Quality, Rating = g.Key.Rating, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -433,7 +433,8 @@ namespace ARKViewer.Models
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
                                             IsBlueprint = g.IsBlueprint,
-                                            Quality = g.Quality
+                                            Quality = g.Quality,
+                                            Rating = g.Rating
 
                                         });
 
@@ -466,7 +467,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Quality } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Quality = g.Key.Quality,Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Quality, x.Rating } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Rating = g.Key.Rating, Quality = g.Key.Quality,Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -491,7 +492,8 @@ namespace ARKViewer.Models
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
                                             IsBlueprint = g.IsBlueprint,
-                                            Quality = g.Quality
+                                            Quality = g.Quality,
+                                            Rating = g.Rating
 
                                         });
 
@@ -525,7 +527,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Quality } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Quality = g.Key.Quality, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Quality, x.Rating } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Quality = g.Key.Quality, Rating = g.Key.Rating, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -549,7 +551,8 @@ namespace ARKViewer.Models
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
                                             IsBlueprint = g.IsBlueprint,
-                                            Quality = g.Quality
+                                            Quality = g.Quality,
+                                            Rating = g.Rating
 
                                         });
 

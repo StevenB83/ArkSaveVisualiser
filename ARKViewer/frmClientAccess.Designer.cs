@@ -29,10 +29,10 @@ namespace ARKViewer
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.grpWrapper = new System.Windows.Forms.GroupBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.lblAccountName = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblClientAccount = new System.Windows.Forms.Label();
             this.btnCopyAccessKey = new System.Windows.Forms.Button();
             this.txtAccessKey = new System.Windows.Forms.TextBox();
             this.lblAccessKey = new System.Windows.Forms.Label();
@@ -54,49 +54,49 @@ namespace ARKViewer
             this.chkAllowTribeStructures = new System.Windows.Forms.CheckBox();
             this.chkAllowTamed = new System.Windows.Forms.CheckBox();
             this.chkAllowWild = new System.Windows.Forms.CheckBox();
-            this.label22 = new System.Windows.Forms.Label();
-            this.lblInclusions = new System.Windows.Forms.Label();
+            this.lblHeaderWrapper = new System.Windows.Forms.Label();
+            this.lblAccessRights = new System.Windows.Forms.Label();
             this.btnCcancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.groupBox7.SuspendLayout();
+            this.grpWrapper.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udRad)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLat)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox7
+            // grpWrapper
             // 
-            this.groupBox7.Controls.Add(this.txtName);
-            this.groupBox7.Controls.Add(this.lblAccountName);
-            this.groupBox7.Controls.Add(this.label2);
-            this.groupBox7.Controls.Add(this.btnCopyAccessKey);
-            this.groupBox7.Controls.Add(this.txtAccessKey);
-            this.groupBox7.Controls.Add(this.lblAccessKey);
-            this.groupBox7.Controls.Add(this.chkAllowDroppedItems);
-            this.groupBox7.Controls.Add(this.chkAllowMapInventories);
-            this.groupBox7.Controls.Add(this.chkAllowMapStructures);
-            this.groupBox7.Controls.Add(this.btnGenerateKey);
-            this.groupBox7.Controls.Add(this.udRad);
-            this.groupBox7.Controls.Add(this.udLon);
-            this.groupBox7.Controls.Add(this.udLat);
-            this.groupBox7.Controls.Add(this.lblRadius);
-            this.groupBox7.Controls.Add(this.cboSelectedForPlayerId);
-            this.groupBox7.Controls.Add(this.cboSelectedForTribeId);
-            this.groupBox7.Controls.Add(this.lblLon);
-            this.groupBox7.Controls.Add(this.lblLat);
-            this.groupBox7.Controls.Add(this.lblPlayer);
-            this.groupBox7.Controls.Add(this.lblTribe);
-            this.groupBox7.Controls.Add(this.lblRestrictions);
-            this.groupBox7.Controls.Add(this.chkAllowTribeStructures);
-            this.groupBox7.Controls.Add(this.chkAllowTamed);
-            this.groupBox7.Controls.Add(this.chkAllowWild);
-            this.groupBox7.Controls.Add(this.label22);
-            this.groupBox7.Controls.Add(this.lblInclusions);
-            this.groupBox7.Location = new System.Drawing.Point(12, 12);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(461, 391);
-            this.groupBox7.TabIndex = 0;
-            this.groupBox7.TabStop = false;
+            this.grpWrapper.Controls.Add(this.txtName);
+            this.grpWrapper.Controls.Add(this.lblAccountName);
+            this.grpWrapper.Controls.Add(this.lblClientAccount);
+            this.grpWrapper.Controls.Add(this.btnCopyAccessKey);
+            this.grpWrapper.Controls.Add(this.txtAccessKey);
+            this.grpWrapper.Controls.Add(this.lblAccessKey);
+            this.grpWrapper.Controls.Add(this.chkAllowDroppedItems);
+            this.grpWrapper.Controls.Add(this.chkAllowMapInventories);
+            this.grpWrapper.Controls.Add(this.chkAllowMapStructures);
+            this.grpWrapper.Controls.Add(this.btnGenerateKey);
+            this.grpWrapper.Controls.Add(this.udRad);
+            this.grpWrapper.Controls.Add(this.udLon);
+            this.grpWrapper.Controls.Add(this.udLat);
+            this.grpWrapper.Controls.Add(this.lblRadius);
+            this.grpWrapper.Controls.Add(this.cboSelectedForPlayerId);
+            this.grpWrapper.Controls.Add(this.cboSelectedForTribeId);
+            this.grpWrapper.Controls.Add(this.lblLon);
+            this.grpWrapper.Controls.Add(this.lblLat);
+            this.grpWrapper.Controls.Add(this.lblPlayer);
+            this.grpWrapper.Controls.Add(this.lblTribe);
+            this.grpWrapper.Controls.Add(this.lblRestrictions);
+            this.grpWrapper.Controls.Add(this.chkAllowTribeStructures);
+            this.grpWrapper.Controls.Add(this.chkAllowTamed);
+            this.grpWrapper.Controls.Add(this.chkAllowWild);
+            this.grpWrapper.Controls.Add(this.lblHeaderWrapper);
+            this.grpWrapper.Controls.Add(this.lblAccessRights);
+            this.grpWrapper.Location = new System.Drawing.Point(12, 12);
+            this.grpWrapper.Name = "grpWrapper";
+            this.grpWrapper.Size = new System.Drawing.Size(461, 391);
+            this.grpWrapper.TabIndex = 0;
+            this.grpWrapper.TabStop = false;
             // 
             // txtName
             // 
@@ -114,17 +114,17 @@ namespace ARKViewer
             this.lblAccountName.TabIndex = 2;
             this.lblAccountName.Text = "Account Name:";
             // 
-            // label2
+            // lblClientAccount
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(14, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(98, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Client Account";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblClientAccount.AutoSize = true;
+            this.lblClientAccount.BackColor = System.Drawing.Color.Transparent;
+            this.lblClientAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblClientAccount.Location = new System.Drawing.Point(14, 16);
+            this.lblClientAccount.Name = "lblClientAccount";
+            this.lblClientAccount.Size = new System.Drawing.Size(98, 15);
+            this.lblClientAccount.TabIndex = 1;
+            this.lblClientAccount.Text = "Client Account";
+            this.lblClientAccount.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCopyAccessKey
             // 
@@ -347,29 +347,29 @@ namespace ARKViewer
             this.chkAllowWild.Text = "Wild Creatures";
             this.chkAllowWild.UseVisualStyleBackColor = true;
             // 
-            // label22
+            // lblHeaderWrapper
             // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblHeaderWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.BackColor = System.Drawing.Color.Aqua;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(0, 6);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(463, 6);
-            this.label22.TabIndex = 0;
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHeaderWrapper.BackColor = System.Drawing.Color.Aqua;
+            this.lblHeaderWrapper.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderWrapper.Location = new System.Drawing.Point(0, 0);
+            this.lblHeaderWrapper.Name = "lblHeaderWrapper";
+            this.lblHeaderWrapper.Size = new System.Drawing.Size(463, 6);
+            this.lblHeaderWrapper.TabIndex = 0;
+            this.lblHeaderWrapper.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblInclusions
+            // lblAccessRights
             // 
-            this.lblInclusions.AutoSize = true;
-            this.lblInclusions.BackColor = System.Drawing.Color.Transparent;
-            this.lblInclusions.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInclusions.Location = new System.Drawing.Point(15, 133);
-            this.lblInclusions.Name = "lblInclusions";
-            this.lblInclusions.Size = new System.Drawing.Size(96, 15);
-            this.lblInclusions.TabIndex = 8;
-            this.lblInclusions.Text = "Access Rights";
-            this.lblInclusions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblAccessRights.AutoSize = true;
+            this.lblAccessRights.BackColor = System.Drawing.Color.Transparent;
+            this.lblAccessRights.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAccessRights.Location = new System.Drawing.Point(15, 133);
+            this.lblAccessRights.Name = "lblAccessRights";
+            this.lblAccessRights.Size = new System.Drawing.Size(96, 15);
+            this.lblAccessRights.TabIndex = 8;
+            this.lblAccessRights.Text = "Access Rights";
+            this.lblAccessRights.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCcancel
             // 
@@ -404,15 +404,15 @@ namespace ARKViewer
             this.ClientSize = new System.Drawing.Size(486, 446);
             this.Controls.Add(this.btnCcancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.groupBox7);
+            this.Controls.Add(this.grpWrapper);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmClientAccess";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Client Access  Settings";
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
+            this.grpWrapper.ResumeLayout(false);
+            this.grpWrapper.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udRad)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udLat)).EndInit();
@@ -422,7 +422,7 @@ namespace ARKViewer
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.GroupBox grpWrapper;
         private System.Windows.Forms.CheckBox chkAllowDroppedItems;
         private System.Windows.Forms.CheckBox chkAllowMapInventories;
         private System.Windows.Forms.CheckBox chkAllowMapStructures;
@@ -441,14 +441,14 @@ namespace ARKViewer
         private System.Windows.Forms.CheckBox chkAllowTribeStructures;
         private System.Windows.Forms.CheckBox chkAllowTamed;
         private System.Windows.Forms.CheckBox chkAllowWild;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label lblInclusions;
+        private System.Windows.Forms.Label lblHeaderWrapper;
+        private System.Windows.Forms.Label lblAccessRights;
         private System.Windows.Forms.Label lblAccessKey;
         private System.Windows.Forms.TextBox txtAccessKey;
         private System.Windows.Forms.Button btnCcancel;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.Button btnCopyAccessKey;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblClientAccount;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.Label lblAccountName;
     }

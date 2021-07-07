@@ -389,8 +389,8 @@ namespace ARKViewer
                 tribeName = tribe.TribeName;
             }
 
-            lblPlayerLevel.Text = selectedTame.Level.ToString();
-            lblPlayerName.Text = friendlyName;
+            lblLevel.Text = selectedTame.Level.ToString();
+            lblName.Text = friendlyName;
             lblTribeName.Text = tribeName;
 
             PopulateTameDetails();

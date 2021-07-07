@@ -88,18 +88,18 @@ namespace ARKViewer
                 {
                     if (File.Exists(dialog.FileName))
                     {
-                        txtARKFilename.Text = dialog.FileName;
+                        txtFilename.Text = dialog.FileName;
                     }
 
                 }
 
-                btnSave.Enabled = txtARKFilename.TextLength > 0;
+                btnSave.Enabled = txtFilename.TextLength > 0;
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Filename = txtARKFilename.Text.Trim();
+            Filename = txtFilename.Text.Trim();
             OfflineName = txtName.Text.Trim();
 
             if(txtName.Text.Trim().Length == 0)

@@ -30,7 +30,7 @@ namespace ARKViewer
         private void InitializeComponent()
         {
             this.grpColours = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblKnownColours = new System.Windows.Forms.Label();
             this.chkApplyFilterColours = new System.Windows.Forms.CheckBox();
             this.lblHeaderColours = new System.Windows.Forms.Label();
             this.txtFilterColour = new System.Windows.Forms.TextBox();
@@ -48,7 +48,7 @@ namespace ARKViewer
             this.grpColours.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpColours.Controls.Add(this.label1);
+            this.grpColours.Controls.Add(this.lblKnownColours);
             this.grpColours.Controls.Add(this.chkApplyFilterColours);
             this.grpColours.Controls.Add(this.lblHeaderColours);
             this.grpColours.Controls.Add(this.txtFilterColour);
@@ -59,16 +59,16 @@ namespace ARKViewer
             this.grpColours.TabIndex = 1;
             this.grpColours.TabStop = false;
             // 
-            // label1
+            // lblKnownColours
             // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(10, 16);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(198, 22);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Known Colours";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblKnownColours.BackColor = System.Drawing.Color.Transparent;
+            this.lblKnownColours.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKnownColours.Location = new System.Drawing.Point(10, 16);
+            this.lblKnownColours.Name = "lblKnownColours";
+            this.lblKnownColours.Size = new System.Drawing.Size(198, 22);
+            this.lblKnownColours.TabIndex = 0;
+            this.lblKnownColours.Text = "Known Colours";
+            this.lblKnownColours.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkApplyFilterColours
             // 
@@ -89,7 +89,7 @@ namespace ARKViewer
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lblHeaderColours.BackColor = System.Drawing.Color.Aqua;
             this.lblHeaderColours.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeaderColours.Location = new System.Drawing.Point(-2, 6);
+            this.lblHeaderColours.Location = new System.Drawing.Point(-2, 3);
             this.lblHeaderColours.Name = "lblHeaderColours";
             this.lblHeaderColours.Size = new System.Drawing.Size(318, 6);
             this.lblHeaderColours.TabIndex = 0;
@@ -186,7 +186,7 @@ namespace ARKViewer
         #endregion
 
         private System.Windows.Forms.GroupBox grpColours;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblKnownColours;
         private System.Windows.Forms.CheckBox chkApplyFilterColours;
         private System.Windows.Forms.Label lblHeaderColours;
         private System.Windows.Forms.TextBox txtFilterColour;

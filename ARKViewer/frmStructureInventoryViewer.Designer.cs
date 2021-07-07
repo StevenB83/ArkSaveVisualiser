@@ -33,14 +33,15 @@
             this.lblFilter = new System.Windows.Forms.Label();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.lvwInventory = new System.Windows.Forms.ListView();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwInventory_Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwInventory_Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwInventory_Qty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwInventory_Quality = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblWindowTitle = new System.Windows.Forms.Label();
             this.picWindowIcon = new System.Windows.Forms.PictureBox();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblStructureName = new System.Windows.Forms.Label();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwInventory_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlCreatureInventory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picWindowIcon)).BeginInit();
             this.SuspendLayout();
@@ -65,9 +66,9 @@
             this.chkApplyFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkApplyFilter.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkApplyFilter.Image = global::ARKViewer.Properties.Resources.button_filter;
-            this.chkApplyFilter.Location = new System.Drawing.Point(557, 339);
+            this.chkApplyFilter.Location = new System.Drawing.Point(562, 333);
             this.chkApplyFilter.Name = "chkApplyFilter";
-            this.chkApplyFilter.Size = new System.Drawing.Size(33, 27);
+            this.chkApplyFilter.Size = new System.Drawing.Size(35, 35);
             this.chkApplyFilter.TabIndex = 3;
             this.chkApplyFilter.UseVisualStyleBackColor = true;
             this.chkApplyFilter.CheckedChanged += new System.EventHandler(this.chkApplyFilter_CheckedChanged);
@@ -76,7 +77,7 @@
             // 
             this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblFilter.AutoSize = true;
-            this.lblFilter.Location = new System.Drawing.Point(26, 345);
+            this.lblFilter.Location = new System.Drawing.Point(8, 345);
             this.lblFilter.Name = "lblFilter";
             this.lblFilter.Size = new System.Drawing.Size(29, 13);
             this.lblFilter.TabIndex = 1;
@@ -86,9 +87,9 @@
             // 
             this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFilter.Location = new System.Drawing.Point(72, 342);
+            this.txtFilter.Location = new System.Drawing.Point(43, 342);
             this.txtFilter.Name = "txtFilter";
-            this.txtFilter.Size = new System.Drawing.Size(480, 20);
+            this.txtFilter.Size = new System.Drawing.Size(513, 20);
             this.txtFilter.TabIndex = 2;
             // 
             // lvwInventory
@@ -97,34 +98,40 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwInventory.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader8,
-            this.columnHeader12,
-            this.columnHeader1});
+            this.lvwInventory_Item,
+            this.lvwInventory_Category,
+            this.lvwInventory_Quality,
+            this.lvwInventory_Rating,
+            this.lvwInventory_Qty});
             this.lvwInventory.FullRowSelect = true;
             this.lvwInventory.HideSelection = false;
-            this.lvwInventory.Location = new System.Drawing.Point(24, 19);
+            this.lvwInventory.Location = new System.Drawing.Point(11, 13);
             this.lvwInventory.Name = "lvwInventory";
-            this.lvwInventory.Size = new System.Drawing.Size(566, 316);
+            this.lvwInventory.Size = new System.Drawing.Size(586, 316);
             this.lvwInventory.TabIndex = 0;
             this.lvwInventory.UseCompatibleStateImageBehavior = false;
             this.lvwInventory.View = System.Windows.Forms.View.Details;
             this.lvwInventory.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwInventory_ColumnClick);
             // 
-            // columnHeader3
+            // lvwInventory_Item
             // 
-            this.columnHeader3.Text = "Item";
-            this.columnHeader3.Width = 200;
+            this.lvwInventory_Item.Text = "Item";
+            this.lvwInventory_Item.Width = 169;
             // 
-            // columnHeader8
+            // lvwInventory_Category
             // 
-            this.columnHeader8.Text = "Category";
-            this.columnHeader8.Width = 200;
+            this.lvwInventory_Category.Text = "Category";
+            this.lvwInventory_Category.Width = 160;
             // 
-            // columnHeader12
+            // lvwInventory_Qty
             // 
-            this.columnHeader12.Text = "Qty";
-            this.columnHeader12.Width = 48;
+            this.lvwInventory_Qty.Text = "Qty";
+            this.lvwInventory_Qty.Width = 50;
+            // 
+            // lvwInventory_Quality
+            // 
+            this.lvwInventory_Quality.Text = "Quality";
+            this.lvwInventory_Quality.Width = 80;
             // 
             // lblWindowTitle
             // 
@@ -173,10 +180,9 @@
             this.lblStructureName.Text = "Structure Name";
             this.lblStructureName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // columnHeader1
+            // lvwInventory_Rating
             // 
-            this.columnHeader1.Text = "Quality";
-            this.columnHeader1.Width = 80;
+            this.lvwInventory_Rating.Text = "Rating";
             // 
             // frmStructureInventoryViewer
             // 
@@ -210,13 +216,14 @@
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.TextBox txtFilter;
         private System.Windows.Forms.ListView lvwInventory;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader lvwInventory_Item;
+        private System.Windows.Forms.ColumnHeader lvwInventory_Category;
+        private System.Windows.Forms.ColumnHeader lvwInventory_Qty;
         private System.Windows.Forms.Label lblWindowTitle;
         private System.Windows.Forms.PictureBox picWindowIcon;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Label lblStructureName;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader lvwInventory_Quality;
+        private System.Windows.Forms.ColumnHeader lvwInventory_Rating;
     }
 }

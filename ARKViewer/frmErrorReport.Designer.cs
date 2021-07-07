@@ -29,38 +29,38 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmErrorReport));
-            this.lblPlayerName = new System.Windows.Forms.Label();
-            this.picPlayerGender = new System.Windows.Forms.PictureBox();
+            this.lblTitle = new System.Windows.Forms.Label();
+            this.picIcon = new System.Windows.Forms.PictureBox();
             this.rtbError = new System.Windows.Forms.RichTextBox();
             this.btnClose = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lblSelectedMapContentPack = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayerGender)).BeginInit();
-            this.groupBox2.SuspendLayout();
+            this.grpReport = new System.Windows.Forms.GroupBox();
+            this.lblErrorReport = new System.Windows.Forms.Label();
+            this.lblHeaderReport = new System.Windows.Forms.Label();
+            this.lblSubTitle = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
+            this.grpReport.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblPlayerName
+            // lblTitle
             // 
-            this.lblPlayerName.AutoSize = true;
-            this.lblPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerName.ForeColor = System.Drawing.Color.DimGray;
-            this.lblPlayerName.Location = new System.Drawing.Point(56, 7);
-            this.lblPlayerName.Name = "lblPlayerName";
-            this.lblPlayerName.Size = new System.Drawing.Size(300, 29);
-            this.lblPlayerName.TabIndex = 12;
-            this.lblPlayerName.Text = "Something went wrong...";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.DimGray;
+            this.lblTitle.Location = new System.Drawing.Point(56, 7);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(300, 29);
+            this.lblTitle.TabIndex = 12;
+            this.lblTitle.Text = "Something went wrong...";
             // 
-            // picPlayerGender
+            // picIcon
             // 
-            this.picPlayerGender.Image = ((System.Drawing.Image)(resources.GetObject("picPlayerGender.Image")));
-            this.picPlayerGender.Location = new System.Drawing.Point(9, 7);
-            this.picPlayerGender.Name = "picPlayerGender";
-            this.picPlayerGender.Size = new System.Drawing.Size(40, 40);
-            this.picPlayerGender.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picPlayerGender.TabIndex = 14;
-            this.picPlayerGender.TabStop = false;
+            this.picIcon.Image = ((System.Drawing.Image)(resources.GetObject("picIcon.Image")));
+            this.picIcon.Location = new System.Drawing.Point(9, 7);
+            this.picIcon.Name = "picIcon";
+            this.picIcon.Size = new System.Drawing.Size(40, 40);
+            this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picIcon.TabIndex = 14;
+            this.picIcon.TabStop = false;
             // 
             // rtbError
             // 
@@ -86,52 +86,52 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // grpReport
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grpReport.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.rtbError);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.lblSelectedMapContentPack);
-            this.groupBox2.Location = new System.Drawing.Point(9, 75);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(512, 191);
-            this.groupBox2.TabIndex = 17;
-            this.groupBox2.TabStop = false;
+            this.grpReport.Controls.Add(this.rtbError);
+            this.grpReport.Controls.Add(this.lblErrorReport);
+            this.grpReport.Controls.Add(this.lblHeaderReport);
+            this.grpReport.Location = new System.Drawing.Point(9, 75);
+            this.grpReport.Name = "grpReport";
+            this.grpReport.Size = new System.Drawing.Size(512, 191);
+            this.grpReport.TabIndex = 17;
+            this.grpReport.TabStop = false;
             // 
-            // lblSelectedMapContentPack
+            // lblErrorReport
             // 
-            this.lblSelectedMapContentPack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblErrorReport.AutoSize = true;
+            this.lblErrorReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblErrorReport.ForeColor = System.Drawing.Color.DimGray;
+            this.lblErrorReport.Location = new System.Drawing.Point(6, 7);
+            this.lblErrorReport.Name = "lblErrorReport";
+            this.lblErrorReport.Size = new System.Drawing.Size(74, 15);
+            this.lblErrorReport.TabIndex = 13;
+            this.lblErrorReport.Text = "Error Report";
+            // 
+            // lblHeaderReport
+            // 
+            this.lblHeaderReport.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSelectedMapContentPack.BackColor = System.Drawing.Color.Aqua;
-            this.lblSelectedMapContentPack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectedMapContentPack.Location = new System.Drawing.Point(-2, 1);
-            this.lblSelectedMapContentPack.Name = "lblSelectedMapContentPack";
-            this.lblSelectedMapContentPack.Size = new System.Drawing.Size(515, 6);
-            this.lblSelectedMapContentPack.TabIndex = 0;
-            this.lblSelectedMapContentPack.Text = "   ";
-            this.lblSelectedMapContentPack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHeaderReport.BackColor = System.Drawing.Color.Aqua;
+            this.lblHeaderReport.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderReport.Location = new System.Drawing.Point(-2, 1);
+            this.lblHeaderReport.Name = "lblHeaderReport";
+            this.lblHeaderReport.Size = new System.Drawing.Size(515, 6);
+            this.lblHeaderReport.TabIndex = 0;
+            this.lblHeaderReport.Text = "   ";
+            this.lblHeaderReport.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label1
+            // lblSubTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(6, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 15);
-            this.label1.TabIndex = 13;
-            this.label1.Text = "Error Report";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(61, 46);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(459, 13);
-            this.label2.TabIndex = 18;
-            this.label2.Text = "If this problem persists please report to @MirageUK on www.survivetheark.com for " +
+            this.lblSubTitle.AutoSize = true;
+            this.lblSubTitle.Location = new System.Drawing.Point(61, 46);
+            this.lblSubTitle.Name = "lblSubTitle";
+            this.lblSubTitle.Size = new System.Drawing.Size(459, 13);
+            this.lblSubTitle.TabIndex = 18;
+            this.lblSubTitle.Text = "If this problem persists please report to @MirageUK on www.survivetheark.com for " +
     "investigation.";
             // 
             // frmErrorReport
@@ -140,32 +140,32 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(534, 311);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.lblSubTitle);
+            this.Controls.Add(this.grpReport);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.lblPlayerName);
-            this.Controls.Add(this.picPlayerGender);
+            this.Controls.Add(this.lblTitle);
+            this.Controls.Add(this.picIcon);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MinimumSize = new System.Drawing.Size(550, 350);
             this.Name = "frmErrorReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Error Report";
-            ((System.ComponentModel.ISupportInitialize)(this.picPlayerGender)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picIcon)).EndInit();
+            this.grpReport.ResumeLayout(false);
+            this.grpReport.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Label lblPlayerName;
-        private System.Windows.Forms.PictureBox picPlayerGender;
+        private System.Windows.Forms.Label lblTitle;
+        private System.Windows.Forms.PictureBox picIcon;
         private System.Windows.Forms.RichTextBox rtbError;
         private System.Windows.Forms.Button btnClose;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label lblSelectedMapContentPack;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.GroupBox grpReport;
+        private System.Windows.Forms.Label lblErrorReport;
+        private System.Windows.Forms.Label lblHeaderReport;
+        private System.Windows.Forms.Label lblSubTitle;
     }
 }

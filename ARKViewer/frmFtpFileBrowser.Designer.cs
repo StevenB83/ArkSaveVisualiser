@@ -40,24 +40,24 @@ namespace ARKViewer
             this.lblStatus = new System.Windows.Forms.Label();
             this.optFtpModeSftp = new System.Windows.Forms.RadioButton();
             this.optFtpModeFtp = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblMode = new System.Windows.Forms.Label();
             this.chkPasswordVisibility = new System.Windows.Forms.CheckBox();
             this.udFTPPort = new System.Windows.Forms.NumericUpDown();
             this.txtFTPPassword = new System.Windows.Forms.TextBox();
             this.txtFTPUsername = new System.Windows.Forms.TextBox();
-            this.lblFTPPassword = new System.Windows.Forms.Label();
-            this.lblFTPUsername = new System.Windows.Forms.Label();
+            this.lblPassword = new System.Windows.Forms.Label();
+            this.lblUsername = new System.Windows.Forms.Label();
             this.txtFTPAddress = new System.Windows.Forms.TextBox();
-            this.lblFTPPort = new System.Windows.Forms.Label();
-            this.lblFTPHost = new System.Windows.Forms.Label();
+            this.lblServerPort = new System.Windows.Forms.Label();
+            this.lblServerAddress = new System.Windows.Forms.Label();
             this.btnConnect = new System.Windows.Forms.Button();
             this.txtServerName = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblServerName = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.grpFtpServer = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
+            this.lblFileBrowser = new System.Windows.Forms.Label();
+            this.lblFtpServerDetails = new System.Windows.Forms.Label();
+            this.lblHeaderFtp = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.udFTPPort)).BeginInit();
             this.grpFtpServer.SuspendLayout();
             this.SuspendLayout();
@@ -157,17 +157,17 @@ namespace ARKViewer
             this.optFtpModeFtp.Text = "FTP";
             this.optFtpModeFtp.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // lblMode
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.Control;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(21, 278);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 11;
-            this.label1.Text = "Mode";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblMode.AutoSize = true;
+            this.lblMode.BackColor = System.Drawing.SystemColors.Control;
+            this.lblMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMode.Location = new System.Drawing.Point(21, 278);
+            this.lblMode.Name = "lblMode";
+            this.lblMode.Size = new System.Drawing.Size(34, 13);
+            this.lblMode.TabIndex = 11;
+            this.lblMode.Text = "Mode";
+            this.lblMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // chkPasswordVisibility
             // 
@@ -214,28 +214,28 @@ namespace ARKViewer
             this.txtFTPUsername.Size = new System.Drawing.Size(214, 20);
             this.txtFTPUsername.TabIndex = 7;
             // 
-            // lblFTPPassword
+            // lblPassword
             // 
-            this.lblFTPPassword.AutoSize = true;
-            this.lblFTPPassword.BackColor = System.Drawing.SystemColors.Control;
-            this.lblFTPPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFTPPassword.Location = new System.Drawing.Point(21, 234);
-            this.lblFTPPassword.Name = "lblFTPPassword";
-            this.lblFTPPassword.Size = new System.Drawing.Size(53, 13);
-            this.lblFTPPassword.TabIndex = 8;
-            this.lblFTPPassword.Text = "Password";
+            this.lblPassword.AutoSize = true;
+            this.lblPassword.BackColor = System.Drawing.SystemColors.Control;
+            this.lblPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPassword.Location = new System.Drawing.Point(21, 234);
+            this.lblPassword.Name = "lblPassword";
+            this.lblPassword.Size = new System.Drawing.Size(53, 13);
+            this.lblPassword.TabIndex = 8;
+            this.lblPassword.Text = "Password";
             // 
-            // lblFTPUsername
+            // lblUsername
             // 
-            this.lblFTPUsername.AutoSize = true;
-            this.lblFTPUsername.BackColor = System.Drawing.SystemColors.Control;
-            this.lblFTPUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFTPUsername.Location = new System.Drawing.Point(21, 181);
-            this.lblFTPUsername.Name = "lblFTPUsername";
-            this.lblFTPUsername.Size = new System.Drawing.Size(55, 13);
-            this.lblFTPUsername.TabIndex = 6;
-            this.lblFTPUsername.Text = "Username";
-            this.lblFTPUsername.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblUsername.AutoSize = true;
+            this.lblUsername.BackColor = System.Drawing.SystemColors.Control;
+            this.lblUsername.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUsername.Location = new System.Drawing.Point(21, 181);
+            this.lblUsername.Name = "lblUsername";
+            this.lblUsername.Size = new System.Drawing.Size(55, 13);
+            this.lblUsername.TabIndex = 6;
+            this.lblUsername.Text = "Username";
+            this.lblUsername.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtFTPAddress
             // 
@@ -245,27 +245,27 @@ namespace ARKViewer
             this.txtFTPAddress.TabIndex = 3;
             this.txtFTPAddress.Validating += new System.ComponentModel.CancelEventHandler(this.txtFTPAddress_Validating);
             // 
-            // lblFTPPort
+            // lblServerPort
             // 
-            this.lblFTPPort.AutoSize = true;
-            this.lblFTPPort.BackColor = System.Drawing.SystemColors.Control;
-            this.lblFTPPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFTPPort.Location = new System.Drawing.Point(21, 134);
-            this.lblFTPPort.Name = "lblFTPPort";
-            this.lblFTPPort.Size = new System.Drawing.Size(26, 13);
-            this.lblFTPPort.TabIndex = 4;
-            this.lblFTPPort.Text = "Port";
+            this.lblServerPort.AutoSize = true;
+            this.lblServerPort.BackColor = System.Drawing.SystemColors.Control;
+            this.lblServerPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblServerPort.Location = new System.Drawing.Point(21, 134);
+            this.lblServerPort.Name = "lblServerPort";
+            this.lblServerPort.Size = new System.Drawing.Size(26, 13);
+            this.lblServerPort.TabIndex = 4;
+            this.lblServerPort.Text = "Port";
             // 
-            // lblFTPHost
+            // lblServerAddress
             // 
-            this.lblFTPHost.BackColor = System.Drawing.SystemColors.Control;
-            this.lblFTPHost.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFTPHost.Location = new System.Drawing.Point(21, 89);
-            this.lblFTPHost.Name = "lblFTPHost";
-            this.lblFTPHost.Size = new System.Drawing.Size(217, 19);
-            this.lblFTPHost.TabIndex = 2;
-            this.lblFTPHost.Text = "Server Address                        ";
-            this.lblFTPHost.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblServerAddress.BackColor = System.Drawing.SystemColors.Control;
+            this.lblServerAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblServerAddress.Location = new System.Drawing.Point(21, 89);
+            this.lblServerAddress.Name = "lblServerAddress";
+            this.lblServerAddress.Size = new System.Drawing.Size(217, 19);
+            this.lblServerAddress.TabIndex = 2;
+            this.lblServerAddress.Text = "Server Address                        ";
+            this.lblServerAddress.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnConnect
             // 
@@ -284,17 +284,17 @@ namespace ARKViewer
             this.txtServerName.Size = new System.Drawing.Size(214, 20);
             this.txtServerName.TabIndex = 1;
             // 
-            // label2
+            // lblServerName
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.Control;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(21, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(69, 13);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Server Name";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblServerName.AutoSize = true;
+            this.lblServerName.BackColor = System.Drawing.SystemColors.Control;
+            this.lblServerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblServerName.Location = new System.Drawing.Point(21, 47);
+            this.lblServerName.Name = "lblServerName";
+            this.lblServerName.Size = new System.Drawing.Size(69, 13);
+            this.lblServerName.TabIndex = 0;
+            this.lblServerName.Text = "Server Name";
+            this.lblServerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnClose
             // 
@@ -313,22 +313,22 @@ namespace ARKViewer
             this.grpFtpServer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.grpFtpServer.Controls.Add(this.label4);
-            this.grpFtpServer.Controls.Add(this.label3);
-            this.grpFtpServer.Controls.Add(this.label22);
+            this.grpFtpServer.Controls.Add(this.lblFileBrowser);
+            this.grpFtpServer.Controls.Add(this.lblFtpServerDetails);
+            this.grpFtpServer.Controls.Add(this.lblHeaderFtp);
             this.grpFtpServer.Controls.Add(this.txtServerName);
-            this.grpFtpServer.Controls.Add(this.label2);
+            this.grpFtpServer.Controls.Add(this.lblServerName);
             this.grpFtpServer.Controls.Add(this.lvwFileBrowser);
             this.grpFtpServer.Controls.Add(this.btnConnect);
-            this.grpFtpServer.Controls.Add(this.lblFTPHost);
+            this.grpFtpServer.Controls.Add(this.lblServerAddress);
             this.grpFtpServer.Controls.Add(this.optFtpModeSftp);
-            this.grpFtpServer.Controls.Add(this.lblFTPPort);
+            this.grpFtpServer.Controls.Add(this.lblServerPort);
             this.grpFtpServer.Controls.Add(this.optFtpModeFtp);
             this.grpFtpServer.Controls.Add(this.txtFTPAddress);
-            this.grpFtpServer.Controls.Add(this.label1);
-            this.grpFtpServer.Controls.Add(this.lblFTPUsername);
+            this.grpFtpServer.Controls.Add(this.lblMode);
+            this.grpFtpServer.Controls.Add(this.lblUsername);
             this.grpFtpServer.Controls.Add(this.chkPasswordVisibility);
-            this.grpFtpServer.Controls.Add(this.lblFTPPassword);
+            this.grpFtpServer.Controls.Add(this.lblPassword);
             this.grpFtpServer.Controls.Add(this.udFTPPort);
             this.grpFtpServer.Controls.Add(this.txtFTPUsername);
             this.grpFtpServer.Controls.Add(this.txtFTPPassword);
@@ -338,42 +338,42 @@ namespace ARKViewer
             this.grpFtpServer.TabIndex = 0;
             this.grpFtpServer.TabStop = false;
             // 
-            // label4
+            // lblFileBrowser
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.SystemColors.Control;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(276, 47);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(64, 13);
-            this.label4.TabIndex = 16;
-            this.label4.Text = "File Browser";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblFileBrowser.AutoSize = true;
+            this.lblFileBrowser.BackColor = System.Drawing.SystemColors.Control;
+            this.lblFileBrowser.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFileBrowser.Location = new System.Drawing.Point(276, 47);
+            this.lblFileBrowser.Name = "lblFileBrowser";
+            this.lblFileBrowser.Size = new System.Drawing.Size(64, 13);
+            this.lblFileBrowser.TabIndex = 16;
+            this.lblFileBrowser.Text = "File Browser";
+            this.lblFileBrowser.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label3
+            // lblFtpServerDetails
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label3.Location = new System.Drawing.Point(10, 14);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(126, 15);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "FTP Server Details";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblFtpServerDetails.AutoSize = true;
+            this.lblFtpServerDetails.BackColor = System.Drawing.Color.Transparent;
+            this.lblFtpServerDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFtpServerDetails.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblFtpServerDetails.Location = new System.Drawing.Point(10, 14);
+            this.lblFtpServerDetails.Name = "lblFtpServerDetails";
+            this.lblFtpServerDetails.Size = new System.Drawing.Size(126, 15);
+            this.lblFtpServerDetails.TabIndex = 1;
+            this.lblFtpServerDetails.Text = "FTP Server Details";
+            this.lblFtpServerDetails.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label22
+            // lblHeaderFtp
             // 
-            this.label22.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblHeaderFtp.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.label22.BackColor = System.Drawing.Color.Aqua;
-            this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(0, 0);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(849, 6);
-            this.label22.TabIndex = 0;
-            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHeaderFtp.BackColor = System.Drawing.Color.Aqua;
+            this.lblHeaderFtp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeaderFtp.Location = new System.Drawing.Point(0, 0);
+            this.lblHeaderFtp.Name = "lblHeaderFtp";
+            this.lblHeaderFtp.Size = new System.Drawing.Size(849, 6);
+            this.lblHeaderFtp.TabIndex = 0;
+            this.lblHeaderFtp.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // frmFtpFileBrowser
             // 
@@ -410,23 +410,23 @@ namespace ARKViewer
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.RadioButton optFtpModeSftp;
         private System.Windows.Forms.RadioButton optFtpModeFtp;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblMode;
         private System.Windows.Forms.CheckBox chkPasswordVisibility;
         private System.Windows.Forms.NumericUpDown udFTPPort;
         private System.Windows.Forms.TextBox txtFTPPassword;
         private System.Windows.Forms.TextBox txtFTPUsername;
-        private System.Windows.Forms.Label lblFTPPassword;
-        private System.Windows.Forms.Label lblFTPUsername;
+        private System.Windows.Forms.Label lblPassword;
+        private System.Windows.Forms.Label lblUsername;
         private System.Windows.Forms.TextBox txtFTPAddress;
-        private System.Windows.Forms.Label lblFTPPort;
-        private System.Windows.Forms.Label lblFTPHost;
+        private System.Windows.Forms.Label lblServerPort;
+        private System.Windows.Forms.Label lblServerAddress;
         private System.Windows.Forms.Button btnConnect;
         private System.Windows.Forms.TextBox txtServerName;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblServerName;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.GroupBox grpFtpServer;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label22;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblFtpServerDetails;
+        private System.Windows.Forms.Label lblHeaderFtp;
+        private System.Windows.Forms.Label lblFileBrowser;
     }
 }

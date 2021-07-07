@@ -29,34 +29,61 @@ namespace ARKViewer
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.grpWrapper = new System.Windows.Forms.GroupBox();
+            this.lblOfflineName = new System.Windows.Forms.Label();
+            this.lblFilename = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
             this.btnAddARK = new System.Windows.Forms.Button();
-            this.txtARKFilename = new System.Windows.Forms.TextBox();
-            this.lblSelectedMapContentPack = new System.Windows.Forms.Label();
+            this.txtFilename = new System.Windows.Forms.TextBox();
+            this.lblHeader = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.groupBox2.SuspendLayout();
+            this.grpWrapper.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox2
+            // grpWrapper
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.grpWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.txtName);
-            this.groupBox2.Controls.Add(this.btnAddARK);
-            this.groupBox2.Controls.Add(this.txtARKFilename);
-            this.groupBox2.Controls.Add(this.lblSelectedMapContentPack);
-            this.groupBox2.Location = new System.Drawing.Point(12, 9);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(410, 152);
-            this.groupBox2.TabIndex = 6;
-            this.groupBox2.TabStop = false;
+            this.grpWrapper.Controls.Add(this.lblOfflineName);
+            this.grpWrapper.Controls.Add(this.lblFilename);
+            this.grpWrapper.Controls.Add(this.txtName);
+            this.grpWrapper.Controls.Add(this.btnAddARK);
+            this.grpWrapper.Controls.Add(this.txtFilename);
+            this.grpWrapper.Controls.Add(this.lblHeader);
+            this.grpWrapper.Location = new System.Drawing.Point(12, 9);
+            this.grpWrapper.Name = "grpWrapper";
+            this.grpWrapper.Size = new System.Drawing.Size(410, 152);
+            this.grpWrapper.TabIndex = 6;
+            this.grpWrapper.TabStop = false;
+            // 
+            // lblOfflineName
+            // 
+            this.lblOfflineName.AutoSize = true;
+            this.lblOfflineName.Location = new System.Drawing.Point(18, 75);
+            this.lblOfflineName.Name = "lblOfflineName";
+            this.lblOfflineName.Size = new System.Drawing.Size(68, 13);
+            this.lblOfflineName.TabIndex = 5;
+            this.lblOfflineName.Text = "Offline Name";
+            // 
+            // lblFilename
+            // 
+            this.lblFilename.AutoSize = true;
+            this.lblFilename.Location = new System.Drawing.Point(18, 26);
+            this.lblFilename.Name = "lblFilename";
+            this.lblFilename.Size = new System.Drawing.Size(49, 13);
+            this.lblFilename.TabIndex = 4;
+            this.lblFilename.Text = "Filename";
+            // 
+            // txtName
+            // 
+            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtName.Location = new System.Drawing.Point(18, 93);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(330, 20);
+            this.txtName.TabIndex = 3;
             // 
             // btnAddARK
             // 
@@ -70,29 +97,29 @@ namespace ARKViewer
             this.btnAddARK.UseVisualStyleBackColor = true;
             this.btnAddARK.Click += new System.EventHandler(this.btnAddARK_Click);
             // 
-            // txtARKFilename
+            // txtFilename
             // 
-            this.txtARKFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtFilename.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtARKFilename.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtARKFilename.Location = new System.Drawing.Point(18, 45);
-            this.txtARKFilename.Name = "txtARKFilename";
-            this.txtARKFilename.ReadOnly = true;
-            this.txtARKFilename.Size = new System.Drawing.Size(330, 22);
-            this.txtARKFilename.TabIndex = 1;
+            this.txtFilename.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtFilename.Location = new System.Drawing.Point(18, 45);
+            this.txtFilename.Name = "txtFilename";
+            this.txtFilename.ReadOnly = true;
+            this.txtFilename.Size = new System.Drawing.Size(330, 22);
+            this.txtFilename.TabIndex = 1;
             // 
-            // lblSelectedMapContentPack
+            // lblHeader
             // 
-            this.lblSelectedMapContentPack.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblHeader.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblSelectedMapContentPack.BackColor = System.Drawing.Color.Aqua;
-            this.lblSelectedMapContentPack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSelectedMapContentPack.Location = new System.Drawing.Point(-2, 6);
-            this.lblSelectedMapContentPack.Name = "lblSelectedMapContentPack";
-            this.lblSelectedMapContentPack.Size = new System.Drawing.Size(413, 6);
-            this.lblSelectedMapContentPack.TabIndex = 0;
-            this.lblSelectedMapContentPack.Text = "   ";
-            this.lblSelectedMapContentPack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblHeader.BackColor = System.Drawing.Color.Aqua;
+            this.lblHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeader.Location = new System.Drawing.Point(-2, 0);
+            this.lblHeader.Name = "lblHeader";
+            this.lblHeader.Size = new System.Drawing.Size(413, 6);
+            this.lblHeader.TabIndex = 0;
+            this.lblHeader.Text = "   ";
+            this.lblHeader.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // btnCancel
             // 
@@ -119,33 +146,6 @@ namespace ARKViewer
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // txtName
-            // 
-            this.txtName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtName.Location = new System.Drawing.Point(18, 93);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(330, 20);
-            this.txtName.TabIndex = 3;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Filename";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 75);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(68, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Offline Name";
-            // 
             // frmAddLocalARK
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -154,7 +154,7 @@ namespace ARKViewer
             this.ClientSize = new System.Drawing.Size(434, 211);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.grpWrapper);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximumSize = new System.Drawing.Size(450, 250);
             this.MinimumSize = new System.Drawing.Size(450, 250);
@@ -162,22 +162,22 @@ namespace ARKViewer
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add ARK Save File";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAddLocalARK_FormClosed);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.grpWrapper.ResumeLayout(false);
+            this.grpWrapper.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grpWrapper;
         private System.Windows.Forms.Button btnAddARK;
-        private System.Windows.Forms.TextBox txtARKFilename;
-        private System.Windows.Forms.Label lblSelectedMapContentPack;
+        private System.Windows.Forms.TextBox txtFilename;
+        private System.Windows.Forms.Label lblHeader;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblOfflineName;
+        private System.Windows.Forms.Label lblFilename;
         private System.Windows.Forms.TextBox txtName;
     }
 }

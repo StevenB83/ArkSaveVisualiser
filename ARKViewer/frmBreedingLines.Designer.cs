@@ -33,10 +33,10 @@ namespace ARKViewer
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmBreedingLines));
             this.cboGeneration = new System.Windows.Forms.ComboBox();
             this.lblGeneration = new System.Windows.Forms.Label();
-            this.lblPlayerLevelLabel = new System.Windows.Forms.Label();
-            this.lblPlayerLevel = new System.Windows.Forms.Label();
+            this.lblLevelLabel = new System.Windows.Forms.Label();
+            this.lblLevel = new System.Windows.Forms.Label();
             this.lblTribeName = new System.Windows.Forms.Label();
-            this.lblPlayerName = new System.Windows.Forms.Label();
+            this.lblName = new System.Windows.Forms.Label();
             this.lblWindowTitle = new System.Windows.Forms.Label();
             this.picWindowIcon = new System.Windows.Forms.PictureBox();
             this.btnCopyCommandTamed = new System.Windows.Forms.Button();
@@ -72,42 +72,42 @@ namespace ARKViewer
             this.lvwTameDetail_MutationsFemale = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTameDetail_MutationsMale = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTameDetail_Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.pnlStatTypes = new System.Windows.Forms.Panel();
             this.lblStats = new System.Windows.Forms.Label();
             this.optStatsTamed = new System.Windows.Forms.RadioButton();
             this.optStatsBase = new System.Windows.Forms.RadioButton();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lvwTame = new System.Windows.Forms.ListView();
-            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lvwTame_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Base = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Level = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Lon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Hp = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Stam = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Melee = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Weight = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Food = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Oxy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Craft = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Server = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Tamer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Imprinter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Imprint = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Stored = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_C0 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_C1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_C2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_C3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_C4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_C5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_MutF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_MutM = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTame_Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabBreeding = new System.Windows.Forms.TabControl();
+            this.tpgAncestors = new System.Windows.Forms.TabPage();
+            this.tpgTamed = new System.Windows.Forms.TabPage();
             this.btnTameCopyCommand = new System.Windows.Forms.Button();
             this.lblTameCommand = new System.Windows.Forms.Label();
             this.cboTameCommand = new System.Windows.Forms.ComboBox();
@@ -143,7 +143,7 @@ namespace ARKViewer
             this.tameLovers_MutF = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tameLovers_MutM = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tameLovers_Id = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tpgWild = new System.Windows.Forms.TabPage();
             this.btnWildCopyCommand = new System.Windows.Forms.Button();
             this.lblWildCommand = new System.Windows.Forms.Label();
             this.cboWildCommand = new System.Windows.Forms.ComboBox();
@@ -171,11 +171,11 @@ namespace ARKViewer
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnClose = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picWindowIcon)).BeginInit();
-            this.panel3.SuspendLayout();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
+            this.pnlStatTypes.SuspendLayout();
+            this.tabBreeding.SuspendLayout();
+            this.tpgAncestors.SuspendLayout();
+            this.tpgTamed.SuspendLayout();
+            this.tpgWild.SuspendLayout();
             this.SuspendLayout();
             // 
             // cboGeneration
@@ -198,26 +198,26 @@ namespace ARKViewer
             this.lblGeneration.TabIndex = 16;
             this.lblGeneration.Text = "Generation:";
             // 
-            // lblPlayerLevelLabel
+            // lblLevelLabel
             // 
-            this.lblPlayerLevelLabel.AutoSize = true;
-            this.lblPlayerLevelLabel.ForeColor = System.Drawing.Color.DarkGray;
-            this.lblPlayerLevelLabel.Location = new System.Drawing.Point(12, 16);
-            this.lblPlayerLevelLabel.Name = "lblPlayerLevelLabel";
-            this.lblPlayerLevelLabel.Size = new System.Drawing.Size(70, 13);
-            this.lblPlayerLevelLabel.TabIndex = 21;
-            this.lblPlayerLevelLabel.Text = "Current Level";
+            this.lblLevelLabel.AutoSize = true;
+            this.lblLevelLabel.ForeColor = System.Drawing.Color.DarkGray;
+            this.lblLevelLabel.Location = new System.Drawing.Point(12, 16);
+            this.lblLevelLabel.Name = "lblLevelLabel";
+            this.lblLevelLabel.Size = new System.Drawing.Size(70, 13);
+            this.lblLevelLabel.TabIndex = 21;
+            this.lblLevelLabel.Text = "Current Level";
             // 
-            // lblPlayerLevel
+            // lblLevel
             // 
-            this.lblPlayerLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerLevel.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblPlayerLevel.Location = new System.Drawing.Point(13, 29);
-            this.lblPlayerLevel.Name = "lblPlayerLevel";
-            this.lblPlayerLevel.Size = new System.Drawing.Size(62, 19);
-            this.lblPlayerLevel.TabIndex = 22;
-            this.lblPlayerLevel.Text = "135";
-            this.lblPlayerLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblLevel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLevel.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblLevel.Location = new System.Drawing.Point(13, 29);
+            this.lblLevel.Name = "lblLevel";
+            this.lblLevel.Size = new System.Drawing.Size(62, 19);
+            this.lblLevel.TabIndex = 22;
+            this.lblLevel.Text = "135";
+            this.lblLevel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblTribeName
             // 
@@ -226,26 +226,26 @@ namespace ARKViewer
             this.lblTribeName.AutoSize = true;
             this.lblTribeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTribeName.ForeColor = System.Drawing.Color.DimGray;
-            this.lblTribeName.Location = new System.Drawing.Point(100, 40);
+            this.lblTribeName.Location = new System.Drawing.Point(100, 39);
             this.lblTribeName.Name = "lblTribeName";
             this.lblTribeName.Size = new System.Drawing.Size(90, 16);
             this.lblTribeName.TabIndex = 20;
             this.lblTribeName.Text = "Tribe Name";
             this.lblTribeName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // lblPlayerName
+            // lblName
             // 
-            this.lblPlayerName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.lblName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lblPlayerName.AutoSize = true;
-            this.lblPlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPlayerName.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblPlayerName.Location = new System.Drawing.Point(98, 9);
-            this.lblPlayerName.Name = "lblPlayerName";
-            this.lblPlayerName.Size = new System.Drawing.Size(170, 25);
-            this.lblPlayerName.TabIndex = 19;
-            this.lblPlayerName.Text = "Creature Name";
-            this.lblPlayerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblName.AutoSize = true;
+            this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblName.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblName.Location = new System.Drawing.Point(98, 9);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(170, 25);
+            this.lblName.TabIndex = 19;
+            this.lblName.Text = "Creature Name";
+            this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblWindowTitle
             // 
@@ -499,17 +499,17 @@ namespace ARKViewer
             this.lvwTameDetail_Id.Text = "Id";
             this.lvwTameDetail_Id.Width = 0;
             // 
-            // panel3
+            // pnlStatTypes
             // 
-            this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.lblStats);
-            this.panel3.Controls.Add(this.optStatsTamed);
-            this.panel3.Controls.Add(this.optStatsBase);
-            this.panel3.Location = new System.Drawing.Point(15, 482);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(175, 34);
-            this.panel3.TabIndex = 37;
+            this.pnlStatTypes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pnlStatTypes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlStatTypes.Controls.Add(this.lblStats);
+            this.pnlStatTypes.Controls.Add(this.optStatsTamed);
+            this.pnlStatTypes.Controls.Add(this.optStatsBase);
+            this.pnlStatTypes.Location = new System.Drawing.Point(15, 482);
+            this.pnlStatTypes.Name = "pnlStatTypes";
+            this.pnlStatTypes.Size = new System.Drawing.Size(175, 34);
+            this.pnlStatTypes.TabIndex = 37;
             // 
             // lblStats
             // 
@@ -563,33 +563,33 @@ namespace ARKViewer
             this.lvwTame.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwTame.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader4,
-            this.columnHeader5,
-            this.columnHeader6,
-            this.columnHeader7,
-            this.columnHeader8,
-            this.columnHeader9,
-            this.columnHeader10,
-            this.columnHeader11,
-            this.columnHeader12,
-            this.columnHeader13,
-            this.columnHeader14,
-            this.columnHeader15,
-            this.columnHeader16,
-            this.columnHeader17,
-            this.columnHeader18,
-            this.columnHeader19,
-            this.columnHeader20,
-            this.columnHeader21,
-            this.columnHeader22,
-            this.columnHeader23,
-            this.columnHeader24,
-            this.columnHeader25,
-            this.columnHeader26,
-            this.columnHeader27,
-            this.columnHeader28,
-            this.columnHeader29});
+            this.lvwTame_Sex,
+            this.lvwTame_Base,
+            this.lvwTame_Level,
+            this.lvwTame_Lat,
+            this.lvwTame_Lon,
+            this.lvwTame_Hp,
+            this.lvwTame_Stam,
+            this.lvwTame_Melee,
+            this.lvwTame_Weight,
+            this.lvwTame_Speed,
+            this.lvwTame_Food,
+            this.lvwTame_Oxy,
+            this.lvwTame_Craft,
+            this.lvwTame_Server,
+            this.lvwTame_Tamer,
+            this.lvwTame_Imprinter,
+            this.lvwTame_Imprint,
+            this.lvwTame_Stored,
+            this.lvwTame_C0,
+            this.lvwTame_C1,
+            this.lvwTame_C2,
+            this.lvwTame_C3,
+            this.lvwTame_C4,
+            this.lvwTame_C5,
+            this.lvwTame_MutF,
+            this.lvwTame_MutM,
+            this.lvwTame_Id});
             this.lvwTame.FullRowSelect = true;
             this.lvwTame.HideSelection = false;
             this.lvwTame.Location = new System.Drawing.Point(14, 62);
@@ -600,181 +600,181 @@ namespace ARKViewer
             this.lvwTame.UseCompatibleStateImageBehavior = false;
             this.lvwTame.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader3
+            // lvwTame_Sex
             // 
-            this.columnHeader3.Text = "Sex";
+            this.lvwTame_Sex.Text = "Sex";
             // 
-            // columnHeader4
+            // lvwTame_Base
             // 
-            this.columnHeader4.Text = "Base";
-            this.columnHeader4.Width = 50;
+            this.lvwTame_Base.Text = "Base";
+            this.lvwTame_Base.Width = 50;
             // 
-            // columnHeader5
+            // lvwTame_Level
             // 
-            this.columnHeader5.Text = "Lvl";
-            this.columnHeader5.Width = 41;
+            this.lvwTame_Level.Text = "Lvl";
+            this.lvwTame_Level.Width = 41;
             // 
-            // columnHeader6
+            // lvwTame_Lat
             // 
-            this.columnHeader6.Text = "Lat";
-            this.columnHeader6.Width = 58;
+            this.lvwTame_Lat.Text = "Lat";
+            this.lvwTame_Lat.Width = 58;
             // 
-            // columnHeader7
+            // lvwTame_Lon
             // 
-            this.columnHeader7.Text = "Lon";
-            this.columnHeader7.Width = 57;
+            this.lvwTame_Lon.Text = "Lon";
+            this.lvwTame_Lon.Width = 57;
             // 
-            // columnHeader8
+            // lvwTame_Hp
             // 
-            this.columnHeader8.Text = "HP";
-            this.columnHeader8.Width = 45;
+            this.lvwTame_Hp.Text = "HP";
+            this.lvwTame_Hp.Width = 45;
             // 
-            // columnHeader9
+            // lvwTame_Stam
             // 
-            this.columnHeader9.Text = "Stam";
-            this.columnHeader9.Width = 45;
+            this.lvwTame_Stam.Text = "Stam";
+            this.lvwTame_Stam.Width = 45;
             // 
-            // columnHeader10
+            // lvwTame_Melee
             // 
-            this.columnHeader10.Text = "Melee";
-            this.columnHeader10.Width = 48;
+            this.lvwTame_Melee.Text = "Melee";
+            this.lvwTame_Melee.Width = 48;
             // 
-            // columnHeader11
+            // lvwTame_Weight
             // 
-            this.columnHeader11.Text = "Weight";
-            this.columnHeader11.Width = 55;
+            this.lvwTame_Weight.Text = "Weight";
+            this.lvwTame_Weight.Width = 55;
             // 
-            // columnHeader12
+            // lvwTame_Speed
             // 
-            this.columnHeader12.Text = "Speed";
-            this.columnHeader12.Width = 50;
+            this.lvwTame_Speed.Text = "Speed";
+            this.lvwTame_Speed.Width = 50;
             // 
-            // columnHeader13
+            // lvwTame_Food
             // 
-            this.columnHeader13.Text = "Food";
-            this.columnHeader13.Width = 47;
+            this.lvwTame_Food.Text = "Food";
+            this.lvwTame_Food.Width = 47;
             // 
-            // columnHeader14
+            // lvwTame_Oxy
             // 
-            this.columnHeader14.Text = "Oxygen";
-            this.columnHeader14.Width = 53;
+            this.lvwTame_Oxy.Text = "Oxygen";
+            this.lvwTame_Oxy.Width = 53;
             // 
-            // columnHeader15
+            // lvwTame_Craft
             // 
-            this.columnHeader15.Text = "Craft";
-            this.columnHeader15.Width = 50;
+            this.lvwTame_Craft.Text = "Craft";
+            this.lvwTame_Craft.Width = 50;
             // 
-            // columnHeader16
+            // lvwTame_Server
             // 
-            this.columnHeader16.Text = "Server";
-            this.columnHeader16.Width = 150;
+            this.lvwTame_Server.Text = "Server";
+            this.lvwTame_Server.Width = 150;
             // 
-            // columnHeader17
+            // lvwTame_Tamer
             // 
-            this.columnHeader17.Text = "Tamer";
-            this.columnHeader17.Width = 105;
+            this.lvwTame_Tamer.Text = "Tamer";
+            this.lvwTame_Tamer.Width = 105;
             // 
-            // columnHeader18
+            // lvwTame_Imprinter
             // 
-            this.columnHeader18.Text = "Imprinter";
-            this.columnHeader18.Width = 105;
+            this.lvwTame_Imprinter.Text = "Imprinter";
+            this.lvwTame_Imprinter.Width = 105;
             // 
-            // columnHeader19
+            // lvwTame_Imprint
             // 
-            this.columnHeader19.Text = "Imprint";
+            this.lvwTame_Imprint.Text = "Imprint";
             // 
-            // columnHeader20
+            // lvwTame_Stored
             // 
-            this.columnHeader20.Text = "Stored";
+            this.lvwTame_Stored.Text = "Stored";
             // 
-            // columnHeader21
+            // lvwTame_C0
             // 
-            this.columnHeader21.Text = "C0";
-            this.columnHeader21.Width = 35;
+            this.lvwTame_C0.Text = "C0";
+            this.lvwTame_C0.Width = 35;
             // 
-            // columnHeader22
+            // lvwTame_C1
             // 
-            this.columnHeader22.Text = "C1";
-            this.columnHeader22.Width = 35;
+            this.lvwTame_C1.Text = "C1";
+            this.lvwTame_C1.Width = 35;
             // 
-            // columnHeader23
+            // lvwTame_C2
             // 
-            this.columnHeader23.Text = "C2";
-            this.columnHeader23.Width = 35;
+            this.lvwTame_C2.Text = "C2";
+            this.lvwTame_C2.Width = 35;
             // 
-            // columnHeader24
+            // lvwTame_C3
             // 
-            this.columnHeader24.Text = "C3";
-            this.columnHeader24.Width = 35;
+            this.lvwTame_C3.Text = "C3";
+            this.lvwTame_C3.Width = 35;
             // 
-            // columnHeader25
+            // lvwTame_C4
             // 
-            this.columnHeader25.Text = "C4";
-            this.columnHeader25.Width = 35;
+            this.lvwTame_C4.Text = "C4";
+            this.lvwTame_C4.Width = 35;
             // 
-            // columnHeader26
+            // lvwTame_C5
             // 
-            this.columnHeader26.Text = "C5";
-            this.columnHeader26.Width = 35;
+            this.lvwTame_C5.Text = "C5";
+            this.lvwTame_C5.Width = 35;
             // 
-            // columnHeader27
+            // lvwTame_MutF
             // 
-            this.columnHeader27.Text = "Mut (F)";
+            this.lvwTame_MutF.Text = "Mut (F)";
             // 
-            // columnHeader28
+            // lvwTame_MutM
             // 
-            this.columnHeader28.Text = "Mut (M)";
+            this.lvwTame_MutM.Text = "Mut (M)";
             // 
-            // columnHeader29
+            // lvwTame_Id
             // 
-            this.columnHeader29.Text = "Id";
-            this.columnHeader29.Width = 0;
+            this.lvwTame_Id.Text = "Id";
+            this.lvwTame_Id.Width = 0;
             // 
-            // tabControl1
+            // tabBreeding
             // 
-            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tabBreeding.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Location = new System.Drawing.Point(14, 153);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(922, 324);
-            this.tabControl1.TabIndex = 43;
+            this.tabBreeding.Controls.Add(this.tpgAncestors);
+            this.tabBreeding.Controls.Add(this.tpgTamed);
+            this.tabBreeding.Controls.Add(this.tpgWild);
+            this.tabBreeding.Location = new System.Drawing.Point(14, 153);
+            this.tabBreeding.Name = "tabBreeding";
+            this.tabBreeding.SelectedIndex = 0;
+            this.tabBreeding.Size = new System.Drawing.Size(922, 324);
+            this.tabBreeding.TabIndex = 43;
             // 
-            // tabPage1
+            // tpgAncestors
             // 
-            this.tabPage1.Controls.Add(this.lvwTameDetail);
-            this.tabPage1.Controls.Add(this.cboGeneration);
-            this.tabPage1.Controls.Add(this.btnCopyCommandTamed);
-            this.tabPage1.Controls.Add(this.lblGeneration);
-            this.tabPage1.Controls.Add(this.lblTamedCommand);
-            this.tabPage1.Controls.Add(this.cboConsoleCommandsTamed);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(914, 298);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Ancestors";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpgAncestors.Controls.Add(this.lvwTameDetail);
+            this.tpgAncestors.Controls.Add(this.cboGeneration);
+            this.tpgAncestors.Controls.Add(this.btnCopyCommandTamed);
+            this.tpgAncestors.Controls.Add(this.lblGeneration);
+            this.tpgAncestors.Controls.Add(this.lblTamedCommand);
+            this.tpgAncestors.Controls.Add(this.cboConsoleCommandsTamed);
+            this.tpgAncestors.Location = new System.Drawing.Point(4, 22);
+            this.tpgAncestors.Name = "tpgAncestors";
+            this.tpgAncestors.Padding = new System.Windows.Forms.Padding(3);
+            this.tpgAncestors.Size = new System.Drawing.Size(914, 298);
+            this.tpgAncestors.TabIndex = 0;
+            this.tpgAncestors.Text = "Ancestors";
+            this.tpgAncestors.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tpgTamed
             // 
-            this.tabPage2.Controls.Add(this.btnTameCopyCommand);
-            this.tabPage2.Controls.Add(this.lblTameCommand);
-            this.tabPage2.Controls.Add(this.cboTameCommand);
-            this.tabPage2.Controls.Add(this.btnTameSettings);
-            this.tabPage2.Controls.Add(this.chkAllTribes);
-            this.tabPage2.Controls.Add(this.lvwTameLovers);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(914, 298);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Tamed Lovers";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpgTamed.Controls.Add(this.btnTameCopyCommand);
+            this.tpgTamed.Controls.Add(this.lblTameCommand);
+            this.tpgTamed.Controls.Add(this.cboTameCommand);
+            this.tpgTamed.Controls.Add(this.btnTameSettings);
+            this.tpgTamed.Controls.Add(this.chkAllTribes);
+            this.tpgTamed.Controls.Add(this.lvwTameLovers);
+            this.tpgTamed.Location = new System.Drawing.Point(4, 22);
+            this.tpgTamed.Name = "tpgTamed";
+            this.tpgTamed.Padding = new System.Windows.Forms.Padding(3);
+            this.tpgTamed.Size = new System.Drawing.Size(914, 298);
+            this.tpgTamed.TabIndex = 1;
+            this.tpgTamed.Text = "Tamed Lovers";
+            this.tpgTamed.UseVisualStyleBackColor = true;
             // 
             // btnTameCopyCommand
             // 
@@ -1028,19 +1028,19 @@ namespace ARKViewer
             this.tameLovers_Id.Text = "Id";
             this.tameLovers_Id.Width = 0;
             // 
-            // tabPage3
+            // tpgWild
             // 
-            this.tabPage3.Controls.Add(this.btnWildCopyCommand);
-            this.tabPage3.Controls.Add(this.lblWildCommand);
-            this.tabPage3.Controls.Add(this.cboWildCommand);
-            this.tabPage3.Controls.Add(this.btnWildSettings);
-            this.tabPage3.Controls.Add(this.lvwWildLovers);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(914, 298);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Wild Lovers";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tpgWild.Controls.Add(this.btnWildCopyCommand);
+            this.tpgWild.Controls.Add(this.lblWildCommand);
+            this.tpgWild.Controls.Add(this.cboWildCommand);
+            this.tpgWild.Controls.Add(this.btnWildSettings);
+            this.tpgWild.Controls.Add(this.lvwWildLovers);
+            this.tpgWild.Location = new System.Drawing.Point(4, 22);
+            this.tpgWild.Name = "tpgWild";
+            this.tpgWild.Size = new System.Drawing.Size(914, 298);
+            this.tpgWild.TabIndex = 2;
+            this.tpgWild.Text = "Wild Lovers";
+            this.tpgWild.UseVisualStyleBackColor = true;
             // 
             // btnWildCopyCommand
             // 
@@ -1240,14 +1240,14 @@ namespace ARKViewer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 528);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.tabBreeding);
             this.Controls.Add(this.lvwTame);
             this.Controls.Add(this.lblStatus);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.lblPlayerLevelLabel);
-            this.Controls.Add(this.lblPlayerLevel);
+            this.Controls.Add(this.pnlStatTypes);
+            this.Controls.Add(this.lblLevelLabel);
+            this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.lblTribeName);
-            this.Controls.Add(this.lblPlayerName);
+            this.Controls.Add(this.lblName);
             this.Controls.Add(this.lblWindowTitle);
             this.Controls.Add(this.picWindowIcon);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -1259,14 +1259,14 @@ namespace ARKViewer
             this.Text = " ";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmAncestorView_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.picWindowIcon)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
-            this.tabPage3.ResumeLayout(false);
+            this.pnlStatTypes.ResumeLayout(false);
+            this.pnlStatTypes.PerformLayout();
+            this.tabBreeding.ResumeLayout(false);
+            this.tpgAncestors.ResumeLayout(false);
+            this.tpgAncestors.PerformLayout();
+            this.tpgTamed.ResumeLayout(false);
+            this.tpgTamed.PerformLayout();
+            this.tpgWild.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1275,10 +1275,10 @@ namespace ARKViewer
         #endregion
         private System.Windows.Forms.ComboBox cboGeneration;
         private System.Windows.Forms.Label lblGeneration;
-        private System.Windows.Forms.Label lblPlayerLevelLabel;
-        private System.Windows.Forms.Label lblPlayerLevel;
+        private System.Windows.Forms.Label lblLevelLabel;
+        private System.Windows.Forms.Label lblLevel;
         private System.Windows.Forms.Label lblTribeName;
-        private System.Windows.Forms.Label lblPlayerName;
+        private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblWindowTitle;
         private System.Windows.Forms.PictureBox picWindowIcon;
         private System.Windows.Forms.Button btnCopyCommandTamed;
@@ -1314,43 +1314,43 @@ namespace ARKViewer
         private System.Windows.Forms.ColumnHeader lvwTameDetail_MutationsFemale;
         private System.Windows.Forms.ColumnHeader lvwTameDetail_MutationsMale;
         private System.Windows.Forms.ColumnHeader lvwTameDetail_Id;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel pnlStatTypes;
         private System.Windows.Forms.Label lblStats;
         private System.Windows.Forms.RadioButton optStatsTamed;
         private System.Windows.Forms.RadioButton optStatsBase;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.ListView lvwTame;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
-        private System.Windows.Forms.ColumnHeader columnHeader6;
-        private System.Windows.Forms.ColumnHeader columnHeader7;
-        private System.Windows.Forms.ColumnHeader columnHeader8;
-        private System.Windows.Forms.ColumnHeader columnHeader9;
-        private System.Windows.Forms.ColumnHeader columnHeader10;
-        private System.Windows.Forms.ColumnHeader columnHeader11;
-        private System.Windows.Forms.ColumnHeader columnHeader12;
-        private System.Windows.Forms.ColumnHeader columnHeader13;
-        private System.Windows.Forms.ColumnHeader columnHeader14;
-        private System.Windows.Forms.ColumnHeader columnHeader15;
-        private System.Windows.Forms.ColumnHeader columnHeader16;
-        private System.Windows.Forms.ColumnHeader columnHeader17;
-        private System.Windows.Forms.ColumnHeader columnHeader18;
-        private System.Windows.Forms.ColumnHeader columnHeader19;
-        private System.Windows.Forms.ColumnHeader columnHeader20;
-        private System.Windows.Forms.ColumnHeader columnHeader21;
-        private System.Windows.Forms.ColumnHeader columnHeader22;
-        private System.Windows.Forms.ColumnHeader columnHeader23;
-        private System.Windows.Forms.ColumnHeader columnHeader24;
-        private System.Windows.Forms.ColumnHeader columnHeader25;
-        private System.Windows.Forms.ColumnHeader columnHeader26;
-        private System.Windows.Forms.ColumnHeader columnHeader27;
-        private System.Windows.Forms.ColumnHeader columnHeader28;
-        private System.Windows.Forms.ColumnHeader columnHeader29;
-        private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.ColumnHeader lvwTame_Sex;
+        private System.Windows.Forms.ColumnHeader lvwTame_Base;
+        private System.Windows.Forms.ColumnHeader lvwTame_Level;
+        private System.Windows.Forms.ColumnHeader lvwTame_Lat;
+        private System.Windows.Forms.ColumnHeader lvwTame_Lon;
+        private System.Windows.Forms.ColumnHeader lvwTame_Hp;
+        private System.Windows.Forms.ColumnHeader lvwTame_Stam;
+        private System.Windows.Forms.ColumnHeader lvwTame_Melee;
+        private System.Windows.Forms.ColumnHeader lvwTame_Weight;
+        private System.Windows.Forms.ColumnHeader lvwTame_Speed;
+        private System.Windows.Forms.ColumnHeader lvwTame_Food;
+        private System.Windows.Forms.ColumnHeader lvwTame_Oxy;
+        private System.Windows.Forms.ColumnHeader lvwTame_Craft;
+        private System.Windows.Forms.ColumnHeader lvwTame_Server;
+        private System.Windows.Forms.ColumnHeader lvwTame_Tamer;
+        private System.Windows.Forms.ColumnHeader lvwTame_Imprinter;
+        private System.Windows.Forms.ColumnHeader lvwTame_Imprint;
+        private System.Windows.Forms.ColumnHeader lvwTame_Stored;
+        private System.Windows.Forms.ColumnHeader lvwTame_C0;
+        private System.Windows.Forms.ColumnHeader lvwTame_C1;
+        private System.Windows.Forms.ColumnHeader lvwTame_C2;
+        private System.Windows.Forms.ColumnHeader lvwTame_C3;
+        private System.Windows.Forms.ColumnHeader lvwTame_C4;
+        private System.Windows.Forms.ColumnHeader lvwTame_C5;
+        private System.Windows.Forms.ColumnHeader lvwTame_MutF;
+        private System.Windows.Forms.ColumnHeader lvwTame_MutM;
+        private System.Windows.Forms.ColumnHeader lvwTame_Id;
+        private System.Windows.Forms.TabControl tabBreeding;
+        private System.Windows.Forms.TabPage tpgAncestors;
+        private System.Windows.Forms.TabPage tpgTamed;
+        private System.Windows.Forms.TabPage tpgWild;
         private System.Windows.Forms.CheckBox chkAllTribes;
         private System.Windows.Forms.ListView lvwTameLovers;
         private System.Windows.Forms.ColumnHeader tameLovers_Name;

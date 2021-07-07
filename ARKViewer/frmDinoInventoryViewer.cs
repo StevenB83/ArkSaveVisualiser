@@ -100,8 +100,8 @@ namespace ARKViewer
                 }
             }
 
-            lblPlayerName.Text = dinoName;
-            lblPlayerLevel.Text = tame.Level.ToString();
+            lblName.Text = dinoName;
+            lblLevel.Text = tame.Level.ToString();
             lblTribeName.Text = tame.TribeName;
 
 
@@ -140,6 +140,7 @@ namespace ARKViewer
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(invItem.Quality);
+                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
                             newItem.SubItems.Add(invItem.Quantity.ToString());
                             newItem.ImageIndex = itemIcon - 1;
 
