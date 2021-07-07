@@ -4652,6 +4652,11 @@ namespace ARKViewer
                     if (addItem)
                     {
                         ASVComboValue valuePair = new ASVComboValue(player.Id.ToString(), player.CharacterName);
+
+                        if (player.CharacterName == null)
+                        {
+
+                        }
                         newItems.Add(valuePair);
 
                     }
@@ -5420,6 +5425,11 @@ namespace ARKViewer
                     item.SubItems.Add(detail.Id.ToString());
                     item.SubItems.Add(Math.Round(detail.WildScale, 1).ToString("f1"));
 
+                    string rig1Name = Program.ProgramConfig.ItemMap.FirstOrDefault(x => x.ClassName == detail.Rig1)?.DisplayName ?? detail.Rig1;
+                    string rig2Name = Program.ProgramConfig.ItemMap.FirstOrDefault(x => x.ClassName == detail.Rig2)?.DisplayName ?? detail.Rig2;
+                    item.SubItems.Add(rig1Name);
+                    item.SubItems.Add(rig2Name);
+
                     if (detail.Id == selectedId)
                     {
 
@@ -5609,6 +5619,14 @@ namespace ARKViewer
                     item.SubItems.Add(detail.Id.ToString());
                     item.SubItems.Add(Math.Round(detail.WildScale,1).ToString("f1"));
 
+
+
+                    string rig1Name = Program.ProgramConfig.ItemMap.FirstOrDefault(x=>x.ClassName == detail.Rig1)?.DisplayName ?? detail.Rig1;
+                    string rig2Name = Program.ProgramConfig.ItemMap.FirstOrDefault(x => x.ClassName == detail.Rig2)?.DisplayName ?? detail.Rig2;
+                    item.SubItems.Add(rig1Name);
+                    item.SubItems.Add(rig2Name);
+
+
                     if (detail.Id == selectedId)
                     {
 
@@ -5616,6 +5634,8 @@ namespace ARKViewer
                         selectedX = (decimal)Math.Round(detail.Longitude.Value, 2);
                         selectedY = (decimal)Math.Round(detail.Latitude.Value, 2);
                     }
+
+
 
                     listItems.Add(item);
                 });
@@ -5879,6 +5899,186 @@ namespace ARKViewer
 
             this.Cursor = Cursors.Default;
             btnSaveChartTames.Enabled = true;
+        }
+
+        private void FindNextWild()
+        {
+            string searchString = txtFilterWild.Text.Trim().ToLower();
+            int currentItemIndex = 0;
+            int maxItemIndex = lvwWildDetail.Items.Count - 1;
+            if (lvwWildDetail.SelectedItems.Count > 0) currentItemIndex = lvwWildDetail.SelectedItems[0].Index;
+
+            for(int nextIndex = currentItemIndex+1; nextIndex <= maxItemIndex; nextIndex++)
+            {
+                bool searchFound = lvwWildDetail.Items[nextIndex].SubItems.Cast<ListViewItem.ListViewSubItem>().Any(x => x.Text.ToLower().Contains(searchString));
+                if (searchFound)
+                {
+                    lvwWildDetail.SelectedItems.Clear();
+                    lvwWildDetail.Items[nextIndex].Selected = true;
+                    lvwWildDetail.EnsureVisible(nextIndex);
+                    break;
+                }
+            }
+
+        }
+
+        private void FindNextTamed()
+        {
+            string searchString = txtFilterTamed.Text.Trim().ToLower();
+            int currentItemIndex = 0;
+            int maxItemIndex = lvwTameDetail.Items.Count - 1;
+            if (lvwTameDetail.SelectedItems.Count > 0) currentItemIndex = lvwTameDetail.SelectedItems[0].Index;
+
+            for (int nextIndex = currentItemIndex + 1; nextIndex <= maxItemIndex; nextIndex++)
+            {
+                bool searchFound = lvwTameDetail.Items[nextIndex].SubItems.Cast<ListViewItem.ListViewSubItem>().Any(x => x.Text.ToLower().Contains(searchString));
+                if (searchFound)
+                {
+                    lvwTameDetail.SelectedItems.Clear();
+                    lvwTameDetail.Items[nextIndex].Selected = true;
+                    lvwTameDetail.EnsureVisible(nextIndex);
+                    break;
+                }
+            }
+
+        }
+
+        private void FindNextStructure()
+        {
+            string searchString = txtFilterStructures.Text.Trim().ToLower();
+            int currentItemIndex = 0;
+            int maxItemIndex = lvwStructureLocations.Items.Count - 1;
+            if (lvwStructureLocations.SelectedItems.Count > 0) currentItemIndex = lvwStructureLocations.SelectedItems[0].Index;
+
+            for (int nextIndex = currentItemIndex + 1; nextIndex <= maxItemIndex; nextIndex++)
+            {
+                bool searchFound = lvwStructureLocations.Items[nextIndex].SubItems.Cast<ListViewItem.ListViewSubItem>().Any(x => x.Text.ToLower().Contains(searchString));
+                if (searchFound)
+                {
+                    lvwStructureLocations.SelectedItems.Clear();
+                    lvwStructureLocations.Items[nextIndex].Selected = true;
+                    lvwStructureLocations.EnsureVisible(nextIndex);
+                    break;
+                }
+            }
+
+        }
+
+        private void FindNextDropped()
+        {
+            string searchString = txtFilterDropped.Text.Trim().ToLower();
+            int currentItemIndex = 0;
+            int maxItemIndex = lvwDroppedItems.Items.Count - 1;
+            if (lvwDroppedItems.SelectedItems.Count > 0) currentItemIndex = lvwDroppedItems.SelectedItems[0].Index;
+
+            for (int nextIndex = currentItemIndex + 1; nextIndex <= maxItemIndex; nextIndex++)
+            {
+                bool searchFound = lvwDroppedItems.Items[nextIndex].SubItems.Cast<ListViewItem.ListViewSubItem>().Any(x => x.Text.ToLower().Contains(searchString));
+                if (searchFound)
+                {
+                    lvwDroppedItems.SelectedItems.Clear();
+                    lvwDroppedItems.Items[nextIndex].Selected = true;
+                    lvwDroppedItems.EnsureVisible(nextIndex);
+                    break;
+                }
+            }
+
+        }
+
+        private void FindNextSearched()
+        {
+            string searchString = txtFilterSearch.Text.Trim().ToLower();
+            int currentItemIndex = 0;
+            int maxItemIndex = lvwItemList.Items.Count - 1;
+            if (lvwItemList.SelectedItems.Count > 0) currentItemIndex = lvwItemList.SelectedItems[0].Index;
+
+            for (int nextIndex = currentItemIndex + 1; nextIndex <= maxItemIndex; nextIndex++)
+            {
+                bool searchFound = lvwItemList.Items[nextIndex].SubItems.Cast<ListViewItem.ListViewSubItem>().Any(x => x.Text.ToLower().Contains(searchString));
+                if (searchFound)
+                {
+                    lvwItemList.SelectedItems.Clear();
+                    lvwItemList.Items[nextIndex].Selected = true;
+                    lvwItemList.EnsureVisible(nextIndex);
+                    break;
+                }
+            }
+
+        }
+
+        private void txtFilterWild_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
+            {
+                FindNextWild();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+        }
+
+        private void txtFilterTamed_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
+            {
+                FindNextTamed();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+        }
+
+        private void txtFilterStructures_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
+            {
+                FindNextStructure();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+        }
+
+        private void txtFilterDropped_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
+            {
+                FindNextDropped();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+        }
+
+        private void txtFilterSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
+            {
+                FindNextSearched();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+        }
+
+        private void btnFindTamed_Click(object sender, EventArgs e)
+        {
+            FindNextTamed();
+        }
+
+        private void btnFindStructures_Click(object sender, EventArgs e)
+        {
+            FindNextStructure();
+        }
+
+        private void btnFindDropped_Click(object sender, EventArgs e)
+        {
+            FindNextDropped();
+        }
+
+        private void btnFindSearched_Click(object sender, EventArgs e)
+        {
+            FindNextSearched();
         }
     }
 }

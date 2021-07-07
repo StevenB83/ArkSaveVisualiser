@@ -47,9 +47,10 @@ namespace ASVPack.Models
             TribeName = propertyList.GetPropertyValue<string>("TribeName");
 
             //logs
-            if (propertyList.HasAnyProperty("TribeLog"))
+            var tribeLogs = propertyList.GetTypedProperty<PropertyArray>("TribeLog");
+            if (tribeLogs!=null)
             {
-                IArkArray<string> tribeLogProp = (IArkArray<string>)propertyList.GetTypedProperty<PropertyArray>("TribeLog").Value;
+                IArkArray<string> tribeLogProp = (IArkArray<string>)tribeLogs.Value;
                 Logs = tribeLogProp.ToArray<string>();
             }
         }

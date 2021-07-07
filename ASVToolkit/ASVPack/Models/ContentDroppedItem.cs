@@ -41,9 +41,9 @@ namespace ASVPack.Models
                 Y = itemObject.Location?.Y;
                 Z = itemObject.Location?.Z;                  
             }
-            DroppedByName = itemObject.HasAnyProperty("OwnerName") ?itemObject.GetPropertyValue<string>("OwnerName") : itemObject.GetPropertyValue<string>("DroppedByName");
+            DroppedByName = itemObject.GetPropertyValue<string>("OwnerName") ?? itemObject.GetPropertyValue<string>("DroppedByName");
             DroppedByTribeId =  itemObject.GetPropertyValue<int>("TargetingTeam", 0, 0);
-            DroppedByPlayerId = itemObject.HasAnyProperty("LinkedPlayerDataID") ? itemObject.GetPropertyValue<long>("LinkedPlayerDataID") : itemObject.GetPropertyValue<long>("DroppedByPlayerID", 0, 0);
+            DroppedByPlayerId = itemObject.GetPropertyValue<long?>("LinkedPlayerDataID") ?? itemObject.GetPropertyValue<long>("DroppedByPlayerID", 0, 0);
             CreatedTimeInGame = itemObject.GetPropertyValue<double>("OriginalCreationTime", 0, 0);
 
         }

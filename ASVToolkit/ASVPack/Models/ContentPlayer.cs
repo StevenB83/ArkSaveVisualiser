@@ -62,7 +62,7 @@ namespace ASVPack.Models
             if (characterConfig != null)
             {
                 var playerConfig = (StructPropertyList)characterConfig.Value;
-                CharacterName = playerConfig.GetPropertyValue<string>("PlayerCharacterName");
+                CharacterName = playerConfig.GetPropertyValue<string>("PlayerCharacterName") ?? Name;
                 Gender = playerConfig.GetPropertyValue<bool>("bIsFemale") ? "Female" : "Male";
             }
 
@@ -87,26 +87,31 @@ namespace ASVPack.Models
 
             if (playerData.HasAnyProperty("LatestMissionScores"))
             {
-                var missionScores = (ArkArrayStruct)playerData.GetTypedProperty<PropertyArray>("LatestMissionScores").Value;
-                foreach (StructPropertyList propertyList in missionScores)
+                var missionScores = playerData.GetTypedProperty<PropertyArray>("LatestMissionScores");
+                if (missionScores != null)
                 {
-                    var bestScore = (StructPropertyList)propertyList.GetTypedProperty<PropertyStruct>("BestScore").Value;
 
-                    var newScore = new ContentMissionScore()
+                    foreach (StructPropertyList propertyList in (ArkArrayStruct)missionScores.Value)
                     {
-                        FullTag = bestScore.GetTypedProperty<PropertyName>("MissionTag").Value.Name
-                    };
+                        var bestScore = (StructPropertyList)propertyList.GetTypedProperty<PropertyStruct>("BestScore").Value;
 
-                    float floatValue = bestScore.GetPropertyValue<float>("FloatValue");
-                    int intValue = bestScore.GetPropertyValue<int>("IntValue");
+                        var newScore = new ContentMissionScore()
+                        {
+                            FullTag = bestScore.GetTypedProperty<PropertyName>("MissionTag").Value.Name
+                        };
 
-                    string stringScore = floatValue.ToString($"f{intValue}");
-                    decimal.TryParse(stringScore, out decimal highScore);
-                    newScore.HighScore = (decimal)highScore;
-                    newScore.FullTag = newScore.FullTag.Substring(newScore.MissionTag.LastIndexOf(".") + 1);
+                        float floatValue = bestScore.GetPropertyValue<float>("FloatValue");
+                        int intValue = bestScore.GetPropertyValue<int>("IntValue");
 
-                    MissionScores.Add(newScore);
+                        string stringScore = floatValue.ToString($"f{intValue}");
+                        decimal.TryParse(stringScore, out decimal highScore);
+                        newScore.HighScore = (decimal)highScore;
+                        newScore.FullTag = newScore.FullTag.Substring(newScore.MissionTag.LastIndexOf(".") + 1);
+
+                        MissionScores.Add(newScore);
+                    }
                 }
+                
             }
 
         }
@@ -131,7 +136,7 @@ namespace ASVPack.Models
             
             //get data
             HasGameFile = false;
-            Id = playerComponent.HasAnyProperty("PlayerDataID")?playerComponent.GetPropertyValue<long>("PlayerDataID"):playerComponent.GetPropertyValue<long>("LinkedPlayerDataID");
+            Id = playerComponent.GetPropertyValue<long?>("PlayerDataID") ?? playerComponent.GetPropertyValue<long>("LinkedPlayerDataID");
             TargetingTeam = playerComponent.GetPropertyValue<int>("TargetingTeam");
             Stats = new byte[12];
             if(statusComponent!=null)

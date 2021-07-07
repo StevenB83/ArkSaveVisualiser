@@ -33,8 +33,9 @@ namespace ASVPack.Models
         [DataMember] public float? X { get; set; }
         [DataMember] public float? Y { get; set; }
         [DataMember] public float? Z { get; set; }
-
         [DataMember] public float WildScale { get; set; } = 1;
+        [DataMember] public string Rig1 { get; set; } = "N/A";
+        [DataMember] public string Rig2 { get; set; } = "N/A";
 
         public override bool Equals(object obj)
         {
@@ -167,8 +168,19 @@ namespace ASVPack.Models
                     productionItems.Add("PrimalItemResource_ElementDust_C");
 
                     break;
+                case "TekStrider_Character_BP_C":
+                    //tek stryder rigs
+                    var inventComp = creatureObject.InventoryComponent();
+
+                    //EquippedItems
+
+
+
+                    break;
             }
             if (productionItems.Count > 0) ProductionResources = productionItems.ToArray();
+
+            
 
 
 
