@@ -45,6 +45,7 @@
             this.lblTribeName = new System.Windows.Forms.Label();
             this.lblPlayerName = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.picWindowIcon)).BeginInit();
             this.pnlCreatureInventory.SuspendLayout();
             this.SuspendLayout();
@@ -127,6 +128,7 @@
             this.columnHeader3,
             this.columnHeader1,
             this.columnHeader8,
+            this.columnHeader2,
             this.columnHeader12});
             this.lvwCreatureInventory.FullRowSelect = true;
             this.lvwCreatureInventory.HideSelection = false;
@@ -141,7 +143,7 @@
             // columnHeader3
             // 
             this.columnHeader3.Text = "Item";
-            this.columnHeader3.Width = 200;
+            this.columnHeader3.Width = 180;
             // 
             // columnHeader1
             // 
@@ -151,7 +153,7 @@
             // columnHeader8
             // 
             this.columnHeader8.Text = "Category";
-            this.columnHeader8.Width = 250;
+            this.columnHeader8.Width = 200;
             // 
             // columnHeader12
             // 
@@ -215,6 +217,11 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Quality";
+            this.columnHeader2.Width = 80;
+            // 
             // frmDinoInventoryViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -263,5 +270,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.CheckBox chkApplyFilterDinos;
         private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
     }
 }

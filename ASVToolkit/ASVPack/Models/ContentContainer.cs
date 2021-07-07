@@ -337,6 +337,7 @@ namespace ASVPack.Models
 
                                                 if (!item.IsEngram & !item.IsBlueprint)
                                                 {
+                                                   
                                                     inventoryItems.Add(item);
                                                 }
                                             }
@@ -619,7 +620,9 @@ namespace ASVPack.Models
                                                         var item = itemObject.AsItem();
                                                         if (!item.IsEngram)
                                                         {
+                                                            
                                                             inventoryItems.Add(item);
+
                                                         }
                                                     }
                                                 }
@@ -641,6 +644,7 @@ namespace ASVPack.Models
                                                         var item = itemObject.AsItem();
                                                         if (!item.IsEngram)
                                                         {
+                                                            
                                                             inventoryItems.Add(item);
                                                         }
                                                     }
@@ -658,9 +662,6 @@ namespace ASVPack.Models
 
                             }
                             );
-                        
-
-
                         }
                         //);
 
@@ -729,6 +730,7 @@ namespace ASVPack.Models
                                                 var item = itemObject.AsItem();
                                                 if (!item.IsEngram)
                                                 {
+                                                    
                                                     inventoryItems.Add(item);
                                                 }
                                             }
@@ -748,6 +750,7 @@ namespace ASVPack.Models
                                                 var item = itemObject.AsItem();
                                                 if (!item.IsEngram)
                                                 {
+                                                    
                                                     inventoryItems.Add(item);
                                                 }
                                             }
@@ -811,6 +814,7 @@ namespace ASVPack.Models
                                                 var item = itemObject.AsItem();
                                                 if (!item.IsEngram)
                                                 {
+                                                    
                                                     inventoryItems.Add(item);
                                                 }
                                             }
@@ -830,6 +834,7 @@ namespace ASVPack.Models
                                                 var item = itemObject.AsItem();
                                                 if (!item.IsEngram)
                                                 {
+                                                    
                                                     inventoryItems.Add(item);
                                                 }
                                             }
@@ -866,6 +871,8 @@ namespace ASVPack.Models
 
                                 droppedItem.Latitude = mapLatLonCalcs.Item1 + droppedItem.Y / mapLatLonCalcs.Item2;
                                 droppedItem.Longitude = mapLatLonCalcs.Item3 + droppedItem.X / mapLatLonCalcs.Item4;
+
+                                
 
                                 return droppedItem;
                             }).ToList()
@@ -910,6 +917,7 @@ namespace ASVPack.Models
                                                         var item = itemObject.AsItem();
                                                         if (!item.IsEngram)
                                                         {
+                                                            
                                                             inventoryItems.Add(item);
                                                         }
 
@@ -933,6 +941,7 @@ namespace ASVPack.Models
                                                             var item = itemObject.AsItem();
                                                             if (!item.IsEngram)
                                                             {
+                                                                
                                                                 inventoryItems.Add(item);
                                                             }
 
@@ -993,6 +1002,7 @@ namespace ASVPack.Models
                                                         var item = itemObject.AsItem();
                                                         if (!item.IsEngram)
                                                         {
+                                                            
                                                             inventoryItems.Add(item);
                                                         }
 
@@ -1020,6 +1030,7 @@ namespace ASVPack.Models
                                                         var item = itemObject.AsItem();
                                                         if (!item.IsEngram)
                                                         {
+                                                            
                                                             inventoryItems.Add(item);
                                                         }
 

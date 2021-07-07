@@ -409,7 +409,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { ClassName = x.ClassName, IsBluePrint = x.IsBlueprint }).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBluePrint, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { ClassName = x.ClassName, IsBluePrint = x.IsBlueprint, Quality=x.Quality }).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBluePrint, Quality=g.Key.Quality, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -432,7 +432,8 @@ namespace ARKViewer.Models
                                             Y = (decimal)container.Y,
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
-                                            IsBlueprint = g.IsBlueprint
+                                            IsBlueprint = g.IsBlueprint,
+                                            Quality = g.Quality
 
                                         });
 
@@ -465,7 +466,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Quality } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Quality = g.Key.Quality,Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -489,7 +490,8 @@ namespace ARKViewer.Models
                                             Y = (decimal)container.Y,
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
-                                            IsBlueprint = g.IsBlueprint                                            
+                                            IsBlueprint = g.IsBlueprint,
+                                            Quality = g.Quality
 
                                         });
 
@@ -523,7 +525,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Quality } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Quality = g.Key.Quality, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -546,7 +548,8 @@ namespace ARKViewer.Models
                                             Y = (decimal)container.Y,
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
-                                            IsBlueprint = g.IsBlueprint
+                                            IsBlueprint = g.IsBlueprint,
+                                            Quality = g.Quality
 
                                         });
 

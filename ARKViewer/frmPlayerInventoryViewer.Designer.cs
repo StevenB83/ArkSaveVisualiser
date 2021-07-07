@@ -95,6 +95,8 @@
             this.lblWindowTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblPlayerId = new System.Windows.Forms.Label();
+            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlPlayerInventory.SuspendLayout();
             this.tabInventory.SuspendLayout();
             this.tpgPlayerInventory.SuspendLayout();
@@ -401,6 +403,7 @@
             this.columnHeader3,
             this.columnHeader25,
             this.columnHeader8,
+            this.columnHeader27,
             this.columnHeader6,
             this.columnHeader19,
             this.columnHeader9,
@@ -566,7 +569,8 @@
             this.columnHeader15,
             this.columnHeader16,
             this.columnHeader17,
-            this.columnHeader18});
+            this.columnHeader18,
+            this.columnHeader28});
             this.lvwStorageInventory.FullRowSelect = true;
             this.lvwStorageInventory.HideSelection = false;
             this.lvwStorageInventory.Location = new System.Drawing.Point(24, 19);
@@ -751,6 +755,17 @@
             this.lblPlayerId.TabIndex = 0;
             this.lblPlayerId.Text = "Player Id:";
             // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "Quality";
+            this.columnHeader27.Width = 80;
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.DisplayIndex = 3;
+            this.columnHeader28.Text = "Quality";
+            this.columnHeader28.Width = 80;
+            // 
             // frmPlayerInventoryViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -862,5 +877,7 @@
         private System.Windows.Forms.ColumnHeader columnHeader23;
         private System.Windows.Forms.ColumnHeader columnHeader25;
         private System.Windows.Forms.ColumnHeader columnHeader26;
+        private System.Windows.Forms.ColumnHeader columnHeader27;
+        private System.Windows.Forms.ColumnHeader columnHeader28;
     }
 }

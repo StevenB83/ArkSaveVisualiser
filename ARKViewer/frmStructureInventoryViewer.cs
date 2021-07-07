@@ -117,6 +117,7 @@ namespace ARKViewer
                             ListViewItem newItem = new ListViewItem(itemName);
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(invItem.Quantity.ToString());
+                            newItem.SubItems.Add(invItem.Quality);
                             newItem.ImageIndex = itemIcon - 1;
 
                             listItems.Add(newItem);

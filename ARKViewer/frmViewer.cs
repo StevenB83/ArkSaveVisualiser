@@ -4882,10 +4882,12 @@ namespace ARKViewer
                         ListViewItem newItem = new ListViewItem(foundItem.TribeName);
                         newItem.SubItems.Add(foundItem.ContainerName);
                         newItem.SubItems.Add(foundItem.DisplayName);
+                        newItem.SubItems.Add(foundItem.Quality);
                         newItem.SubItems.Add(foundItem.IsBlueprint ? "Yes" : "No");
                         newItem.SubItems.Add(foundItem.Quantity.ToString());
                         newItem.SubItems.Add(foundItem.Latitude.ToString("f2"));
                         newItem.SubItems.Add(foundItem.Longitude.ToString("f2"));
+                        
                         newItem.Tag = foundItem;
                         newItems.Add(newItem);
 
@@ -5088,12 +5090,14 @@ namespace ARKViewer
 
                     ListViewItem newItem = new ListViewItem(itemName);
                     newItem.Tag = playerCache;
+                    newItem.SubItems.Add(""); //quality
                     newItem.SubItems.Add("No");
                     newItem.SubItems.Add(playerCache.DroppedByName);
                     newItem.SubItems.Add((playerCache.Latitude.GetValueOrDefault(0) == 0 && playerCache.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : playerCache.Latitude.Value.ToString("0.00"));
                     newItem.SubItems.Add((playerCache.Latitude.GetValueOrDefault(0) == 0 && playerCache.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : playerCache.Longitude.Value.ToString("0.00"));
                     newItem.SubItems.Add(tribeName);
                     newItem.SubItems.Add(playerName);
+
 
                     listItems.Add(newItem);
 
@@ -5130,13 +5134,13 @@ namespace ARKViewer
 
                             ListViewItem newItem = new ListViewItem(itemName);
                             newItem.Tag = droppedItem;
+                            newItem.SubItems.Add(droppedItem.Quality); //quality
                             newItem.SubItems.Add(droppedItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(droppedItem.DroppedByName);
                             newItem.SubItems.Add((droppedItem.Latitude.GetValueOrDefault(0) == 0 && droppedItem.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : droppedItem.Latitude.Value.ToString("0.00"));
                             newItem.SubItems.Add((droppedItem.Latitude.GetValueOrDefault(0) == 0 && droppedItem.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : droppedItem.Longitude.Value.ToString("0.00"));
                             newItem.SubItems.Add(tribeName);
                             newItem.SubItems.Add(playerName);
-
                             listItems.Add(newItem);
                         }                        
 

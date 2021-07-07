@@ -111,7 +111,7 @@ namespace ARKViewer
                     {
                         if (!invItem.IsEngram)
                         {
-                            string qualityName = "";
+                            string qualityName = invItem.Quality;
                             Color backColor = SystemColors.Window;
                             Color foreColor = SystemColors.WindowText;
 
@@ -200,7 +200,7 @@ namespace ARKViewer
                         if (!invItem.IsEngram)
                         {
 
-                            string qualityName = "";
+                            string qualityName = invItem.Quality;
                             Color backColor = SystemColors.Window;
                             Color foreColor = SystemColors.WindowText;
 
@@ -282,7 +282,7 @@ namespace ARKViewer
                         if (!invItem.IsEngram)
                         {
 
-                            string qualityName = "";
+                            string qualityName = invItem.Quality;
                             Color backColor = SystemColors.Window;
                             Color foreColor = SystemColors.WindowText;
 

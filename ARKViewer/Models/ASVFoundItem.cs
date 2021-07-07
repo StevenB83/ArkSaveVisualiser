@@ -20,6 +20,7 @@ namespace ARKViewer.Models
         public decimal X { get; set; } = 0;
         public decimal Y { get; set; } = 0;
         public decimal Z { get; set; } = 0;
+        public string Quality { get; set; } = "";
 
 
     }
