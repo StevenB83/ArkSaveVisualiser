@@ -37,7 +37,11 @@ namespace ASVPack.Models
         [DataMember] public string TribeName { get; set; } = "";
         [DataMember] public string TamerName { get; set; } = "";
         [DataMember] public double TamedTimeInGame { get; set; } = 0;
-        [DataMember] public DateTime? TamedAtDateTime { get; set; } = null;
+        public DateTime? TamedAtDateTime{ get; internal set; }
+
+        [DataMember] public double LastAllyInRangeTimeInGame { get; set; } = 0;
+        public DateTime? LastAllyInRangeTime { get; internal set; }
+
 
         public ContentTamedCreature(GameObject creatureObject, GameObject statusObject): base(creatureObject, statusObject)
         {
@@ -60,11 +64,11 @@ namespace ASVPack.Models
 
             }
 
+            LastAllyInRangeTimeInGame = creatureObject.GetPropertyValue<double>("LastInAllyRangeTime", 0, 0);
 
 
 
 
-            
             TribeName = creatureObject.GetPropertyValue<string>("TribeName");
             Name = creatureObject.GetPropertyValue<string>("TamedName");
             if (statusObject == null)

@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewer));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title9 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.lvwWildDetail = new System.Windows.Forms.ListView();
             this.lvwWildDetail_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -283,6 +283,7 @@
             this.lvwItemList_Container = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Quality = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwItemList_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_BP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Quantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -295,7 +296,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMap = new System.Windows.Forms.Label();
             this.cboSelectedMap = new System.Windows.Forms.ComboBox();
-            this.lvwItemList_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTameDetail_TribeInRange = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mnuContext.SuspendLayout();
             this.tabFeatures.SuspendLayout();
             this.tpgWild.SuspendLayout();
@@ -1341,7 +1342,8 @@
             this.lvwTameDetail_Id,
             this.lvwTameDetail_Scale,
             this.lvwTameDetail_Rig1,
-            this.lvwTameDetail_Rig2});
+            this.lvwTameDetail_Rig2,
+            this.lvwTameDetail_TribeInRange});
             this.lvwTameDetail.ContextMenuStrip = this.mnuContext;
             this.lvwTameDetail.FullRowSelect = true;
             this.lvwTameDetail.HideSelection = false;
@@ -1359,7 +1361,7 @@
             // lvwTameDetail_Creature
             // 
             this.lvwTameDetail_Creature.Text = "Creature";
-            this.lvwTameDetail_Creature.Width = 168;
+            this.lvwTameDetail_Creature.Width = 140;
             // 
             // lvwTameDetail_Name
             // 
@@ -1898,22 +1900,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeTames.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea1.Name = "ChartArea1";
-            this.chartTribeTames.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartTribeTames.Legends.Add(legend1);
+            chartArea7.Name = "ChartArea1";
+            this.chartTribeTames.ChartAreas.Add(chartArea7);
+            legend7.Name = "Legend1";
+            this.chartTribeTames.Legends.Add(legend7);
             this.chartTribeTames.Location = new System.Drawing.Point(4, 3);
             this.chartTribeTames.Name = "chartTribeTames";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartTribeTames.Series.Add(series1);
+            series7.ChartArea = "ChartArea1";
+            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series7.Legend = "Legend1";
+            series7.Name = "Series1";
+            this.chartTribeTames.Series.Add(series7);
             this.chartTribeTames.Size = new System.Drawing.Size(247, 159);
             this.chartTribeTames.TabIndex = 8;
             this.chartTribeTames.Text = "Tribe Players";
-            title1.Name = "Tribe Players";
-            this.chartTribeTames.Titles.Add(title1);
+            title7.Name = "Tribe Players";
+            this.chartTribeTames.Titles.Add(title7);
             // 
             // pnlChart2
             // 
@@ -1975,22 +1977,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeStructures.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea2.Name = "ChartArea1";
-            this.chartTribeStructures.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartTribeStructures.Legends.Add(legend2);
+            chartArea8.Name = "ChartArea1";
+            this.chartTribeStructures.ChartAreas.Add(chartArea8);
+            legend8.Name = "Legend1";
+            this.chartTribeStructures.Legends.Add(legend8);
             this.chartTribeStructures.Location = new System.Drawing.Point(4, 3);
             this.chartTribeStructures.Name = "chartTribeStructures";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartTribeStructures.Series.Add(series2);
+            series8.ChartArea = "ChartArea1";
+            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series8.Legend = "Legend1";
+            series8.Name = "Series1";
+            this.chartTribeStructures.Series.Add(series8);
             this.chartTribeStructures.Size = new System.Drawing.Size(246, 159);
             this.chartTribeStructures.TabIndex = 8;
             this.chartTribeStructures.Text = "Tribe Players";
-            title2.Name = "Tribe Players";
-            this.chartTribeStructures.Titles.Add(title2);
+            title8.Name = "Tribe Players";
+            this.chartTribeStructures.Titles.Add(title8);
             // 
             // pnlChart1
             // 
@@ -2052,22 +2054,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribePlayers.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea3.Name = "ChartArea1";
-            this.chartTribePlayers.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartTribePlayers.Legends.Add(legend3);
+            chartArea9.Name = "ChartArea1";
+            this.chartTribePlayers.ChartAreas.Add(chartArea9);
+            legend9.Name = "Legend1";
+            this.chartTribePlayers.Legends.Add(legend9);
             this.chartTribePlayers.Location = new System.Drawing.Point(4, 3);
             this.chartTribePlayers.Name = "chartTribePlayers";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartTribePlayers.Series.Add(series3);
+            series9.ChartArea = "ChartArea1";
+            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series9.Legend = "Legend1";
+            series9.Name = "Series1";
+            this.chartTribePlayers.Series.Add(series9);
             this.chartTribePlayers.Size = new System.Drawing.Size(245, 159);
             this.chartTribePlayers.TabIndex = 8;
             this.chartTribePlayers.Text = "Tribe Players";
-            title3.Name = "Tribe Players";
-            this.chartTribePlayers.Titles.Add(title3);
+            title9.Name = "Tribe Players";
+            this.chartTribePlayers.Titles.Add(title9);
             // 
             // chkTribeStructures
             // 
@@ -2908,6 +2910,10 @@
             this.lvwItemList_Quality.Text = "Quality";
             this.lvwItemList_Quality.Width = 80;
             // 
+            // lvwItemList_Rating
+            // 
+            this.lvwItemList_Rating.Text = "Rating";
+            // 
             // lvwItemList_BP
             // 
             this.lvwItemList_BP.Text = "BP";
@@ -3013,9 +3019,10 @@
             this.cboSelectedMap.TabIndex = 26;
             this.cboSelectedMap.SelectedIndexChanged += new System.EventHandler(this.cboSelectedMap_SelectedIndexChanged);
             // 
-            // lvwItemList_Rating
+            // lvwTameDetail_TribeInRange
             // 
-            this.lvwItemList_Rating.Text = "Rating";
+            this.lvwTameDetail_TribeInRange.Text = "Tribe In Range";
+            this.lvwTameDetail_TribeInRange.Width = 120;
             // 
             // frmViewer
             // 
@@ -3350,6 +3357,7 @@
         private System.Windows.Forms.ColumnHeader lvwTameDetail_Rig2;
         private System.Windows.Forms.ColumnHeader lvwItemList_Quality;
         private System.Windows.Forms.ColumnHeader lvwItemList_Rating;
+        private System.Windows.Forms.ColumnHeader lvwTameDetail_TribeInRange;
     }
 }
 

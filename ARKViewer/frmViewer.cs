@@ -696,8 +696,41 @@ namespace ARKViewer
         private void tabFeatures_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (isLoading) return;
+
+
+
             tabFeatures.Refresh();
             this.Cursor = Cursors.WaitCursor;
+            switch (tabFeatures.SelectedTab.Name)
+            {
+                case "tpgWild":
+                    if(lvwWildDetail.Items.Count == 0) LoadWildDetail();
+                    break;
+                case "tpgTamed":
+                    if (lvwTameDetail.Items.Count == 0) LoadTameDetail();
+                    break;
+                case "tpgStructures":
+                    if (lvwStructureLocations.Items.Count == 0) LoadPlayerStructureDetail();
+                    break;
+                case "tpgTribes":
+                    if (lvwTribes.Items.Count == 0) RefreshTribeSummary();
+                    break;
+                case "tpgPlayers":
+                    if (lvwPlayers.Items.Count == 0) LoadPlayerDetail();
+                    break;
+                case "tpgDroppedItems":
+                    if (lvwDroppedItems.Items.Count == 0) LoadDroppedItemDetail();
+                    break;
+                case "tpgItemList":
+                    if (lvwItemList.Items.Count == 0) LoadItemListDetail();
+                    break;
+                default:
+
+                    break;
+            }
+            
+            
+            
             DrawMap(0, 0);
             this.Cursor = Cursors.Default;
         }
@@ -915,7 +948,7 @@ namespace ARKViewer
 
         private void cboTameClass_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboTameClass.SelectedIndex > 0 && cboTamedResource.SelectedIndex > 0) cboTamedResource.SelectedIndex = 0;
+            if (cboTameClass.SelectedIndex != 1 && cboTamedResource.SelectedIndex > 0) cboTamedResource.SelectedIndex = 0;
             LoadTameDetail();
         }
 
@@ -3828,6 +3861,9 @@ namespace ARKViewer
         {
             if (cm == null) return;
 
+            if (tabFeatures.SelectedTab.Name != "tpgTribes") return;
+
+
             lvwTribes.Items.Clear();
             var allTribes = cm.GetTribes(0);
             if (allTribes != null && allTribes.Count > 0)
@@ -4045,8 +4081,11 @@ namespace ARKViewer
                                 .OrderBy(o => o.Name);
 
             cboTameClass.Items.Clear();
+            cboTameClass.Items.Add(new ASVCreatureSummary() { ClassName = "-1", Name = "[Please Select]", Count = 0});
+
             if (tamedSummary != null && tamedSummary.Count() > 0)
             {
+                ((ASVCreatureSummary)cboTameClass.Items[0]).Count = tamedSummary.Sum(s => s.Count);
                 cboTameClass.Items.Add(new ASVCreatureSummary() { ClassName = "", Name = "[All Creatures]", Count = tamedSummary.Sum(s => s.Count) });
 
                 foreach (var summary in tamedSummary)
@@ -4563,12 +4602,7 @@ namespace ARKViewer
             if (newItems.Count > 0)
             {
                 cboDroppedItem.BeginUpdate();
-
-                foreach (var newItem in newItems.OrderBy(o => o.Value))
-                {
-                    cboDroppedItem.Items.Add(newItem);
-                }
-
+                cboDroppedItem.Items.AddRange(newItems.OrderBy(x => x.Value).ToArray());
                 cboDroppedItem.EndUpdate();
             }
             cboDroppedItem.SelectedIndex = 0;
@@ -4754,6 +4788,9 @@ namespace ARKViewer
         {
 
             if (cm == null) return;
+            if (tabFeatures.SelectedTab.Name != "tpgStructures") return;
+
+
             if (cboStructureTribe.SelectedItem == null) return;
             if (cboStructurePlayer.SelectedItem == null) return;
 
@@ -4858,6 +4895,10 @@ namespace ARKViewer
         private void LoadItemListDetail()
         {
             if (cm == null) return;
+
+            if (tabFeatures.SelectedTab.Name != "tpgItemList") return;
+            
+            
             if (cboItemListTribe.SelectedItem == null) return;
             if (cboItemListItem.SelectedItem == null) return;
 
@@ -4928,6 +4969,10 @@ namespace ARKViewer
         private void LoadPlayerDetail()
         {
             if (cm == null) return;
+
+            if (tabFeatures.SelectedTab.Name != "tpgPlayers") return;
+
+
             if (cboTribes.SelectedItem == null) return;
             if (cboPlayers.SelectedItem == null) return;
 
@@ -5043,6 +5088,8 @@ namespace ARKViewer
             {
                 return;
             }
+
+            if (tabFeatures.SelectedTab.Name != "tpgDroppedItems") return;
 
             this.Cursor = Cursors.WaitCursor;
             lblStatus.Text = "Populating dropped item data.";
@@ -5182,6 +5229,8 @@ namespace ARKViewer
             {
                 return;
             }
+
+            if (tabFeatures.SelectedTab.Name != "tpgTamed") return;
 
             this.Cursor = Cursors.WaitCursor;
             lblStatus.Text = "Populating tame data.";
@@ -5434,6 +5483,7 @@ namespace ARKViewer
                     string rig2Name = Program.ProgramConfig.ItemMap.FirstOrDefault(x => x.ClassName == detail.Rig2)?.DisplayName ?? detail.Rig2;
                     item.SubItems.Add(rig1Name);
                     item.SubItems.Add(rig2Name);
+                    item.SubItems.Add(detail.LastAllyInRangeTime.HasValue ? detail.LastAllyInRangeTime.Value.ToString("dd MMM yyyy HH:mm") : "");
 
                     if (detail.Id == selectedId)
                     {
@@ -5497,6 +5547,8 @@ namespace ARKViewer
             {
                 return;
             }
+
+            if (tabFeatures.SelectedTab.Name != "tpgWild") return;
 
             this.Cursor = Cursors.WaitCursor;
             lblStatus.Text = "Populating creature data.";
@@ -5768,9 +5820,9 @@ namespace ARKViewer
 
             if (cboTameClass.Items.Count > 1 && cboTamedResource.SelectedIndex > 0)
             {
-                if (cboTameClass.SelectedIndex != 0)
+                if (cboTameClass.SelectedIndex != 1)
                 {
-                    cboTameClass.SelectedIndex = 0;
+                    cboTameClass.SelectedIndex = 1;
                 }
                 else
                 {
