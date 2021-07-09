@@ -719,8 +719,12 @@ namespace ASVPack.Models
                                 ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
 
                                 logWriter.Debug($"Determining inventory status for: {creature.Id} - {creature.Name}");
+
+
                                 if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent") != null)
                                 {
+
+
                                     logWriter.Debug($"Retrieving inventory for: {creature.Id} - {creature.Name}");
 
                                     int inventoryRefId = x.GetPropertyValue<ObjectReference>("MyInventoryComponent").ObjectId;
@@ -745,52 +749,60 @@ namespace ASVPack.Models
                                             }
                                         });
 
+
+
                                             
-                                        PropertyArray equippedItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("EquippedItems");
-
-                                        if (equippedItemsArray != null)
-                                        {
-                                            ArkArrayObjectReference equippedReferences = (ArkArrayObjectReference)equippedItemsArray.Value;
-
-                                            if (equippedReferences != null && equippedReferences.Count == 2)
-                                            {
-                                                
-                                                if(x.ClassString == "")
-                                                {
-                                                    objectContainer.TryGetValue(equippedReferences[0].ObjectId, out GameObject rig1Object);
-                                                    var itemRig1 = rig1Object.AsItem();
-                                                    creature.Rig1 = itemRig1.ClassName;
-
-                                                    objectContainer.TryGetValue(equippedReferences[1].ObjectId, out GameObject rig2Object);
-                                                    var itemRig2 = rig2Object.AsItem();
-                                                    creature.Rig2 = itemRig2.ClassName;
-                                                }
-                                                else
-                                                {
-                                                    Parallel.ForEach(objectReferences, objectReference =>
-                                                    //foreach (var objectReference in objectReferences)
-                                                    {
-                                                        objectContainer.TryGetValue(objectReference.ObjectId, out GameObject itemObject);
-                                                        if (itemObject != null)
-                                                        {
-                                                            var item = itemObject.AsItem();
-                                                            if (!item.IsEngram)
-                                                            {
-
-                                                                inventoryItems.Add(item);
-                                                            }
-                                                        }
-                                                    }
-                                                    );
-                                                }
-                                            }
-                                            
-
-                                        }
+                                        
                                     }
 
 
-                                    
+                                    PropertyArray equippedItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("EquippedItems");
+
+
+
+
+                                    if (equippedItemsArray != null)
+                                    {
+                                        ArkArrayObjectReference equippedReferences = (ArkArrayObjectReference)equippedItemsArray.Value;
+
+                                        if (equippedReferences != null)
+                                        {
+
+                                            if (x.ClassString == "TekStrider_Character_BP_C")
+                                            {
+                                                objectContainer.TryGetValue(equippedReferences[0].ObjectId, out GameObject rig1Object);
+                                                var itemRig1 = rig1Object.AsItem();
+                                                creature.Rig1 = itemRig1.ClassName;
+
+                                                objectContainer.TryGetValue(equippedReferences[1].ObjectId, out GameObject rig2Object);
+                                                var itemRig2 = rig2Object.AsItem();
+                                                creature.Rig2 = itemRig2.ClassName;
+                                            }
+                                            else
+                                            {
+                                                Parallel.ForEach(equippedReferences, objectReference =>
+                                                //foreach (var objectReference in objectReferences)
+                                                {
+                                                    objectContainer.TryGetValue(objectReference.ObjectId, out GameObject itemObject);
+                                                    if (itemObject != null)
+                                                    {
+                                                        var item = itemObject.AsItem();
+                                                        if (!item.IsEngram)
+                                                        {
+
+                                                            inventoryItems.Add(item);
+                                                        }
+                                                    }
+                                                }
+                                                );
+                                            }
+                                        }
+
+
+                                    }
+
+
+
 
                                     creature.Inventory = new ContentInventory() { Items = inventoryItems.ToList() };
                                 }

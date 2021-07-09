@@ -34,8 +34,8 @@ namespace ASVPack.Models
         [DataMember] public float? Y { get; set; }
         [DataMember] public float? Z { get; set; }
         [DataMember] public float WildScale { get; set; } = 1;
-        [DataMember] public string Rig1 { get; set; } = "N/A";
-        [DataMember] public string Rig2 { get; set; } = "N/A";
+        [DataMember] public string Rig1 { get; set; } = "";
+        [DataMember] public string Rig2 { get; set; } = "";
 
         public override bool Equals(object obj)
         {
