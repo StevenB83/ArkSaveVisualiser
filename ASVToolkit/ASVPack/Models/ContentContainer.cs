@@ -454,7 +454,7 @@ namespace ASVPack.Models
 
                         logWriter.Debug($"Identifying tamed creatures");
                         var allTames = parallelContainer
-                                        .Where(x => x.IsTamed() && x.ClassString != "MotorRaft_BP_C" && x.ClassString != "Raft_BP_C" && x.ClassString != "TekHoverSkiff_Character_BP_C") //exclude rafts.. no idea why these are "creatures"
+                                        .Where(x => x.IsTamed()) //exclude rafts.. no idea why these are "creatures"
                                         .GroupBy(x => new { TribeId = (long)x.GetPropertyValue<int>("TargetingTeam"), TribeName = x.GetPropertyValue<string>("TamerString") });
 
 

@@ -238,7 +238,7 @@ namespace ARKViewer
                     var knownMap = SavedConfig.DinoMap.ToList();
                     var unknownMap = new List<string>();
 
-                    var unmappedClasses = wilds.Where(w => !knownMap.Any(m => m.ClassName == w.ClassName)).Select(s => s.ClassName).Distinct().OrderBy(s => s).ToList();
+                    var unmappedClasses = wilds.Where(w => !knownMap.Any(m => m.ClassName == w.ClassName)).GroupBy(x=>x.ClassName).Select(s => s.First().ClassName).Distinct().OrderBy(s => s).ToList();
                     if (unmappedClasses != null && unmappedClasses.Count > 0) unknownMap.AddRange(unmappedClasses);
 
                     if (unknownMap != null && unknownMap.Count() > 0)
@@ -319,7 +319,7 @@ namespace ARKViewer
                                                                     x.Items.Where(w =>
                                                                         !knownMap.Any(m => m.ClassName == w.ClassName)
                                                                     )
-                                                             ).ToList();
+                                                             ).GroupBy(x=>x.ClassName).Select(x=>x.First()).ToList();
 
                     if (unmappedClasses != null && unmappedClasses.Count > 0)
                     {
@@ -397,7 +397,7 @@ namespace ARKViewer
                     var knownMap = SavedConfig.StructureMap.ToList();
                     var unknownMap = new List<string>();
 
-                    var unmappedClasses = structures.Where(w => !knownMap.Any(m => m.ClassName == w.ClassName)).Select(s => s.ClassName).Distinct().OrderBy(s => s).ToList();
+                    var unmappedClasses = structures.Where(w => !knownMap.Any(m => m.ClassName == w.ClassName)).GroupBy(x=>x.ClassName).Select(s => s.First().ClassName).OrderBy(s => s).ToList();
                     if (unmappedClasses != null && unmappedClasses.Count > 0) unknownMap.AddRange(unmappedClasses);
 
                     if (unknownMap != null && unknownMap.Count() > 0)

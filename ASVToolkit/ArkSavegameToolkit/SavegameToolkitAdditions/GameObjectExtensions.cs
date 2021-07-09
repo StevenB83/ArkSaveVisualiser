@@ -18,6 +18,10 @@ namespace SavegameToolkitAdditions {
                             || gameObject.ClassString == "MotorRaft_BP_C" 
                             || gameObject.ClassString == "Raft_BP_C"
                             || gameObject.ClassString == "TekHoverSkiff_Character_BP_C"
+                            || gameObject.ClassString == "CogRaft_BP_C"
+                            || gameObject.ClassString == "DingyRaft_BP_C"
+                            || gameObject.ClassString == "LongshipRaft_BP_C"
+                            || gameObject.ClassString == "SRaft_BP_C"
                         )
                         && gameObject.ClassString != "Structure_LoadoutDummy_Hotbar_C"
                         & ! gameObject.ClassString.StartsWith("DeathItemCache_")
@@ -25,7 +29,16 @@ namespace SavegameToolkitAdditions {
         }
 
         public static bool IsCreature(this GameObject gameObject) {
-            return gameObject.HasAnyProperty("bServerInitializedDino");
+            return gameObject.HasAnyProperty("bServerInitializedDino") 
+                        &! (
+                            gameObject.ClassString == "MotorRaft_BP_C"
+                            || gameObject.ClassString == "Raft_BP_C"
+                            || gameObject.ClassString == "TekHoverSkiff_Character_BP_C"
+                            || gameObject.ClassString == "CogRaft_BP_C"
+                            || gameObject.ClassString == "DingyRaft_BP_C"
+                            || gameObject.ClassString == "LongshipRaft_BP_C"
+                            || gameObject.ClassString == "SRaft_BP_C"
+                            );
             
         }
 

@@ -1277,6 +1277,10 @@ namespace ARKViewer
                 mnuContext_PlayerId.Visible = true;
                 mnuContext_SteamId.Visible = true;
                 mnuContext_TribeId.Visible = false;
+                mnuContext_Structures.Visible = true;
+                mnuContext_Tames.Visible = true;
+                mnuContext_Players.Visible = false;
+
             }
             else
             {
@@ -1297,6 +1301,10 @@ namespace ARKViewer
                 mnuContext_PlayerId.Visible = false;
                 mnuContext_SteamId.Visible = false;
                 mnuContext_TribeId.Visible = true;
+                mnuContext_Structures.Visible = false;
+                mnuContext_Tames.Visible = true;
+                mnuContext_Players.Visible = true;
+
             }
         }
 
@@ -1671,6 +1679,10 @@ namespace ARKViewer
                 mnuContext_PlayerId.Visible = false;
                 mnuContext_SteamId.Visible = false;
                 mnuContext_TribeId.Visible = true;
+                mnuContext_Structures.Visible = true ;
+                mnuContext_Tames.Visible = true;
+                mnuContext_Players.Visible = true;
+
             }
             else
             {
@@ -2441,6 +2453,10 @@ namespace ARKViewer
                 mnuContext_PlayerId.Visible = false;
                 mnuContext_SteamId.Visible = false;
                 mnuContext_TribeId.Visible = false;
+                mnuContext_Structures.Visible = false;
+                mnuContext_Tames.Visible = false;
+                mnuContext_Players.Visible = false;
+
             }
         }
 
@@ -2451,6 +2467,10 @@ namespace ARKViewer
                 mnuContext_PlayerId.Visible = false;
                 mnuContext_SteamId.Visible = false;
                 mnuContext_TribeId.Visible = true;
+                mnuContext_Structures.Visible = true;
+                mnuContext_Tames.Visible = false;
+                mnuContext_Players.Visible = true;
+
             }
         }
 
@@ -5009,7 +5029,8 @@ namespace ARKViewer
 
                     if (addPlayer)
                     {
-                        ListViewItem newItem = new ListViewItem(player.CharacterName);
+                        ListViewItem newItem = new ListViewItem(player.Id.ToString());
+                        newItem.SubItems.Add(player.CharacterName);
                         newItem.SubItems.Add(tribe.TribeName);
 
                         newItem.SubItems.Add(player.Gender.ToString());
@@ -6063,6 +6084,48 @@ namespace ARKViewer
 
         }
 
+        private void FindNextPlayer()
+        {
+            string searchString = txtFilterPlayer.Text.Trim().ToLower();
+            int currentItemIndex = 0;
+            int maxItemIndex = lvwPlayers.Items.Count - 1;
+            if (lvwPlayers.SelectedItems.Count > 0) currentItemIndex = lvwPlayers.SelectedItems[0].Index;
+
+            for (int nextIndex = currentItemIndex + 1; nextIndex <= maxItemIndex; nextIndex++)
+            {
+                bool searchFound = lvwPlayers.Items[nextIndex].SubItems.Cast<ListViewItem.ListViewSubItem>().Any(x => x.Text.ToLower().Contains(searchString));
+                if (searchFound)
+                {
+                    lvwPlayers.SelectedItems.Clear();
+                    lvwPlayers.Items[nextIndex].Selected = true;
+                    lvwPlayers.EnsureVisible(nextIndex);
+                    break;
+                }
+            }
+
+        }
+
+        private void FindNextTribe()
+        {
+            string searchString = txtFilterTribe.Text.Trim().ToLower();
+            int currentItemIndex = 0;
+            int maxItemIndex = lvwTribes.Items.Count - 1;
+            if (lvwTribes.SelectedItems.Count > 0) currentItemIndex = lvwTribes.SelectedItems[0].Index;
+
+            for (int nextIndex = currentItemIndex + 1; nextIndex <= maxItemIndex; nextIndex++) 
+            { 
+                bool searchFound = lvwTribes.Items[nextIndex].SubItems.Cast<ListViewItem.ListViewSubItem>().Any(x => x.Text.ToLower().Contains(searchString));
+                if (searchFound)
+                {
+                    lvwTribes.SelectedItems.Clear();
+                    lvwTribes.Items[nextIndex].Selected = true;
+                    lvwTribes.EnsureVisible(nextIndex);
+                    break;
+                }
+            }
+
+        }
+
         private void txtFilterWild_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
@@ -6136,6 +6199,153 @@ namespace ARKViewer
         private void btnFindSearched_Click(object sender, EventArgs e)
         {
             FindNextSearched();
+        }
+
+        private void btnFilterPlayer_Click(object sender, EventArgs e)
+        {
+            FindNextPlayer();
+        }
+
+        private void txtFilterPlayer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
+            {
+                FindNextPlayer();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
+        }
+
+        private void mnuContext_Structures_Click(object sender, EventArgs e)
+        {
+            long selectedTribeId = 0;
+
+
+            switch (tabFeatures.SelectedTab.Name)
+            {
+                case "tpgTribes":
+                    if(lvwTribes.SelectedItems.Count > 0)
+                    {
+                        ContentTribe selectedTribe = (ContentTribe)lvwTribes.SelectedItems[0].Tag;
+                        selectedTribeId = selectedTribe.TribeId;
+                    }
+                    break;
+                case "tpgTamed":
+                    if (lvwTameDetail.SelectedItems.Count > 0)
+                    {
+                        ContentTamedCreature selectedTame = (ContentTamedCreature)lvwTameDetail.SelectedItems[0].Tag;
+                        selectedTribeId = selectedTame.TargetingTeam;
+                    }
+                    break;
+                case "tpgPlayers":
+                    if (lvwPlayers.SelectedItems.Count > 0)
+                    {
+                        ContentPlayer selectedPlayer = (ContentPlayer)lvwPlayers.SelectedItems[0].Tag;
+                        selectedTribeId = selectedPlayer.TargetingTeam;
+                    }
+                    break;
+            }
+
+            if(selectedTribeId !=  0)
+            {
+                tabFeatures.SelectTab("tpgStructures");
+                var foundTribe = cboStructureTribe.Items.Cast<ASVComboValue>().FirstOrDefault(x => x.Key == selectedTribeId.ToString());
+                if (foundTribe != null) cboStructureTribe.SelectedItem = foundTribe;
+            }
+
+        }
+
+        private void mnuContext_Tames_Click(object sender, EventArgs e)
+        {
+            long selectedTribeId = 0;
+
+
+            switch (tabFeatures.SelectedTab.Name)
+            {
+                case "tpgTribes":
+                    if (lvwTribes.SelectedItems.Count > 0)
+                    {
+                        ContentTribe selectedTribe = (ContentTribe)lvwTribes.SelectedItems[0].Tag;
+                        selectedTribeId = selectedTribe.TribeId;
+                    }
+                    break;
+                case "tpgStructures":
+                    if (lvwStructureLocations.SelectedItems.Count > 0)
+                    {
+                        ContentStructure selectedTame = (ContentStructure)lvwStructureLocations.SelectedItems[0].Tag;
+                        selectedTribeId = selectedTame.TargetingTeam;
+                    }
+                    break;
+                case "tpgPlayers":
+                    if (lvwPlayers.SelectedItems.Count > 0)
+                    {
+                        ContentPlayer selectedPlayer = (ContentPlayer)lvwPlayers.SelectedItems[0].Tag;
+                        selectedTribeId = selectedPlayer.TargetingTeam;
+                    }
+                    break;
+            }
+
+            if (selectedTribeId != 0)
+            {
+                tabFeatures.SelectTab("tpgTamed");
+                var foundTribe = cboTameTribes.Items.Cast<ASVComboValue>().FirstOrDefault(x => x.Key == selectedTribeId.ToString());
+                if (foundTribe != null) cboTameTribes.SelectedItem = foundTribe;
+            }
+        }
+
+        private void mnuContext_Players_Click(object sender, EventArgs e)
+        {
+            long selectedTribeId = 0;
+
+
+            switch (tabFeatures.SelectedTab.Name)
+            {
+                case "tpgTribes":
+                    if (lvwTribes.SelectedItems.Count > 0)
+                    {
+                        ContentTribe selectedTribe = (ContentTribe)lvwTribes.SelectedItems[0].Tag;
+                        selectedTribeId = selectedTribe.TribeId;
+                    }
+                    break;
+                case "tpgStructures":
+                    if (lvwStructureLocations.SelectedItems.Count > 0)
+                    {
+                        ContentStructure selectedStructure = (ContentStructure)lvwStructureLocations.SelectedItems[0].Tag;
+                        selectedTribeId = selectedStructure.TargetingTeam;
+                    }
+                    break;
+                case "tpgTamed":
+                    if (lvwTameDetail.SelectedItems.Count > 0)
+                    {
+                        ContentTamedCreature selectedTame = (ContentTamedCreature)lvwTameDetail.SelectedItems[0].Tag;
+                        selectedTribeId = selectedTame.TargetingTeam;
+                    }
+                    break;
+            }
+
+            if (selectedTribeId != 0)
+            {
+                tabFeatures.SelectTab("tpgPlayers");
+                var foundTribe = cboTribes.Items.Cast<ASVComboValue>().FirstOrDefault(x => x.Key == selectedTribeId.ToString());
+                if (foundTribe != null) cboTribes.SelectedItem = foundTribe;
+            }
+        }
+
+        private void btnFilterTribe_Click(object sender, EventArgs e)
+        {
+            FindNextTribe();
+        }
+
+        private void txtFilterTribe_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData == Keys.Enter || e.KeyData == Keys.Return)
+            {
+                FindNextTribe();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+            }
         }
     }
 }

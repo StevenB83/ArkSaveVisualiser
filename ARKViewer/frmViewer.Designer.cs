@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewer));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title7 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title8 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title9 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.lvwWildDetail = new System.Windows.Forms.ListView();
             this.lvwWildDetail_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -72,6 +72,9 @@
             this.mnuContext_SteamId = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContext_TribeId = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuContext_Export = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuContext_Structures = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuContext_Tames = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuContext_Players = new System.Windows.Forms.ToolStripMenuItem();
             this.lblWildTotal = new System.Windows.Forms.Label();
             this.lblMapDate = new System.Windows.Forms.Label();
             this.cboWildClass = new System.Windows.Forms.ComboBox();
@@ -161,6 +164,7 @@
             this.lvwTameDetail_Scale = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTameDetail_Rig1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTameDetail_Rig2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTameDetail_TribeInRange = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lblTameTotal = new System.Windows.Forms.Label();
             this.pnlTameStatTypes = new System.Windows.Forms.Panel();
             this.lblStats = new System.Windows.Forms.Label();
@@ -188,6 +192,9 @@
             this.lvwStructureLocations_LastTime = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwStructureLocations_DecayReset = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpgTribes = new System.Windows.Forms.TabPage();
+            this.pnlFilterTribes = new System.Windows.Forms.Panel();
+            this.btnFilterTribe = new System.Windows.Forms.Button();
+            this.txtFilterTribe = new System.Windows.Forms.TextBox();
             this.tableCharts = new System.Windows.Forms.TableLayoutPanel();
             this.pnlChart3 = new System.Windows.Forms.Panel();
             this.btnSaveChartTames = new System.Windows.Forms.Button();
@@ -217,6 +224,9 @@
             this.lvwTribes_Structures = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTribes_Active = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpgPlayers = new System.Windows.Forms.TabPage();
+            this.pnlFilterPlayers = new System.Windows.Forms.Panel();
+            this.btnFilterPlayer = new System.Windows.Forms.Button();
+            this.txtFilterPlayer = new System.Windows.Forms.TextBox();
             this.btnMissionScoreboard = new System.Windows.Forms.Button();
             this.lblPlayerTotal = new System.Windows.Forms.Label();
             this.lblCommandPlayer = new System.Windows.Forms.Label();
@@ -226,6 +236,7 @@
             this.cboTribes = new System.Windows.Forms.ComboBox();
             this.cboPlayers = new System.Windows.Forms.ComboBox();
             this.lvwPlayers = new System.Windows.Forms.ListView();
+            this.lvwPlayers_PlayerId = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwPlayers_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwPlayers_Tribe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwPlayers_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -296,7 +307,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMap = new System.Windows.Forms.Label();
             this.cboSelectedMap = new System.Windows.Forms.ComboBox();
-            this.lvwTameDetail_TribeInRange = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mnuContext.SuspendLayout();
             this.tabFeatures.SuspendLayout();
             this.tpgWild.SuspendLayout();
@@ -312,6 +322,7 @@
             this.tpgStructures.SuspendLayout();
             this.pnlFilterStructures.SuspendLayout();
             this.tpgTribes.SuspendLayout();
+            this.pnlFilterTribes.SuspendLayout();
             this.tableCharts.SuspendLayout();
             this.pnlChart3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udChartTopTames)).BeginInit();
@@ -323,6 +334,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.udChartTopPlayers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartTribePlayers)).BeginInit();
             this.tpgPlayers.SuspendLayout();
+            this.pnlFilterPlayers.SuspendLayout();
             this.tpgDroppedItems.SuspendLayout();
             this.pnlFilterDropped.SuspendLayout();
             this.tpgItemList.SuspendLayout();
@@ -498,37 +510,64 @@
             this.mnuContext_PlayerId,
             this.mnuContext_SteamId,
             this.mnuContext_TribeId,
-            this.mnuContext_Export});
+            this.mnuContext_Export,
+            this.mnuContext_Structures,
+            this.mnuContext_Tames,
+            this.mnuContext_Players});
             this.mnuContext.Name = "mnuContext";
-            this.mnuContext.Size = new System.Drawing.Size(153, 92);
+            this.mnuContext.Size = new System.Drawing.Size(156, 158);
             // 
             // mnuContext_PlayerId
             // 
             this.mnuContext_PlayerId.Name = "mnuContext_PlayerId";
-            this.mnuContext_PlayerId.Size = new System.Drawing.Size(152, 22);
+            this.mnuContext_PlayerId.Size = new System.Drawing.Size(155, 22);
             this.mnuContext_PlayerId.Text = "Copy Player ID";
             this.mnuContext_PlayerId.Click += new System.EventHandler(this.mnuContext_PlayerId_Click);
             // 
             // mnuContext_SteamId
             // 
             this.mnuContext_SteamId.Name = "mnuContext_SteamId";
-            this.mnuContext_SteamId.Size = new System.Drawing.Size(152, 22);
+            this.mnuContext_SteamId.Size = new System.Drawing.Size(155, 22);
             this.mnuContext_SteamId.Text = "Copy Steam ID";
             this.mnuContext_SteamId.Click += new System.EventHandler(this.mnuContext_SteamId_Click);
             // 
             // mnuContext_TribeId
             // 
             this.mnuContext_TribeId.Name = "mnuContext_TribeId";
-            this.mnuContext_TribeId.Size = new System.Drawing.Size(152, 22);
+            this.mnuContext_TribeId.Size = new System.Drawing.Size(155, 22);
             this.mnuContext_TribeId.Text = "Copy Tribe ID";
             this.mnuContext_TribeId.Click += new System.EventHandler(this.mnuContext_TribeId_Click);
             // 
             // mnuContext_Export
             // 
             this.mnuContext_Export.Name = "mnuContext_Export";
-            this.mnuContext_Export.Size = new System.Drawing.Size(152, 22);
+            this.mnuContext_Export.Size = new System.Drawing.Size(155, 22);
             this.mnuContext_Export.Text = "Export Data";
             this.mnuContext_Export.Click += new System.EventHandler(this.mnuContext_ExportData_Click);
+            // 
+            // mnuContext_Structures
+            // 
+            this.mnuContext_Structures.Name = "mnuContext_Structures";
+            this.mnuContext_Structures.Size = new System.Drawing.Size(155, 22);
+            this.mnuContext_Structures.Text = "View Structures";
+            this.mnuContext_Structures.Visible = false;
+            this.mnuContext_Structures.Click += new System.EventHandler(this.mnuContext_Structures_Click);
+            // 
+            // mnuContext_Tames
+            // 
+            this.mnuContext_Tames.Name = "mnuContext_Tames";
+            this.mnuContext_Tames.Size = new System.Drawing.Size(155, 22);
+            this.mnuContext_Tames.Text = "View Tames";
+            this.mnuContext_Tames.Visible = false;
+            this.mnuContext_Tames.Click += new System.EventHandler(this.mnuContext_Tames_Click);
+            // 
+            // mnuContext_Players
+            // 
+            this.mnuContext_Players.Name = "mnuContext_Players";
+            this.mnuContext_Players.Size = new System.Drawing.Size(155, 22);
+            this.mnuContext_Players.Text = "View Players";
+            this.mnuContext_Players.Visible = false;
+            this.mnuContext_Players.Click += new System.EventHandler(this.mnuContext_Players_Click);
             // 
             // lblWildTotal
             // 
@@ -1512,6 +1551,11 @@
             this.lvwTameDetail_Rig2.Text = "Rig2";
             this.lvwTameDetail_Rig2.Width = 100;
             // 
+            // lvwTameDetail_TribeInRange
+            // 
+            this.lvwTameDetail_TribeInRange.Text = "Tribe In Range";
+            this.lvwTameDetail_TribeInRange.Width = 120;
+            // 
             // lblTameTotal
             // 
             this.lblTameTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -1804,6 +1848,7 @@
             // 
             // tpgTribes
             // 
+            this.tpgTribes.Controls.Add(this.pnlFilterTribes);
             this.tpgTribes.Controls.Add(this.tableCharts);
             this.tpgTribes.Controls.Add(this.chkTribeStructures);
             this.tpgTribes.Controls.Add(this.chkTribeTames);
@@ -1819,6 +1864,42 @@
             this.tpgTribes.TabIndex = 5;
             this.tpgTribes.Text = "Tribes";
             this.tpgTribes.UseVisualStyleBackColor = true;
+            // 
+            // pnlFilterTribes
+            // 
+            this.pnlFilterTribes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlFilterTribes.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.pnlFilterTribes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFilterTribes.Controls.Add(this.btnFilterTribe);
+            this.pnlFilterTribes.Controls.Add(this.txtFilterTribe);
+            this.pnlFilterTribes.Location = new System.Drawing.Point(12, 173);
+            this.pnlFilterTribes.Name = "pnlFilterTribes";
+            this.pnlFilterTribes.Size = new System.Drawing.Size(786, 29);
+            this.pnlFilterTribes.TabIndex = 23;
+            // 
+            // btnFilterTribe
+            // 
+            this.btnFilterTribe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilterTribe.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFilterTribe.Image = global::ARKViewer.Properties.Resources.button_zoom;
+            this.btnFilterTribe.Location = new System.Drawing.Point(755, -1);
+            this.btnFilterTribe.Name = "btnFilterTribe";
+            this.btnFilterTribe.Size = new System.Drawing.Size(30, 29);
+            this.btnFilterTribe.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.btnFilterTribe, "Find next");
+            this.btnFilterTribe.UseVisualStyleBackColor = true;
+            this.btnFilterTribe.Click += new System.EventHandler(this.btnFilterTribe_Click);
+            // 
+            // txtFilterTribe
+            // 
+            this.txtFilterTribe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFilterTribe.Location = new System.Drawing.Point(10, 3);
+            this.txtFilterTribe.Name = "txtFilterTribe";
+            this.txtFilterTribe.Size = new System.Drawing.Size(735, 20);
+            this.txtFilterTribe.TabIndex = 6;
+            this.txtFilterTribe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterTribe_KeyDown);
             // 
             // tableCharts
             // 
@@ -1900,22 +1981,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeTames.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea7.Name = "ChartArea1";
-            this.chartTribeTames.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.chartTribeTames.Legends.Add(legend7);
+            chartArea4.Name = "ChartArea1";
+            this.chartTribeTames.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartTribeTames.Legends.Add(legend4);
             this.chartTribeTames.Location = new System.Drawing.Point(4, 3);
             this.chartTribeTames.Name = "chartTribeTames";
-            series7.ChartArea = "ChartArea1";
-            series7.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series7.Legend = "Legend1";
-            series7.Name = "Series1";
-            this.chartTribeTames.Series.Add(series7);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartTribeTames.Series.Add(series4);
             this.chartTribeTames.Size = new System.Drawing.Size(247, 159);
             this.chartTribeTames.TabIndex = 8;
             this.chartTribeTames.Text = "Tribe Players";
-            title7.Name = "Tribe Players";
-            this.chartTribeTames.Titles.Add(title7);
+            title4.Name = "Tribe Players";
+            this.chartTribeTames.Titles.Add(title4);
             // 
             // pnlChart2
             // 
@@ -1977,22 +2058,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeStructures.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea8.Name = "ChartArea1";
-            this.chartTribeStructures.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.chartTribeStructures.Legends.Add(legend8);
+            chartArea5.Name = "ChartArea1";
+            this.chartTribeStructures.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chartTribeStructures.Legends.Add(legend5);
             this.chartTribeStructures.Location = new System.Drawing.Point(4, 3);
             this.chartTribeStructures.Name = "chartTribeStructures";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series8.Legend = "Legend1";
-            series8.Name = "Series1";
-            this.chartTribeStructures.Series.Add(series8);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chartTribeStructures.Series.Add(series5);
             this.chartTribeStructures.Size = new System.Drawing.Size(246, 159);
             this.chartTribeStructures.TabIndex = 8;
             this.chartTribeStructures.Text = "Tribe Players";
-            title8.Name = "Tribe Players";
-            this.chartTribeStructures.Titles.Add(title8);
+            title5.Name = "Tribe Players";
+            this.chartTribeStructures.Titles.Add(title5);
             // 
             // pnlChart1
             // 
@@ -2054,22 +2135,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribePlayers.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea9.Name = "ChartArea1";
-            this.chartTribePlayers.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.chartTribePlayers.Legends.Add(legend9);
+            chartArea6.Name = "ChartArea1";
+            this.chartTribePlayers.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chartTribePlayers.Legends.Add(legend6);
             this.chartTribePlayers.Location = new System.Drawing.Point(4, 3);
             this.chartTribePlayers.Name = "chartTribePlayers";
-            series9.ChartArea = "ChartArea1";
-            series9.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series9.Legend = "Legend1";
-            series9.Name = "Series1";
-            this.chartTribePlayers.Series.Add(series9);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chartTribePlayers.Series.Add(series6);
             this.chartTribePlayers.Size = new System.Drawing.Size(245, 159);
             this.chartTribePlayers.TabIndex = 8;
             this.chartTribePlayers.Text = "Tribe Players";
-            title9.Name = "Tribe Players";
-            this.chartTribePlayers.Titles.Add(title9);
+            title6.Name = "Tribe Players";
+            this.chartTribePlayers.Titles.Add(title6);
             // 
             // chkTribeStructures
             // 
@@ -2176,7 +2257,7 @@
             this.lvwTribes.HideSelection = false;
             this.lvwTribes.Location = new System.Drawing.Point(12, 13);
             this.lvwTribes.Name = "lvwTribes";
-            this.lvwTribes.Size = new System.Drawing.Size(786, 184);
+            this.lvwTribes.Size = new System.Drawing.Size(786, 161);
             this.lvwTribes.TabIndex = 0;
             this.lvwTribes.UseCompatibleStateImageBehavior = false;
             this.lvwTribes.View = System.Windows.Forms.View.Details;
@@ -2216,6 +2297,7 @@
             // 
             // tpgPlayers
             // 
+            this.tpgPlayers.Controls.Add(this.pnlFilterPlayers);
             this.tpgPlayers.Controls.Add(this.btnMissionScoreboard);
             this.tpgPlayers.Controls.Add(this.btnDeletePlayer);
             this.tpgPlayers.Controls.Add(this.lblPlayerTotal);
@@ -2236,6 +2318,42 @@
             this.tpgPlayers.TabIndex = 1;
             this.tpgPlayers.Text = "Players";
             this.tpgPlayers.UseVisualStyleBackColor = true;
+            // 
+            // pnlFilterPlayers
+            // 
+            this.pnlFilterPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlFilterPlayers.BackColor = System.Drawing.Color.PaleTurquoise;
+            this.pnlFilterPlayers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlFilterPlayers.Controls.Add(this.btnFilterPlayer);
+            this.pnlFilterPlayers.Controls.Add(this.txtFilterPlayer);
+            this.pnlFilterPlayers.Location = new System.Drawing.Point(12, 376);
+            this.pnlFilterPlayers.Name = "pnlFilterPlayers";
+            this.pnlFilterPlayers.Size = new System.Drawing.Size(787, 29);
+            this.pnlFilterPlayers.TabIndex = 23;
+            // 
+            // btnFilterPlayer
+            // 
+            this.btnFilterPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnFilterPlayer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFilterPlayer.Image = global::ARKViewer.Properties.Resources.button_zoom;
+            this.btnFilterPlayer.Location = new System.Drawing.Point(756, -1);
+            this.btnFilterPlayer.Name = "btnFilterPlayer";
+            this.btnFilterPlayer.Size = new System.Drawing.Size(30, 29);
+            this.btnFilterPlayer.TabIndex = 9;
+            this.toolTip1.SetToolTip(this.btnFilterPlayer, "Find next");
+            this.btnFilterPlayer.UseVisualStyleBackColor = true;
+            this.btnFilterPlayer.Click += new System.EventHandler(this.btnFilterPlayer_Click);
+            // 
+            // txtFilterPlayer
+            // 
+            this.txtFilterPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtFilterPlayer.Location = new System.Drawing.Point(10, 3);
+            this.txtFilterPlayer.Name = "txtFilterPlayer";
+            this.txtFilterPlayer.Size = new System.Drawing.Size(736, 20);
+            this.txtFilterPlayer.TabIndex = 6;
+            this.txtFilterPlayer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterPlayer_KeyDown);
             // 
             // btnMissionScoreboard
             // 
@@ -2367,6 +2485,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwPlayers.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvwPlayers_PlayerId,
             this.lvwPlayers_Name,
             this.lvwPlayers_Tribe,
             this.lvwPlayers_Sex,
@@ -2391,7 +2510,7 @@
             this.lvwPlayers.HideSelection = false;
             this.lvwPlayers.Location = new System.Drawing.Point(12, 52);
             this.lvwPlayers.Name = "lvwPlayers";
-            this.lvwPlayers.Size = new System.Drawing.Size(786, 353);
+            this.lvwPlayers.Size = new System.Drawing.Size(787, 325);
             this.lvwPlayers.TabIndex = 4;
             this.lvwPlayers.UseCompatibleStateImageBehavior = false;
             this.lvwPlayers.View = System.Windows.Forms.View.Details;
@@ -2399,6 +2518,11 @@
             this.lvwPlayers.SelectedIndexChanged += new System.EventHandler(this.lvwPlayers_SelectedIndexChanged);
             this.lvwPlayers.Click += new System.EventHandler(this.lvwPlayers_Click);
             this.lvwPlayers.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvwPlayers_MouseClick);
+            // 
+            // lvwPlayers_PlayerId
+            // 
+            this.lvwPlayers_PlayerId.Text = "Id";
+            this.lvwPlayers_PlayerId.Width = 100;
             // 
             // lvwPlayers_Name
             // 
@@ -2489,7 +2613,7 @@
             // 
             // lvwPlayers_SteamId
             // 
-            this.lvwPlayers_SteamId.Text = "SteamId";
+            this.lvwPlayers_SteamId.Text = "Steam Id";
             this.lvwPlayers_SteamId.Width = 0;
             // 
             // tpgDroppedItems
@@ -3019,11 +3143,6 @@
             this.cboSelectedMap.TabIndex = 26;
             this.cboSelectedMap.SelectedIndexChanged += new System.EventHandler(this.cboSelectedMap_SelectedIndexChanged);
             // 
-            // lvwTameDetail_TribeInRange
-            // 
-            this.lvwTameDetail_TribeInRange.Text = "Tribe In Range";
-            this.lvwTameDetail_TribeInRange.Width = 120;
-            // 
             // frmViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3074,6 +3193,8 @@
             this.pnlFilterStructures.PerformLayout();
             this.tpgTribes.ResumeLayout(false);
             this.tpgTribes.PerformLayout();
+            this.pnlFilterTribes.ResumeLayout(false);
+            this.pnlFilterTribes.PerformLayout();
             this.tableCharts.ResumeLayout(false);
             this.pnlChart3.ResumeLayout(false);
             this.pnlChart3.PerformLayout();
@@ -3089,6 +3210,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartTribePlayers)).EndInit();
             this.tpgPlayers.ResumeLayout(false);
             this.tpgPlayers.PerformLayout();
+            this.pnlFilterPlayers.ResumeLayout(false);
+            this.pnlFilterPlayers.PerformLayout();
             this.tpgDroppedItems.ResumeLayout(false);
             this.tpgDroppedItems.PerformLayout();
             this.pnlFilterDropped.ResumeLayout(false);
@@ -3358,6 +3481,16 @@
         private System.Windows.Forms.ColumnHeader lvwItemList_Quality;
         private System.Windows.Forms.ColumnHeader lvwItemList_Rating;
         private System.Windows.Forms.ColumnHeader lvwTameDetail_TribeInRange;
+        private System.Windows.Forms.ColumnHeader lvwPlayers_PlayerId;
+        private System.Windows.Forms.Panel pnlFilterPlayers;
+        private System.Windows.Forms.Button btnFilterPlayer;
+        private System.Windows.Forms.TextBox txtFilterPlayer;
+        private System.Windows.Forms.Panel pnlFilterTribes;
+        private System.Windows.Forms.Button btnFilterTribe;
+        private System.Windows.Forms.TextBox txtFilterTribe;
+        private System.Windows.Forms.ToolStripMenuItem mnuContext_Structures;
+        private System.Windows.Forms.ToolStripMenuItem mnuContext_Tames;
+        private System.Windows.Forms.ToolStripMenuItem mnuContext_Players;
     }
 }
 
