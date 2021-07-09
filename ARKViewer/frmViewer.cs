@@ -5334,6 +5334,8 @@ namespace ARKViewer
                     item.UseItemStyleForSubItems = false;
 
                     item.SubItems.Add(creatureName);
+                    item.SubItems.Add(detail.IsWandering ? "Yes" : "No");
+                    item.SubItems.Add(detail.IsMating ? "Yes" : "No");
                     item.SubItems.Add(detail.Gender.ToString());
                     item.SubItems.Add(detail.BaseLevel.ToString());
                     item.SubItems.Add(detail.Level.ToString());

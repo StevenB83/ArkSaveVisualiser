@@ -42,11 +42,19 @@ namespace ASVPack.Models
         [DataMember] public double LastAllyInRangeTimeInGame { get; set; } = 0;
         public DateTime? LastAllyInRangeTime { get; internal set; }
 
+        [DataMember] public bool IsMating { get; set; } = false;
+        [DataMember] public bool IsWandering { get; set; } = false;
+
+
 
         public ContentTamedCreature(GameObject creatureObject, GameObject statusObject): base(creatureObject, statusObject)
         {
             TamedTimeInGame = creatureObject.GetPropertyValue<double>("TamedAtTime");
-            
+
+            IsWandering = creatureObject.GetPropertyValue<bool>("bEnableTamedWandering", 0, false);
+            IsMating = creatureObject.GetPropertyValue<bool>("bEnableTamedMating", 0, false);
+
+
             int testTarget = creatureObject.GetPropertyValue<int>("TargetingTeam");
             int testTeam = creatureObject.GetPropertyValue<int>("TamingTeamID");
 
@@ -107,6 +115,8 @@ namespace ASVPack.Models
                 for (var i = 0; i < TamedStats.Length; i++) TamedStats[i] = statusObject.GetPropertyValue<ArkByteValue>("NumberOfLevelUpPointsAppliedTamed", i)?.ByteValue ?? 0;
 
             }
+
+
 
 
             //ancestors

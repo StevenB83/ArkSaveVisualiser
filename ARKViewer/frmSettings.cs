@@ -143,6 +143,16 @@ namespace ARKViewer
 
             }
 
+            
+
+
+            lvwColours.EndUpdate();
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void RefreshUnknownColours()
+        {
             if (cm != null && cm.MapFilename.Length > 0)
             {
                 btnColoursNotMatchedAdd.Enabled = false;
@@ -181,12 +191,8 @@ namespace ARKViewer
 
                 lvwColoursNotMapped.EndUpdate();
             }
-
-
-            lvwColours.EndUpdate();
-
-            this.Cursor = Cursors.Default;
         }
+
         private void PopulateDinoClassMap(string selectedClass)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -226,6 +232,14 @@ namespace ARKViewer
             lvwDinoClasses.EndUpdate();
 
 
+            
+
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void RefreshUnknownCreatures()
+        {
             if (cm != null && cm.MapFilename.Length > 0)
             {
                 lvwCreaturesNotMapped.BeginUpdate();
@@ -238,7 +252,7 @@ namespace ARKViewer
                     var knownMap = SavedConfig.DinoMap.ToList();
                     var unknownMap = new List<string>();
 
-                    var unmappedClasses = wilds.Where(w => !knownMap.Any(m => m.ClassName == w.ClassName)).GroupBy(x=>x.ClassName).Select(s => s.First().ClassName).Distinct().OrderBy(s => s).ToList();
+                    var unmappedClasses = wilds.Where(w => !knownMap.Any(m => m.ClassName == w.ClassName)).GroupBy(x => x.ClassName).Select(s => s.First().ClassName).Distinct().OrderBy(s => s).ToList();
                     if (unmappedClasses != null && unmappedClasses.Count > 0) unknownMap.AddRange(unmappedClasses);
 
                     if (unknownMap != null && unknownMap.Count() > 0)
@@ -254,9 +268,6 @@ namespace ARKViewer
 
                 lvwCreaturesNotMapped.EndUpdate();
             }
-
-
-            this.Cursor = Cursors.Default;
         }
 
         private void PopulateItemClassMap(string selectedClass)
@@ -303,6 +314,13 @@ namespace ARKViewer
             lvwItemMap.EndUpdate();
 
 
+            
+
+            this.Cursor = Cursors.Default;
+        }
+
+        private void RefreshUnknownItems()
+        {
             if (cm != null && cm.MapFilename.Length > 0)
             {
                 lvwItemsNotMatched.BeginUpdate();
@@ -319,7 +337,7 @@ namespace ARKViewer
                                                                     x.Items.Where(w =>
                                                                         !knownMap.Any(m => m.ClassName == w.ClassName)
                                                                     )
-                                                             ).GroupBy(x=>x.ClassName).Select(x=>x.First()).ToList();
+                                                             ).GroupBy(x => x.ClassName).Select(x => x.First()).ToList();
 
                     if (unmappedClasses != null && unmappedClasses.Count > 0)
                     {
@@ -340,8 +358,6 @@ namespace ARKViewer
                 }
 
             }
-
-            this.Cursor = Cursors.Default;
         }
 
 
@@ -383,7 +399,11 @@ namespace ARKViewer
             }
             lvwStructureMap.EndUpdate();
 
+            this.Cursor = Cursors.Default;
+        }
 
+        private void RefreshUnknownStructures()
+        {
             if (cm != null && cm.MapFilename.Length > 0)
             {
                 lvwStructuresNotMapped.BeginUpdate();
@@ -397,7 +417,7 @@ namespace ARKViewer
                     var knownMap = SavedConfig.StructureMap.ToList();
                     var unknownMap = new List<string>();
 
-                    var unmappedClasses = structures.Where(w => !knownMap.Any(m => m.ClassName == w.ClassName)).GroupBy(x=>x.ClassName).Select(s => s.First().ClassName).OrderBy(s => s).ToList();
+                    var unmappedClasses = structures.GroupBy(x => x.ClassName).Where(w => !knownMap.Any(m => m.ClassName == w.Key)).Select(s => s.First().ClassName).OrderBy(s => s).ToList();
                     if (unmappedClasses != null && unmappedClasses.Count > 0) unknownMap.AddRange(unmappedClasses);
 
                     if (unknownMap != null && unknownMap.Count() > 0)
@@ -413,8 +433,6 @@ namespace ARKViewer
 
                 lvwStructuresNotMapped.EndUpdate();
             }
-
-            this.Cursor = Cursors.Default;
         }
 
         private void PopulateSinglePlayerGames()
@@ -1891,6 +1909,7 @@ namespace ARKViewer
                     }
 
                     PopulateColours();
+                    lvwColoursNotMapped.Items.Remove(selectedItem);
                 }
             }
         }
@@ -1924,6 +1943,7 @@ namespace ARKViewer
                 }
 
                 PopulateDinoClassMap(mapEditor.ClassMap.ClassName);
+                lvwCreaturesNotMapped.Items.Remove(selectedItem);
 
             }
         }
@@ -1946,6 +1966,7 @@ namespace ARKViewer
                 SavedConfig.ItemMap.Add(mapEditor.ClassMap);
 
                 PopulateItemClassMap(mapEditor.ClassMap.ClassName);
+                lvwItemsNotMatched.Items.Remove(lvwItemsNotMatched.SelectedItems[0]);
             }
         }
 
@@ -1982,6 +2003,7 @@ namespace ARKViewer
                 }
 
                 PopulateStructureClassMap("");
+                lvwStructuresNotMapped.Items.Remove(lvwStructuresNotMapped.SelectedItems[0]);
             }
         }
 
@@ -2109,6 +2131,44 @@ namespace ARKViewer
         private void btnRemoveARK_Click(object sender, EventArgs e)
         {
             cboLocalARK.Items.RemoveAt(cboLocalARK.SelectedIndex);
+        }
+
+        private void btnRefreshUnknownItems_Click(object sender, EventArgs e)
+        {
+            btnRefreshUnknownItems.Enabled = false;
+
+            RefreshUnknownItems();
+
+            btnRefreshUnknownItems.Enabled = true;
+
+        }
+
+        private void btnRefreshUnknownStructures_Click(object sender, EventArgs e)
+        {
+            btnRefreshUnknownStructures.Enabled = false;
+
+            RefreshUnknownStructures();
+
+            btnRefreshUnknownStructures.Enabled = true;
+        }
+
+        private void btnRefreshUnknownCreatures_Click(object sender, EventArgs e)
+        {
+            btnRefreshUnknownCreatures.Enabled = false;
+
+            RefreshUnknownCreatures();
+
+            btnRefreshUnknownCreatures.Enabled = true;
+
+        }
+
+        private void btnRefreshUnknownColours_Click(object sender, EventArgs e)
+        {
+            btnRefreshUnknownColours.Enabled = false;
+
+            RefreshUnknownColours();
+
+            btnRefreshUnknownColours.Enabled = true;
         }
     }
 }

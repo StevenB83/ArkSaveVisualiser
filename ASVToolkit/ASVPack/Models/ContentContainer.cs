@@ -757,10 +757,6 @@ namespace ASVPack.Models
 
 
                                     PropertyArray equippedItemsArray = inventoryComponent.GetTypedProperty<PropertyArray>("EquippedItems");
-
-
-
-
                                     if (equippedItemsArray != null)
                                     {
                                         ArkArrayObjectReference equippedReferences = (ArkArrayObjectReference)equippedItemsArray.Value;
