@@ -810,7 +810,9 @@ namespace ASVPack.Models
                         }
                         );
 
-
+                        long tameLoadEnd = DateTime.Now.Ticks;
+                        var tameLoadTime = TimeSpan.FromTicks(tameLoadEnd - tribeLoadEnd );
+                        logWriter.Info($"Tames loaded in: {tameLoadTime.ToString(@"mm\:ss")}.");
 
                         //TODO:// add unclaimed babies, with living parent belonging to tribe
 
@@ -894,7 +896,9 @@ namespace ASVPack.Models
                         });
                         if (fileTribes.Count > 0) Tribes.AddRange(fileTribes.ToList());
 
-
+                        long structureLoadEnd = DateTime.Now.Ticks;
+                        var structureLoadTime = TimeSpan.FromTicks(structureLoadEnd - tameLoadEnd);
+                        logWriter.Info($"Player structures loaded in: {structureLoadTime.ToString(@"mm\:ss")}.");
 
                         //dropped 
                         logWriter.Debug($"Identifying dropped items");
@@ -1090,6 +1094,11 @@ namespace ASVPack.Models
                                 return droppedItem;
                             }).ToList()
                         );
+
+                        long droppedLoadEnd = DateTime.Now.Ticks;
+                        var droppedLoadTime = TimeSpan.FromTicks(droppedLoadEnd - structureLoadEnd);
+                        logWriter.Info($"Dropped items / bags loaded in: {droppedLoadTime.ToString(@"mm\:ss")}.");
+
 
                     }
                 }
