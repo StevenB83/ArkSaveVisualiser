@@ -21,6 +21,7 @@ namespace ARKViewer.Models
         public decimal Y { get; set; } = 0;
         public decimal Z { get; set; } = 0;
         public string Quality { get; set; } = "";
+        public int? QualityColor { get; set; } = null;
         public float? Rating { get; set; } = null;
 
 

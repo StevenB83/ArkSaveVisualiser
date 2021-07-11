@@ -46,7 +46,7 @@ namespace SavegameToolkit
 
             if (ProfileVersion != 1)
             {
-                throw new NotSupportedException("Unknown Profile Version " + ProfileVersion);
+                //throw new NotSupportedException("Unknown Profile Version " + ProfileVersion);
             }
 
             int profilesCount = archive.ReadInt();

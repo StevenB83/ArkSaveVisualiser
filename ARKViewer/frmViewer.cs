@@ -141,7 +141,16 @@ namespace ARKViewer
                 {
                     //assume .ark
                     ContentContainer container = new ContentContainer();
-                    container.LoadSaveGame(fileName);
+
+                    string localProfileFilename = "";
+                    string steamFolder = Program.GetSteamFolder();
+                    if (steamFolder != "")
+                    {
+                        localProfileFilename = Path.Combine(steamFolder, @"LocalProfiles\PlayerLocalData.arkprofile");
+                    }
+
+
+                    container.LoadSaveGame(fileName, localProfileFilename);
 
                     cm = new ASVDataManager(container);
                 }
@@ -581,6 +590,8 @@ namespace ARKViewer
 
         private void btnDinoAncestors_Click(object sender, EventArgs e)
         {
+            if (lvwTameDetail.SelectedItems.Count == 0) return;
+
             //MessageBox.Show("Dino ancestor explorer coming soon.", "Coming Soon!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             ListViewItem selectedItem = lvwTameDetail.SelectedItems[0];
             ContentTamedCreature selectedTame = (ContentTamedCreature)selectedItem.Tag;
@@ -2980,8 +2991,6 @@ namespace ARKViewer
                                 {
                                     if (File.Exists(localFilename) && Program.ProgramConfig.FtpDownloadMode == 0 && File.GetLastWriteTimeUtc(localFilename) >= serverFile.LastAccessTimeUtc)
                                     {
-
-
                                         shouldDownload = false;
                                     }
                                 }
@@ -2996,7 +3005,24 @@ namespace ARKViewer
 
                             if (shouldDownload)
                             {
-                                Program.LogWriter.Debug($"Downloading: {serverFile} as {localFilename}");
+                                string serverFilename = serverFile.FullName;
+
+                                if (serverFile.Name.EndsWith(".ark"))
+                                {
+                                    //check for newer .tmp
+                                    var tmpFilename = files.FirstOrDefault(x => x.Name == serverFile.Name.Replace(".ark", ".tmp"));
+                                    if (tmpFilename != null)
+                                    {
+                                        if(tmpFilename.LastWriteTimeUtc > serverFile.LastWriteTimeUtc)
+                                        {
+                                            //tmp is newer, use that instead
+                                            serverFilename = tmpFilename.FullName;
+                                        }
+                                    }
+
+                                }
+                                
+                                Program.LogWriter.Debug($"Downloading: {serverFilename} as {localFilename}");
 
                                 //delete local if any
                                 if (File.Exists(localFilename))
@@ -3006,7 +3032,7 @@ namespace ARKViewer
 
                                 using (FileStream outputStream = new FileStream(localFilename, FileMode.CreateNew))
                                 {
-                                    sftp.DownloadFile(serverFile.FullName, outputStream);
+                                    sftp.DownloadFile(serverFilename, outputStream);
                                     outputStream.Flush();
                                 }
                                 DateTime saveTime = serverFile.LastWriteTimeUtc;
@@ -3145,7 +3171,21 @@ namespace ARKViewer
                     {
                         Program.LogWriter.Debug($"Found: {serverSaveFile}");
 
-                        localFilename = Path.Combine(downloadPath, serverSaveFile.Name);
+                        string serverGameFilename = serverSaveFile.Name;
+
+                        //check for .tmp file
+                        var serverTempFile = serverFiles.Where(f => f.Name.ToLower() == selectedServer.Map.ToLower().Replace(".ark", ".tmp")).FirstOrDefault();
+                        if (serverTempFile != null)
+                        {
+                            if(serverTempFile.Modified.ToUniversalTime() > serverSaveFile.Modified.ToUniversalTime())
+                            {
+                                //tmp is newer, use that instead
+                                serverGameFilename = serverTempFile.Name;
+                            }
+                        }
+
+
+                        localFilename = Path.Combine(downloadPath, serverGameFilename);
                         downloadedFilename = localFilename;
                         bool shouldDownload = true;
 
@@ -4940,15 +4980,30 @@ namespace ARKViewer
                 {
                     if(chkItemSearchBlueprints.Checked || !chkItemSearchBlueprints.Checked &! foundItem.IsBlueprint)
                     {
+                        string qualityName = "";
+                        Color backColor = SystemColors.Window;
+                        Color foreColor = SystemColors.WindowText;
+                        if (foundItem.Rating.HasValue)
+                        {
+                            var itemQuality = Program.GetQualityByRating(foundItem.Rating.Value);
+                            qualityName = itemQuality.QualityName;
+                            backColor = itemQuality.QualityColor;
+                            foreColor = Program.IdealTextColor(backColor);
+                        }
+
                         ListViewItem newItem = new ListViewItem(foundItem.TribeName);
+                        newItem.BackColor = backColor;
+                        newItem.ForeColor = foreColor;
                         newItem.SubItems.Add(foundItem.ContainerName);
                         newItem.SubItems.Add(foundItem.DisplayName);
-                        newItem.SubItems.Add(foundItem.Quality);
-                        newItem.SubItems.Add(foundItem.Rating.HasValue ? foundItem.Rating.ToString() : "");
+                        newItem.SubItems.Add(qualityName);
+                        newItem.SubItems.Add(foundItem.Rating.HasValue ? foundItem.Rating.Value.ToString() : "");
                         newItem.SubItems.Add(foundItem.IsBlueprint ? "Yes" : "No");
                         newItem.SubItems.Add(foundItem.Quantity.ToString());
                         newItem.SubItems.Add(foundItem.Latitude.ToString("f2"));
                         newItem.SubItems.Add(foundItem.Longitude.ToString("f2"));
+
+
                         
                         newItem.Tag = foundItem;
                         newItems.Add(newItem);
@@ -5159,8 +5214,6 @@ namespace ARKViewer
 
                     ListViewItem newItem = new ListViewItem(itemName);
                     newItem.Tag = playerCache;
-                    newItem.SubItems.Add(""); //quality
-                    newItem.SubItems.Add("");
                     newItem.SubItems.Add("No");
                     newItem.SubItems.Add(playerCache.DroppedByName);
                     newItem.SubItems.Add((playerCache.Latitude.GetValueOrDefault(0) == 0 && playerCache.Longitude.GetValueOrDefault(0) == 0) ? "n/a" : playerCache.Latitude.Value.ToString("0.00"));
@@ -5396,46 +5449,19 @@ namespace ARKViewer
                     if (detail.IsCryo)
                     {
                         item.BackColor = Color.LightSkyBlue;
-                        item.SubItems[1].BackColor = Color.LightSkyBlue;
-                        item.SubItems[2].BackColor = Color.LightSkyBlue;
-                        item.SubItems[3].BackColor = Color.LightSkyBlue;
-                        item.SubItems[4].BackColor = Color.LightSkyBlue;
-                        item.SubItems[5].BackColor = Color.LightSkyBlue;
-                        item.SubItems[6].BackColor = Color.LightSkyBlue;
-                        item.SubItems[7].BackColor = Color.LightSkyBlue;
-                        item.SubItems[8].BackColor = Color.LightSkyBlue;
-                        item.SubItems[9].BackColor = Color.LightSkyBlue;
-                        item.SubItems[10].BackColor = Color.LightSkyBlue;
-                        item.SubItems[11].BackColor = Color.LightSkyBlue;
-                        item.SubItems[12].BackColor = Color.LightSkyBlue;
-                        item.SubItems[13].BackColor = Color.LightSkyBlue;
-                        item.SubItems[14].BackColor = Color.LightSkyBlue;
-                        item.SubItems[15].BackColor = Color.LightSkyBlue;
-                        item.SubItems[16].BackColor = Color.LightSkyBlue;
-                        item.SubItems[17].BackColor = Color.LightSkyBlue;
-                        item.SubItems[18].BackColor = Color.LightSkyBlue;
+                        
+                        foreach(ListViewItem.ListViewSubItem subItem in item.SubItems)
+                        {
+                            subItem.BackColor = Color.LightSkyBlue;
+                        }
                     }
                     else if (detail.IsVivarium)
                     {
                         item.BackColor = Color.LightGreen;
-                        item.SubItems[1].BackColor = Color.LightGreen;
-                        item.SubItems[2].BackColor = Color.LightGreen;
-                        item.SubItems[3].BackColor = Color.LightGreen;
-                        item.SubItems[4].BackColor = Color.LightGreen;
-                        item.SubItems[5].BackColor = Color.LightGreen;
-                        item.SubItems[6].BackColor = Color.LightGreen;
-                        item.SubItems[7].BackColor = Color.LightGreen;
-                        item.SubItems[8].BackColor = Color.LightGreen;
-                        item.SubItems[9].BackColor = Color.LightGreen;
-                        item.SubItems[10].BackColor = Color.LightGreen;
-                        item.SubItems[11].BackColor = Color.LightGreen;
-                        item.SubItems[12].BackColor = Color.LightGreen;
-                        item.SubItems[13].BackColor = Color.LightGreen;
-                        item.SubItems[14].BackColor = Color.LightGreen;
-                        item.SubItems[15].BackColor = Color.LightGreen;
-                        item.SubItems[16].BackColor = Color.LightGreen;
-                        item.SubItems[17].BackColor = Color.LightGreen;
-                        item.SubItems[18].BackColor = Color.LightGreen;
+                        foreach (ListViewItem.ListViewSubItem subItem in item.SubItems)
+                        {
+                            subItem.BackColor = Color.LightGreen;
+                        }
                     }
 
 
@@ -5445,8 +5471,8 @@ namespace ARKViewer
                     ColourMap selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[0]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[20].BackColor = selectedColor.Color;
-                        item.SubItems[20].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count-1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[1];
@@ -5454,8 +5480,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[1]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[21].BackColor = selectedColor.Color;
-                        item.SubItems[21].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[2];
@@ -5463,8 +5489,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[2]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[22].BackColor = selectedColor.Color;
-                        item.SubItems[22].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[3];
@@ -5472,8 +5498,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[3]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[23].BackColor = selectedColor.Color;
-                        item.SubItems[23].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[4];
@@ -5481,8 +5507,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[4]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[24].BackColor = selectedColor.Color;
-                        item.SubItems[24].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[5];
@@ -5490,8 +5516,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[5]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[25].BackColor = selectedColor.Color;
-                        item.SubItems[25].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
 
@@ -5647,8 +5673,8 @@ namespace ARKViewer
                     ColourMap selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[0]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[14].BackColor = selectedColor.Color;
-                        item.SubItems[14].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[1];
@@ -5656,8 +5682,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[1]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[15].BackColor = selectedColor.Color;
-                        item.SubItems[15].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[2];
@@ -5665,8 +5691,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[2]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[16].BackColor = selectedColor.Color;
-                        item.SubItems[16].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[3];
@@ -5674,8 +5700,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[3]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[17].BackColor = selectedColor.Color;
-                        item.SubItems[17].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[4];
@@ -5683,8 +5709,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[4]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[18].BackColor = selectedColor.Color;
-                        item.SubItems[18].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     colourCheck = (int)detail.Colors[5];
@@ -5692,8 +5718,8 @@ namespace ARKViewer
                     selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[5]).FirstOrDefault();
                     if (selectedColor != null && selectedColor.Hex.Length > 0)
                     {
-                        item.SubItems[19].BackColor = selectedColor.Color;
-                        item.SubItems[19].ForeColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                        item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
                     }
 
                     item.SubItems.Add(detail.Id.ToString());
@@ -6348,6 +6374,14 @@ namespace ARKViewer
                 e.SuppressKeyPress = true;
 
             }
+        }
+
+        private void btnMyData_Click(object sender, EventArgs e)
+        {
+
+
+
+
         }
     }
 }

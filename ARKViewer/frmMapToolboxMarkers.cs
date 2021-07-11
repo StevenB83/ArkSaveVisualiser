@@ -1,5 +1,6 @@
 ﻿using ARKViewer.Configuration;
 using ARKViewer.Models;
+using ASVPack.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -123,12 +124,45 @@ namespace ARKViewer
 
         private void lvwMapMarkers_SelectedIndexChanged(object sender, EventArgs e)
         {
+            decimal selectedX = 0;
+            decimal selectedY = 0;
 
+            if (lvwMapMarkers.SelectedItems.Count > 0)
+            {
+                ContentMarker selectedMarker = (ContentMarker)lvwMapMarkers.SelectedItems[0].Tag;
+                selectedX = (decimal)selectedMarker.Lon;
+                selectedY = (decimal)selectedMarker.Lat;
+
+            }
+            MapViewer.DrawTestMap(selectedX, selectedY);
         }
 
         private void lvwMapMarkers_ItemChecked(object sender, ItemCheckedEventArgs e)
         {
+            MapViewer.CustomMarkers.Clear();
+            if (lvwMapMarkers.CheckedItems.Count == 0) return;
 
+            foreach (ListViewItem checkedItem in lvwMapMarkers.Items)
+            {
+                ContentMarker itemMarker = (ContentMarker)checkedItem.Tag;
+                itemMarker.Displayed = checkedItem.Checked;
+                checkedItem.Tag = itemMarker;
+
+                if (checkedItem.Checked) MapViewer.CustomMarkers.Add(itemMarker);
+            }
+
+            decimal selectedX = 0;
+            decimal selectedY = 0;
+
+            if (lvwMapMarkers.SelectedItems.Count > 0)
+            {
+                ContentMarker selectedMarker = (ContentMarker)lvwMapMarkers.SelectedItems[0].Tag;
+                selectedX = (decimal)selectedMarker.Lon;
+                selectedY = (decimal)selectedMarker.Lat;
+
+            }
+
+            MapViewer.DrawTestMap(selectedX, selectedY);
         }
 
         private void lvwMapMarkers_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -189,7 +223,18 @@ namespace ARKViewer
 
         private void btnAddMarker_Click(object sender, EventArgs e)
         {
+            frmMarkerEditor markerEditor = new frmMarkerEditor(Path.GetFileName(ARKViewer.Program.ProgramConfig.SelectedFile), ARKViewer.Program.ProgramConfig.MapMarkerList, "");
+            markerEditor.Owner = this;
+            if (markerEditor.ShowDialog() == DialogResult.OK)
+            {
+                ListViewItem newItem = lvwMapMarkers.Items.Add(markerEditor.EditingMarker.Name);
+                newItem.ImageIndex = Program.GetMarkerImageIndex(markerEditor.EditingMarker.Image) - 1;
+                newItem.SubItems.Add(markerEditor.EditingMarker.Lat.ToString("0.00"));
+                newItem.SubItems.Add(markerEditor.EditingMarker.Lon.ToString("0.00"));
+                newItem.Tag = markerEditor.EditingMarker;
 
+                ARKViewer.Program.ProgramConfig.MapMarkerList.Add(markerEditor.EditingMarker);
+            }
         }
 
         private void btnRemoveMarker_Click(object sender, EventArgs e)

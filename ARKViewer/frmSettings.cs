@@ -29,11 +29,13 @@ namespace ARKViewer
         
 
         public ViewerConfiguration SavedConfig { get; set; }
-        public frmSettings(ASVDataManager manager)
+        public frmSettings()
         {
             InitializeComponent();
 
-            cm = manager;
+
+            cm = null;
+
             btnExportContentPack.Enabled = cm != null;
             btnJsonExportAll.Enabled = cm != null;
             btnJsonExportPlayers.Enabled = cm != null;
@@ -52,6 +54,31 @@ namespace ARKViewer
             PopulateExportTribes();
 
             SavedConfig = Program.ProgramConfig;
+        }
+        public frmSettings(ASVDataManager manager): this()
+        {
+
+            cm = manager;
+
+            btnExportContentPack.Enabled = cm != null;
+            btnJsonExportAll.Enabled = cm != null;
+            btnJsonExportPlayers.Enabled = cm != null;
+            btnJsonExportTamed.Enabled = cm != null;
+            btnJsonExportWild.Enabled = cm != null;
+
+            lvwItemMap.LargeImageList = Program.ItemImageList;
+            lvwItemMap.SmallImageList = Program.ItemImageList;
+
+            imageFolder = Path.Combine(AppContext.BaseDirectory, @"images\icons\");
+            if (!Directory.Exists(imageFolder))
+            {
+                Directory.CreateDirectory(imageFolder);
+            }
+
+            PopulateExportTribes();
+
+            SavedConfig = Program.ProgramConfig;
+
         }
 
         private void PopulateExportTribes()
@@ -1745,14 +1772,14 @@ namespace ARKViewer
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     this.Cursor = Cursors.WaitCursor;
-                    if (!Directory.Exists(dialog.FileName)) Directory.CreateDirectory(dialog.FileName);
+                    if (!Directory.Exists(Path.GetDirectoryName(dialog.FileName))) Directory.CreateDirectory(Path.GetDirectoryName(dialog.FileName));
                     cm.ExportWild(dialog.FileName);
                     this.Cursor = Cursors.Default;
                     MessageBox.Show("Wild data exported successfully.", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
             }
-            btnJsonExportWild.Enabled = false;
+            btnJsonExportWild.Enabled = true;
         }
 
         private void btnJsonExportTamed_Click(object sender, EventArgs e)
@@ -1766,7 +1793,7 @@ namespace ARKViewer
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     this.Cursor = Cursors.WaitCursor;
-                    if (!Directory.Exists(dialog.FileName)) Directory.CreateDirectory(dialog.FileName);
+                    if (!Directory.Exists(Path.GetDirectoryName(dialog.FileName))) Directory.CreateDirectory(Path.GetDirectoryName(dialog.FileName));
                     cm.ExportTamed(dialog.FileName);
                     this.Cursor = Cursors.Default;
                     MessageBox.Show("Tamed data exported successfully.", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1782,13 +1809,13 @@ namespace ARKViewer
 
             using (SaveFileDialog dialog = new SaveFileDialog())
             {
-                dialog.Title = "Export Tribes";
+                dialog.Title = "Exporting Tribes";
                 dialog.Filter = "JSON text file(*.json)|*.json";
                 dialog.InitialDirectory = AppContext.BaseDirectory;
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     this.Cursor = Cursors.WaitCursor;
-                    if (!Directory.Exists(dialog.FileName)) Directory.CreateDirectory(dialog.FileName);
+                    if (!Directory.Exists(Path.GetDirectoryName(dialog.FileName))) Directory.CreateDirectory(Path.GetDirectoryName(dialog.FileName));
                     cm.ExportPlayerTribes(dialog.FileName);
                     this.Cursor = Cursors.Default;
                     MessageBox.Show("Tribe data exported successfully.", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1796,7 +1823,22 @@ namespace ARKViewer
                 }
             }
 
-            btnJsonExportTribes.Enabled = false;
+            using (SaveFileDialog dialog = new SaveFileDialog())
+            {
+                dialog.Title = "Exporting Tribe Logs";
+                dialog.Filter = "JSON text file(*.json)|*.json";
+                dialog.InitialDirectory = AppContext.BaseDirectory;
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    this.Cursor = Cursors.WaitCursor;
+                    if (!Directory.Exists(Path.GetDirectoryName(dialog.FileName))) Directory.CreateDirectory(Path.GetDirectoryName(dialog.FileName));
+                    cm.ExportPlayerTribeLogs(dialog.FileName);
+                    this.Cursor = Cursors.Default;
+                    MessageBox.Show("Tribe log data exported successfully.", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+
+            btnJsonExportTribes.Enabled = true;
         }
 
         private void btnJsonExportPlayers_Click(object sender, EventArgs e)
@@ -1811,7 +1853,7 @@ namespace ARKViewer
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     this.Cursor = Cursors.WaitCursor;
-                    if (!Directory.Exists(dialog.FileName)) Directory.CreateDirectory(dialog.FileName);
+                    if (!Directory.Exists(Path.GetDirectoryName(dialog.FileName))) Directory.CreateDirectory(Path.GetDirectoryName(dialog.FileName));
                     cm.ExportPlayers(dialog.FileName);
                     this.Cursor = Cursors.Default;
                     MessageBox.Show("Player data exported successfully.", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -1835,7 +1877,7 @@ namespace ARKViewer
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     this.Cursor = Cursors.WaitCursor;
-                    if (!Directory.Exists(dialog.FileName)) Directory.CreateDirectory(dialog.FileName);
+                    if (!Directory.Exists(Path.GetDirectoryName(dialog.FileName))) Directory.CreateDirectory(Path.GetDirectoryName(dialog.FileName));
                     cm.ExportPlayerStructures(dialog.FileName);
                     this.Cursor = Cursors.Default;
                     MessageBox.Show("Structure data exported successfully.", "Export Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);

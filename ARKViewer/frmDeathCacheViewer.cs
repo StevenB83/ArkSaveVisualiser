@@ -116,10 +116,25 @@ namespace ARKViewer
                     {
                         if (!invItem.IsEngram)
                         {
+
+                            string qualityName = "";
+                            Color backColor = SystemColors.Window;
+                            Color foreColor = SystemColors.WindowText;
+                            if (invItem.Rating.HasValue)
+                            {
+                                var itemQuality = Program.GetQualityByRating(invItem.Rating.Value);
+                                qualityName = itemQuality.QualityName;
+                                backColor = itemQuality.QualityColor;
+                                foreColor = Program.IdealTextColor(backColor);
+                            }
+                            
+
                             ListViewItem newItem = new ListViewItem(itemName);
+                            newItem.BackColor = backColor;
+                            newItem.ForeColor = foreColor;
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
-                            newItem.SubItems.Add(invItem.Quality);
+                            newItem.SubItems.Add(qualityName);
                             newItem.SubItems.Add(invItem.Quantity.ToString());
                             newItem.ImageIndex = itemIcon - 1;
 

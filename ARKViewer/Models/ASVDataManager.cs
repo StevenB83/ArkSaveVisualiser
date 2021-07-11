@@ -409,7 +409,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { ClassName = x.ClassName, IsBluePrint = x.IsBlueprint, Quality=x.Quality, x.Rating }).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBluePrint, Quality=g.Key.Quality, Rating = g.Key.Rating, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { ClassName = x.ClassName, IsBluePrint = x.IsBlueprint, x.Rating }).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBluePrint, Rating = g.Key.Rating, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -433,7 +433,6 @@ namespace ARKViewer.Models
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
                                             IsBlueprint = g.IsBlueprint,
-                                            Quality = g.Quality,
                                             Rating = g.Rating
 
                                         });
@@ -467,7 +466,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Quality, x.Rating } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Rating = g.Key.Rating, Quality = g.Key.Quality,Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint,  x.Rating } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Rating = g.Key.Rating, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -492,7 +491,6 @@ namespace ARKViewer.Models
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
                                             IsBlueprint = g.IsBlueprint,
-                                            Quality = g.Quality,
                                             Rating = g.Rating
 
                                         });
@@ -527,7 +525,7 @@ namespace ARKViewer.Models
                         {
                             foreach (var container in matchedContainers)
                             {
-                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Quality, x.Rating } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Quality = g.Key.Quality, Rating = g.Key.Rating, Qty = g.Sum(i => i.Quantity) }).ToList();
+                                var groupedItems = container.MatchedItems.GroupBy(x => new { x.ClassName, x.IsBlueprint, x.Rating } ).Select(g => new { ClassName = g.Key.ClassName, IsBlueprint = g.Key.IsBlueprint, Rating = g.Key.Rating, Qty = g.Sum(i => i.Quantity) }).ToList();
 
                                 if (groupedItems != null && groupedItems.Count > 0)
                                 {
@@ -551,7 +549,6 @@ namespace ARKViewer.Models
                                             Z = (decimal)container.Z,
                                             Quantity = g.Qty,
                                             IsBlueprint = g.IsBlueprint,
-                                            Quality = g.Quality,
                                             Rating = g.Rating
 
                                         });
@@ -595,6 +592,7 @@ namespace ARKViewer.Models
             Task.WaitAll(
                 Task.Run(() => ExportWild(Path.Combine(exportPath, "ASV_Wild.json"))),
                 Task.Run(() => ExportPlayerTribes(Path.Combine(exportPath, "ASV_Tribes.json"))),
+                Task.Run(() => ExportPlayerTribeLogs(Path.Combine(exportPath, "ASV_TribeLogs.json"))),
                 Task.Run(() => ExportTamed(Path.Combine(exportPath, "ASV_Tamed.json"))),
                 Task.Run(() => ExportPlayers(Path.Combine(exportPath, "ASV_Players.json"))),
                 Task.Run(() => ExportPlayerStructures(Path.Combine(exportPath, "ASV_Structures.json")))
@@ -987,7 +985,8 @@ namespace ARKViewer.Models
             }
         }
 
-        public void ExportPlayerTribes(string exportFilename)
+
+        public void ExportPlayerTribeLogs(string exportFilename)
         {
             string exportFolder = Path.GetDirectoryName(exportFilename);
             if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
@@ -1011,49 +1010,19 @@ namespace ARKViewer.Models
                             jw.WritePropertyName("tribe");
                             jw.WriteValue(playerTribe.TribeName);
 
-                            jw.WritePropertyName("players");
-                            jw.WriteValue(playerTribe.Players.Count);
 
-                            if (playerTribe.Players != null && playerTribe.Players.Count > 0)
+                            if (playerTribe.Logs != null && playerTribe.Logs.Length > 0)
                             {
-                                jw.WritePropertyName("members");
+                                jw.WritePropertyName("logs");
                                 jw.WriteStartArray();
-                                foreach (var tribePlayer in playerTribe.Players)
+                                foreach (var logEntry in playerTribe.Logs)
                                 {
-                                    jw.WriteStartObject();
 
-                                    jw.WritePropertyName("ign");
-                                    jw.WriteValue(tribePlayer.CharacterName);
-
-                                    jw.WritePropertyName("lvl");
-                                    jw.WriteValue(tribePlayer.Level.ToString());
-
-                                    jw.WritePropertyName("playerid");
-                                    jw.WriteValue(tribePlayer.Id.ToString());
-
-                                    jw.WritePropertyName("playername");
-                                    jw.WriteValue(tribePlayer.Name);
-
-                                    jw.WritePropertyName("steamid");
-                                    jw.WriteValue(tribePlayer.NetworkId);
-
-                                    jw.WriteEndObject();
+                                    jw.WriteValue(logEntry);
                                 }
 
                                 jw.WriteEndArray();
                             }
-
-
-
-                            jw.WritePropertyName("tames");
-                            jw.WriteValue(playerTribe.Tames.Count);
-
-                            jw.WritePropertyName("structures");
-                            jw.WriteValue(playerTribe.Structures.Count);
-
-                            jw.WritePropertyName("active");
-                            jw.WriteValue(playerTribe.LastActive);
-
 
                             jw.WriteEnd();
                         }
@@ -1064,6 +1033,82 @@ namespace ARKViewer.Models
                 }
 
             }
+
+        }
+
+
+        public void ExportPlayerTribes(string exportFilename)
+        {
+            if (File.Exists(exportFilename)) File.Delete(exportFilename);
+
+            using (StreamWriter sw = new StreamWriter(exportFilename))
+            {
+                using (JsonTextWriter jw = new JsonTextWriter(sw))
+                {
+                    jw.WriteStartArray();
+
+                    foreach (var playerTribe in pack.Tribes)
+                    {
+                        jw.WriteStartObject();
+
+                        jw.WritePropertyName("tribeid");
+                        jw.WriteValue(playerTribe.TribeId);
+
+                        jw.WritePropertyName("tribe");
+                        jw.WriteValue(playerTribe.TribeName);
+
+                        jw.WritePropertyName("players");
+                        jw.WriteValue(playerTribe.Players.Count);
+
+                        if (playerTribe.Players != null && playerTribe.Players.Count > 0)
+                        {
+                            jw.WritePropertyName("members");
+                            jw.WriteStartArray();
+                            foreach (var tribePlayer in playerTribe.Players)
+                            {
+                                jw.WriteStartObject();
+
+                                jw.WritePropertyName("ign");
+                                jw.WriteValue(tribePlayer.CharacterName);
+
+                                jw.WritePropertyName("lvl");
+                                jw.WriteValue(tribePlayer.Level.ToString());
+
+                                jw.WritePropertyName("playerid");
+                                jw.WriteValue(tribePlayer.Id.ToString());
+
+                                jw.WritePropertyName("playername");
+                                jw.WriteValue(tribePlayer.Name);
+
+                                jw.WritePropertyName("steamid");
+                                jw.WriteValue(tribePlayer.NetworkId);
+
+                                jw.WriteEndObject();
+                            }
+
+                            jw.WriteEndArray();
+                        }
+
+
+
+                        jw.WritePropertyName("tames");
+                        jw.WriteValue(playerTribe.Tames.Count);
+
+                        jw.WritePropertyName("structures");
+                        jw.WriteValue(playerTribe.Structures.Count);
+
+                        jw.WritePropertyName("active");
+                        jw.WriteValue(playerTribe.LastActive);
+
+
+                        jw.WriteEnd();
+                    }
+
+                    jw.WriteEndArray();
+                }
+
+            }
+
         }
 
         public void ExportPlayers(string exportFilename)

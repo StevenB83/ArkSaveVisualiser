@@ -35,6 +35,47 @@ namespace ARKViewer
         public static ViewerConfiguration ProgramConfig { get; set; }
         public static ApiConfiguration ApiConfig { get; set; }
 
+        public static string GetSteamFolder()
+        {
+            string directoryCheck = "";
+
+            try
+            {
+                string steamRoot = Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString();
+
+                if (steamRoot != null && steamRoot.Length > 0)
+                {
+                    steamRoot = steamRoot.Replace(@"/", @"\");
+                    steamRoot = Path.Combine(steamRoot, @"steamapps\libraryfolders.vdf");
+                    if (File.Exists(steamRoot))
+                    {
+                        string fileText = File.ReadAllText(steamRoot).Replace("\"LibraryFolders\"", "");
+
+                        foreach (string line in fileText.Split('\n'))
+                        {
+                            if (line.Contains("\t"))
+                            {
+                                string[] lineContent = line.Split('\t');
+                                if (lineContent.Length == 4)
+                                {
+                                    //check 4th param as a path
+                                    directoryCheck = lineContent[3].ToString().Replace("\"", "").Replace(@"\\", @"\") + @"\SteamApps\Common\ARK\ShooterGame\Saved\";
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+            catch
+            {
+                //permission access to registry or unavailable?
+
+            }
+
+            return directoryCheck;
+        }
+
         public static ILogger LogWriter { get; internal set; } = LogManager.GetCurrentClassLogger();
 
         public static Dictionary<string, string> MapFilenameMap = new Dictionary<string, string>
@@ -91,14 +132,26 @@ namespace ARKViewer
 
             if (commandArguments != null && commandArguments.Length > 1)
             {
-                LogWriter.Info("Running in command line mode.");
+                LogWriter.Info($"Running in command line mode (v{Application.ProductVersion}).");
                 ExportWithCommandLineOptions(commandArguments);
             }
             else
             {
-                LogWriter.Info("Running in visual mode.");
+                LogWriter.Info($"Running in visual mode (v{Application.ProductVersion}).");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
+
+                if (!File.Exists(ProgramConfig.SelectedFile))
+                {
+                    using(frmSettings settings = new frmSettings())
+                    {
+                        if(settings.ShowDialog() != DialogResult.OK)
+                        {
+                            LogWriter.Info("No game file selected, aborting.");
+                            return;
+                        }
+                    }
+                }
 
                 frmViewer mainForm = new frmViewer();
                 mainForm.UpdateProgress("Loading content pack...");
@@ -202,7 +255,7 @@ namespace ARKViewer
                         }
 
                         ContentContainer container = new ContentContainer();
-                        container.LoadSaveGame(inputFilename);
+                        container.LoadSaveGame(inputFilename, "");
                         ASVDataManager exportManger = new ASVDataManager(container);
 
                         switch (commandOptionCheck)
@@ -216,6 +269,11 @@ namespace ARKViewer
                                 LogWriter.Info($"Exporting JSON (structures) for: {inputFilename}");
 
                                 exportManger.ExportPlayerStructures(exportFilename);
+                                break;
+                            case "logs":
+                                LogWriter.Info($"Exporting JSON (tribe logs) for: {inputFilename}");
+                                exportManger.ExportPlayerTribeLogs(exportFilename);
+
                                 break;
                             case "tribes":
                                 LogWriter.Info($"Exporting JSON (tribes) for: {inputFilename}");
@@ -330,7 +388,7 @@ namespace ARKViewer
             ContentContainer exportPack = new ContentContainer();
 
             LogWriter.Debug($"Loading .ark save file: {mapFilename}");
-            exportPack.LoadSaveGame(mapFilename);
+            exportPack.LoadSaveGame(mapFilename, "");
 
             LogWriter.Debug($"Creating ContentPack");
             ContentPack pack = new ContentPack(exportPack, tribeId, playerId, filterLat, filterLon, filterRad,packStructureLocations, packStructureContent,packTribesPlayers,packTamed,packWild,packPlayerStructures,packDroppedItems);
@@ -466,7 +524,7 @@ namespace ARKViewer
             //load everything
             ContentContainer exportContainer = new ContentContainer();
             LogWriter.Debug($"Loading .ark save file.");
-            exportContainer.LoadSaveGame(mapFilename);
+            exportContainer.LoadSaveGame(mapFilename, "");
 
             //filter a pack for export
             LogWriter.Debug($"Loading ContentPack.");
@@ -599,5 +657,99 @@ namespace ARKViewer
             MarkerImageKeyMap.TryGetValue(markerImageFilename, out int imageIndex);
             return imageIndex;
         }
+        
+        public static Color IdealTextColor(Color bg)
+        {
+            int nThreshold = 105;
+            int bgDelta = Convert.ToInt32((bg.R * 0.299) + (bg.G * 0.587) +
+                                          (bg.B * 0.114));
+
+            Color foreColor = (255 - bgDelta < nThreshold) ? Color.Black : Color.White;
+            return foreColor;
+        }
+
+
+        public class ArkItemQuality
+        {
+            public Color QualityColor;
+            public string QualityName;
+            public float QualityRandomMultiplierThreshold;
+            public float CraftingXPMultiplier;
+            public float RepairingXPMultiplier;
+            public float CraftingResourceRequirementsMultiplier;
+        };
+
+        static List<ArkItemQuality> ItemQualityDefinitions { get; set; } = new List<ArkItemQuality>()
+        {
+            new ArkItemQuality()
+            {
+                QualityColor = ControlPaint.LightLight(Color.FromArgb(179, 179, 179)),
+                QualityName = "Primitive",
+                QualityRandomMultiplierThreshold = 1,
+                CraftingXPMultiplier = 1,
+                RepairingXPMultiplier = 1,
+                CraftingResourceRequirementsMultiplier = 1
+            },
+            new ArkItemQuality()
+            {
+                QualityColor = ControlPaint.LightLight(Color.FromArgb(51, 255, 51)),
+                QualityName = "Ramshackle",
+                QualityRandomMultiplierThreshold = 1.25f,
+                CraftingXPMultiplier = 2.0f,
+                RepairingXPMultiplier = 2.0f,
+                CraftingResourceRequirementsMultiplier = 1.333333f
+            },
+            new ArkItemQuality()
+            {
+                QualityColor = ControlPaint.Light(Color.FromArgb(51, 76, 255)),
+                QualityName = "Apprentice",
+                QualityRandomMultiplierThreshold = 2.5f,
+                CraftingXPMultiplier = 3.0f,
+                RepairingXPMultiplier = 3.0f,
+                CraftingResourceRequirementsMultiplier = 1.666667f
+            },
+            new ArkItemQuality()
+            {
+                QualityColor = ControlPaint.LightLight(Color.FromArgb(127, 51, 255)),
+                QualityName = "Journeyman",
+                QualityRandomMultiplierThreshold = 4.5f,
+                CraftingXPMultiplier = 4.0f,
+                RepairingXPMultiplier = 4.0f,
+                CraftingResourceRequirementsMultiplier = 2.0f
+            },
+            new ArkItemQuality()
+            {
+                QualityColor = ControlPaint.LightLight(Color.FromArgb(255, 243, 25)),
+                QualityName = "Mastercraft",
+                QualityRandomMultiplierThreshold = 7f,
+                CraftingXPMultiplier = 5.0f,
+                RepairingXPMultiplier = 5.0f,
+                CraftingResourceRequirementsMultiplier = 2.5f
+            },
+            new ArkItemQuality()
+            {
+                QualityColor = ControlPaint.LightLight(Color.FromArgb( 0, 255, 255)),
+                QualityName = "Ascendant",
+                QualityRandomMultiplierThreshold = 10f,
+                CraftingXPMultiplier = 6.0f,
+                RepairingXPMultiplier = 6.0f,
+                CraftingResourceRequirementsMultiplier = 3.5f
+            }
+
+        };
+        public static ArkItemQuality GetQualityByRating(float itemRating)
+        {
+            foreach (var quality in ItemQualityDefinitions.OrderByDescending(o => o.QualityRandomMultiplierThreshold))
+            {
+                if (itemRating >= quality.QualityRandomMultiplierThreshold)
+                {
+                    return quality;
+                }
+            }
+
+            return ItemQualityDefinitions.OrderBy(o=>o.CraftingResourceRequirementsMultiplier).First();
+        }
+
+
     }
 }

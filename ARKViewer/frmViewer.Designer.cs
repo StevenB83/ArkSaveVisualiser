@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewer));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.lvwWildDetail = new System.Windows.Forms.ListView();
             this.lvwWildDetail_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -134,6 +134,8 @@
             this.lvwTameDetail = new System.Windows.Forms.ListView();
             this.lvwTameDetail_Creature = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTameDetail_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTameDetail_Wandering = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwTameDetail_Mating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTameDetail_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTameDetail_Base = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwTameDetail_Level = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -227,7 +229,6 @@
             this.pnlFilterPlayers = new System.Windows.Forms.Panel();
             this.btnFilterPlayer = new System.Windows.Forms.Button();
             this.txtFilterPlayer = new System.Windows.Forms.TextBox();
-            this.btnMissionScoreboard = new System.Windows.Forms.Button();
             this.lblPlayerTotal = new System.Windows.Forms.Label();
             this.lblCommandPlayer = new System.Windows.Forms.Label();
             this.cboConsoleCommandsPlayerTribe = new System.Windows.Forms.ComboBox();
@@ -299,6 +300,80 @@
             this.lvwItemList_Quantity = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwItemList_Lon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tpgLocalProfile = new System.Windows.Forms.TabPage();
+            this.pnlUploadedStats = new System.Windows.Forms.Panel();
+            this.lblUploadedStats = new System.Windows.Forms.Label();
+            this.optUploadedStatsTamed = new System.Windows.Forms.RadioButton();
+            this.optUploadedStatsBase = new System.Windows.Forms.RadioButton();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lblUploadedItems = new System.Windows.Forms.Label();
+            this.lvwUploadedItems = new System.Windows.Forms.ListView();
+            this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader9 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader18 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader19 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader22 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblUploadedTames = new System.Windows.Forms.Label();
+            this.lblUploadedCharacters = new System.Windows.Forms.Label();
+            this.lvwUploadedCharacters = new System.Windows.Forms.ListView();
+            this.columnHeader37 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader39 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader40 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader43 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader44 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader45 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader46 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader47 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader48 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader49 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader50 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader51 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader52 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwUploadedTames = new System.Windows.Forms.ListView();
+            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader5 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader6 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader7 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader10 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader11 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader12 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader13 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader14 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader15 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader16 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader17 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader21 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader23 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader24 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader25 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader26 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader27 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader28 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader29 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader33 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader34 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.listView4 = new System.Windows.Forms.ListView();
+            this.columnHeader32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader35 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader36 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwLeaderboard = new System.Windows.Forms.ListView();
+            this.lvwLeaderboard_Mission = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwLeaderboard_Tribe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwLeaderboard_Player = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwLeaderboard_LastScore = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwLeaderboard_HighScore = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSubTitle = new System.Windows.Forms.Label();
@@ -307,8 +382,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMap = new System.Windows.Forms.Label();
             this.cboSelectedMap = new System.Windows.Forms.ComboBox();
-            this.lvwTameDetail_Wandering = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwTameDetail_Mating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mnuContext.SuspendLayout();
             this.tabFeatures.SuspendLayout();
             this.tpgWild.SuspendLayout();
@@ -341,6 +414,9 @@
             this.pnlFilterDropped.SuspendLayout();
             this.tpgItemList.SuspendLayout();
             this.pnlFilterSearch.SuspendLayout();
+            this.tpgLocalProfile.SuspendLayout();
+            this.pnlUploadedStats.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvwWildDetail
@@ -379,7 +455,7 @@
             this.lvwWildDetail.Location = new System.Drawing.Point(11, 77);
             this.lvwWildDetail.MultiSelect = false;
             this.lvwWildDetail.Name = "lvwWildDetail";
-            this.lvwWildDetail.Size = new System.Drawing.Size(786, 303);
+            this.lvwWildDetail.Size = new System.Drawing.Size(920, 289);
             this.lvwWildDetail.TabIndex = 14;
             this.lvwWildDetail.UseCompatibleStateImageBehavior = false;
             this.lvwWildDetail.View = System.Windows.Forms.View.Details;
@@ -577,7 +653,7 @@
             this.lblWildTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblWildTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWildTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblWildTotal.Location = new System.Drawing.Point(668, 422);
+            this.lblWildTotal.Location = new System.Drawing.Point(802, 408);
             this.lblWildTotal.Name = "lblWildTotal";
             this.lblWildTotal.Size = new System.Drawing.Size(130, 30);
             this.lblWildTotal.TabIndex = 19;
@@ -590,7 +666,7 @@
             this.lblMapDate.BackColor = System.Drawing.Color.Transparent;
             this.lblMapDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMapDate.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblMapDate.Location = new System.Drawing.Point(498, 5);
+            this.lblMapDate.Location = new System.Drawing.Point(632, 5);
             this.lblMapDate.Name = "lblMapDate";
             this.lblMapDate.Size = new System.Drawing.Size(328, 18);
             this.lblMapDate.TabIndex = 3;
@@ -606,7 +682,7 @@
             this.cboWildClass.FormattingEnabled = true;
             this.cboWildClass.Location = new System.Drawing.Point(82, 45);
             this.cboWildClass.Name = "cboWildClass";
-            this.cboWildClass.Size = new System.Drawing.Size(456, 21);
+            this.cboWildClass.Size = new System.Drawing.Size(590, 21);
             this.cboWildClass.TabIndex = 13;
             this.cboWildClass.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.cboSelected_DrawItem);
             this.cboWildClass.SelectedIndexChanged += new System.EventHandler(this.CboWildClass_SelectedIndexChanged);
@@ -616,7 +692,7 @@
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.Location = new System.Drawing.Point(664, 564);
+            this.btnRefresh.Location = new System.Drawing.Point(798, 550);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(50, 50);
             this.btnRefresh.TabIndex = 2;
@@ -630,7 +706,7 @@
             this.btnSettings.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSettings.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSettings.Image = global::ARKViewer.Properties.Resources.button_settings;
-            this.btnSettings.Location = new System.Drawing.Point(776, 564);
+            this.btnSettings.Location = new System.Drawing.Point(910, 550);
             this.btnSettings.Name = "btnSettings";
             this.btnSettings.Size = new System.Drawing.Size(50, 50);
             this.btnSettings.TabIndex = 4;
@@ -645,7 +721,7 @@
             this.btnPlayerInventory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPlayerInventory.Enabled = false;
             this.btnPlayerInventory.Image = global::ARKViewer.Properties.Resources.button_family;
-            this.btnPlayerInventory.Location = new System.Drawing.Point(436, 412);
+            this.btnPlayerInventory.Location = new System.Drawing.Point(436, 401);
             this.btnPlayerInventory.Name = "btnPlayerInventory";
             this.btnPlayerInventory.Size = new System.Drawing.Size(40, 40);
             this.btnPlayerInventory.TabIndex = 9;
@@ -659,7 +735,7 @@
             this.btnPlayerTribeLog.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnPlayerTribeLog.Enabled = false;
             this.btnPlayerTribeLog.Image = global::ARKViewer.Properties.Resources.TribeLogs;
-            this.btnPlayerTribeLog.Location = new System.Drawing.Point(393, 412);
+            this.btnPlayerTribeLog.Location = new System.Drawing.Point(393, 401);
             this.btnPlayerTribeLog.Name = "btnPlayerTribeLog";
             this.btnPlayerTribeLog.Size = new System.Drawing.Size(40, 40);
             this.btnPlayerTribeLog.TabIndex = 8;
@@ -672,7 +748,7 @@
             this.btnStructureExclusionFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnStructureExclusionFilter.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStructureExclusionFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnStructureExclusionFilter.Image")));
-            this.btnStructureExclusionFilter.Location = new System.Drawing.Point(758, 7);
+            this.btnStructureExclusionFilter.Location = new System.Drawing.Point(891, 7);
             this.btnStructureExclusionFilter.Name = "btnStructureExclusionFilter";
             this.btnStructureExclusionFilter.Size = new System.Drawing.Size(40, 40);
             this.btnStructureExclusionFilter.TabIndex = 6;
@@ -686,7 +762,7 @@
             this.btnCopyCommandPlayer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCopyCommandPlayer.Enabled = false;
             this.btnCopyCommandPlayer.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnCopyCommandPlayer.Location = new System.Drawing.Point(350, 412);
+            this.btnCopyCommandPlayer.Location = new System.Drawing.Point(350, 401);
             this.btnCopyCommandPlayer.Name = "btnCopyCommandPlayer";
             this.btnCopyCommandPlayer.Size = new System.Drawing.Size(40, 40);
             this.btnCopyCommandPlayer.TabIndex = 7;
@@ -700,7 +776,7 @@
             this.btnCopyCommandStructure.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCopyCommandStructure.Enabled = false;
             this.btnCopyCommandStructure.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnCopyCommandStructure.Location = new System.Drawing.Point(345, 410);
+            this.btnCopyCommandStructure.Location = new System.Drawing.Point(345, 404);
             this.btnCopyCommandStructure.Name = "btnCopyCommandStructure";
             this.btnCopyCommandStructure.Size = new System.Drawing.Size(40, 40);
             this.btnCopyCommandStructure.TabIndex = 10;
@@ -714,7 +790,7 @@
             this.btnDinoAncestors.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDinoAncestors.Enabled = false;
             this.btnDinoAncestors.Image = global::ARKViewer.Properties.Resources.loveicon;
-            this.btnDinoAncestors.Location = new System.Drawing.Point(562, 415);
+            this.btnDinoAncestors.Location = new System.Drawing.Point(562, 403);
             this.btnDinoAncestors.Name = "btnDinoAncestors";
             this.btnDinoAncestors.Size = new System.Drawing.Size(40, 40);
             this.btnDinoAncestors.TabIndex = 12;
@@ -727,7 +803,7 @@
             this.btnDinoInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDinoInventory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDinoInventory.Image = ((System.Drawing.Image)(resources.GetObject("btnDinoInventory.Image")));
-            this.btnDinoInventory.Location = new System.Drawing.Point(606, 415);
+            this.btnDinoInventory.Location = new System.Drawing.Point(606, 403);
             this.btnDinoInventory.Name = "btnDinoInventory";
             this.btnDinoInventory.Size = new System.Drawing.Size(40, 40);
             this.btnDinoInventory.TabIndex = 13;
@@ -741,7 +817,7 @@
             this.btnCopyCommandWild.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCopyCommandWild.Enabled = false;
             this.btnCopyCommandWild.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnCopyCommandWild.Location = new System.Drawing.Point(350, 417);
+            this.btnCopyCommandWild.Location = new System.Drawing.Point(350, 403);
             this.btnCopyCommandWild.Name = "btnCopyCommandWild";
             this.btnCopyCommandWild.Size = new System.Drawing.Size(40, 40);
             this.btnCopyCommandWild.TabIndex = 17;
@@ -755,7 +831,7 @@
             this.btnCopyCommandTamed.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCopyCommandTamed.Enabled = false;
             this.btnCopyCommandTamed.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnCopyCommandTamed.Location = new System.Drawing.Point(518, 415);
+            this.btnCopyCommandTamed.Location = new System.Drawing.Point(518, 403);
             this.btnCopyCommandTamed.Name = "btnCopyCommandTamed";
             this.btnCopyCommandTamed.Size = new System.Drawing.Size(40, 40);
             this.btnCopyCommandTamed.TabIndex = 11;
@@ -770,7 +846,7 @@
             this.chkCryo.BackgroundImage = global::ARKViewer.Properties.Resources.button_cryooff;
             this.chkCryo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.chkCryo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkCryo.Location = new System.Drawing.Point(757, 21);
+            this.chkCryo.Location = new System.Drawing.Point(891, 21);
             this.chkCryo.Name = "chkCryo";
             this.chkCryo.Size = new System.Drawing.Size(40, 40);
             this.chkCryo.TabIndex = 6;
@@ -784,7 +860,7 @@
             this.btnCopyCommandDropped.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnCopyCommandDropped.Enabled = false;
             this.btnCopyCommandDropped.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnCopyCommandDropped.Location = new System.Drawing.Point(350, 412);
+            this.btnCopyCommandDropped.Location = new System.Drawing.Point(350, 404);
             this.btnCopyCommandDropped.Name = "btnCopyCommandDropped";
             this.btnCopyCommandDropped.Size = new System.Drawing.Size(40, 40);
             this.btnCopyCommandDropped.TabIndex = 7;
@@ -798,7 +874,7 @@
             this.btnTribeCopyCommand.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTribeCopyCommand.Enabled = false;
             this.btnTribeCopyCommand.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnTribeCopyCommand.Location = new System.Drawing.Point(350, 415);
+            this.btnTribeCopyCommand.Location = new System.Drawing.Point(350, 402);
             this.btnTribeCopyCommand.Name = "btnTribeCopyCommand";
             this.btnTribeCopyCommand.Size = new System.Drawing.Size(40, 40);
             this.btnTribeCopyCommand.TabIndex = 3;
@@ -812,7 +888,7 @@
             this.btnTribeLog.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTribeLog.Enabled = false;
             this.btnTribeLog.Image = global::ARKViewer.Properties.Resources.TribeLogs;
-            this.btnTribeLog.Location = new System.Drawing.Point(394, 415);
+            this.btnTribeLog.Location = new System.Drawing.Point(394, 402);
             this.btnTribeLog.Name = "btnTribeLog";
             this.btnTribeLog.Size = new System.Drawing.Size(40, 40);
             this.btnTribeLog.TabIndex = 4;
@@ -826,7 +902,7 @@
             this.btnStructureInventory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnStructureInventory.Enabled = false;
             this.btnStructureInventory.Image = ((System.Drawing.Image)(resources.GetObject("btnStructureInventory.Image")));
-            this.btnStructureInventory.Location = new System.Drawing.Point(388, 410);
+            this.btnStructureInventory.Location = new System.Drawing.Point(388, 404);
             this.btnStructureInventory.Name = "btnStructureInventory";
             this.btnStructureInventory.Size = new System.Drawing.Size(40, 40);
             this.btnStructureInventory.TabIndex = 11;
@@ -840,7 +916,7 @@
             this.btnDeletePlayer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDeletePlayer.Enabled = false;
             this.btnDeletePlayer.Image = global::ARKViewer.Properties.Resources.button_remove;
-            this.btnDeletePlayer.Location = new System.Drawing.Point(479, 412);
+            this.btnDeletePlayer.Location = new System.Drawing.Point(479, 401);
             this.btnDeletePlayer.Name = "btnDeletePlayer";
             this.btnDeletePlayer.Size = new System.Drawing.Size(40, 40);
             this.btnDeletePlayer.TabIndex = 10;
@@ -854,7 +930,7 @@
             this.btnDropInventory.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDropInventory.Enabled = false;
             this.btnDropInventory.Image = ((System.Drawing.Image)(resources.GetObject("btnDropInventory.Image")));
-            this.btnDropInventory.Location = new System.Drawing.Point(394, 412);
+            this.btnDropInventory.Location = new System.Drawing.Point(394, 404);
             this.btnDropInventory.Name = "btnDropInventory";
             this.btnDropInventory.Size = new System.Drawing.Size(40, 40);
             this.btnDropInventory.TabIndex = 8;
@@ -867,7 +943,7 @@
             this.btnViewMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnViewMap.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnViewMap.Image = global::ARKViewer.Properties.Resources.ModernXP_73_Globe_icon;
-            this.btnViewMap.Location = new System.Drawing.Point(720, 564);
+            this.btnViewMap.Location = new System.Drawing.Point(854, 550);
             this.btnViewMap.Name = "btnViewMap";
             this.btnViewMap.Size = new System.Drawing.Size(50, 50);
             this.btnViewMap.TabIndex = 3;
@@ -888,11 +964,13 @@
             this.tabFeatures.Controls.Add(this.tpgPlayers);
             this.tabFeatures.Controls.Add(this.tpgDroppedItems);
             this.tabFeatures.Controls.Add(this.tpgItemList);
+            this.tabFeatures.Controls.Add(this.tpgLocalProfile);
+            this.tabFeatures.Controls.Add(this.tabPage1);
             this.tabFeatures.HotTrack = true;
             this.tabFeatures.Location = new System.Drawing.Point(9, 69);
             this.tabFeatures.Name = "tabFeatures";
             this.tabFeatures.SelectedIndex = 0;
-            this.tabFeatures.Size = new System.Drawing.Size(819, 489);
+            this.tabFeatures.Size = new System.Drawing.Size(953, 475);
             this.tabFeatures.TabIndex = 0;
             this.tabFeatures.SelectedIndexChanged += new System.EventHandler(this.tabFeatures_SelectedIndexChanged);
             // 
@@ -922,7 +1000,7 @@
             this.tpgWild.Location = new System.Drawing.Point(4, 22);
             this.tpgWild.Name = "tpgWild";
             this.tpgWild.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgWild.Size = new System.Drawing.Size(811, 463);
+            this.tpgWild.Size = new System.Drawing.Size(945, 449);
             this.tpgWild.TabIndex = 0;
             this.tpgWild.Text = "Wild Creatures";
             this.tpgWild.UseVisualStyleBackColor = true;
@@ -935,9 +1013,9 @@
             this.pnlFilterWilds.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilterWilds.Controls.Add(this.btnFindWild);
             this.pnlFilterWilds.Controls.Add(this.txtFilterWild);
-            this.pnlFilterWilds.Location = new System.Drawing.Point(11, 379);
+            this.pnlFilterWilds.Location = new System.Drawing.Point(11, 365);
             this.pnlFilterWilds.Name = "pnlFilterWilds";
-            this.pnlFilterWilds.Size = new System.Drawing.Size(786, 29);
+            this.pnlFilterWilds.Size = new System.Drawing.Size(920, 29);
             this.pnlFilterWilds.TabIndex = 20;
             // 
             // btnFindWild
@@ -945,7 +1023,7 @@
             this.btnFindWild.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFindWild.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFindWild.Image = global::ARKViewer.Properties.Resources.button_zoom;
-            this.btnFindWild.Location = new System.Drawing.Point(755, -1);
+            this.btnFindWild.Location = new System.Drawing.Point(889, -1);
             this.btnFindWild.Name = "btnFindWild";
             this.btnFindWild.Size = new System.Drawing.Size(30, 29);
             this.btnFindWild.TabIndex = 8;
@@ -958,7 +1036,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterWild.Location = new System.Drawing.Point(10, 3);
             this.txtFilterWild.Name = "txtFilterWild";
-            this.txtFilterWild.Size = new System.Drawing.Size(735, 20);
+            this.txtFilterWild.Size = new System.Drawing.Size(869, 20);
             this.txtFilterWild.TabIndex = 6;
             this.txtFilterWild.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterWild_KeyDown);
             // 
@@ -967,7 +1045,7 @@
             this.cboWildResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboWildResource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboWildResource.FormattingEnabled = true;
-            this.cboWildResource.Location = new System.Drawing.Point(606, 45);
+            this.cboWildResource.Location = new System.Drawing.Point(740, 45);
             this.cboWildResource.Name = "cboWildResource";
             this.cboWildResource.Size = new System.Drawing.Size(191, 21);
             this.cboWildResource.TabIndex = 11;
@@ -979,7 +1057,7 @@
             this.lblResource.AutoSize = true;
             this.lblResource.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResource.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblResource.Location = new System.Drawing.Point(540, 48);
+            this.lblResource.Location = new System.Drawing.Point(674, 48);
             this.lblResource.Name = "lblResource";
             this.lblResource.Size = new System.Drawing.Size(65, 13);
             this.lblResource.TabIndex = 10;
@@ -1134,7 +1212,7 @@
             this.lblWildCommand.AutoSize = true;
             this.lblWildCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWildCommand.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblWildCommand.Location = new System.Drawing.Point(14, 429);
+            this.lblWildCommand.Location = new System.Drawing.Point(14, 415);
             this.lblWildCommand.Name = "lblWildCommand";
             this.lblWildCommand.Size = new System.Drawing.Size(65, 13);
             this.lblWildCommand.TabIndex = 15;
@@ -1149,7 +1227,7 @@
             "DestroyAll <ClassName>",
             "GMSummon \"<ClassName>\" <Level> ",
             "SetPlayerPos  <x> <y> <z>"});
-            this.cboConsoleCommandsWild.Location = new System.Drawing.Point(82, 426);
+            this.cboConsoleCommandsWild.Location = new System.Drawing.Point(82, 412);
             this.cboConsoleCommandsWild.Name = "cboConsoleCommandsWild";
             this.cboConsoleCommandsWild.Size = new System.Drawing.Size(262, 21);
             this.cboConsoleCommandsWild.TabIndex = 16;
@@ -1160,7 +1238,7 @@
             this.lblSelectedWildTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblSelectedWildTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSelectedWildTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblSelectedWildTotal.Location = new System.Drawing.Point(541, 422);
+            this.lblSelectedWildTotal.Location = new System.Drawing.Point(675, 408);
             this.lblSelectedWildTotal.Name = "lblSelectedWildTotal";
             this.lblSelectedWildTotal.Size = new System.Drawing.Size(123, 30);
             this.lblSelectedWildTotal.TabIndex = 18;
@@ -1200,7 +1278,7 @@
             this.tpgTamed.Controls.Add(this.cboTameClass);
             this.tpgTamed.Location = new System.Drawing.Point(4, 22);
             this.tpgTamed.Name = "tpgTamed";
-            this.tpgTamed.Size = new System.Drawing.Size(811, 463);
+            this.tpgTamed.Size = new System.Drawing.Size(945, 449);
             this.tpgTamed.TabIndex = 3;
             this.tpgTamed.Text = "Tamed Creatures";
             this.tpgTamed.UseVisualStyleBackColor = true;
@@ -1213,9 +1291,9 @@
             this.pnlFilterTamed.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilterTamed.Controls.Add(this.btnFindTamed);
             this.pnlFilterTamed.Controls.Add(this.txtFilterTamed);
-            this.pnlFilterTamed.Location = new System.Drawing.Point(11, 379);
+            this.pnlFilterTamed.Location = new System.Drawing.Point(11, 367);
             this.pnlFilterTamed.Name = "pnlFilterTamed";
-            this.pnlFilterTamed.Size = new System.Drawing.Size(786, 29);
+            this.pnlFilterTamed.Size = new System.Drawing.Size(920, 29);
             this.pnlFilterTamed.TabIndex = 21;
             // 
             // btnFindTamed
@@ -1223,7 +1301,7 @@
             this.btnFindTamed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFindTamed.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFindTamed.Image = global::ARKViewer.Properties.Resources.button_zoom;
-            this.btnFindTamed.Location = new System.Drawing.Point(755, -1);
+            this.btnFindTamed.Location = new System.Drawing.Point(889, -1);
             this.btnFindTamed.Name = "btnFindTamed";
             this.btnFindTamed.Size = new System.Drawing.Size(30, 29);
             this.btnFindTamed.TabIndex = 9;
@@ -1237,7 +1315,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterTamed.Location = new System.Drawing.Point(10, 3);
             this.txtFilterTamed.Name = "txtFilterTamed";
-            this.txtFilterTamed.Size = new System.Drawing.Size(735, 20);
+            this.txtFilterTamed.Size = new System.Drawing.Size(869, 20);
             this.txtFilterTamed.TabIndex = 6;
             this.txtFilterTamed.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterTamed_KeyDown);
             // 
@@ -1246,7 +1324,7 @@
             this.cboTamedResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboTamedResource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTamedResource.FormattingEnabled = true;
-            this.cboTamedResource.Location = new System.Drawing.Point(520, 43);
+            this.cboTamedResource.Location = new System.Drawing.Point(669, 43);
             this.cboTamedResource.Name = "cboTamedResource";
             this.cboTamedResource.Size = new System.Drawing.Size(216, 21);
             this.cboTamedResource.TabIndex = 16;
@@ -1258,7 +1336,7 @@
             this.lblTameResource.AutoSize = true;
             this.lblTameResource.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTameResource.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblTameResource.Location = new System.Drawing.Point(442, 46);
+            this.lblTameResource.Location = new System.Drawing.Point(591, 46);
             this.lblTameResource.Name = "lblTameResource";
             this.lblTameResource.Size = new System.Drawing.Size(65, 13);
             this.lblTameResource.TabIndex = 15;
@@ -1270,7 +1348,7 @@
             this.lblTamedCommand.AutoSize = true;
             this.lblTamedCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTamedCommand.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblTamedCommand.Location = new System.Drawing.Point(192, 427);
+            this.lblTamedCommand.Location = new System.Drawing.Point(192, 415);
             this.lblTamedCommand.Name = "lblTamedCommand";
             this.lblTamedCommand.Size = new System.Drawing.Size(65, 13);
             this.lblTamedCommand.TabIndex = 9;
@@ -1287,7 +1365,7 @@
             "GMSummon \"<ClassName>\"  <Level>",
             "TakeTribe <TribeID>",
             "SetPlayerPos  <x> <y> <z>"});
-            this.cboConsoleCommandsTamed.Location = new System.Drawing.Point(260, 424);
+            this.cboConsoleCommandsTamed.Location = new System.Drawing.Point(260, 412);
             this.cboConsoleCommandsTamed.Name = "cboConsoleCommandsTamed";
             this.cboConsoleCommandsTamed.Size = new System.Drawing.Size(248, 21);
             this.cboConsoleCommandsTamed.TabIndex = 10;
@@ -1318,7 +1396,7 @@
             this.lblTameCreature.AutoSize = true;
             this.lblTameCreature.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTameCreature.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblTameCreature.Location = new System.Drawing.Point(442, 18);
+            this.lblTameCreature.Location = new System.Drawing.Point(591, 18);
             this.lblTameCreature.Name = "lblTameCreature";
             this.lblTameCreature.Size = new System.Drawing.Size(59, 13);
             this.lblTameCreature.TabIndex = 4;
@@ -1393,7 +1471,7 @@
             this.lvwTameDetail.Location = new System.Drawing.Point(11, 79);
             this.lvwTameDetail.MultiSelect = false;
             this.lvwTameDetail.Name = "lvwTameDetail";
-            this.lvwTameDetail.Size = new System.Drawing.Size(786, 301);
+            this.lvwTameDetail.Size = new System.Drawing.Size(920, 289);
             this.lvwTameDetail.TabIndex = 7;
             this.lvwTameDetail.UseCompatibleStateImageBehavior = false;
             this.lvwTameDetail.View = System.Windows.Forms.View.Details;
@@ -1410,6 +1488,15 @@
             // 
             this.lvwTameDetail_Name.Text = "Name";
             this.lvwTameDetail_Name.Width = 150;
+            // 
+            // lvwTameDetail_Wandering
+            // 
+            this.lvwTameDetail_Wandering.Text = "Wandering";
+            this.lvwTameDetail_Wandering.Width = 70;
+            // 
+            // lvwTameDetail_Mating
+            // 
+            this.lvwTameDetail_Mating.Text = "Mating";
             // 
             // lvwTameDetail_Sex
             // 
@@ -1566,7 +1653,7 @@
             this.lblTameTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblTameTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTameTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblTameTotal.Location = new System.Drawing.Point(674, 420);
+            this.lblTameTotal.Location = new System.Drawing.Point(808, 408);
             this.lblTameTotal.Name = "lblTameTotal";
             this.lblTameTotal.Size = new System.Drawing.Size(123, 30);
             this.lblTameTotal.TabIndex = 14;
@@ -1580,7 +1667,7 @@
             this.pnlTameStatTypes.Controls.Add(this.lblStats);
             this.pnlTameStatTypes.Controls.Add(this.optStatsTamed);
             this.pnlTameStatTypes.Controls.Add(this.optStatsBase);
-            this.pnlTameStatTypes.Location = new System.Drawing.Point(11, 414);
+            this.pnlTameStatTypes.Location = new System.Drawing.Point(11, 404);
             this.pnlTameStatTypes.Name = "pnlTameStatTypes";
             this.pnlTameStatTypes.Size = new System.Drawing.Size(175, 34);
             this.pnlTameStatTypes.TabIndex = 8;
@@ -1622,7 +1709,7 @@
             this.cboTameClass.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboTameClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboTameClass.FormattingEnabled = true;
-            this.cboTameClass.Location = new System.Drawing.Point(520, 16);
+            this.cboTameClass.Location = new System.Drawing.Point(669, 16);
             this.cboTameClass.Name = "cboTameClass";
             this.cboTameClass.Size = new System.Drawing.Size(216, 21);
             this.cboTameClass.TabIndex = 5;
@@ -1646,7 +1733,7 @@
             this.tpgStructures.Controls.Add(this.lvwStructureLocations);
             this.tpgStructures.Location = new System.Drawing.Point(4, 22);
             this.tpgStructures.Name = "tpgStructures";
-            this.tpgStructures.Size = new System.Drawing.Size(811, 463);
+            this.tpgStructures.Size = new System.Drawing.Size(945, 449);
             this.tpgStructures.TabIndex = 2;
             this.tpgStructures.Text = "Player Structures";
             this.tpgStructures.UseVisualStyleBackColor = true;
@@ -1659,9 +1746,9 @@
             this.pnlFilterStructures.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilterStructures.Controls.Add(this.btnFindStructures);
             this.pnlFilterStructures.Controls.Add(this.txtFilterStructures);
-            this.pnlFilterStructures.Location = new System.Drawing.Point(11, 379);
+            this.pnlFilterStructures.Location = new System.Drawing.Point(11, 373);
             this.pnlFilterStructures.Name = "pnlFilterStructures";
-            this.pnlFilterStructures.Size = new System.Drawing.Size(786, 29);
+            this.pnlFilterStructures.Size = new System.Drawing.Size(920, 29);
             this.pnlFilterStructures.TabIndex = 22;
             // 
             // btnFindStructures
@@ -1669,7 +1756,7 @@
             this.btnFindStructures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFindStructures.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFindStructures.Image = global::ARKViewer.Properties.Resources.button_zoom;
-            this.btnFindStructures.Location = new System.Drawing.Point(755, -1);
+            this.btnFindStructures.Location = new System.Drawing.Point(889, -1);
             this.btnFindStructures.Name = "btnFindStructures";
             this.btnFindStructures.Size = new System.Drawing.Size(30, 29);
             this.btnFindStructures.TabIndex = 9;
@@ -1683,7 +1770,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterStructures.Location = new System.Drawing.Point(10, 3);
             this.txtFilterStructures.Name = "txtFilterStructures";
-            this.txtFilterStructures.Size = new System.Drawing.Size(735, 20);
+            this.txtFilterStructures.Size = new System.Drawing.Size(869, 20);
             this.txtFilterStructures.TabIndex = 6;
             this.txtFilterStructures.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterStructures_KeyDown);
             // 
@@ -1693,7 +1780,7 @@
             this.lblStructureTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblStructureTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStructureTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblStructureTotal.Location = new System.Drawing.Point(675, 417);
+            this.lblStructureTotal.Location = new System.Drawing.Point(808, 411);
             this.lblStructureTotal.Name = "lblStructureTotal";
             this.lblStructureTotal.Size = new System.Drawing.Size(123, 30);
             this.lblStructureTotal.TabIndex = 12;
@@ -1705,7 +1792,7 @@
             this.lblCommandStructure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblCommandStructure.AutoSize = true;
             this.lblCommandStructure.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCommandStructure.Location = new System.Drawing.Point(9, 421);
+            this.lblCommandStructure.Location = new System.Drawing.Point(9, 415);
             this.lblCommandStructure.Name = "lblCommandStructure";
             this.lblCommandStructure.Size = new System.Drawing.Size(65, 13);
             this.lblCommandStructure.TabIndex = 8;
@@ -1723,7 +1810,7 @@
             "DestroyTribeIdStructures <TribeID>",
             "TakeTribe <TribeID>",
             "SetPlayerPos  <x> <y> <z>"});
-            this.cboConsoleCommandsStructure.Location = new System.Drawing.Point(77, 418);
+            this.cboConsoleCommandsStructure.Location = new System.Drawing.Point(77, 412);
             this.cboConsoleCommandsStructure.Name = "cboConsoleCommandsStructure";
             this.cboConsoleCommandsStructure.Size = new System.Drawing.Size(262, 21);
             this.cboConsoleCommandsStructure.TabIndex = 9;
@@ -1748,7 +1835,7 @@
             this.cboStructureStructure.FormattingEnabled = true;
             this.cboStructureStructure.Location = new System.Drawing.Point(553, 16);
             this.cboStructureStructure.Name = "cboStructureStructure";
-            this.cboStructureStructure.Size = new System.Drawing.Size(197, 21);
+            this.cboStructureStructure.Size = new System.Drawing.Size(237, 21);
             this.cboStructureStructure.TabIndex = 5;
             this.cboStructureStructure.SelectedIndexChanged += new System.EventHandler(this.cboStructureStructure_SelectedIndexChanged);
             // 
@@ -1812,7 +1899,7 @@
             this.lvwStructureLocations.Location = new System.Drawing.Point(11, 51);
             this.lvwStructureLocations.MultiSelect = false;
             this.lvwStructureLocations.Name = "lvwStructureLocations";
-            this.lvwStructureLocations.Size = new System.Drawing.Size(786, 329);
+            this.lvwStructureLocations.Size = new System.Drawing.Size(920, 323);
             this.lvwStructureLocations.TabIndex = 7;
             this.lvwStructureLocations.UseCompatibleStateImageBehavior = false;
             this.lvwStructureLocations.View = System.Windows.Forms.View.Details;
@@ -1864,7 +1951,7 @@
             this.tpgTribes.Controls.Add(this.lvwTribes);
             this.tpgTribes.Location = new System.Drawing.Point(4, 22);
             this.tpgTribes.Name = "tpgTribes";
-            this.tpgTribes.Size = new System.Drawing.Size(811, 463);
+            this.tpgTribes.Size = new System.Drawing.Size(945, 449);
             this.tpgTribes.TabIndex = 5;
             this.tpgTribes.Text = "Tribes";
             this.tpgTribes.UseVisualStyleBackColor = true;
@@ -1879,7 +1966,7 @@
             this.pnlFilterTribes.Controls.Add(this.txtFilterTribe);
             this.pnlFilterTribes.Location = new System.Drawing.Point(12, 173);
             this.pnlFilterTribes.Name = "pnlFilterTribes";
-            this.pnlFilterTribes.Size = new System.Drawing.Size(786, 29);
+            this.pnlFilterTribes.Size = new System.Drawing.Size(880, 29);
             this.pnlFilterTribes.TabIndex = 23;
             // 
             // btnFilterTribe
@@ -1887,7 +1974,7 @@
             this.btnFilterTribe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFilterTribe.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFilterTribe.Image = global::ARKViewer.Properties.Resources.button_zoom;
-            this.btnFilterTribe.Location = new System.Drawing.Point(755, -1);
+            this.btnFilterTribe.Location = new System.Drawing.Point(849, -1);
             this.btnFilterTribe.Name = "btnFilterTribe";
             this.btnFilterTribe.Size = new System.Drawing.Size(30, 29);
             this.btnFilterTribe.TabIndex = 9;
@@ -1901,7 +1988,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterTribe.Location = new System.Drawing.Point(10, 3);
             this.txtFilterTribe.Name = "txtFilterTribe";
-            this.txtFilterTribe.Size = new System.Drawing.Size(735, 20);
+            this.txtFilterTribe.Size = new System.Drawing.Size(829, 20);
             this.txtFilterTribe.TabIndex = 6;
             this.txtFilterTribe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterTribe_KeyDown);
             // 
@@ -1921,8 +2008,8 @@
             this.tableCharts.Name = "tableCharts";
             this.tableCharts.RowCount = 1;
             this.tableCharts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableCharts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 207F));
-            this.tableCharts.Size = new System.Drawing.Size(786, 207);
+            this.tableCharts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 195F));
+            this.tableCharts.Size = new System.Drawing.Size(880, 195);
             this.tableCharts.TabIndex = 21;
             // 
             // pnlChart3
@@ -1935,9 +2022,9 @@
             this.pnlChart3.Controls.Add(this.udChartTopTames);
             this.pnlChart3.Controls.Add(this.lblChartTopTames);
             this.pnlChart3.Controls.Add(this.chartTribeTames);
-            this.pnlChart3.Location = new System.Drawing.Point(526, 3);
+            this.pnlChart3.Location = new System.Drawing.Point(589, 3);
             this.pnlChart3.Name = "pnlChart3";
-            this.pnlChart3.Size = new System.Drawing.Size(257, 201);
+            this.pnlChart3.Size = new System.Drawing.Size(288, 189);
             this.pnlChart3.TabIndex = 22;
             // 
             // btnSaveChartTames
@@ -1945,7 +2032,7 @@
             this.btnSaveChartTames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChartTames.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveChartTames.Image = global::ARKViewer.Properties.Resources.button_save;
-            this.btnSaveChartTames.Location = new System.Drawing.Point(221, 166);
+            this.btnSaveChartTames.Location = new System.Drawing.Point(252, 154);
             this.btnSaveChartTames.Name = "btnSaveChartTames";
             this.btnSaveChartTames.Size = new System.Drawing.Size(30, 30);
             this.btnSaveChartTames.TabIndex = 18;
@@ -1957,7 +2044,7 @@
             // udChartTopTames
             // 
             this.udChartTopTames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.udChartTopTames.Location = new System.Drawing.Point(50, 172);
+            this.udChartTopTames.Location = new System.Drawing.Point(50, 160);
             this.udChartTopTames.Name = "udChartTopTames";
             this.udChartTopTames.Size = new System.Drawing.Size(43, 20);
             this.udChartTopTames.TabIndex = 14;
@@ -1973,7 +2060,7 @@
             this.lblChartTopTames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblChartTopTames.AutoSize = true;
             this.lblChartTopTames.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChartTopTames.Location = new System.Drawing.Point(11, 174);
+            this.lblChartTopTames.Location = new System.Drawing.Point(11, 162);
             this.lblChartTopTames.Name = "lblChartTopTames";
             this.lblChartTopTames.Size = new System.Drawing.Size(33, 13);
             this.lblChartTopTames.TabIndex = 15;
@@ -1985,22 +2072,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeTames.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea1.Name = "ChartArea1";
-            this.chartTribeTames.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartTribeTames.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chartTribeTames.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartTribeTames.Legends.Add(legend4);
             this.chartTribeTames.Location = new System.Drawing.Point(4, 3);
             this.chartTribeTames.Name = "chartTribeTames";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartTribeTames.Series.Add(series1);
-            this.chartTribeTames.Size = new System.Drawing.Size(247, 159);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartTribeTames.Series.Add(series4);
+            this.chartTribeTames.Size = new System.Drawing.Size(278, 147);
             this.chartTribeTames.TabIndex = 8;
             this.chartTribeTames.Text = "Tribe Players";
-            title1.Name = "Tribe Players";
-            this.chartTribeTames.Titles.Add(title1);
+            title4.Name = "Tribe Players";
+            this.chartTribeTames.Titles.Add(title4);
             // 
             // pnlChart2
             // 
@@ -2012,9 +2099,9 @@
             this.pnlChart2.Controls.Add(this.udChartTopStructures);
             this.pnlChart2.Controls.Add(this.lblChartTopStructures);
             this.pnlChart2.Controls.Add(this.chartTribeStructures);
-            this.pnlChart2.Location = new System.Drawing.Point(264, 3);
+            this.pnlChart2.Location = new System.Drawing.Point(296, 3);
             this.pnlChart2.Name = "pnlChart2";
-            this.pnlChart2.Size = new System.Drawing.Size(256, 201);
+            this.pnlChart2.Size = new System.Drawing.Size(287, 189);
             this.pnlChart2.TabIndex = 21;
             // 
             // btnSaveChartStructures
@@ -2022,7 +2109,7 @@
             this.btnSaveChartStructures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChartStructures.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveChartStructures.Image = global::ARKViewer.Properties.Resources.button_save;
-            this.btnSaveChartStructures.Location = new System.Drawing.Point(220, 165);
+            this.btnSaveChartStructures.Location = new System.Drawing.Point(251, 153);
             this.btnSaveChartStructures.Name = "btnSaveChartStructures";
             this.btnSaveChartStructures.Size = new System.Drawing.Size(30, 30);
             this.btnSaveChartStructures.TabIndex = 17;
@@ -2034,7 +2121,7 @@
             // udChartTopStructures
             // 
             this.udChartTopStructures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.udChartTopStructures.Location = new System.Drawing.Point(47, 172);
+            this.udChartTopStructures.Location = new System.Drawing.Point(47, 160);
             this.udChartTopStructures.Name = "udChartTopStructures";
             this.udChartTopStructures.Size = new System.Drawing.Size(43, 20);
             this.udChartTopStructures.TabIndex = 14;
@@ -2050,7 +2137,7 @@
             this.lblChartTopStructures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblChartTopStructures.AutoSize = true;
             this.lblChartTopStructures.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChartTopStructures.Location = new System.Drawing.Point(8, 174);
+            this.lblChartTopStructures.Location = new System.Drawing.Point(8, 162);
             this.lblChartTopStructures.Name = "lblChartTopStructures";
             this.lblChartTopStructures.Size = new System.Drawing.Size(33, 13);
             this.lblChartTopStructures.TabIndex = 15;
@@ -2062,22 +2149,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeStructures.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea2.Name = "ChartArea1";
-            this.chartTribeStructures.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartTribeStructures.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            this.chartTribeStructures.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chartTribeStructures.Legends.Add(legend5);
             this.chartTribeStructures.Location = new System.Drawing.Point(4, 3);
             this.chartTribeStructures.Name = "chartTribeStructures";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartTribeStructures.Series.Add(series2);
-            this.chartTribeStructures.Size = new System.Drawing.Size(246, 159);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chartTribeStructures.Series.Add(series5);
+            this.chartTribeStructures.Size = new System.Drawing.Size(277, 147);
             this.chartTribeStructures.TabIndex = 8;
             this.chartTribeStructures.Text = "Tribe Players";
-            title2.Name = "Tribe Players";
-            this.chartTribeStructures.Titles.Add(title2);
+            title5.Name = "Tribe Players";
+            this.chartTribeStructures.Titles.Add(title5);
             // 
             // pnlChart1
             // 
@@ -2091,7 +2178,7 @@
             this.pnlChart1.Controls.Add(this.chartTribePlayers);
             this.pnlChart1.Location = new System.Drawing.Point(3, 3);
             this.pnlChart1.Name = "pnlChart1";
-            this.pnlChart1.Size = new System.Drawing.Size(255, 201);
+            this.pnlChart1.Size = new System.Drawing.Size(287, 189);
             this.pnlChart1.TabIndex = 20;
             // 
             // btnSaveChartPlayers
@@ -2099,7 +2186,7 @@
             this.btnSaveChartPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChartPlayers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveChartPlayers.Image = global::ARKViewer.Properties.Resources.button_save;
-            this.btnSaveChartPlayers.Location = new System.Drawing.Point(219, 165);
+            this.btnSaveChartPlayers.Location = new System.Drawing.Point(251, 153);
             this.btnSaveChartPlayers.Name = "btnSaveChartPlayers";
             this.btnSaveChartPlayers.Size = new System.Drawing.Size(30, 30);
             this.btnSaveChartPlayers.TabIndex = 16;
@@ -2111,7 +2198,7 @@
             // udChartTopPlayers
             // 
             this.udChartTopPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.udChartTopPlayers.Location = new System.Drawing.Point(46, 172);
+            this.udChartTopPlayers.Location = new System.Drawing.Point(46, 160);
             this.udChartTopPlayers.Name = "udChartTopPlayers";
             this.udChartTopPlayers.Size = new System.Drawing.Size(43, 20);
             this.udChartTopPlayers.TabIndex = 14;
@@ -2127,7 +2214,7 @@
             this.lblChartTopPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblChartTopPlayers.AutoSize = true;
             this.lblChartTopPlayers.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblChartTopPlayers.Location = new System.Drawing.Point(7, 174);
+            this.lblChartTopPlayers.Location = new System.Drawing.Point(7, 162);
             this.lblChartTopPlayers.Name = "lblChartTopPlayers";
             this.lblChartTopPlayers.Size = new System.Drawing.Size(33, 13);
             this.lblChartTopPlayers.TabIndex = 15;
@@ -2139,22 +2226,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribePlayers.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea3.Name = "ChartArea1";
-            this.chartTribePlayers.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartTribePlayers.Legends.Add(legend3);
+            chartArea6.Name = "ChartArea1";
+            this.chartTribePlayers.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chartTribePlayers.Legends.Add(legend6);
             this.chartTribePlayers.Location = new System.Drawing.Point(4, 3);
             this.chartTribePlayers.Name = "chartTribePlayers";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartTribePlayers.Series.Add(series3);
-            this.chartTribePlayers.Size = new System.Drawing.Size(245, 159);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chartTribePlayers.Series.Add(series6);
+            this.chartTribePlayers.Size = new System.Drawing.Size(277, 147);
             this.chartTribePlayers.TabIndex = 8;
             this.chartTribePlayers.Text = "Tribe Players";
-            title3.Name = "Tribe Players";
-            this.chartTribePlayers.Titles.Add(title3);
+            title6.Name = "Tribe Players";
+            this.chartTribePlayers.Titles.Add(title6);
             // 
             // chkTribeStructures
             // 
@@ -2164,7 +2251,7 @@
             this.chkTribeStructures.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkTribeStructures.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkTribeStructures.ForeColor = System.Drawing.Color.ForestGreen;
-            this.chkTribeStructures.Location = new System.Drawing.Point(677, 418);
+            this.chkTribeStructures.Location = new System.Drawing.Point(768, 405);
             this.chkTribeStructures.Name = "chkTribeStructures";
             this.chkTribeStructures.Size = new System.Drawing.Size(121, 35);
             this.chkTribeStructures.TabIndex = 7;
@@ -2182,7 +2269,7 @@
             this.chkTribeTames.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkTribeTames.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkTribeTames.ForeColor = System.Drawing.Color.Chocolate;
-            this.chkTribeTames.Location = new System.Drawing.Point(566, 418);
+            this.chkTribeTames.Location = new System.Drawing.Point(657, 405);
             this.chkTribeTames.Name = "chkTribeTames";
             this.chkTribeTames.Size = new System.Drawing.Size(105, 35);
             this.chkTribeTames.TabIndex = 6;
@@ -2202,7 +2289,7 @@
             this.chkTribePlayers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkTribePlayers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkTribePlayers.ForeColor = System.Drawing.Color.LightCyan;
-            this.chkTribePlayers.Location = new System.Drawing.Point(446, 418);
+            this.chkTribePlayers.Location = new System.Drawing.Point(537, 405);
             this.chkTribePlayers.Name = "chkTribePlayers";
             this.chkTribePlayers.Size = new System.Drawing.Size(114, 35);
             this.chkTribePlayers.TabIndex = 5;
@@ -2218,7 +2305,7 @@
             this.lblTribeCopyCommand.AutoSize = true;
             this.lblTribeCopyCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTribeCopyCommand.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblTribeCopyCommand.Location = new System.Drawing.Point(14, 427);
+            this.lblTribeCopyCommand.Location = new System.Drawing.Point(14, 414);
             this.lblTribeCopyCommand.Name = "lblTribeCopyCommand";
             this.lblTribeCopyCommand.Size = new System.Drawing.Size(65, 13);
             this.lblTribeCopyCommand.TabIndex = 1;
@@ -2240,7 +2327,7 @@
             "TribeDinoAudit  <TribeID>",
             "RM <FileCsvList>",
             "DEL <FileCsvList>"});
-            this.cboTribeCopyCommand.Location = new System.Drawing.Point(82, 424);
+            this.cboTribeCopyCommand.Location = new System.Drawing.Point(82, 411);
             this.cboTribeCopyCommand.Name = "cboTribeCopyCommand";
             this.cboTribeCopyCommand.Size = new System.Drawing.Size(262, 21);
             this.cboTribeCopyCommand.TabIndex = 2;
@@ -2261,7 +2348,7 @@
             this.lvwTribes.HideSelection = false;
             this.lvwTribes.Location = new System.Drawing.Point(12, 13);
             this.lvwTribes.Name = "lvwTribes";
-            this.lvwTribes.Size = new System.Drawing.Size(786, 161);
+            this.lvwTribes.Size = new System.Drawing.Size(880, 161);
             this.lvwTribes.TabIndex = 0;
             this.lvwTribes.UseCompatibleStateImageBehavior = false;
             this.lvwTribes.View = System.Windows.Forms.View.Details;
@@ -2302,7 +2389,6 @@
             // tpgPlayers
             // 
             this.tpgPlayers.Controls.Add(this.pnlFilterPlayers);
-            this.tpgPlayers.Controls.Add(this.btnMissionScoreboard);
             this.tpgPlayers.Controls.Add(this.btnDeletePlayer);
             this.tpgPlayers.Controls.Add(this.lblPlayerTotal);
             this.tpgPlayers.Controls.Add(this.btnCopyCommandPlayer);
@@ -2318,7 +2404,7 @@
             this.tpgPlayers.Location = new System.Drawing.Point(4, 22);
             this.tpgPlayers.Name = "tpgPlayers";
             this.tpgPlayers.Padding = new System.Windows.Forms.Padding(3);
-            this.tpgPlayers.Size = new System.Drawing.Size(811, 463);
+            this.tpgPlayers.Size = new System.Drawing.Size(945, 449);
             this.tpgPlayers.TabIndex = 1;
             this.tpgPlayers.Text = "Players";
             this.tpgPlayers.UseVisualStyleBackColor = true;
@@ -2331,9 +2417,9 @@
             this.pnlFilterPlayers.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilterPlayers.Controls.Add(this.btnFilterPlayer);
             this.pnlFilterPlayers.Controls.Add(this.txtFilterPlayer);
-            this.pnlFilterPlayers.Location = new System.Drawing.Point(12, 376);
+            this.pnlFilterPlayers.Location = new System.Drawing.Point(12, 364);
             this.pnlFilterPlayers.Name = "pnlFilterPlayers";
-            this.pnlFilterPlayers.Size = new System.Drawing.Size(787, 29);
+            this.pnlFilterPlayers.Size = new System.Drawing.Size(919, 29);
             this.pnlFilterPlayers.TabIndex = 23;
             // 
             // btnFilterPlayer
@@ -2341,7 +2427,7 @@
             this.btnFilterPlayer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFilterPlayer.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFilterPlayer.Image = global::ARKViewer.Properties.Resources.button_zoom;
-            this.btnFilterPlayer.Location = new System.Drawing.Point(756, -1);
+            this.btnFilterPlayer.Location = new System.Drawing.Point(888, -1);
             this.btnFilterPlayer.Name = "btnFilterPlayer";
             this.btnFilterPlayer.Size = new System.Drawing.Size(30, 29);
             this.btnFilterPlayer.TabIndex = 9;
@@ -2355,23 +2441,9 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterPlayer.Location = new System.Drawing.Point(10, 3);
             this.txtFilterPlayer.Name = "txtFilterPlayer";
-            this.txtFilterPlayer.Size = new System.Drawing.Size(736, 20);
+            this.txtFilterPlayer.Size = new System.Drawing.Size(868, 20);
             this.txtFilterPlayer.TabIndex = 6;
             this.txtFilterPlayer.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterPlayer_KeyDown);
-            // 
-            // btnMissionScoreboard
-            // 
-            this.btnMissionScoreboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMissionScoreboard.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnMissionScoreboard.Enabled = false;
-            this.btnMissionScoreboard.Image = ((System.Drawing.Image)(resources.GetObject("btnMissionScoreboard.Image")));
-            this.btnMissionScoreboard.Location = new System.Drawing.Point(758, 8);
-            this.btnMissionScoreboard.Name = "btnMissionScoreboard";
-            this.btnMissionScoreboard.Size = new System.Drawing.Size(40, 40);
-            this.btnMissionScoreboard.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.btnMissionScoreboard, "View mission scoreboard");
-            this.btnMissionScoreboard.UseVisualStyleBackColor = true;
-            this.btnMissionScoreboard.Click += new System.EventHandler(this.btmMissionScoreboard_Click);
             // 
             // lblPlayerTotal
             // 
@@ -2379,7 +2451,7 @@
             this.lblPlayerTotal.BackColor = System.Drawing.Color.AliceBlue;
             this.lblPlayerTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPlayerTotal.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblPlayerTotal.Location = new System.Drawing.Point(675, 417);
+            this.lblPlayerTotal.Location = new System.Drawing.Point(808, 406);
             this.lblPlayerTotal.Name = "lblPlayerTotal";
             this.lblPlayerTotal.Size = new System.Drawing.Size(123, 30);
             this.lblPlayerTotal.TabIndex = 11;
@@ -2392,7 +2464,7 @@
             this.lblCommandPlayer.AutoSize = true;
             this.lblCommandPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCommandPlayer.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblCommandPlayer.Location = new System.Drawing.Point(14, 423);
+            this.lblCommandPlayer.Location = new System.Drawing.Point(14, 412);
             this.lblCommandPlayer.Name = "lblCommandPlayer";
             this.lblCommandPlayer.Size = new System.Drawing.Size(65, 13);
             this.lblCommandPlayer.TabIndex = 5;
@@ -2435,7 +2507,7 @@
             "UnbanPlayer <SteamID>",
             "RM <FileCsvList>",
             "DEL <FileCsvList>"});
-            this.cboConsoleCommandsPlayerTribe.Location = new System.Drawing.Point(82, 420);
+            this.cboConsoleCommandsPlayerTribe.Location = new System.Drawing.Point(82, 409);
             this.cboConsoleCommandsPlayerTribe.Name = "cboConsoleCommandsPlayerTribe";
             this.cboConsoleCommandsPlayerTribe.Size = new System.Drawing.Size(262, 21);
             this.cboConsoleCommandsPlayerTribe.TabIndex = 6;
@@ -2514,7 +2586,7 @@
             this.lvwPlayers.HideSelection = false;
             this.lvwPlayers.Location = new System.Drawing.Point(12, 52);
             this.lvwPlayers.Name = "lvwPlayers";
-            this.lvwPlayers.Size = new System.Drawing.Size(787, 325);
+            this.lvwPlayers.Size = new System.Drawing.Size(919, 313);
             this.lvwPlayers.TabIndex = 4;
             this.lvwPlayers.UseCompatibleStateImageBehavior = false;
             this.lvwPlayers.View = System.Windows.Forms.View.Details;
@@ -2636,7 +2708,7 @@
             this.tpgDroppedItems.Controls.Add(this.lvwDroppedItems);
             this.tpgDroppedItems.Location = new System.Drawing.Point(4, 22);
             this.tpgDroppedItems.Name = "tpgDroppedItems";
-            this.tpgDroppedItems.Size = new System.Drawing.Size(811, 463);
+            this.tpgDroppedItems.Size = new System.Drawing.Size(945, 449);
             this.tpgDroppedItems.TabIndex = 4;
             this.tpgDroppedItems.Text = "Dropped Items";
             this.tpgDroppedItems.UseVisualStyleBackColor = true;
@@ -2649,9 +2721,9 @@
             this.pnlFilterDropped.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilterDropped.Controls.Add(this.btnFindDropped);
             this.pnlFilterDropped.Controls.Add(this.txtFilterDropped);
-            this.pnlFilterDropped.Location = new System.Drawing.Point(11, 379);
+            this.pnlFilterDropped.Location = new System.Drawing.Point(11, 371);
             this.pnlFilterDropped.Name = "pnlFilterDropped";
-            this.pnlFilterDropped.Size = new System.Drawing.Size(786, 29);
+            this.pnlFilterDropped.Size = new System.Drawing.Size(922, 29);
             this.pnlFilterDropped.TabIndex = 22;
             // 
             // btnFindDropped
@@ -2659,7 +2731,7 @@
             this.btnFindDropped.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFindDropped.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFindDropped.Image = global::ARKViewer.Properties.Resources.button_zoom;
-            this.btnFindDropped.Location = new System.Drawing.Point(755, -1);
+            this.btnFindDropped.Location = new System.Drawing.Point(891, -1);
             this.btnFindDropped.Name = "btnFindDropped";
             this.btnFindDropped.Size = new System.Drawing.Size(30, 29);
             this.btnFindDropped.TabIndex = 9;
@@ -2673,7 +2745,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterDropped.Location = new System.Drawing.Point(10, 3);
             this.txtFilterDropped.Name = "txtFilterDropped";
-            this.txtFilterDropped.Size = new System.Drawing.Size(735, 20);
+            this.txtFilterDropped.Size = new System.Drawing.Size(871, 20);
             this.txtFilterDropped.TabIndex = 6;
             this.txtFilterDropped.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterDropped_KeyDown);
             // 
@@ -2684,7 +2756,7 @@
             this.chkDroppedBlueprints.BackgroundImage = global::ARKViewer.Properties.Resources.blueprints_unchecked;
             this.chkDroppedBlueprints.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.chkDroppedBlueprints.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkDroppedBlueprints.Location = new System.Drawing.Point(758, 5);
+            this.chkDroppedBlueprints.Location = new System.Drawing.Point(893, 5);
             this.chkDroppedBlueprints.Name = "chkDroppedBlueprints";
             this.chkDroppedBlueprints.Size = new System.Drawing.Size(40, 40);
             this.chkDroppedBlueprints.TabIndex = 10;
@@ -2729,7 +2801,7 @@
             this.lblCopyCommandDropped.AutoSize = true;
             this.lblCopyCommandDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCopyCommandDropped.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblCopyCommandDropped.Location = new System.Drawing.Point(14, 425);
+            this.lblCopyCommandDropped.Location = new System.Drawing.Point(14, 417);
             this.lblCopyCommandDropped.Name = "lblCopyCommandDropped";
             this.lblCopyCommandDropped.Size = new System.Drawing.Size(65, 13);
             this.lblCopyCommandDropped.TabIndex = 5;
@@ -2742,7 +2814,7 @@
             this.cboCopyCommandDropped.FormattingEnabled = true;
             this.cboCopyCommandDropped.Items.AddRange(new object[] {
             "SetPlayerPos  <x> <y> <z>"});
-            this.cboCopyCommandDropped.Location = new System.Drawing.Point(82, 422);
+            this.cboCopyCommandDropped.Location = new System.Drawing.Point(82, 414);
             this.cboCopyCommandDropped.Name = "cboCopyCommandDropped";
             this.cboCopyCommandDropped.Size = new System.Drawing.Size(262, 21);
             this.cboCopyCommandDropped.TabIndex = 6;
@@ -2753,7 +2825,7 @@
             this.lblCountDropped.BackColor = System.Drawing.Color.AliceBlue;
             this.lblCountDropped.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCountDropped.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblCountDropped.Location = new System.Drawing.Point(675, 417);
+            this.lblCountDropped.Location = new System.Drawing.Point(810, 409);
             this.lblCountDropped.Name = "lblCountDropped";
             this.lblCountDropped.Size = new System.Drawing.Size(123, 30);
             this.lblCountDropped.TabIndex = 9;
@@ -2789,7 +2861,7 @@
             this.lvwDroppedItems.Location = new System.Drawing.Point(11, 52);
             this.lvwDroppedItems.MultiSelect = false;
             this.lvwDroppedItems.Name = "lvwDroppedItems";
-            this.lvwDroppedItems.Size = new System.Drawing.Size(786, 328);
+            this.lvwDroppedItems.Size = new System.Drawing.Size(922, 320);
             this.lvwDroppedItems.TabIndex = 4;
             this.lvwDroppedItems.UseCompatibleStateImageBehavior = false;
             this.lvwDroppedItems.View = System.Windows.Forms.View.Details;
@@ -2843,7 +2915,7 @@
             this.tpgItemList.Controls.Add(this.lvwItemList);
             this.tpgItemList.Location = new System.Drawing.Point(4, 22);
             this.tpgItemList.Name = "tpgItemList";
-            this.tpgItemList.Size = new System.Drawing.Size(811, 463);
+            this.tpgItemList.Size = new System.Drawing.Size(945, 449);
             this.tpgItemList.TabIndex = 6;
             this.tpgItemList.Text = "Item Search";
             this.tpgItemList.UseVisualStyleBackColor = true;
@@ -2856,9 +2928,9 @@
             this.pnlFilterSearch.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlFilterSearch.Controls.Add(this.btnFindSearched);
             this.pnlFilterSearch.Controls.Add(this.txtFilterSearch);
-            this.pnlFilterSearch.Location = new System.Drawing.Point(11, 379);
+            this.pnlFilterSearch.Location = new System.Drawing.Point(11, 371);
             this.pnlFilterSearch.Name = "pnlFilterSearch";
-            this.pnlFilterSearch.Size = new System.Drawing.Size(786, 29);
+            this.pnlFilterSearch.Size = new System.Drawing.Size(920, 29);
             this.pnlFilterSearch.TabIndex = 22;
             // 
             // btnFindSearched
@@ -2866,7 +2938,7 @@
             this.btnFindSearched.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFindSearched.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFindSearched.Image = global::ARKViewer.Properties.Resources.button_zoom;
-            this.btnFindSearched.Location = new System.Drawing.Point(755, -1);
+            this.btnFindSearched.Location = new System.Drawing.Point(889, -1);
             this.btnFindSearched.Name = "btnFindSearched";
             this.btnFindSearched.Size = new System.Drawing.Size(30, 29);
             this.btnFindSearched.TabIndex = 9;
@@ -2880,7 +2952,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterSearch.Location = new System.Drawing.Point(10, 3);
             this.txtFilterSearch.Name = "txtFilterSearch";
-            this.txtFilterSearch.Size = new System.Drawing.Size(735, 20);
+            this.txtFilterSearch.Size = new System.Drawing.Size(869, 20);
             this.txtFilterSearch.TabIndex = 6;
             this.txtFilterSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterSearch_KeyDown);
             // 
@@ -2891,7 +2963,7 @@
             this.chkItemSearchBlueprints.BackgroundImage = global::ARKViewer.Properties.Resources.blueprints_unchecked;
             this.chkItemSearchBlueprints.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.chkItemSearchBlueprints.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.chkItemSearchBlueprints.Location = new System.Drawing.Point(758, 6);
+            this.chkItemSearchBlueprints.Location = new System.Drawing.Point(891, 6);
             this.chkItemSearchBlueprints.Name = "chkItemSearchBlueprints";
             this.chkItemSearchBlueprints.Size = new System.Drawing.Size(40, 40);
             this.chkItemSearchBlueprints.TabIndex = 11;
@@ -2936,7 +3008,7 @@
             this.btnItemListCommand.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnItemListCommand.Enabled = false;
             this.btnItemListCommand.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnItemListCommand.Location = new System.Drawing.Point(350, 412);
+            this.btnItemListCommand.Location = new System.Drawing.Point(350, 404);
             this.btnItemListCommand.Name = "btnItemListCommand";
             this.btnItemListCommand.Size = new System.Drawing.Size(40, 40);
             this.btnItemListCommand.TabIndex = 7;
@@ -2949,7 +3021,7 @@
             this.lblItemListCommand.AutoSize = true;
             this.lblItemListCommand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblItemListCommand.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblItemListCommand.Location = new System.Drawing.Point(14, 425);
+            this.lblItemListCommand.Location = new System.Drawing.Point(14, 417);
             this.lblItemListCommand.Name = "lblItemListCommand";
             this.lblItemListCommand.Size = new System.Drawing.Size(65, 13);
             this.lblItemListCommand.TabIndex = 5;
@@ -2962,7 +3034,7 @@
             this.cboItemListCommand.FormattingEnabled = true;
             this.cboItemListCommand.Items.AddRange(new object[] {
             "SetPlayerPos  <x> <y> <z>"});
-            this.cboItemListCommand.Location = new System.Drawing.Point(82, 422);
+            this.cboItemListCommand.Location = new System.Drawing.Point(82, 414);
             this.cboItemListCommand.Name = "cboItemListCommand";
             this.cboItemListCommand.Size = new System.Drawing.Size(262, 21);
             this.cboItemListCommand.TabIndex = 6;
@@ -2973,7 +3045,7 @@
             this.lblItemListCount.BackColor = System.Drawing.Color.AliceBlue;
             this.lblItemListCount.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblItemListCount.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblItemListCount.Location = new System.Drawing.Point(675, 417);
+            this.lblItemListCount.Location = new System.Drawing.Point(808, 409);
             this.lblItemListCount.Name = "lblItemListCount";
             this.lblItemListCount.Size = new System.Drawing.Size(123, 30);
             this.lblItemListCount.TabIndex = 8;
@@ -3011,7 +3083,7 @@
             this.lvwItemList.Location = new System.Drawing.Point(11, 52);
             this.lvwItemList.MultiSelect = false;
             this.lvwItemList.Name = "lvwItemList";
-            this.lvwItemList.Size = new System.Drawing.Size(786, 328);
+            this.lvwItemList.Size = new System.Drawing.Size(920, 320);
             this.lvwItemList.TabIndex = 4;
             this.lvwItemList.UseCompatibleStateImageBehavior = false;
             this.lvwItemList.View = System.Windows.Forms.View.Details;
@@ -3059,6 +3131,604 @@
             // 
             this.lvwItemList_Lon.Text = "Lon";
             // 
+            // tpgLocalProfile
+            // 
+            this.tpgLocalProfile.Controls.Add(this.pnlUploadedStats);
+            this.tpgLocalProfile.Controls.Add(this.label6);
+            this.tpgLocalProfile.Controls.Add(this.label5);
+            this.tpgLocalProfile.Controls.Add(this.label4);
+            this.tpgLocalProfile.Controls.Add(this.lblUploadedItems);
+            this.tpgLocalProfile.Controls.Add(this.lvwUploadedItems);
+            this.tpgLocalProfile.Controls.Add(this.lblUploadedTames);
+            this.tpgLocalProfile.Controls.Add(this.lblUploadedCharacters);
+            this.tpgLocalProfile.Controls.Add(this.lvwUploadedCharacters);
+            this.tpgLocalProfile.Controls.Add(this.lvwUploadedTames);
+            this.tpgLocalProfile.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.tpgLocalProfile.Location = new System.Drawing.Point(4, 22);
+            this.tpgLocalProfile.Name = "tpgLocalProfile";
+            this.tpgLocalProfile.Size = new System.Drawing.Size(945, 449);
+            this.tpgLocalProfile.TabIndex = 7;
+            this.tpgLocalProfile.Text = "Local Profile";
+            this.tpgLocalProfile.UseVisualStyleBackColor = true;
+            // 
+            // pnlUploadedStats
+            // 
+            this.pnlUploadedStats.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlUploadedStats.Controls.Add(this.lblUploadedStats);
+            this.pnlUploadedStats.Controls.Add(this.optUploadedStatsTamed);
+            this.pnlUploadedStats.Controls.Add(this.optUploadedStatsBase);
+            this.pnlUploadedStats.Enabled = false;
+            this.pnlUploadedStats.Location = new System.Drawing.Point(13, 246);
+            this.pnlUploadedStats.Name = "pnlUploadedStats";
+            this.pnlUploadedStats.Size = new System.Drawing.Size(175, 34);
+            this.pnlUploadedStats.TabIndex = 17;
+            // 
+            // lblUploadedStats
+            // 
+            this.lblUploadedStats.AutoSize = true;
+            this.lblUploadedStats.Location = new System.Drawing.Point(2, 10);
+            this.lblUploadedStats.Name = "lblUploadedStats";
+            this.lblUploadedStats.Size = new System.Drawing.Size(34, 13);
+            this.lblUploadedStats.TabIndex = 0;
+            this.lblUploadedStats.Text = "Stats:";
+            // 
+            // optUploadedStatsTamed
+            // 
+            this.optUploadedStatsTamed.AutoSize = true;
+            this.optUploadedStatsTamed.Location = new System.Drawing.Point(97, 8);
+            this.optUploadedStatsTamed.Name = "optUploadedStatsTamed";
+            this.optUploadedStatsTamed.Size = new System.Drawing.Size(58, 17);
+            this.optUploadedStatsTamed.TabIndex = 2;
+            this.optUploadedStatsTamed.Text = "Tamed";
+            this.optUploadedStatsTamed.UseVisualStyleBackColor = true;
+            // 
+            // optUploadedStatsBase
+            // 
+            this.optUploadedStatsBase.AutoSize = true;
+            this.optUploadedStatsBase.Checked = true;
+            this.optUploadedStatsBase.Location = new System.Drawing.Point(42, 8);
+            this.optUploadedStatsBase.Name = "optUploadedStatsBase";
+            this.optUploadedStatsBase.Size = new System.Drawing.Size(49, 17);
+            this.optUploadedStatsBase.TabIndex = 1;
+            this.optUploadedStatsBase.TabStop = true;
+            this.optUploadedStatsBase.Text = "Base";
+            this.optUploadedStatsBase.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.label6.BackColor = System.Drawing.Color.AliceBlue;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label6.Location = new System.Drawing.Point(824, 421);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(108, 21);
+            this.label6.TabIndex = 16;
+            this.label6.Text = "Count: 0";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label5.BackColor = System.Drawing.Color.AliceBlue;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label5.Location = new System.Drawing.Point(824, 246);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(108, 21);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Count: 0";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label4.BackColor = System.Drawing.Color.AliceBlue;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label4.Location = new System.Drawing.Point(824, 95);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(108, 21);
+            this.label4.TabIndex = 14;
+            this.label4.Text = "Count: 0";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // lblUploadedItems
+            // 
+            this.lblUploadedItems.AutoSize = true;
+            this.lblUploadedItems.Enabled = false;
+            this.lblUploadedItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUploadedItems.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblUploadedItems.Location = new System.Drawing.Point(10, 292);
+            this.lblUploadedItems.Name = "lblUploadedItems";
+            this.lblUploadedItems.Size = new System.Drawing.Size(78, 13);
+            this.lblUploadedItems.TabIndex = 13;
+            this.lblUploadedItems.Text = "Stored Items";
+            // 
+            // lvwUploadedItems
+            // 
+            this.lvwUploadedItems.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvwUploadedItems.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader8,
+            this.columnHeader9,
+            this.columnHeader18,
+            this.columnHeader19,
+            this.columnHeader22});
+            this.lvwUploadedItems.Enabled = false;
+            this.lvwUploadedItems.FullRowSelect = true;
+            this.lvwUploadedItems.HideSelection = false;
+            this.lvwUploadedItems.Location = new System.Drawing.Point(13, 308);
+            this.lvwUploadedItems.MultiSelect = false;
+            this.lvwUploadedItems.Name = "lvwUploadedItems";
+            this.lvwUploadedItems.Size = new System.Drawing.Size(920, 110);
+            this.lvwUploadedItems.TabIndex = 12;
+            this.lvwUploadedItems.UseCompatibleStateImageBehavior = false;
+            this.lvwUploadedItems.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader8
+            // 
+            this.columnHeader8.Text = "Item";
+            this.columnHeader8.Width = 175;
+            // 
+            // columnHeader9
+            // 
+            this.columnHeader9.Text = "Quality";
+            this.columnHeader9.Width = 80;
+            // 
+            // columnHeader18
+            // 
+            this.columnHeader18.Text = "Rating";
+            // 
+            // columnHeader19
+            // 
+            this.columnHeader19.Text = "BP";
+            this.columnHeader19.Width = 40;
+            // 
+            // columnHeader22
+            // 
+            this.columnHeader22.Text = "Qty";
+            // 
+            // lblUploadedTames
+            // 
+            this.lblUploadedTames.AutoSize = true;
+            this.lblUploadedTames.Enabled = false;
+            this.lblUploadedTames.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUploadedTames.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblUploadedTames.Location = new System.Drawing.Point(10, 105);
+            this.lblUploadedTames.Name = "lblUploadedTames";
+            this.lblUploadedTames.Size = new System.Drawing.Size(102, 13);
+            this.lblUploadedTames.TabIndex = 11;
+            this.lblUploadedTames.Text = "Uploaded Tames";
+            // 
+            // lblUploadedCharacters
+            // 
+            this.lblUploadedCharacters.AutoSize = true;
+            this.lblUploadedCharacters.Enabled = false;
+            this.lblUploadedCharacters.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUploadedCharacters.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblUploadedCharacters.Location = new System.Drawing.Point(10, 16);
+            this.lblUploadedCharacters.Name = "lblUploadedCharacters";
+            this.lblUploadedCharacters.Size = new System.Drawing.Size(126, 13);
+            this.lblUploadedCharacters.TabIndex = 10;
+            this.lblUploadedCharacters.Text = "Uploaded Characters";
+            // 
+            // lvwUploadedCharacters
+            // 
+            this.lvwUploadedCharacters.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvwUploadedCharacters.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader37,
+            this.columnHeader39,
+            this.columnHeader40,
+            this.columnHeader43,
+            this.columnHeader44,
+            this.columnHeader45,
+            this.columnHeader46,
+            this.columnHeader47,
+            this.columnHeader48,
+            this.columnHeader49,
+            this.columnHeader50,
+            this.columnHeader51,
+            this.columnHeader52});
+            this.lvwUploadedCharacters.ContextMenuStrip = this.mnuContext;
+            this.lvwUploadedCharacters.Enabled = false;
+            this.lvwUploadedCharacters.FullRowSelect = true;
+            this.lvwUploadedCharacters.HideSelection = false;
+            this.lvwUploadedCharacters.Location = new System.Drawing.Point(13, 36);
+            this.lvwUploadedCharacters.Name = "lvwUploadedCharacters";
+            this.lvwUploadedCharacters.Size = new System.Drawing.Size(919, 56);
+            this.lvwUploadedCharacters.TabIndex = 9;
+            this.lvwUploadedCharacters.UseCompatibleStateImageBehavior = false;
+            this.lvwUploadedCharacters.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader37
+            // 
+            this.columnHeader37.Text = "Name";
+            this.columnHeader37.Width = 90;
+            // 
+            // columnHeader39
+            // 
+            this.columnHeader39.Text = "Sex";
+            this.columnHeader39.Width = 55;
+            // 
+            // columnHeader40
+            // 
+            this.columnHeader40.Text = "Lvl";
+            this.columnHeader40.Width = 35;
+            // 
+            // columnHeader43
+            // 
+            this.columnHeader43.Text = "HP";
+            this.columnHeader43.Width = 45;
+            // 
+            // columnHeader44
+            // 
+            this.columnHeader44.Text = "Stam";
+            this.columnHeader44.Width = 45;
+            // 
+            // columnHeader45
+            // 
+            this.columnHeader45.Text = "Melee";
+            this.columnHeader45.Width = 48;
+            // 
+            // columnHeader46
+            // 
+            this.columnHeader46.Text = "Weight";
+            this.columnHeader46.Width = 55;
+            // 
+            // columnHeader47
+            // 
+            this.columnHeader47.Text = "Speed";
+            this.columnHeader47.Width = 50;
+            // 
+            // columnHeader48
+            // 
+            this.columnHeader48.Text = "Food";
+            this.columnHeader48.Width = 47;
+            // 
+            // columnHeader49
+            // 
+            this.columnHeader49.Text = "Water";
+            // 
+            // columnHeader50
+            // 
+            this.columnHeader50.Text = "Oxygen";
+            this.columnHeader50.Width = 53;
+            // 
+            // columnHeader51
+            // 
+            this.columnHeader51.Text = "Crafting";
+            // 
+            // columnHeader52
+            // 
+            this.columnHeader52.Text = "Fortitude";
+            // 
+            // lvwUploadedTames
+            // 
+            this.lvwUploadedTames.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvwUploadedTames.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader1,
+            this.columnHeader2,
+            this.columnHeader5,
+            this.columnHeader6,
+            this.columnHeader7,
+            this.columnHeader10,
+            this.columnHeader11,
+            this.columnHeader12,
+            this.columnHeader13,
+            this.columnHeader14,
+            this.columnHeader15,
+            this.columnHeader16,
+            this.columnHeader17,
+            this.columnHeader20,
+            this.columnHeader21,
+            this.columnHeader23,
+            this.columnHeader24,
+            this.columnHeader25,
+            this.columnHeader26,
+            this.columnHeader27,
+            this.columnHeader28,
+            this.columnHeader29,
+            this.columnHeader30,
+            this.columnHeader33,
+            this.columnHeader34});
+            this.lvwUploadedTames.ContextMenuStrip = this.mnuContext;
+            this.lvwUploadedTames.Enabled = false;
+            this.lvwUploadedTames.FullRowSelect = true;
+            this.lvwUploadedTames.HideSelection = false;
+            this.lvwUploadedTames.Location = new System.Drawing.Point(13, 124);
+            this.lvwUploadedTames.MultiSelect = false;
+            this.lvwUploadedTames.Name = "lvwUploadedTames";
+            this.lvwUploadedTames.Size = new System.Drawing.Size(919, 116);
+            this.lvwUploadedTames.TabIndex = 8;
+            this.lvwUploadedTames.UseCompatibleStateImageBehavior = false;
+            this.lvwUploadedTames.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader1
+            // 
+            this.columnHeader1.Text = "Creature";
+            this.columnHeader1.Width = 140;
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Name";
+            this.columnHeader2.Width = 150;
+            // 
+            // columnHeader5
+            // 
+            this.columnHeader5.Text = "Sex";
+            // 
+            // columnHeader6
+            // 
+            this.columnHeader6.Text = "Base";
+            this.columnHeader6.Width = 50;
+            // 
+            // columnHeader7
+            // 
+            this.columnHeader7.Text = "Lvl";
+            this.columnHeader7.Width = 41;
+            // 
+            // columnHeader10
+            // 
+            this.columnHeader10.Text = "HP";
+            this.columnHeader10.Width = 45;
+            // 
+            // columnHeader11
+            // 
+            this.columnHeader11.Text = "Stam";
+            this.columnHeader11.Width = 45;
+            // 
+            // columnHeader12
+            // 
+            this.columnHeader12.Text = "Melee";
+            this.columnHeader12.Width = 48;
+            // 
+            // columnHeader13
+            // 
+            this.columnHeader13.Text = "Weight";
+            this.columnHeader13.Width = 55;
+            // 
+            // columnHeader14
+            // 
+            this.columnHeader14.Text = "Speed";
+            this.columnHeader14.Width = 50;
+            // 
+            // columnHeader15
+            // 
+            this.columnHeader15.Text = "Food";
+            this.columnHeader15.Width = 47;
+            // 
+            // columnHeader16
+            // 
+            this.columnHeader16.Text = "Oxygen";
+            this.columnHeader16.Width = 53;
+            // 
+            // columnHeader17
+            // 
+            this.columnHeader17.Text = "Craft";
+            this.columnHeader17.Width = 50;
+            // 
+            // columnHeader20
+            // 
+            this.columnHeader20.Text = "Imprinter";
+            this.columnHeader20.Width = 105;
+            // 
+            // columnHeader21
+            // 
+            this.columnHeader21.Text = "Imprint";
+            // 
+            // columnHeader23
+            // 
+            this.columnHeader23.Text = "C0";
+            this.columnHeader23.Width = 35;
+            // 
+            // columnHeader24
+            // 
+            this.columnHeader24.Text = "C1";
+            this.columnHeader24.Width = 35;
+            // 
+            // columnHeader25
+            // 
+            this.columnHeader25.Text = "C2";
+            this.columnHeader25.Width = 35;
+            // 
+            // columnHeader26
+            // 
+            this.columnHeader26.Text = "C3";
+            this.columnHeader26.Width = 35;
+            // 
+            // columnHeader27
+            // 
+            this.columnHeader27.Text = "C4";
+            this.columnHeader27.Width = 35;
+            // 
+            // columnHeader28
+            // 
+            this.columnHeader28.Text = "C5";
+            this.columnHeader28.Width = 35;
+            // 
+            // columnHeader29
+            // 
+            this.columnHeader29.Text = "Mut (F)";
+            // 
+            // columnHeader30
+            // 
+            this.columnHeader30.Text = "Mut (M)";
+            // 
+            // columnHeader33
+            // 
+            this.columnHeader33.Text = "Rig1";
+            this.columnHeader33.Width = 100;
+            // 
+            // columnHeader34
+            // 
+            this.columnHeader34.Text = "Rig2";
+            this.columnHeader34.Width = 100;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.listView4);
+            this.tabPage1.Controls.Add(this.lvwLeaderboard);
+            this.tabPage1.Controls.Add(this.comboBox3);
+            this.tabPage1.Controls.Add(this.label10);
+            this.tabPage1.Controls.Add(this.comboBox1);
+            this.tabPage1.Controls.Add(this.comboBox2);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Size = new System.Drawing.Size(945, 449);
+            this.tabPage1.TabIndex = 8;
+            this.tabPage1.Text = "Leaderboard";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // listView4
+            // 
+            this.listView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listView4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnHeader32,
+            this.columnHeader35,
+            this.columnHeader36});
+            this.listView4.ContextMenuStrip = this.mnuContext;
+            this.listView4.FullRowSelect = true;
+            this.listView4.HideSelection = false;
+            this.listView4.Location = new System.Drawing.Point(12, 58);
+            this.listView4.MultiSelect = false;
+            this.listView4.Name = "listView4";
+            this.listView4.Size = new System.Drawing.Size(920, 143);
+            this.listView4.TabIndex = 16;
+            this.listView4.UseCompatibleStateImageBehavior = false;
+            this.listView4.View = System.Windows.Forms.View.Details;
+            // 
+            // columnHeader32
+            // 
+            this.columnHeader32.Text = "Tribe";
+            this.columnHeader32.Width = 170;
+            // 
+            // columnHeader35
+            // 
+            this.columnHeader35.Text = "Player";
+            this.columnHeader35.Width = 179;
+            // 
+            // columnHeader36
+            // 
+            this.columnHeader36.Text = "Mission Count";
+            this.columnHeader36.Width = 113;
+            // 
+            // lvwLeaderboard
+            // 
+            this.lvwLeaderboard.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvwLeaderboard.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvwLeaderboard_Mission,
+            this.lvwLeaderboard_Tribe,
+            this.lvwLeaderboard_Player,
+            this.lvwLeaderboard_LastScore,
+            this.lvwLeaderboard_HighScore});
+            this.lvwLeaderboard.ContextMenuStrip = this.mnuContext;
+            this.lvwLeaderboard.FullRowSelect = true;
+            this.lvwLeaderboard.HideSelection = false;
+            this.lvwLeaderboard.Location = new System.Drawing.Point(12, 239);
+            this.lvwLeaderboard.MultiSelect = false;
+            this.lvwLeaderboard.Name = "lvwLeaderboard";
+            this.lvwLeaderboard.Size = new System.Drawing.Size(920, 192);
+            this.lvwLeaderboard.TabIndex = 15;
+            this.lvwLeaderboard.UseCompatibleStateImageBehavior = false;
+            this.lvwLeaderboard.View = System.Windows.Forms.View.Details;
+            // 
+            // lvwLeaderboard_Mission
+            // 
+            this.lvwLeaderboard_Mission.Text = "Mission";
+            this.lvwLeaderboard_Mission.Width = 303;
+            // 
+            // lvwLeaderboard_Tribe
+            // 
+            this.lvwLeaderboard_Tribe.Text = "Tribe";
+            this.lvwLeaderboard_Tribe.Width = 170;
+            // 
+            // lvwLeaderboard_Player
+            // 
+            this.lvwLeaderboard_Player.Text = "Player";
+            this.lvwLeaderboard_Player.Width = 179;
+            // 
+            // lvwLeaderboard_LastScore
+            // 
+            this.lvwLeaderboard_LastScore.Text = "Last Score";
+            this.lvwLeaderboard_LastScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.lvwLeaderboard_LastScore.Width = 77;
+            // 
+            // lvwLeaderboard_HighScore
+            // 
+            this.lvwLeaderboard_HighScore.Text = "High Score";
+            this.lvwLeaderboard_HighScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.lvwLeaderboard_HighScore.Width = 77;
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(69, 211);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(199, 21);
+            this.comboBox3.TabIndex = 9;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label10.Location = new System.Drawing.Point(11, 215);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(53, 13);
+            this.label10.TabIndex = 8;
+            this.label10.Text = "Mission:";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(69, 27);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(199, 21);
+            this.comboBox1.TabIndex = 5;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(347, 27);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(199, 21);
+            this.comboBox2.TabIndex = 7;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label8.Location = new System.Drawing.Point(289, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 13);
+            this.label8.TabIndex = 6;
+            this.label8.Text = "Player:";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.label9.Location = new System.Drawing.Point(11, 31);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(40, 13);
+            this.label9.TabIndex = 4;
+            this.label9.Text = "Tribe:";
+            // 
             // lblStatus
             // 
             this.lblStatus.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -3067,9 +3737,9 @@
             this.lblStatus.BackColor = System.Drawing.Color.Transparent;
             this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblStatus.ForeColor = System.Drawing.Color.CadetBlue;
-            this.lblStatus.Location = new System.Drawing.Point(16, 564);
+            this.lblStatus.Location = new System.Drawing.Point(16, 550);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(644, 50);
+            this.lblStatus.Size = new System.Drawing.Size(778, 50);
             this.lblStatus.TabIndex = 1;
             this.lblStatus.Text = "Loading...";
             this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -3104,7 +3774,7 @@
             this.lblMapTypeName.BackColor = System.Drawing.Color.Transparent;
             this.lblMapTypeName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMapTypeName.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblMapTypeName.Location = new System.Drawing.Point(322, 26);
+            this.lblMapTypeName.Location = new System.Drawing.Point(456, 26);
             this.lblMapTypeName.Name = "lblMapTypeName";
             this.lblMapTypeName.Size = new System.Drawing.Size(504, 18);
             this.lblMapTypeName.TabIndex = 4;
@@ -3130,7 +3800,7 @@
             this.lblMap.BackColor = System.Drawing.Color.Transparent;
             this.lblMap.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMap.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblMap.Location = new System.Drawing.Point(530, 71);
+            this.lblMap.Location = new System.Drawing.Point(664, 71);
             this.lblMap.Name = "lblMap";
             this.lblMap.Size = new System.Drawing.Size(89, 13);
             this.lblMap.TabIndex = 25;
@@ -3141,20 +3811,11 @@
             this.cboSelectedMap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboSelectedMap.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboSelectedMap.FormattingEnabled = true;
-            this.cboSelectedMap.Location = new System.Drawing.Point(619, 67);
+            this.cboSelectedMap.Location = new System.Drawing.Point(753, 67);
             this.cboSelectedMap.Name = "cboSelectedMap";
             this.cboSelectedMap.Size = new System.Drawing.Size(207, 21);
             this.cboSelectedMap.TabIndex = 26;
             this.cboSelectedMap.SelectedIndexChanged += new System.EventHandler(this.cboSelectedMap_SelectedIndexChanged);
-            // 
-            // lvwTameDetail_Wandering
-            // 
-            this.lvwTameDetail_Wandering.Text = "Wandering";
-            this.lvwTameDetail_Wandering.Width = 70;
-            // 
-            // lvwTameDetail_Mating
-            // 
-            this.lvwTameDetail_Mating.Text = "Mating";
             // 
             // frmViewer
             // 
@@ -3162,7 +3823,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(840, 625);
+            this.ClientSize = new System.Drawing.Size(974, 611);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.lblSubTitle);
             this.Controls.Add(this.lblTitle);
@@ -3176,7 +3837,7 @@
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.tabFeatures);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(850, 375);
+            this.MinimumSize = new System.Drawing.Size(950, 375);
             this.Name = "frmViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARK Savegame Visualiser";
@@ -3233,6 +3894,12 @@
             this.tpgItemList.PerformLayout();
             this.pnlFilterSearch.ResumeLayout(false);
             this.pnlFilterSearch.PerformLayout();
+            this.tpgLocalProfile.ResumeLayout(false);
+            this.tpgLocalProfile.PerformLayout();
+            this.pnlUploadedStats.ResumeLayout(false);
+            this.pnlUploadedStats.PerformLayout();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3445,7 +4112,6 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Label lblMap;
         private System.Windows.Forms.ComboBox cboSelectedMap;
-        private System.Windows.Forms.Button btnMissionScoreboard;
         private System.Windows.Forms.ColumnHeader lvwDroppedItems_Bp;
         private System.Windows.Forms.ColumnHeader lvwItemList_BP;
         private System.Windows.Forms.CheckBox chkDroppedBlueprints;
@@ -3506,6 +4172,80 @@
         private System.Windows.Forms.ToolStripMenuItem mnuContext_Players;
         private System.Windows.Forms.ColumnHeader lvwTameDetail_Wandering;
         private System.Windows.Forms.ColumnHeader lvwTameDetail_Mating;
+        private System.Windows.Forms.TabPage tpgLocalProfile;
+        private System.Windows.Forms.Label lblUploadedCharacters;
+        private System.Windows.Forms.ListView lvwUploadedCharacters;
+        private System.Windows.Forms.ColumnHeader columnHeader37;
+        private System.Windows.Forms.ColumnHeader columnHeader39;
+        private System.Windows.Forms.ColumnHeader columnHeader40;
+        private System.Windows.Forms.ColumnHeader columnHeader43;
+        private System.Windows.Forms.ColumnHeader columnHeader44;
+        private System.Windows.Forms.ColumnHeader columnHeader45;
+        private System.Windows.Forms.ColumnHeader columnHeader46;
+        private System.Windows.Forms.ColumnHeader columnHeader47;
+        private System.Windows.Forms.ColumnHeader columnHeader48;
+        private System.Windows.Forms.ColumnHeader columnHeader49;
+        private System.Windows.Forms.ColumnHeader columnHeader50;
+        private System.Windows.Forms.ColumnHeader columnHeader51;
+        private System.Windows.Forms.ColumnHeader columnHeader52;
+        private System.Windows.Forms.ListView lvwUploadedTames;
+        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader columnHeader6;
+        private System.Windows.Forms.ColumnHeader columnHeader7;
+        private System.Windows.Forms.ColumnHeader columnHeader10;
+        private System.Windows.Forms.ColumnHeader columnHeader11;
+        private System.Windows.Forms.ColumnHeader columnHeader12;
+        private System.Windows.Forms.ColumnHeader columnHeader13;
+        private System.Windows.Forms.ColumnHeader columnHeader14;
+        private System.Windows.Forms.ColumnHeader columnHeader15;
+        private System.Windows.Forms.ColumnHeader columnHeader16;
+        private System.Windows.Forms.ColumnHeader columnHeader17;
+        private System.Windows.Forms.ColumnHeader columnHeader20;
+        private System.Windows.Forms.ColumnHeader columnHeader21;
+        private System.Windows.Forms.ColumnHeader columnHeader23;
+        private System.Windows.Forms.ColumnHeader columnHeader24;
+        private System.Windows.Forms.ColumnHeader columnHeader25;
+        private System.Windows.Forms.ColumnHeader columnHeader26;
+        private System.Windows.Forms.ColumnHeader columnHeader27;
+        private System.Windows.Forms.ColumnHeader columnHeader28;
+        private System.Windows.Forms.ColumnHeader columnHeader29;
+        private System.Windows.Forms.ColumnHeader columnHeader30;
+        private System.Windows.Forms.ColumnHeader columnHeader33;
+        private System.Windows.Forms.ColumnHeader columnHeader34;
+        private System.Windows.Forms.Label lblUploadedTames;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblUploadedItems;
+        private System.Windows.Forms.ListView lvwUploadedItems;
+        private System.Windows.Forms.ColumnHeader columnHeader8;
+        private System.Windows.Forms.ColumnHeader columnHeader9;
+        private System.Windows.Forms.ColumnHeader columnHeader18;
+        private System.Windows.Forms.ColumnHeader columnHeader19;
+        private System.Windows.Forms.ColumnHeader columnHeader22;
+        private System.Windows.Forms.Panel pnlUploadedStats;
+        private System.Windows.Forms.Label lblUploadedStats;
+        private System.Windows.Forms.RadioButton optUploadedStatsTamed;
+        private System.Windows.Forms.RadioButton optUploadedStatsBase;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.ListView lvwLeaderboard;
+        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ColumnHeader lvwLeaderboard_Mission;
+        private System.Windows.Forms.ColumnHeader lvwLeaderboard_Tribe;
+        private System.Windows.Forms.ColumnHeader lvwLeaderboard_Player;
+        private System.Windows.Forms.ColumnHeader lvwLeaderboard_LastScore;
+        private System.Windows.Forms.ColumnHeader lvwLeaderboard_HighScore;
+        private System.Windows.Forms.ListView listView4;
+        private System.Windows.Forms.ColumnHeader columnHeader32;
+        private System.Windows.Forms.ColumnHeader columnHeader35;
+        private System.Windows.Forms.ColumnHeader columnHeader36;
     }
 }
 

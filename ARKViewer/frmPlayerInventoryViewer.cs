@@ -111,9 +111,16 @@ namespace ARKViewer
                     {
                         if (!invItem.IsEngram)
                         {
-                            string qualityName = invItem.Quality;
+                            string qualityName = "";
                             Color backColor = SystemColors.Window;
                             Color foreColor = SystemColors.WindowText;
+                            if (invItem.Rating.HasValue)
+                            {
+                                var itemQuality = Program.GetQualityByRating(invItem.Rating.Value);
+                                qualityName = itemQuality.QualityName;
+                                backColor = itemQuality.QualityColor;
+                                foreColor = Program.IdealTextColor(backColor);
+                            }
 
                             string craftedBy = "";
                             if (invItem.CraftedByPlayer != null && invItem.CraftedByPlayer.Length > 0)
@@ -127,7 +134,7 @@ namespace ARKViewer
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
-                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
+                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.Value.ToString() : "");
                             newItem.SubItems.Add(craftedBy);
                             newItem.SubItems.Add(invItem.Quantity.ToString());
                             newItem.ImageIndex = itemIcon - 1;
@@ -201,9 +208,16 @@ namespace ARKViewer
                         if (!invItem.IsEngram)
                         {
 
-                            string qualityName = invItem.Quality;
+                            string qualityName = "";
                             Color backColor = SystemColors.Window;
                             Color foreColor = SystemColors.WindowText;
+                            if (invItem.Rating.HasValue)
+                            {
+                                var itemQuality = Program.GetQualityByRating(invItem.Rating.Value);
+                                qualityName = itemQuality.QualityName;
+                                backColor = itemQuality.QualityColor;
+                                foreColor = Program.IdealTextColor(backColor);
+                            }
 
                             string craftedBy = "";
                             if (invItem.CraftedByPlayer != null && invItem.CraftedByPlayer.Length > 0)
@@ -217,7 +231,7 @@ namespace ARKViewer
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
-                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
+                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.Value.ToString() : "");
                             newItem.SubItems.Add(craftedBy);
 
                             newItem.SubItems.Add(creatureName);
@@ -283,10 +297,16 @@ namespace ARKViewer
                     {
                         if (!invItem.IsEngram)
                         {
-
-                            string qualityName = invItem.Quality;
+                            string qualityName = "";
                             Color backColor = SystemColors.Window;
                             Color foreColor = SystemColors.WindowText;
+                            if (invItem.Rating.HasValue)
+                            {
+                                var itemQuality = Program.GetQualityByRating(invItem.Rating.Value);
+                                qualityName = itemQuality.QualityName;
+                                backColor = itemQuality.QualityColor;
+                                foreColor = Program.IdealTextColor(backColor);
+                            }
 
                             string craftedBy = "";
                             if (invItem.CraftedByPlayer != null && invItem.CraftedByPlayer.Length > 0)
@@ -302,7 +322,13 @@ namespace ARKViewer
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
-                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
+                            var test = invItem.Rating.HasValue ? invItem.Rating.Value.ToString() : "";
+                            if(test == "NaN")
+                            {
+
+                            }
+
+                            newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.Value.ToString() : "");
                             newItem.SubItems.Add(craftedBy);
                             newItem.SubItems.Add(containerName);
                             newItem.SubItems.Add(container.Latitude.GetValueOrDefault(0).ToString("0.00"));

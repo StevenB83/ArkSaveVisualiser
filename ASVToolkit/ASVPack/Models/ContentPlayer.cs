@@ -43,6 +43,78 @@ namespace ASVPack.Models
 
         }
 
+        public ContentPlayer(GameObject playerObject)
+        {
+            var playerData = (StructPropertyList)playerObject.GetTypedProperty<PropertyStruct>("MyData").Value;
+
+
+            HasGameFile = true;
+            Id = playerData.GetPropertyValue<long>("PlayerDataID");
+
+            StructUniqueNetIdRepl netId = (StructUniqueNetIdRepl)playerData.GetTypedProperty<PropertyStruct>("UniqueID")?.Value;
+            NetworkId = netId == null ? "" : netId.NetId;
+            Name = playerData.GetPropertyValue<string>("PlayerName") ?? "Unknown";
+            CharacterName = Name;
+            TargetingTeam = playerData.GetPropertyValue<int>("TribeId");
+            LastTimeInGame = playerData.GetPropertyValue<double>("LoginTime");
+
+            var characterConfig = playerData.GetTypedProperty<PropertyStruct>("MyPlayerCharacterConfig");
+            if (characterConfig != null)
+            {
+                var playerConfig = (StructPropertyList)characterConfig.Value;
+                CharacterName = playerConfig.GetPropertyValue<string>("PlayerCharacterName") ?? Name;
+                Gender = playerConfig.GetPropertyValue<bool>("bIsFemale") ? "Female" : "Male";
+            }
+
+            X = 0;
+            Y = 0;
+            Z = 0;
+
+            var characterStats = playerData.GetTypedProperty<PropertyStruct>("MyPersistentCharacterStats");
+            if (characterStats != null)
+            {
+                var playerStatus = (StructPropertyList)characterStats.Value;
+
+                Level = playerStatus.GetPropertyValue<short>("CharacterStatusComponent_ExtraCharacterLevel") + 1;
+                Stats = new byte[12];
+                for (var i = 0; i < Stats.Length; i++)
+                {
+                    var pointValue = playerStatus.GetTypedProperty<PropertyByte>("CharacterStatusComponent_NumberOfLevelUpPointsApplied", i);
+                    Stats[i] = pointValue == null ? (byte)0 : pointValue.Value.ByteValue;
+                }
+
+            }
+
+            if (playerData.HasAnyProperty("LatestMissionScores"))
+            {
+                var missionScores = playerData.GetTypedProperty<PropertyArray>("LatestMissionScores");
+                if (missionScores != null)
+                {
+
+                    foreach (StructPropertyList propertyList in (ArkArrayStruct)missionScores.Value)
+                    {
+                        var bestScore = (StructPropertyList)propertyList.GetTypedProperty<PropertyStruct>("BestScore").Value;
+
+                        var newScore = new ContentMissionScore()
+                        {
+                            FullTag = bestScore.GetTypedProperty<PropertyName>("MissionTag").Value.Name
+                        };
+
+                        float floatValue = bestScore.GetPropertyValue<float>("FloatValue");
+                        int intValue = bestScore.GetPropertyValue<int>("IntValue");
+
+                        string stringScore = floatValue.ToString($"f{intValue}");
+                        decimal.TryParse(stringScore, out decimal highScore);
+                        newScore.HighScore = (decimal)highScore;
+                        newScore.FullTag = newScore.FullTag.Substring(newScore.MissionTag.LastIndexOf(".") + 1);
+
+                        MissionScores.Add(newScore);
+                    }
+                }
+
+            }
+        }
+
         public ContentPlayer(ArkProfile playerProfile)
         {
             var playerData = (StructPropertyList)playerProfile.GetTypedProperty<PropertyStruct>("MyData").Value;

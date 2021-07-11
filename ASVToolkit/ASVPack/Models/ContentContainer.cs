@@ -61,6 +61,7 @@ namespace ASVPack.Models
         [DataMember] public List<ContentWildCreature> WildCreatures { get; set; } = new List<ContentWildCreature>();
         [DataMember] public List<ContentTribe> Tribes { get; set; } = new List<ContentTribe>();
         [DataMember] public List<ContentDroppedItem> DroppedItems { get; set; } = new List<ContentDroppedItem>();
+        [DataMember] public ContentLocalProfile LocalProfile { get; set; } = new ContentLocalProfile();
         [DataMember] public DateTime GameSaveTime { get; set; } = new DateTime();
         [DataMember] public float GameSeconds { get; set; } = 0;
 
@@ -76,14 +77,18 @@ namespace ASVPack.Models
 
         }
 
-        public void LoadSaveGame(string fileName)
+        public void LoadSaveGame(string saveFilename, string localProfileFilename)
         {
+            
+
+
+
             logWriter.Trace("BEGIN LoadSaveGame()");
 
 
-            if (!File.Exists(fileName))
+            if (!File.Exists(saveFilename))
             {
-                logWriter.Error($"LoadSaveGame failed - unable to find file: {fileName}");
+                logWriter.Error($"LoadSaveGame failed - unable to find file: {saveFilename}");
                 throw new FileNotFoundException();
             }
 
@@ -91,19 +96,33 @@ namespace ASVPack.Models
             LoadDefaults();
 
             long startTicks = DateTime.Now.Ticks;
+
+            if (localProfileFilename.Length > 0 && File.Exists(localProfileFilename))
+            {
+                using (Stream streamProfile = new FileStream(localProfileFilename, FileMode.Open))
+                {
+                    using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
+                    {
+                        ArkLocalProfile arkProfile = new ArkLocalProfile();
+                        arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(true).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+                        LocalProfile = new ContentLocalProfile(arkProfile);
+                    }
+                }
+
+            }
+
+
             try
             {
                 List<ContentTribe> tribeContentList = new List<ContentTribe>();
 
                 GameObjectContainer objectContainer = null;
-                GameSaveTime = new FileInfo(fileName).LastWriteTimeUtc.ToLocalTime();
+                GameSaveTime = new FileInfo(saveFilename).LastWriteTimeUtc.ToLocalTime();
 
 
+                logWriter.Debug($"Reading game save data: {saveFilename}");
 
-
-                logWriter.Debug($"Reading game save data: {fileName}");
-
-                using (Stream stream = new MemoryStream(File.ReadAllBytes(fileName)))
+                using (Stream stream = new MemoryStream(File.ReadAllBytes(saveFilename)))
                 {
                     using (ArkArchive archive = new ArkArchive(stream))
                     {
@@ -139,9 +158,8 @@ namespace ASVPack.Models
                             GameSeconds = arkSavegame.GameTime;
                         }
 
-
                         //get map name from .ark file data
-                        logWriter.Debug($"Reading map name from: {fileName}");
+                        logWriter.Debug($"Reading map name from: {saveFilename}");
                         MapName = arkSavegame.DataFiles[0];
                         logWriter.Debug($"Map name returned: {MapName}");
                         latlonCalcs.TryGetValue(MapName.ToLower(), out mapLatLonCalcs);
@@ -154,7 +172,7 @@ namespace ASVPack.Models
 
 
 
-                        var filePath = Path.GetDirectoryName(fileName);
+                        var filePath = Path.GetDirectoryName(saveFilename);
                         long profileStart = DateTime.Now.Ticks;
                         logWriter.Debug($"Reading .arkprofile(s)");
                         ConcurrentBag<ContentPlayer> fileProfiles = new ConcurrentBag<ContentPlayer>();
@@ -202,6 +220,21 @@ namespace ASVPack.Models
 
 
                         ConcurrentBag<ContentTribe> fileTribes = new ConcurrentBag<ContentTribe>();
+                        //add fake tribes for abandoned and unclaimed
+                        fileTribes.Add(new ContentTribe()
+                        {
+                            IsSolo = true,
+                            TribeId = 2_000_000_000,
+                            TribeName = "[ASV Unclaimed]"
+                        });
+
+                        fileTribes.Add(new ContentTribe()
+                        {
+                            IsSolo = true,
+                            TribeId = int.MinValue,
+                            TribeName = "[ASV Abandoned]"
+                        });
+
                         long tribeStart = DateTime.Now.Ticks;
                         logWriter.Debug($"Reading .arktribe(s)");
 
@@ -239,20 +272,7 @@ namespace ASVPack.Models
 
                         });
 
-                        //add fake tribes for abandoned and unclaimed
-                        fileTribes.Add(new ContentTribe()
-                        {
-                            IsSolo = true,
-                            TribeId = 2_000_000_000,
-                            TribeName = "[ASV Unclaimed]"
-                        });
 
-                        fileTribes.Add(new ContentTribe()
-                        {
-                            IsSolo = true,
-                            TribeId = int.MinValue,
-                            TribeName = "[ASV Abandoned]"
-                        });
 
 
                         long tribeEnd = DateTime.Now.Ticks;
@@ -815,8 +835,37 @@ namespace ASVPack.Models
                         logWriter.Info($"Tames loaded in: {tameLoadTime.ToString(@"mm\:ss")}.");
 
                         //TODO:// add unclaimed babies, with living parent belonging to tribe
+                        var unclaimedTribe = fileTribes.First(x => x.TribeId == int.MinValue);
+                        var unclaimedBabies = unclaimedTribe.Tames.Where(x => x.IsBaby).ToList();
+                        if(unclaimedBabies!=null && unclaimedBabies.Count > 0)
+                        {
+                            foreach(var baby in unclaimedBabies)
+                            {
+                                if (baby.MotherId.HasValue)
+                                {
+                                    objectContainer.TryGetValue((int)baby.MotherId.Value, out GameObject babyMamma);
 
+                                    if (babyMamma != null)
+                                    {
+                                        //find mothers tribe
+                                        var mammaTribe = fileTribes.FirstOrDefault(x => x.TribeId == babyMamma.GetPropertyValue<int>("TargetingTeam"));
+                                        if (mammaTribe != null)
+                                        {
+                                            baby.TargetingTeam = mammaTribe.TribeId;
 
+                                            //add to mammaTribe - prepend [Unclaimed] 
+                                            baby.Name = $"[Unclaimed] {baby.Name}";
+                                            mammaTribe.Tames.Add(baby);
+
+                                            //remove from unclaimed tribe
+                                            unclaimedTribe.Tames.ToList().Remove(baby);
+                                        }
+
+                                    }
+
+                                }
+                            }
+                        }
 
                         //structures
                         logWriter.Debug($"Populating player structure inventories");

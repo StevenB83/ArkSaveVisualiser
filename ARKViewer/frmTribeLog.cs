@@ -216,11 +216,83 @@ namespace ARKViewer
 
         private void lvwLog_ColumnClick(object sender, ColumnClickEventArgs e)
         {
+            // Get the new sorting column.
+            ColumnHeader new_sorting_column = lvwLog.Columns[e.Column];
 
+            // Figure out the new sorting order.
+            System.Windows.Forms.SortOrder sort_order;
+            if (SortingColumn_Markers == null)
+            {
+                // New column. Sort ascending.
+                sort_order = SortOrder.Ascending;
+            }
+            else
+            {
+                // See if this is the same column.
+                if (new_sorting_column == SortingColumn_Markers)
+                {
+                    // Same column. Switch the sort order.
+                    if (SortingColumn_Markers.Text.StartsWith("> "))
+                    {
+                        sort_order = SortOrder.Descending;
+                    }
+                    else
+                    {
+                        sort_order = SortOrder.Ascending;
+                    }
+                }
+                else
+                {
+                    // New column. Sort ascending.
+                    sort_order = SortOrder.Ascending;
+                }
+
+                // Remove the old sort indicator.
+                SortingColumn_Markers.Text = SortingColumn_Markers.Text.Substring(2);
+            }
+
+            // Display the new sort order.
+            SortingColumn_Markers = new_sorting_column;
+            if (sort_order == SortOrder.Ascending)
+            {
+                SortingColumn_Markers.Text = "> " + SortingColumn_Markers.Text;
+            }
+            else
+            {
+                SortingColumn_Markers.Text = "< " + SortingColumn_Markers.Text;
+            }
+
+            // Create a comparer.
+            lvwLog.ListViewItemSorter =
+                new ListViewComparer(e.Column, sort_order);
+
+            // Sort.
+            lvwLog.Sort();
         }
 
         private void btnSettings_Click(object sender, EventArgs e)
         {
+            frmTribeLogColourMap colourEditor = null;
+
+            //colour settings
+            if (lvwLog.SelectedItems.Count != 0)
+            {
+                ListViewItem selectedItem = lvwLog.SelectedItems[0];
+                Color standardColor = (Color)selectedItem.SubItems[1].Tag;
+                Color overrideColor = selectedItem.SubItems[1].ForeColor;
+                colourEditor = new frmTribeLogColourMap(lvwLog.BackColor, lvwLog.ForeColor, standardColor, overrideColor);
+                
+            }
+            else
+            {
+                colourEditor = new frmTribeLogColourMap(lvwLog.BackColor, lvwLog.ForeColor);
+            }
+            colourEditor.Owner = this;
+
+            if (colourEditor.ShowDialog() == DialogResult.OK)
+            {
+                LoadLog();
+            }
 
         }
 

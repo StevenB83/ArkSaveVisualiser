@@ -112,12 +112,24 @@ namespace ARKViewer
 
                     if (itemName.ToLower().Contains(txtFilter.Text.ToLower()) || categoryName.ToLower().Contains(txtFilter.Text.ToLower()))
                     {
+                        string qualityName = "";
+                        Color backColor = SystemColors.Window;
+                        Color foreColor = SystemColors.WindowText;
+                        if (invItem.Rating.HasValue)
+                        {
+                            var itemQuality = Program.GetQualityByRating(invItem.Rating.Value);
+                            qualityName = itemQuality.QualityName;
+                            backColor = itemQuality.QualityColor;
+                            foreColor = Program.IdealTextColor(backColor);
+                        }
+
                         if (!invItem.IsEngram)
                         {
                             ListViewItem newItem = new ListViewItem(itemName);
-
+                            newItem.BackColor = backColor;
+                            newItem.ForeColor = foreColor;
                             newItem.SubItems.Add(categoryName);
-                            newItem.SubItems.Add(invItem.Quality);
+                            newItem.SubItems.Add(qualityName);
                             newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.ToString() : "");
                             newItem.SubItems.Add(invItem.Quantity.ToString());
 

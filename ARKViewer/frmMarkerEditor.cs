@@ -132,31 +132,109 @@ namespace ARKViewer
         }
 
 
-
         private void txtName_Validating(object sender, CancelEventArgs e)
         {
+            bool nameExists = markerList.Count(m => m.Map == selectedMap && m.Name.ToLower() == txtName.Text.ToLower()) > 0;
+
+            if (nameExists)
+            {
+                if (EditingMarker != null)
+                {
+                    nameExists = EditingMarker?.Name.ToLower() != txtName.Text;
+
+                }
+
+            }
+
+            if (nameExists)
+            {
+                MessageBox.Show("Marker name is already in use for this map.\n\nPlease use a different marker name.", "Validation Failed", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+
+            e.Cancel = nameExists;
 
         }
 
         private void pnlBorderColour_Click(object sender, EventArgs e)
         {
-
+            colorDialog1.Color = pnlBorderColour.BackColor;
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pnlBorderColour.BackColor = colorDialog1.Color;
+            }
         }
 
         private void pnlBackgroundColour_Click(object sender, EventArgs e)
         {
-
+            colorDialog1.Color = pnlBackgroundColour.BackColor;
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pnlBackgroundColour.BackColor = colorDialog1.Color;
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            EditingMarker.Map = selectedMap;
+            EditingMarker.Name = txtName.Text;
+            EditingMarker.Colour = pnlBackgroundColour.BackColor.ToArgb();
+            EditingMarker.BorderColour = pnlBorderColour.BackColor.ToArgb();
+            EditingMarker.BorderWidth = (int)udBorderSize.Value;
+            EditingMarker.Lat = (double)udLat.Value;
+            EditingMarker.Lon = (double)udLon.Value;
 
+            EditingMarker.Image = picIcon.Tag.ToString();
         }
 
         private void picIcon_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog dialog = new OpenFileDialog())
+            {
+                string imageFolder = Path.Combine(AppContext.BaseDirectory, @"images\");
+                if (!Directory.Exists(imageFolder)) Directory.CreateDirectory(imageFolder);
+
+
+                dialog.Filter = "All Supported Images|*.ico;*.png;*.jpg;*.bmp";
+                dialog.Title = "Select Marker Icon";
+                dialog.InitialDirectory = imageFolder;
+
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (Image img = Image.FromFile(dialog.FileName))
+                    {
+                        string fileName = dialog.FileName;
+                        var mapIcon = img.GetThumbnailImage(100, 100, () => { return true; }, IntPtr.Zero);
+                        picIcon.Image = mapIcon;
+
+                        if (Path.GetDirectoryName(fileName) != Path.GetDirectoryName(imageFolder))
+                        {
+                            //not already in image folder, save for future use
+                            var newFilename = Path.GetFileNameWithoutExtension(Path.GetRandomFileName()) + ".png";
+                            fileName = Path.Combine(imageFolder, newFilename);
+                            mapIcon.Save(fileName, System.Drawing.Imaging.ImageFormat.Png);
+                        }
+
+                        var fileNameOnly = Path.GetFileName(fileName);
+                        picIcon.Tag = fileNameOnly;
+
+                    }
+
+
+                }
+
+            }
+        }
+
+        private void udLat_Enter(object sender, EventArgs e)
+        {
 
         }
+
+        private void udLon_Enter(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void frmMarkerEditor_FormClosed(object sender, FormClosedEventArgs e)
         {

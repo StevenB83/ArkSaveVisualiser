@@ -140,7 +140,7 @@ namespace SavegameToolkit
                                 // assume the first object is the creature object
                                 string creatureActorId = creatureObject.Names[0].ToString();
 
-                                if (storedPod.ClassString.Contains("Vivarium_"))
+                                if (storedPod.ClassString.Contains("Vivarium"))
                                 {
                                     //vivarium
                                     creatureObject.IsVivarium = true;
@@ -157,29 +157,41 @@ namespace SavegameToolkit
 
                                 //get parent of cryopod owner inventory
                                 var podParentRef = storedPod.GetPropertyValue<ObjectReference>("OwnerInventory");
-                                var podParent = inventoryContainers.FirstOrDefault(o => o.GetPropertyValue<ObjectReference>("MyInventoryComponent")?.ObjectId == podParentRef.ObjectId);
-
-                                //determine if we need to re-team the podded animal
-                                if (podParent != null)
+                                if (podParentRef != null)
                                 {
-                                    creatureObject.Location = podParent.Location;
+                                    var podParent = inventoryContainers.FirstOrDefault(o => o.GetPropertyValue<ObjectReference>("MyInventoryComponent")?.ObjectId == podParentRef.ObjectId);
 
-                                    int obTeam = creatureObject.GetPropertyValue<int>("TargetingTeam");
-                                    int containerTeam = podParent.GetPropertyValue<int>("TargetingTeam");
-                                    if (obTeam != containerTeam)
+                                    //determine if we need to re-team the podded animal
+                                    if (podParent != null)
                                     {
-                                        creatureObject.Properties.RemoveAt(creatureObject.Properties.FindIndex(i => i.NameString == "TargetingTeam"));
-                                        creatureObject.Properties.Add(new PropertyInt("TargetingTeam", containerTeam));
-
-
-                                        if (creatureObject.HasAnyProperty("TamingTeamID"))
+                                        if (podParent.ClassString.Contains("_Vivarium"))
                                         {
-                                            creatureObject.Properties.RemoveAt(creatureObject.Properties.FindIndex(i => i.NameString == "TamingTeamID"));
-                                            creatureObject.Properties.Add(new PropertyInt("TamingTeamID", containerTeam));
+                                            creatureObject.IsCryo = false;
+                                            creatureObject.IsVivarium = true;
                                         }
 
+                                        creatureObject.Location = podParent.Location;
+
+                                        int obTeam = creatureObject.GetPropertyValue<int>("TargetingTeam");
+                                        int containerTeam = podParent.GetPropertyValue<int>("TargetingTeam");
+                                        if (obTeam != containerTeam)
+                                        {
+                                            creatureObject.Properties.RemoveAt(creatureObject.Properties.FindIndex(i => i.NameString == "TargetingTeam"));
+                                            creatureObject.Properties.Add(new PropertyInt("TargetingTeam", containerTeam));
+
+
+                                            if (creatureObject.HasAnyProperty("TamingTeamID"))
+                                            {
+                                                creatureObject.Properties.RemoveAt(creatureObject.Properties.FindIndex(i => i.NameString == "TamingTeamID"));
+                                                creatureObject.Properties.Add(new PropertyInt("TamingTeamID", containerTeam));
+                                            }
+
+                                        }
                                     }
                                 }
+
+
+                                
 
                                 cbStored.Add(new Tuple<GameObject, GameObject>(creatureObject, statusObject));
 
