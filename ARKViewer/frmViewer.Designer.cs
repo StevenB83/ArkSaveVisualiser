@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewer));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.lvwWildDetail = new System.Windows.Forms.ListView();
             this.lvwWildDetail_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -305,9 +305,9 @@
             this.lblUploadedStats = new System.Windows.Forms.Label();
             this.optUploadedStatsTamed = new System.Windows.Forms.RadioButton();
             this.optUploadedStatsBase = new System.Windows.Forms.RadioButton();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.lblUploadedCountItems = new System.Windows.Forms.Label();
+            this.lblUploadedCountTames = new System.Windows.Forms.Label();
+            this.lblUploadedCountCharacters = new System.Windows.Forms.Label();
             this.lblUploadedItems = new System.Windows.Forms.Label();
             this.lvwUploadedItems = new System.Windows.Forms.ListView();
             this.columnHeader8 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -357,23 +357,19 @@
             this.columnHeader30 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader33 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader34 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.listView4 = new System.Windows.Forms.ListView();
+            this.tpgLeaderboard = new System.Windows.Forms.TabPage();
+            this.lvwLeaderboardSummary = new System.Windows.Forms.ListView();
             this.columnHeader32 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader35 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader36 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwLeaderboard = new System.Windows.Forms.ListView();
-            this.lvwLeaderboard_Mission = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwLeaderboard_Tribe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwLeaderboard_Player = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwLeaderboard_LastScore = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwLeaderboard_HighScore = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
+            this.lvwLeaderboard_Score = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cboLeaderboardMission = new System.Windows.Forms.ComboBox();
+            this.lblLeaderboardMission = new System.Windows.Forms.Label();
+            this.cboLeaderboardTribe = new System.Windows.Forms.ComboBox();
+            this.lblLeaderboardTribe = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblSubTitle = new System.Windows.Forms.Label();
@@ -382,6 +378,7 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMap = new System.Windows.Forms.Label();
             this.cboSelectedMap = new System.Windows.Forms.ComboBox();
+            this.lvwLeaderboard_Mission = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mnuContext.SuspendLayout();
             this.tabFeatures.SuspendLayout();
             this.tpgWild.SuspendLayout();
@@ -416,7 +413,7 @@
             this.pnlFilterSearch.SuspendLayout();
             this.tpgLocalProfile.SuspendLayout();
             this.pnlUploadedStats.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tpgLeaderboard.SuspendLayout();
             this.SuspendLayout();
             // 
             // lvwWildDetail
@@ -965,7 +962,7 @@
             this.tabFeatures.Controls.Add(this.tpgDroppedItems);
             this.tabFeatures.Controls.Add(this.tpgItemList);
             this.tabFeatures.Controls.Add(this.tpgLocalProfile);
-            this.tabFeatures.Controls.Add(this.tabPage1);
+            this.tabFeatures.Controls.Add(this.tpgLeaderboard);
             this.tabFeatures.HotTrack = true;
             this.tabFeatures.Location = new System.Drawing.Point(9, 69);
             this.tabFeatures.Name = "tabFeatures";
@@ -1690,6 +1687,7 @@
             this.optStatsTamed.TabIndex = 2;
             this.optStatsTamed.Text = "Tamed";
             this.optStatsTamed.UseVisualStyleBackColor = true;
+            this.optStatsTamed.CheckedChanged += new System.EventHandler(this.optStatsTamed_CheckedChanged);
             // 
             // optStatsBase
             // 
@@ -2072,22 +2070,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeTames.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea4.Name = "ChartArea1";
-            this.chartTribeTames.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartTribeTames.Legends.Add(legend4);
+            chartArea1.Name = "ChartArea1";
+            this.chartTribeTames.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartTribeTames.Legends.Add(legend1);
             this.chartTribeTames.Location = new System.Drawing.Point(4, 3);
             this.chartTribeTames.Name = "chartTribeTames";
-            series4.ChartArea = "ChartArea1";
-            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartTribeTames.Series.Add(series4);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartTribeTames.Series.Add(series1);
             this.chartTribeTames.Size = new System.Drawing.Size(278, 147);
             this.chartTribeTames.TabIndex = 8;
             this.chartTribeTames.Text = "Tribe Players";
-            title4.Name = "Tribe Players";
-            this.chartTribeTames.Titles.Add(title4);
+            title1.Name = "Tribe Players";
+            this.chartTribeTames.Titles.Add(title1);
             // 
             // pnlChart2
             // 
@@ -2149,22 +2147,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeStructures.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea5.Name = "ChartArea1";
-            this.chartTribeStructures.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chartTribeStructures.Legends.Add(legend5);
+            chartArea2.Name = "ChartArea1";
+            this.chartTribeStructures.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartTribeStructures.Legends.Add(legend2);
             this.chartTribeStructures.Location = new System.Drawing.Point(4, 3);
             this.chartTribeStructures.Name = "chartTribeStructures";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chartTribeStructures.Series.Add(series5);
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartTribeStructures.Series.Add(series2);
             this.chartTribeStructures.Size = new System.Drawing.Size(277, 147);
             this.chartTribeStructures.TabIndex = 8;
             this.chartTribeStructures.Text = "Tribe Players";
-            title5.Name = "Tribe Players";
-            this.chartTribeStructures.Titles.Add(title5);
+            title2.Name = "Tribe Players";
+            this.chartTribeStructures.Titles.Add(title2);
             // 
             // pnlChart1
             // 
@@ -2226,22 +2224,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribePlayers.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea6.Name = "ChartArea1";
-            this.chartTribePlayers.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chartTribePlayers.Legends.Add(legend6);
+            chartArea3.Name = "ChartArea1";
+            this.chartTribePlayers.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartTribePlayers.Legends.Add(legend3);
             this.chartTribePlayers.Location = new System.Drawing.Point(4, 3);
             this.chartTribePlayers.Name = "chartTribePlayers";
-            series6.ChartArea = "ChartArea1";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series6.Legend = "Legend1";
-            series6.Name = "Series1";
-            this.chartTribePlayers.Series.Add(series6);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartTribePlayers.Series.Add(series3);
             this.chartTribePlayers.Size = new System.Drawing.Size(277, 147);
             this.chartTribePlayers.TabIndex = 8;
             this.chartTribePlayers.Text = "Tribe Players";
-            title6.Name = "Tribe Players";
-            this.chartTribePlayers.Titles.Add(title6);
+            title3.Name = "Tribe Players";
+            this.chartTribePlayers.Titles.Add(title3);
             // 
             // chkTribeStructures
             // 
@@ -3134,9 +3132,9 @@
             // tpgLocalProfile
             // 
             this.tpgLocalProfile.Controls.Add(this.pnlUploadedStats);
-            this.tpgLocalProfile.Controls.Add(this.label6);
-            this.tpgLocalProfile.Controls.Add(this.label5);
-            this.tpgLocalProfile.Controls.Add(this.label4);
+            this.tpgLocalProfile.Controls.Add(this.lblUploadedCountItems);
+            this.tpgLocalProfile.Controls.Add(this.lblUploadedCountTames);
+            this.tpgLocalProfile.Controls.Add(this.lblUploadedCountCharacters);
             this.tpgLocalProfile.Controls.Add(this.lblUploadedItems);
             this.tpgLocalProfile.Controls.Add(this.lvwUploadedItems);
             this.tpgLocalProfile.Controls.Add(this.lblUploadedTames);
@@ -3157,8 +3155,7 @@
             this.pnlUploadedStats.Controls.Add(this.lblUploadedStats);
             this.pnlUploadedStats.Controls.Add(this.optUploadedStatsTamed);
             this.pnlUploadedStats.Controls.Add(this.optUploadedStatsBase);
-            this.pnlUploadedStats.Enabled = false;
-            this.pnlUploadedStats.Location = new System.Drawing.Point(13, 246);
+            this.pnlUploadedStats.Location = new System.Drawing.Point(13, 274);
             this.pnlUploadedStats.Name = "pnlUploadedStats";
             this.pnlUploadedStats.Size = new System.Drawing.Size(175, 34);
             this.pnlUploadedStats.TabIndex = 17;
@@ -3193,53 +3190,53 @@
             this.optUploadedStatsBase.TabStop = true;
             this.optUploadedStatsBase.Text = "Base";
             this.optUploadedStatsBase.UseVisualStyleBackColor = true;
+            this.optUploadedStatsBase.CheckedChanged += new System.EventHandler(this.optUploadedStatsBase_CheckedChanged);
             // 
-            // label6
+            // lblUploadedCountItems
             // 
-            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label6.BackColor = System.Drawing.Color.AliceBlue;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label6.Location = new System.Drawing.Point(824, 421);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(108, 21);
-            this.label6.TabIndex = 16;
-            this.label6.Text = "Count: 0";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblUploadedCountItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUploadedCountItems.BackColor = System.Drawing.Color.AliceBlue;
+            this.lblUploadedCountItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUploadedCountItems.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblUploadedCountItems.Location = new System.Drawing.Point(824, 421);
+            this.lblUploadedCountItems.Name = "lblUploadedCountItems";
+            this.lblUploadedCountItems.Size = new System.Drawing.Size(108, 21);
+            this.lblUploadedCountItems.TabIndex = 16;
+            this.lblUploadedCountItems.Text = "Count: 0";
+            this.lblUploadedCountItems.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label5
+            // lblUploadedCountTames
             // 
-            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label5.BackColor = System.Drawing.Color.AliceBlue;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label5.Location = new System.Drawing.Point(824, 246);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 21);
-            this.label5.TabIndex = 15;
-            this.label5.Text = "Count: 0";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblUploadedCountTames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUploadedCountTames.BackColor = System.Drawing.Color.AliceBlue;
+            this.lblUploadedCountTames.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUploadedCountTames.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblUploadedCountTames.Location = new System.Drawing.Point(824, 271);
+            this.lblUploadedCountTames.Name = "lblUploadedCountTames";
+            this.lblUploadedCountTames.Size = new System.Drawing.Size(108, 21);
+            this.lblUploadedCountTames.TabIndex = 15;
+            this.lblUploadedCountTames.Text = "Count: 0";
+            this.lblUploadedCountTames.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label4
+            // lblUploadedCountCharacters
             // 
-            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label4.BackColor = System.Drawing.Color.AliceBlue;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label4.Location = new System.Drawing.Point(824, 95);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(108, 21);
-            this.label4.TabIndex = 14;
-            this.label4.Text = "Count: 0";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblUploadedCountCharacters.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.lblUploadedCountCharacters.BackColor = System.Drawing.Color.AliceBlue;
+            this.lblUploadedCountCharacters.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblUploadedCountCharacters.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblUploadedCountCharacters.Location = new System.Drawing.Point(824, 126);
+            this.lblUploadedCountCharacters.Name = "lblUploadedCountCharacters";
+            this.lblUploadedCountCharacters.Size = new System.Drawing.Size(108, 21);
+            this.lblUploadedCountCharacters.TabIndex = 14;
+            this.lblUploadedCountCharacters.Text = "Count: 0";
+            this.lblUploadedCountCharacters.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblUploadedItems
             // 
             this.lblUploadedItems.AutoSize = true;
-            this.lblUploadedItems.Enabled = false;
             this.lblUploadedItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUploadedItems.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblUploadedItems.Location = new System.Drawing.Point(10, 292);
+            this.lblUploadedItems.Location = new System.Drawing.Point(10, 311);
             this.lblUploadedItems.Name = "lblUploadedItems";
             this.lblUploadedItems.Size = new System.Drawing.Size(78, 13);
             this.lblUploadedItems.TabIndex = 13;
@@ -3256,16 +3253,16 @@
             this.columnHeader18,
             this.columnHeader19,
             this.columnHeader22});
-            this.lvwUploadedItems.Enabled = false;
             this.lvwUploadedItems.FullRowSelect = true;
             this.lvwUploadedItems.HideSelection = false;
-            this.lvwUploadedItems.Location = new System.Drawing.Point(13, 308);
+            this.lvwUploadedItems.Location = new System.Drawing.Point(13, 327);
             this.lvwUploadedItems.MultiSelect = false;
             this.lvwUploadedItems.Name = "lvwUploadedItems";
-            this.lvwUploadedItems.Size = new System.Drawing.Size(920, 110);
+            this.lvwUploadedItems.Size = new System.Drawing.Size(920, 91);
             this.lvwUploadedItems.TabIndex = 12;
             this.lvwUploadedItems.UseCompatibleStateImageBehavior = false;
             this.lvwUploadedItems.View = System.Windows.Forms.View.Details;
+            this.lvwUploadedItems.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwUploadedItems_ColumnClick);
             // 
             // columnHeader8
             // 
@@ -3293,10 +3290,9 @@
             // lblUploadedTames
             // 
             this.lblUploadedTames.AutoSize = true;
-            this.lblUploadedTames.Enabled = false;
             this.lblUploadedTames.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUploadedTames.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblUploadedTames.Location = new System.Drawing.Point(10, 105);
+            this.lblUploadedTames.Location = new System.Drawing.Point(10, 133);
             this.lblUploadedTames.Name = "lblUploadedTames";
             this.lblUploadedTames.Size = new System.Drawing.Size(102, 13);
             this.lblUploadedTames.TabIndex = 11;
@@ -3305,7 +3301,6 @@
             // lblUploadedCharacters
             // 
             this.lblUploadedCharacters.AutoSize = true;
-            this.lblUploadedCharacters.Enabled = false;
             this.lblUploadedCharacters.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUploadedCharacters.ForeColor = System.Drawing.Color.DarkSlateGray;
             this.lblUploadedCharacters.Location = new System.Drawing.Point(10, 16);
@@ -3333,15 +3328,15 @@
             this.columnHeader51,
             this.columnHeader52});
             this.lvwUploadedCharacters.ContextMenuStrip = this.mnuContext;
-            this.lvwUploadedCharacters.Enabled = false;
             this.lvwUploadedCharacters.FullRowSelect = true;
             this.lvwUploadedCharacters.HideSelection = false;
             this.lvwUploadedCharacters.Location = new System.Drawing.Point(13, 36);
             this.lvwUploadedCharacters.Name = "lvwUploadedCharacters";
-            this.lvwUploadedCharacters.Size = new System.Drawing.Size(919, 56);
+            this.lvwUploadedCharacters.Size = new System.Drawing.Size(919, 87);
             this.lvwUploadedCharacters.TabIndex = 9;
             this.lvwUploadedCharacters.UseCompatibleStateImageBehavior = false;
             this.lvwUploadedCharacters.View = System.Windows.Forms.View.Details;
+            this.lvwUploadedCharacters.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwUploadedCharacters_ColumnClick);
             // 
             // columnHeader37
             // 
@@ -3436,16 +3431,16 @@
             this.columnHeader33,
             this.columnHeader34});
             this.lvwUploadedTames.ContextMenuStrip = this.mnuContext;
-            this.lvwUploadedTames.Enabled = false;
             this.lvwUploadedTames.FullRowSelect = true;
             this.lvwUploadedTames.HideSelection = false;
-            this.lvwUploadedTames.Location = new System.Drawing.Point(13, 124);
+            this.lvwUploadedTames.Location = new System.Drawing.Point(13, 152);
             this.lvwUploadedTames.MultiSelect = false;
             this.lvwUploadedTames.Name = "lvwUploadedTames";
             this.lvwUploadedTames.Size = new System.Drawing.Size(919, 116);
             this.lvwUploadedTames.TabIndex = 8;
             this.lvwUploadedTames.UseCompatibleStateImageBehavior = false;
             this.lvwUploadedTames.View = System.Windows.Forms.View.Details;
+            this.lvwUploadedTames.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwUploadedTames_ColumnClick);
             // 
             // columnHeader1
             // 
@@ -3568,42 +3563,41 @@
             this.columnHeader34.Text = "Rig2";
             this.columnHeader34.Width = 100;
             // 
-            // tabPage1
+            // tpgLeaderboard
             // 
-            this.tabPage1.Controls.Add(this.listView4);
-            this.tabPage1.Controls.Add(this.lvwLeaderboard);
-            this.tabPage1.Controls.Add(this.comboBox3);
-            this.tabPage1.Controls.Add(this.label10);
-            this.tabPage1.Controls.Add(this.comboBox1);
-            this.tabPage1.Controls.Add(this.comboBox2);
-            this.tabPage1.Controls.Add(this.label8);
-            this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(945, 449);
-            this.tabPage1.TabIndex = 8;
-            this.tabPage1.Text = "Leaderboard";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpgLeaderboard.Controls.Add(this.lvwLeaderboardSummary);
+            this.tpgLeaderboard.Controls.Add(this.lvwLeaderboard);
+            this.tpgLeaderboard.Controls.Add(this.cboLeaderboardMission);
+            this.tpgLeaderboard.Controls.Add(this.lblLeaderboardMission);
+            this.tpgLeaderboard.Controls.Add(this.cboLeaderboardTribe);
+            this.tpgLeaderboard.Controls.Add(this.lblLeaderboardTribe);
+            this.tpgLeaderboard.Location = new System.Drawing.Point(4, 22);
+            this.tpgLeaderboard.Name = "tpgLeaderboard";
+            this.tpgLeaderboard.Size = new System.Drawing.Size(945, 449);
+            this.tpgLeaderboard.TabIndex = 8;
+            this.tpgLeaderboard.Text = "Leaderboard";
+            this.tpgLeaderboard.UseVisualStyleBackColor = true;
             // 
-            // listView4
+            // lvwLeaderboardSummary
             // 
-            this.listView4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.lvwLeaderboardSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.listView4.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lvwLeaderboardSummary.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader32,
             this.columnHeader35,
             this.columnHeader36});
-            this.listView4.ContextMenuStrip = this.mnuContext;
-            this.listView4.FullRowSelect = true;
-            this.listView4.HideSelection = false;
-            this.listView4.Location = new System.Drawing.Point(12, 58);
-            this.listView4.MultiSelect = false;
-            this.listView4.Name = "listView4";
-            this.listView4.Size = new System.Drawing.Size(920, 143);
-            this.listView4.TabIndex = 16;
-            this.listView4.UseCompatibleStateImageBehavior = false;
-            this.listView4.View = System.Windows.Forms.View.Details;
+            this.lvwLeaderboardSummary.ContextMenuStrip = this.mnuContext;
+            this.lvwLeaderboardSummary.FullRowSelect = true;
+            this.lvwLeaderboardSummary.HideSelection = false;
+            this.lvwLeaderboardSummary.Location = new System.Drawing.Point(12, 58);
+            this.lvwLeaderboardSummary.MultiSelect = false;
+            this.lvwLeaderboardSummary.Name = "lvwLeaderboardSummary";
+            this.lvwLeaderboardSummary.Size = new System.Drawing.Size(920, 143);
+            this.lvwLeaderboardSummary.TabIndex = 16;
+            this.lvwLeaderboardSummary.UseCompatibleStateImageBehavior = false;
+            this.lvwLeaderboardSummary.View = System.Windows.Forms.View.Details;
+            this.lvwLeaderboardSummary.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwLeaderboardSummary_ColumnClick);
             // 
             // columnHeader32
             // 
@@ -3629,8 +3623,7 @@
             this.lvwLeaderboard_Mission,
             this.lvwLeaderboard_Tribe,
             this.lvwLeaderboard_Player,
-            this.lvwLeaderboard_LastScore,
-            this.lvwLeaderboard_HighScore});
+            this.lvwLeaderboard_Score});
             this.lvwLeaderboard.ContextMenuStrip = this.mnuContext;
             this.lvwLeaderboard.FullRowSelect = true;
             this.lvwLeaderboard.HideSelection = false;
@@ -3641,11 +3634,7 @@
             this.lvwLeaderboard.TabIndex = 15;
             this.lvwLeaderboard.UseCompatibleStateImageBehavior = false;
             this.lvwLeaderboard.View = System.Windows.Forms.View.Details;
-            // 
-            // lvwLeaderboard_Mission
-            // 
-            this.lvwLeaderboard_Mission.Text = "Mission";
-            this.lvwLeaderboard_Mission.Width = 303;
+            this.lvwLeaderboard.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwLeaderboard_ColumnClick);
             // 
             // lvwLeaderboard_Tribe
             // 
@@ -3657,77 +3646,53 @@
             this.lvwLeaderboard_Player.Text = "Player";
             this.lvwLeaderboard_Player.Width = 179;
             // 
-            // lvwLeaderboard_LastScore
+            // lvwLeaderboard_Score
             // 
-            this.lvwLeaderboard_LastScore.Text = "Last Score";
-            this.lvwLeaderboard_LastScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.lvwLeaderboard_LastScore.Width = 77;
+            this.lvwLeaderboard_Score.Text = "Score";
+            this.lvwLeaderboard_Score.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.lvwLeaderboard_Score.Width = 77;
             // 
-            // lvwLeaderboard_HighScore
+            // cboLeaderboardMission
             // 
-            this.lvwLeaderboard_HighScore.Text = "High Score";
-            this.lvwLeaderboard_HighScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.lvwLeaderboard_HighScore.Width = 77;
+            this.cboLeaderboardMission.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLeaderboardMission.FormattingEnabled = true;
+            this.cboLeaderboardMission.Location = new System.Drawing.Point(69, 211);
+            this.cboLeaderboardMission.Name = "cboLeaderboardMission";
+            this.cboLeaderboardMission.Size = new System.Drawing.Size(477, 21);
+            this.cboLeaderboardMission.TabIndex = 9;
+            this.cboLeaderboardMission.SelectedIndexChanged += new System.EventHandler(this.cboLeaderboardMission_SelectedIndexChanged);
             // 
-            // comboBox3
+            // lblLeaderboardMission
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(69, 211);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(199, 21);
-            this.comboBox3.TabIndex = 9;
+            this.lblLeaderboardMission.AutoSize = true;
+            this.lblLeaderboardMission.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLeaderboardMission.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblLeaderboardMission.Location = new System.Drawing.Point(11, 215);
+            this.lblLeaderboardMission.Name = "lblLeaderboardMission";
+            this.lblLeaderboardMission.Size = new System.Drawing.Size(53, 13);
+            this.lblLeaderboardMission.TabIndex = 8;
+            this.lblLeaderboardMission.Text = "Mission:";
             // 
-            // label10
+            // cboLeaderboardTribe
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label10.Location = new System.Drawing.Point(11, 215);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(53, 13);
-            this.label10.TabIndex = 8;
-            this.label10.Text = "Mission:";
+            this.cboLeaderboardTribe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLeaderboardTribe.FormattingEnabled = true;
+            this.cboLeaderboardTribe.Location = new System.Drawing.Point(69, 27);
+            this.cboLeaderboardTribe.Name = "cboLeaderboardTribe";
+            this.cboLeaderboardTribe.Size = new System.Drawing.Size(240, 21);
+            this.cboLeaderboardTribe.TabIndex = 5;
+            this.cboLeaderboardTribe.SelectedIndexChanged += new System.EventHandler(this.cboLeaderboardTribe_SelectedIndexChanged);
             // 
-            // comboBox1
+            // lblLeaderboardTribe
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(69, 27);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(199, 21);
-            this.comboBox1.TabIndex = 5;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(347, 27);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(199, 21);
-            this.comboBox2.TabIndex = 7;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label8.Location = new System.Drawing.Point(289, 31);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 13);
-            this.label8.TabIndex = 6;
-            this.label8.Text = "Player:";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.label9.Location = new System.Drawing.Point(11, 31);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(40, 13);
-            this.label9.TabIndex = 4;
-            this.label9.Text = "Tribe:";
+            this.lblLeaderboardTribe.AutoSize = true;
+            this.lblLeaderboardTribe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLeaderboardTribe.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblLeaderboardTribe.Location = new System.Drawing.Point(11, 31);
+            this.lblLeaderboardTribe.Name = "lblLeaderboardTribe";
+            this.lblLeaderboardTribe.Size = new System.Drawing.Size(40, 13);
+            this.lblLeaderboardTribe.TabIndex = 4;
+            this.lblLeaderboardTribe.Text = "Tribe:";
             // 
             // lblStatus
             // 
@@ -3787,7 +3752,7 @@
             this.lblVersion.BackColor = System.Drawing.Color.Transparent;
             this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblVersion.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblVersion.Location = new System.Drawing.Point(79, 16);
+            this.lblVersion.Location = new System.Drawing.Point(79, 14);
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(32, 16);
             this.lblVersion.TabIndex = 1;
@@ -3816,6 +3781,11 @@
             this.cboSelectedMap.Size = new System.Drawing.Size(207, 21);
             this.cboSelectedMap.TabIndex = 26;
             this.cboSelectedMap.SelectedIndexChanged += new System.EventHandler(this.cboSelectedMap_SelectedIndexChanged);
+            // 
+            // lvwLeaderboard_Mission
+            // 
+            this.lvwLeaderboard_Mission.Text = "Mission";
+            this.lvwLeaderboard_Mission.Width = 350;
             // 
             // frmViewer
             // 
@@ -3898,8 +3868,8 @@
             this.tpgLocalProfile.PerformLayout();
             this.pnlUploadedStats.ResumeLayout(false);
             this.pnlUploadedStats.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
+            this.tpgLeaderboard.ResumeLayout(false);
+            this.tpgLeaderboard.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -4215,9 +4185,9 @@
         private System.Windows.Forms.ColumnHeader columnHeader33;
         private System.Windows.Forms.ColumnHeader columnHeader34;
         private System.Windows.Forms.Label lblUploadedTames;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label lblUploadedCountItems;
+        private System.Windows.Forms.Label lblUploadedCountTames;
+        private System.Windows.Forms.Label lblUploadedCountCharacters;
         private System.Windows.Forms.Label lblUploadedItems;
         private System.Windows.Forms.ListView lvwUploadedItems;
         private System.Windows.Forms.ColumnHeader columnHeader8;
@@ -4229,23 +4199,20 @@
         private System.Windows.Forms.Label lblUploadedStats;
         private System.Windows.Forms.RadioButton optUploadedStatsTamed;
         private System.Windows.Forms.RadioButton optUploadedStatsBase;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tpgLeaderboard;
         private System.Windows.Forms.ListView lvwLeaderboard;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ColumnHeader lvwLeaderboard_Mission;
+        private System.Windows.Forms.ComboBox cboLeaderboardMission;
+        private System.Windows.Forms.Label lblLeaderboardMission;
+        private System.Windows.Forms.ComboBox cboLeaderboardTribe;
+        private System.Windows.Forms.Label lblLeaderboardTribe;
         private System.Windows.Forms.ColumnHeader lvwLeaderboard_Tribe;
         private System.Windows.Forms.ColumnHeader lvwLeaderboard_Player;
-        private System.Windows.Forms.ColumnHeader lvwLeaderboard_LastScore;
-        private System.Windows.Forms.ColumnHeader lvwLeaderboard_HighScore;
-        private System.Windows.Forms.ListView listView4;
+        private System.Windows.Forms.ColumnHeader lvwLeaderboard_Score;
+        private System.Windows.Forms.ListView lvwLeaderboardSummary;
         private System.Windows.Forms.ColumnHeader columnHeader32;
         private System.Windows.Forms.ColumnHeader columnHeader35;
         private System.Windows.Forms.ColumnHeader columnHeader36;
+        private System.Windows.Forms.ColumnHeader lvwLeaderboard_Mission;
     }
 }
 

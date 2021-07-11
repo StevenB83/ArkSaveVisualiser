@@ -661,6 +661,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ASV.ico" />
+    <None Include="Resources\map_none.png" />
+    <None Include="Resources\map_ebenusastrum.png" />
+    <None Include="Resources\map_olympus.png" />
+    <None Include="Resources\map_amissa.png" />
     <None Include="Resources\beacon2.png" />
     <None Include="Resources\blueprints.png" />
     <None Include="Resources\blueprints_unchecked.png" />

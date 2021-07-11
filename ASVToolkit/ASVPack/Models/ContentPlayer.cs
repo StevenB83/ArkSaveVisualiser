@@ -178,7 +178,7 @@ namespace ASVPack.Models
                         string stringScore = floatValue.ToString($"f{intValue}");
                         decimal.TryParse(stringScore, out decimal highScore);
                         newScore.HighScore = (decimal)highScore;
-                        newScore.FullTag = newScore.FullTag.Substring(newScore.MissionTag.LastIndexOf(".") + 1);
+                        newScore.MissionTag = newScore.FullTag.Substring(newScore.MissionTag.LastIndexOf(".") + 1);
 
                         MissionScores.Add(newScore);
                     }

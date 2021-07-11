@@ -98,7 +98,11 @@ namespace ARKViewer
                 { "tiamatprime.ark", "Tiamat Prime"},
                 { "glacius_p.ark", "Glacius"},
                 { "antartika.ark", "Anartika" },
-                { "lostisland.ark", "Lost Island" }
+                { "lostisland.ark", "Lost Island" },
+                { "amissa.ark", "Amissa" },
+                { "olympus.ark", "Olympus" },
+                { "ebenusastrum.ark", "Ebenus Astrum" },
+                { "arkforum_eventmap.ark", "ArkForum Event Map" }
             };
 
         /// <summary>

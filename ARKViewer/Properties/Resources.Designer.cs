@@ -353,6 +353,16 @@ namespace ARKViewer.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap map_amissa {
+            get {
+                object obj = ResourceManager.GetObject("map_amissa", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap map_antartika {
             get {
                 object obj = ResourceManager.GetObject("map_antartika", resourceCulture);
@@ -386,6 +396,16 @@ namespace ARKViewer.Properties {
         internal static System.Drawing.Bitmap map_crystalisles {
             get {
                 object obj = ResourceManager.GetObject("map_crystalisles", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap map_ebenusastrum {
+            get {
+                object obj = ResourceManager.GetObject("map_ebenusastrum", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -456,6 +476,26 @@ namespace ARKViewer.Properties {
         internal static System.Drawing.Bitmap map_lostisland {
             get {
                 object obj = ResourceManager.GetObject("map_lostisland", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap map_none {
+            get {
+                object obj = ResourceManager.GetObject("map_none", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap map_olympus {
+            get {
+                object obj = ResourceManager.GetObject("map_olympus", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

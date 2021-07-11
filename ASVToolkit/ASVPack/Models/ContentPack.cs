@@ -41,6 +41,8 @@ namespace ASVPack.Models
         [DataMember] public List<ContentDroppedItem> DroppedItems { get; set; } = new List<ContentDroppedItem>();
         [DataMember] public List<ContentWildCreature> WildCreatures { get; set; } = new List<ContentWildCreature>();
         [DataMember] public List<ContentTribe> Tribes { get; set; } = new List<ContentTribe>();
+        [DataMember] public ContentLocalProfile LocalProfile { get; set; } = new ContentLocalProfile();
+        [DataMember] public List<ContentLeaderboard> Leaderboards { get; set; } = new List<ContentLeaderboard>();
 
         public List<ContentStructure> OrphanedStructures { get; set; } = new List<ContentStructure>();
         public List<ContentTamedCreature> OrphanedTames { get; set; } = new List<ContentTamedCreature>();
@@ -55,6 +57,7 @@ namespace ASVPack.Models
         decimal FilterLatitude { get; set; } = 50;
         decimal FilterLongitude { get; set; } = 50;
         decimal FilterRadius { get; set; } = 100;
+
 
         ConcurrentBag<ContentInventory> inventoryBag = new ConcurrentBag<ContentInventory>();
 
@@ -123,7 +126,8 @@ namespace ASVPack.Models
             IncludeTamed = includeTamed;
             IncludeWild = includeWild;
             IncludePlayerStructures = includePlayerStructures;
-
+            LocalProfile = container.LocalProfile;
+            Leaderboards = container.Leaderboards;
 
             LoadGameData(container);
 
@@ -162,6 +166,7 @@ namespace ASVPack.Models
                 WildCreatures = loaded.WildCreatures;
                 Tribes = loaded.Tribes;
                 DroppedItems = loaded.DroppedItems;
+                LocalProfile = loaded.LocalProfile;
 
             }
             catch
@@ -697,6 +702,7 @@ namespace ASVPack.Models
             //load content pack from Ark savegame 
             MapFilename = pack.MapFilename;
             ContentDate = pack.ContentDate;
+            LocalProfile = pack.LocalProfile;
 
             if (IncludeGameStructures)
             {

@@ -62,6 +62,7 @@
     <Compile Include="Models\ContentInventory.cs" />
     <Compile Include="Models\ContentItem.cs" />
     <Compile Include="Models\ContentItemUploaded.cs" />
+    <Compile Include="Models\ContentLeaderboard.cs" />
     <Compile Include="Models\ContentLocalProfile.cs" />
     <Compile Include="Models\ContentMarker.cs" />
     <Compile Include="Models\ContentMissionScore.cs" />

@@ -37,13 +37,17 @@ namespace ARKViewer.Configuration
             { "extinction.ark", "Extinction"},
             { "ragnarok.ark", "Ragnarok"},
             { "valguero_p.ark", "Valguero" },
-            {"crystalisles.ark", "Crystal Isles" },
-            {"genesis.ark", "Genesis 1" },
+            { "crystalisles.ark", "Crystal Isles" },
+            { "genesis.ark", "Genesis 1" },
             { "viking_p.ark", "Fjördur"},
             { "tiamatprime.ark", "Tiamat Prime"},
             { "glacius_p.ark", "Glacius"},
             { "antartika.ark", "Antartika" },
-            { "lostisland.ark", "Lost Island" }
+            { "lostisland.ark", "Lost Island" },
+            { "amissa.ark", "Amissa" },
+            { "olympus.ark", "Olympus" },
+            { "ebenusastrum.ark", "Ebenus Astrum" },
+            { "arkforum_eventmap.ark", "ArkForum Event Map" }
         };
 
         [DataMember] public string IV { get; set; }

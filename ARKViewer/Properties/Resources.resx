@@ -325,4 +325,16 @@
   <data name="beacon2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\beacon2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="map_amissa" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_amissa.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map_olympus" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_olympus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map_ebenusastrum" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_ebenusastrum.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="map_none" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\map_none.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

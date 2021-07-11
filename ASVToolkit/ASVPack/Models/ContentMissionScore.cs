@@ -12,7 +12,11 @@ namespace ASVPack.Models
     {
         [DataMember] public string FullTag { get; set; } = "";
         [DataMember] public string MissionTag { get; set; } = "";
+        [DataMember] public decimal LastScore { get; set; } = 0;
         [DataMember] public decimal HighScore { get; set; } = 0;
+        [DataMember] public int TargetingTeam { get; set; } = 0;
+        [DataMember] public long NetworkId { get; set; } = 0;
+        [DataMember] public string PlayerName { get; set; } = "";
 
         
     }

@@ -52,7 +52,11 @@ namespace ARKViewer.Models
                 { "caballus_p.ark", "Caballus"},
                 { "viking_p.ark", "Fjördur"},
                 { "tiamatprime.ark", "Tiamat Prime"},
-                { "glacius_p.ark", "Glacius"}
+                { "glacius_p.ark", "Glacius"},
+                { "amissa.ark", "Amissa" },
+                {"olympus.ark", "Olympus" },
+                {"ebenusastrum.ark", "Ebenus Astrum" },
+                {"arkforum_eventmap.ark", "ArkForum Event Map" }
             };
 
         ContentPack pack = null;
@@ -132,8 +136,15 @@ namespace ARKViewer.Models
                     case "lostisland":
                         
                         return new Bitmap(ARKViewer.Properties.Resources.map_lostisland, new Size(1024, 1024));
+
+                    case "amissa":
+                        return new Bitmap(ARKViewer.Properties.Resources.map_amissa, new Size(1024, 1024));
+                    case "olympus":
+                        return new Bitmap(ARKViewer.Properties.Resources.map_olympus, new Size(1024, 1024));
+                    case "ebenusastrum":
+                        return new Bitmap(ARKViewer.Properties.Resources.map_ebenusastrum, new Size(1024, 1024));
                     default:
-                        return new Bitmap(1024, 1024);
+                        return new Bitmap(ARKViewer.Properties.Resources.map_none, new Size(1024, 1024));
                 }
             }
 
@@ -2190,9 +2201,19 @@ namespace ARKViewer.Models
             return g;
         }
 
+        public  List<ContentPlayer> GetUploadedCharacters()
+        {
+            return pack.LocalProfile.UploadedCharacters;
+        }
 
+        public List<ContentTamedCreature> GetUploadedTames()
+        {
+            return pack.LocalProfile.UploadedTames;
+        }
 
-       
-
+        public List<ContentLeaderboard> GetLeaderboards()
+        {
+            return pack.Leaderboards;
+        }
     }
 }

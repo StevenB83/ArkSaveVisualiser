@@ -51,7 +51,11 @@ namespace ASVPack.Models
             { "tiamatprime", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
             { "glacius_p", Tuple.Create(50.0f, 16250.0f,50.0f, 16250.0f)},
             { "antartika", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
-            { "lostisland", Tuple.Create(48.7f, 16000.0f,50.0f, 15500.0f)}
+            { "lostisland", Tuple.Create(48.7f, 16000.0f,50.0f, 15500.0f)},
+            { "amissa", Tuple.Create(49.9f, 10900.0f,49.9f, 10850.0f)},
+            { "olympus", Tuple.Create(0f, 8130.0f,0f, 8130.0f)},
+            { "ebenusastrum", Tuple.Create(52.9f, 8650.0f,25.0f, 18500.0f)},
+            { "arkforum_eventmap", Tuple.Create(50.0f, 1500.0f,50.0f, 1500.0f) }
         };
 
         Tuple<float, float, float, float> mapLatLonCalcs = new Tuple<float, float, float, float>(50.0f, 8000.0f, 50.0f, 8000.0f); //default to same as The Island map
@@ -62,8 +66,10 @@ namespace ASVPack.Models
         [DataMember] public List<ContentTribe> Tribes { get; set; } = new List<ContentTribe>();
         [DataMember] public List<ContentDroppedItem> DroppedItems { get; set; } = new List<ContentDroppedItem>();
         [DataMember] public ContentLocalProfile LocalProfile { get; set; } = new ContentLocalProfile();
+        [DataMember] public List<ContentLeaderboard> Leaderboards { get; set; } = new List<ContentLeaderboard>();
         [DataMember] public DateTime GameSaveTime { get; set; } = new DateTime();
         [DataMember] public float GameSeconds { get; set; } = 0;
+
 
         private void LoadDefaults()
         {
@@ -169,7 +175,64 @@ namespace ASVPack.Models
                         TimeSpan timeTaken = TimeSpan.FromTicks(saveLoadTime - startTicks);
                         logWriter.Info($"Game data loaded in: {timeTaken.ToString(@"mm\:ss")}.");
 
+                        List<ContentLeaderboard> leaderboardList = new List<ContentLeaderboard>();
 
+                        var testGameMode = objectContainer.FirstOrDefault(x => x.ClassString == "TestGameMode_C");
+                        if (testGameMode != null)
+                        {
+                            //try find leaderboards
+                            var leaderBoardContainer = testGameMode.GetTypedProperty<PropertyStruct>("LeaderboardContainer");
+                            if (leaderBoardContainer != null)
+                            {
+                                var leaderBoardContainerProperties = leaderBoardContainer.Value as StructPropertyList;
+                                var leaderBoards = leaderBoardContainerProperties.GetTypedProperty<PropertyArray>("Leaderboards");
+                                foreach(StructPropertyList leaderBoard in leaderBoards.Value as ArkArrayStruct)
+                                {
+
+                                    string fullTag = leaderBoard.GetTypedProperty<PropertyName>("MissionTag").Value.Name;
+
+                                    ContentLeaderboard board = new ContentLeaderboard()
+                                    {
+                                        FullTag = fullTag,
+                                        MissionTag = fullTag.Substring(fullTag.LastIndexOf(".") + 1),
+                                        Scores = new List<ContentMissionScore>()
+                                    };
+
+                                    var scoreRows = leaderBoard.GetTypedProperty<PropertyArray>("Rows");
+                                    if(scoreRows != null)
+                                    {
+                                        ArkArrayStruct rows = scoreRows.Value as ArkArrayStruct;
+                                        foreach(StructPropertyList rowProperties in rows)
+                                        {
+                                            int tribeId = rowProperties.GetPropertyValue<int>("TribeId");
+                                            long.TryParse(rowProperties.GetPropertyValue<string>("PlayerNetId"), out long dataId);
+                                            string playerName = rowProperties.GetPropertyValue<string>("StringValue");
+
+                                            float floatValue = rowProperties.GetPropertyValue<float>("FloatValue");
+                                            int intValue = rowProperties.GetPropertyValue<int>("IntValue");
+
+                                            string stringScore = floatValue.ToString($"f{intValue}");
+                                            decimal.TryParse(stringScore, out decimal scoreValue);
+
+                                            board.Scores.Add(new ContentMissionScore()
+                                            {
+                                                FullTag = fullTag,
+                                                MissionTag = fullTag.Substring(fullTag.LastIndexOf(".") + 1),
+                                                NetworkId = dataId,
+                                                TargetingTeam = tribeId,
+                                                PlayerName = playerName,
+                                                HighScore = scoreValue
+                                            });
+                                        }
+                                    }
+
+                                    leaderboardList.Add(board);
+                                }
+
+                                Leaderboards = leaderboardList;
+
+                            }
+                        }
 
 
                         var filePath = Path.GetDirectoryName(saveFilename);

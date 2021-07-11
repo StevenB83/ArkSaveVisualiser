@@ -38,6 +38,13 @@ namespace ARKViewer
         private ColumnHeader SortingColumn_Drops = null;
         private ColumnHeader SortingColumn_ItemList = null;
 
+
+        private ColumnHeader SortingColumn_UploadedChar = null;
+        private ColumnHeader SortingColumn_UploadedTame = null;
+        private ColumnHeader SortingColumn_UploadedItem = null;
+        private ColumnHeader SortingColumn_LeaderboardSummary = null;
+        private ColumnHeader SortingColumn_LeaderboardDetail = null;
+
         private string savePath = Path.GetDirectoryName(Application.ExecutablePath);
 
         Random rndChartColor = new Random();
@@ -211,6 +218,15 @@ namespace ARKViewer
                 RefreshItemListTribes();
                 RefreshStructureSummary();
                 RefreshDroppedPlayers();
+
+                RefreshLeaderboardTribes();
+                RefreshLeaderboardMissions();
+                
+                LoadUploadedCharacters();
+                LoadUploadedItems();
+                LoadUploadedTames();
+
+
 
                 DrawMap(0, 0);
 
@@ -735,6 +751,10 @@ namespace ARKViewer
                 case "tpgItemList":
                     if (lvwItemList.Items.Count == 0) LoadItemListDetail();
                     break;
+                case "tpgLeaderboard":
+                    if (lvwLeaderboardSummary.Items.Count == 0) LoadLeaderboardPlayers();
+                    break;
+
                 default:
 
                     break;
@@ -4369,6 +4389,71 @@ namespace ARKViewer
             cboTribes.SelectedIndex = 0;
         }
 
+
+        private void RefreshLeaderboardTribes()
+        {
+            if (cm == null) return;
+
+            cboLeaderboardTribe.Items.Clear();
+            cboLeaderboardTribe.Items.Add(new ASVComboValue("0", "[All Tribes]"));
+
+            List<ASVComboValue> newItems = new List<ASVComboValue>();
+
+            var allTribes = cm.GetTribes(0);
+            if (allTribes != null && allTribes.Count() > 0)
+            {
+                foreach (var tribe in allTribes)
+                {
+                    bool addItem = tribe.TribeId > 0 && tribe.TribeId != 2_000_000_000;
+
+                    if (addItem)
+                    {
+                        if (tribe.TribeName == null || tribe.TribeName.Length == 0) tribe.TribeName = "[N/A]";
+                        ASVComboValue valuePair = new ASVComboValue(tribe.TribeId.ToString(), tribe.TribeName);
+                        newItems.Add(valuePair);
+                    }
+                }
+            }
+
+
+            if (newItems.Count > 0)
+            {
+                cboLeaderboardTribe.BeginUpdate();
+
+                foreach (var newItem in newItems.OrderBy(o => o.Value))
+                {
+                    cboLeaderboardTribe.Items.Add(newItem);
+                }
+
+                cboLeaderboardTribe.EndUpdate();
+            }
+            cboLeaderboardTribe.SelectedIndex = 0;
+        }
+
+        
+
+        private void RefreshLeaderboardMissions()
+        {
+            if (cm == null) return;
+
+            cboLeaderboardMission.Items.Clear();
+
+            cboLeaderboardMission.Items.Add(new ASVComboValue("", "[All Missions]"));
+
+            var leaderboards = cm.GetLeaderboards();
+            if(leaderboards!=null && leaderboards.Count > 0)
+            {
+
+                leaderboards.OrderBy(x => x.MissionTag).ToList().ForEach(x =>
+                {
+                    cboLeaderboardMission.Items.Add(new ASVComboValue(x.FullTag, x.MissionTag));
+                });
+
+                if (cboLeaderboardMission.Items.Count > 0) cboLeaderboardMission.SelectedIndex = 0;
+            }
+        }
+
+
         private void RefreshItemListTribes()
         {
             if (cm == null) return;
@@ -4950,6 +5035,211 @@ namespace ARKViewer
             DrawMap(0, 0);
 
             this.Cursor = Cursors.Default;
+        }
+
+
+        private void LoadUploadedCharacters()
+        {
+            lvwUploadedCharacters.BeginUpdate();
+            lvwUploadedCharacters.Items.Clear();
+
+
+            //Name, Sex, Lvl, Hp, Stam, Melee, Weight, Speed, Food, Water, Oxygen, Crafting, Fortitude
+
+            ConcurrentBag<ListViewItem> listItems = new ConcurrentBag<ListViewItem>();
+            
+            foreach (var player in cm.GetUploadedCharacters())
+            {
+   
+                ListViewItem newItem = new ListViewItem(player.CharacterName);
+                newItem.SubItems.Add(player.Gender.ToString());
+                newItem.SubItems.Add(player.Level.ToString());
+
+
+                //0=health
+                //1=stamina
+                //2=torpor
+                //3=oxygen
+                //4=food
+                //5=water
+                //6=temperature
+                //7=weight
+                //8=melee damage
+                //9=movement speed
+                //10=fortitude
+                //11=crafting speed
+
+                newItem.SubItems.Add(player.Stats.GetValue(0).ToString()); //hp
+                newItem.SubItems.Add(player.Stats.GetValue(1).ToString()); //stam
+                newItem.SubItems.Add(player.Stats.GetValue(8).ToString()); //melee
+                newItem.SubItems.Add(player.Stats.GetValue(7).ToString()); //weight
+                newItem.SubItems.Add(player.Stats.GetValue(9).ToString()); //speed
+                newItem.SubItems.Add(player.Stats.GetValue(4).ToString()); //food
+                newItem.SubItems.Add(player.Stats.GetValue(5).ToString()); //water
+                newItem.SubItems.Add(player.Stats.GetValue(3).ToString()); //oxygen
+                newItem.SubItems.Add(player.Stats.GetValue(11).ToString());//crafting
+                newItem.SubItems.Add(player.Stats.GetValue(10).ToString());//fortitude
+                newItem.Tag = player;
+
+                listItems.Add(newItem);
+             
+            }
+
+    
+
+
+            lvwUploadedCharacters.Items.AddRange(listItems.ToArray());
+            lvwUploadedCharacters.EndUpdate();
+
+            lblUploadedCountCharacters.Text = $"Count: {listItems.Count}";
+
+        }
+        private void LoadUploadedTames()
+        {
+            lvwUploadedTames.BeginUpdate();
+            lvwUploadedTames.Items.Clear();
+
+
+            //Creature, Name, Sex, Base, Lvl, Hp, Stam, Melee, Weight, Speed, Food, Oxygen, Craft, Imprinter, Imprint, C0, C1, C2, C3, C4, C5, Muf (F), Mut (M), Rig1, Rig2
+
+            ConcurrentBag<ListViewItem> listItems = new ConcurrentBag<ListViewItem>();
+
+            foreach (var detail in cm.GetUploadedTames())
+            {
+
+                var dinoMap = ARKViewer.Program.ProgramConfig.DinoMap.Where(dino => dino.ClassName == detail.ClassName).FirstOrDefault();
+
+                string creatureClassName = dinoMap == null ? detail.ClassName : dinoMap.FriendlyName;
+                string creatureName = dinoMap == null ? detail.ClassName : dinoMap.FriendlyName;
+
+                if (detail.Name != null)
+                {
+                    creatureName = detail.Name;
+                }
+
+                if (creatureName.ToLower().Contains("queen"))
+                {
+                    detail.Gender = "Female";
+                }
+
+                ListViewItem item = new ListViewItem(creatureClassName);
+                item.Tag = detail;
+                item.UseItemStyleForSubItems = false;
+
+                item.SubItems.Add(creatureName);
+                item.SubItems.Add(detail.Gender.ToString());
+                item.SubItems.Add(detail.BaseLevel.ToString());
+                item.SubItems.Add(detail.Level.ToString());
+
+                if (optUploadedStatsTamed.Checked)
+                {
+                    item.SubItems.Add(detail.TamedStats[0].ToString());
+                    item.SubItems.Add(detail.TamedStats[1].ToString());
+                    item.SubItems.Add(detail.TamedStats[8].ToString());
+                    item.SubItems.Add(detail.TamedStats[7].ToString());
+                    item.SubItems.Add(detail.TamedStats[9].ToString());
+                    item.SubItems.Add(detail.TamedStats[4].ToString());
+                    item.SubItems.Add(detail.TamedStats[3].ToString());
+                    item.SubItems.Add(detail.TamedStats[11].ToString());
+
+                }
+                else
+                {
+                    item.SubItems.Add(detail.BaseStats[0].ToString());
+                    item.SubItems.Add(detail.BaseStats[1].ToString());
+                    item.SubItems.Add(detail.BaseStats[8].ToString());
+                    item.SubItems.Add(detail.BaseStats[7].ToString());
+                    item.SubItems.Add(detail.BaseStats[9].ToString());
+                    item.SubItems.Add(detail.BaseStats[4].ToString());
+                    item.SubItems.Add(detail.BaseStats[3].ToString());
+                    item.SubItems.Add(detail.BaseStats[11].ToString());
+                }
+                item.SubItems.Add(detail.ImprinterName);
+                item.SubItems.Add((detail.ImprintQuality * 100).ToString("f0"));
+
+                //Colours
+                int colourCheck = (int)detail.Colors[0];
+                item.SubItems.Add(colourCheck == 0 ? "n/a" : detail.Colors[0].ToString()); //14
+                ColourMap selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[0]).FirstOrDefault();
+                if (selectedColor != null && selectedColor.Hex.Length > 0)
+                {
+                    item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                    item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
+                }
+
+                colourCheck = (int)detail.Colors[1];
+                item.SubItems.Add(colourCheck == 0 ? "n/a" : detail.Colors[1].ToString()); //15
+                selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[1]).FirstOrDefault();
+                if (selectedColor != null && selectedColor.Hex.Length > 0)
+                {
+                    item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                    item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
+                }
+
+                colourCheck = (int)detail.Colors[2];
+                item.SubItems.Add(colourCheck == 0 ? "n/a" : detail.Colors[2].ToString()); //16
+                selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[2]).FirstOrDefault();
+                if (selectedColor != null && selectedColor.Hex.Length > 0)
+                {
+                    item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                    item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
+                }
+
+                colourCheck = (int)detail.Colors[3];
+                item.SubItems.Add(colourCheck == 0 ? "n/a" : detail.Colors[3].ToString()); //17
+                selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[3]).FirstOrDefault();
+                if (selectedColor != null && selectedColor.Hex.Length > 0)
+                {
+                    item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                    item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
+                }
+
+                colourCheck = (int)detail.Colors[4];
+                item.SubItems.Add(colourCheck == 0 ? "n/a" : detail.Colors[4].ToString()); //18
+                selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[4]).FirstOrDefault();
+                if (selectedColor != null && selectedColor.Hex.Length > 0)
+                {
+                    item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                    item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
+                }
+
+                colourCheck = (int)detail.Colors[5];
+                item.SubItems.Add(colourCheck == 0 ? "n/a" : detail.Colors[5].ToString()); //19
+                selectedColor = Program.ProgramConfig.ColourMap.Where(c => c.Id == (int)detail.Colors[5]).FirstOrDefault();
+                if (selectedColor != null && selectedColor.Hex.Length > 0)
+                {
+                    item.SubItems[item.SubItems.Count - 1].BackColor = selectedColor.Color;
+                    item.SubItems[item.SubItems.Count - 1].ForeColor = Program.IdealTextColor(selectedColor.Color);
+                }
+
+
+                //mutations
+                item.SubItems.Add(detail.RandomMutationsFemale.ToString());
+                item.SubItems.Add(detail.RandomMutationsMale.ToString());
+
+                string rig1Name = Program.ProgramConfig.ItemMap.FirstOrDefault(x => x.ClassName == detail.Rig1)?.DisplayName ?? detail.Rig1;
+                string rig2Name = Program.ProgramConfig.ItemMap.FirstOrDefault(x => x.ClassName == detail.Rig2)?.DisplayName ?? detail.Rig2;
+                item.SubItems.Add(rig1Name);
+                item.SubItems.Add(rig2Name);
+
+                listItems.Add(item);
+
+            }
+
+
+
+
+            lvwUploadedTames.Items.AddRange(listItems.ToArray());
+
+
+
+            lvwUploadedTames.EndUpdate();
+
+            lblUploadedCountTames.Text = $"Count: {listItems.Count}";
+        }
+        private void LoadUploadedItems()
+        {
+
         }
 
         private void LoadItemListDetail()
@@ -6382,6 +6672,407 @@ namespace ARKViewer
 
 
 
+        }
+
+        private void optStatsTamed_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void optUploadedStatsBase_CheckedChanged(object sender, EventArgs e)
+        {
+            LoadUploadedTames();
+        }
+
+        private void cboLeaderboardTribe_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadLeaderboardPlayers();
+        }
+
+
+        private void LoadLeaderboardPlayers()
+        {
+            if (tabFeatures.SelectedTab.Name != "tpgLeaderboard") return;
+
+            int selectedTribeId = 0;
+            if(cboLeaderboardTribe.SelectedIndex > 0)
+            {
+                ASVComboValue selectedValue = (ASVComboValue)cboLeaderboardTribe.SelectedItem;
+                int.TryParse(selectedValue.Key, out selectedTribeId);
+            }
+
+            lvwLeaderboardSummary.Items.Clear();
+
+            //tribe, player, mission count
+            var leaderboards = cm.GetLeaderboards();
+            var playerSummary = leaderboards
+                .SelectMany(x => x.Scores)
+                .Where(x=> x.TargetingTeam > 0 && (x.TargetingTeam == selectedTribeId || selectedTribeId == 0))
+                .GroupBy(x => new { TribeId = x.TargetingTeam, x.NetworkId, x.PlayerName })
+                .Select(x => new
+                {
+                    x.Key.TribeId,
+                    x.Key.PlayerName,
+                    MissionCount = x.ToList().Count
+                }).ToList();
+
+            if(playerSummary!=null && playerSummary.Count > 0)
+            {
+                foreach(var player in playerSummary)
+                {
+                    string tribeName = "";
+                    var tribe = cm.GetTribes(player.TribeId).FirstOrDefault();
+                    if (tribe != null)
+                    {
+                        tribeName = tribe.TribeName;
+                    }
+
+                    ListViewItem newItem = new ListViewItem(tribeName);
+                    newItem.SubItems.Add(player.PlayerName);
+                    newItem.SubItems.Add(player.MissionCount.ToString());
+                    lvwLeaderboardSummary.Items.Add(newItem);
+                    
+                }
+            }
+
+            LoadLeaderboardScores();
+
+
+        }
+
+        private void LoadLeaderboardScores()
+        {
+            if (tabFeatures.SelectedTab.Name != "tpgLeaderboard") return;
+
+            //mission, tribe, player, score
+            int selectedTribeId = 0;
+            string selectedMission = "";
+
+            if(cboLeaderboardTribe.SelectedIndex > 0)
+            {
+                ASVComboValue selectedValue = (ASVComboValue)cboLeaderboardTribe.SelectedItem;
+                int.TryParse(selectedValue.Key, out selectedTribeId);
+            }
+            if(cboLeaderboardMission.SelectedIndex > 0)
+            {
+                ASVComboValue selectedValue = (ASVComboValue)cboLeaderboardMission.SelectedItem;
+                selectedMission = selectedValue.Key;
+            }
+
+            lvwLeaderboard.Items.Clear();
+
+            //mission, tribe, player, score
+            var leaderboards = cm.GetLeaderboards()
+                .Where(x => x.FullTag == selectedMission || selectedMission == "")
+                .Where(x => x.Scores.Any(y => y.TargetingTeam == selectedTribeId || selectedTribeId == 0))
+                .SelectMany(x => x.Scores)
+                .Where(x => x.TargetingTeam > 0)
+                .ToList();
+            
+            if(leaderboards != null)
+            {
+                foreach (var leaderboard in leaderboards)
+                {
+
+                    string tribeName = "";
+                    var tribe = cm.GetTribes(leaderboard.TargetingTeam).FirstOrDefault();
+                    if (tribe != null)
+                    {
+                        tribeName = tribe.TribeName;
+                    }
+                    ListViewItem newItem = new ListViewItem(leaderboard.MissionTag);
+                    newItem.SubItems.Add(tribeName);
+                    newItem.SubItems.Add(leaderboard.PlayerName);
+                    newItem.SubItems.Add(leaderboard.HighScore.ToString());
+                    lvwLeaderboard.Items.Add(newItem);
+                }
+            }
+
+        }
+
+        private void cboLeaderboardMission_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadLeaderboardScores();
+        }
+
+        private void lvwUploadedCharacters_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Get the new sorting column.
+            ColumnHeader new_sorting_column = lvwUploadedCharacters.Columns[e.Column];
+
+            // Figure out the new sorting order.
+            System.Windows.Forms.SortOrder sort_order;
+            if (SortingColumn_UploadedChar == null)
+            {
+                // New column. Sort ascending.
+                sort_order = SortOrder.Ascending;
+            }
+            else
+            {
+                // See if this is the same column.
+                if (new_sorting_column == SortingColumn_UploadedChar)
+                {
+                    // Same column. Switch the sort order.
+                    if (SortingColumn_UploadedChar.Text.StartsWith("> "))
+                    {
+                        sort_order = SortOrder.Descending;
+                    }
+                    else
+                    {
+                        sort_order = SortOrder.Ascending;
+                    }
+                }
+                else
+                {
+                    // New column. Sort ascending.
+                    sort_order = SortOrder.Ascending;
+                }
+
+                // Remove the old sort indicator.
+                SortingColumn_UploadedChar.Text = SortingColumn_UploadedChar.Text.Substring(2);
+            }
+
+            // Display the new sort order.
+            SortingColumn_UploadedChar = new_sorting_column;
+            if (sort_order == SortOrder.Ascending)
+            {
+                SortingColumn_UploadedChar.Text = "> " + SortingColumn_UploadedChar.Text;
+            }
+            else
+            {
+                SortingColumn_UploadedChar.Text = "< " + SortingColumn_UploadedChar.Text;
+            }
+
+            // Create a comparer.
+            lvwUploadedCharacters.ListViewItemSorter =
+                new ListViewComparer(e.Column, sort_order);
+
+            // Sort.
+            lvwUploadedCharacters.Sort();
+        }
+
+        private void lvwUploadedTames_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Get the new sorting column.
+            ColumnHeader new_sorting_column = lvwUploadedTames.Columns[e.Column];
+
+            // Figure out the new sorting order.
+            System.Windows.Forms.SortOrder sort_order;
+            if (SortingColumn_UploadedTame == null)
+            {
+                // New column. Sort ascending.
+                sort_order = SortOrder.Ascending;
+            }
+            else
+            {
+                // See if this is the same column.
+                if (new_sorting_column == SortingColumn_UploadedTame)
+                {
+                    // Same column. Switch the sort order.
+                    if (SortingColumn_UploadedTame.Text.StartsWith("> "))
+                    {
+                        sort_order = SortOrder.Descending;
+                    }
+                    else
+                    {
+                        sort_order = SortOrder.Ascending;
+                    }
+                }
+                else
+                {
+                    // New column. Sort ascending.
+                    sort_order = SortOrder.Ascending;
+                }
+
+                // Remove the old sort indicator.
+                SortingColumn_UploadedTame.Text = SortingColumn_UploadedTame.Text.Substring(2);
+            }
+
+            // Display the new sort order.
+            SortingColumn_UploadedTame = new_sorting_column;
+            if (sort_order == SortOrder.Ascending)
+            {
+                SortingColumn_UploadedTame.Text = "> " + SortingColumn_UploadedTame.Text;
+            }
+            else
+            {
+                SortingColumn_UploadedTame.Text = "< " + SortingColumn_UploadedTame.Text;
+            }
+
+            // Create a comparer.
+            lvwUploadedTames.ListViewItemSorter =
+                new ListViewComparer(e.Column, sort_order);
+
+            // Sort.
+            lvwUploadedTames.Sort();
+        }
+
+        private void lvwUploadedItems_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Get the new sorting column.
+            ColumnHeader new_sorting_column = lvwUploadedItems.Columns[e.Column];
+
+            // Figure out the new sorting order.
+            System.Windows.Forms.SortOrder sort_order;
+            if (SortingColumn_UploadedItem == null)
+            {
+                // New column. Sort ascending.
+                sort_order = SortOrder.Ascending;
+            }
+            else
+            {
+                // See if this is the same column.
+                if (new_sorting_column == SortingColumn_UploadedItem)
+                {
+                    // Same column. Switch the sort order.
+                    if (SortingColumn_UploadedItem.Text.StartsWith("> "))
+                    {
+                        sort_order = SortOrder.Descending;
+                    }
+                    else
+                    {
+                        sort_order = SortOrder.Ascending;
+                    }
+                }
+                else
+                {
+                    // New column. Sort ascending.
+                    sort_order = SortOrder.Ascending;
+                }
+
+                // Remove the old sort indicator.
+                SortingColumn_UploadedItem.Text = SortingColumn_UploadedItem.Text.Substring(2);
+            }
+
+            // Display the new sort order.
+            SortingColumn_UploadedItem = new_sorting_column;
+            if (sort_order == SortOrder.Ascending)
+            {
+                SortingColumn_UploadedItem.Text = "> " + SortingColumn_UploadedItem.Text;
+            }
+            else
+            {
+                SortingColumn_UploadedItem.Text = "< " + SortingColumn_UploadedItem.Text;
+            }
+
+            // Create a comparer.
+            lvwUploadedItems.ListViewItemSorter =
+                new ListViewComparer(e.Column, sort_order);
+
+            // Sort.
+            lvwUploadedItems.Sort();
+        }
+
+        private void lvwLeaderboardSummary_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Get the new sorting column.
+            ColumnHeader new_sorting_column = lvwLeaderboardSummary.Columns[e.Column];
+
+            // Figure out the new sorting order.
+            System.Windows.Forms.SortOrder sort_order;
+            if (SortingColumn_LeaderboardSummary == null)
+            {
+                // New column. Sort ascending.
+                sort_order = SortOrder.Ascending;
+            }
+            else
+            {
+                // See if this is the same column.
+                if (new_sorting_column == SortingColumn_LeaderboardSummary)
+                {
+                    // Same column. Switch the sort order.
+                    if (SortingColumn_LeaderboardSummary.Text.StartsWith("> "))
+                    {
+                        sort_order = SortOrder.Descending;
+                    }
+                    else
+                    {
+                        sort_order = SortOrder.Ascending;
+                    }
+                }
+                else
+                {
+                    // New column. Sort ascending.
+                    sort_order = SortOrder.Ascending;
+                }
+
+                // Remove the old sort indicator.
+                SortingColumn_LeaderboardSummary.Text = SortingColumn_LeaderboardSummary.Text.Substring(2);
+            }
+
+            // Display the new sort order.
+            SortingColumn_LeaderboardSummary = new_sorting_column;
+            if (sort_order == SortOrder.Ascending)
+            {
+                SortingColumn_LeaderboardSummary.Text = "> " + SortingColumn_LeaderboardSummary.Text;
+            }
+            else
+            {
+                SortingColumn_LeaderboardSummary.Text = "< " + SortingColumn_LeaderboardSummary.Text;
+            }
+
+            // Create a comparer.
+            lvwLeaderboardSummary.ListViewItemSorter =
+                new ListViewComparer(e.Column, sort_order);
+
+            // Sort.
+            lvwLeaderboardSummary.Sort();
+        }
+
+        private void lvwLeaderboard_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            // Get the new sorting column.
+            ColumnHeader new_sorting_column = lvwLeaderboard.Columns[e.Column];
+
+            // Figure out the new sorting order.
+            System.Windows.Forms.SortOrder sort_order;
+            if (SortingColumn_LeaderboardDetail == null)
+            {
+                // New column. Sort ascending.
+                sort_order = SortOrder.Ascending;
+            }
+            else
+            {
+                // See if this is the same column.
+                if (new_sorting_column == SortingColumn_LeaderboardDetail)
+                {
+                    // Same column. Switch the sort order.
+                    if (SortingColumn_LeaderboardDetail.Text.StartsWith("> "))
+                    {
+                        sort_order = SortOrder.Descending;
+                    }
+                    else
+                    {
+                        sort_order = SortOrder.Ascending;
+                    }
+                }
+                else
+                {
+                    // New column. Sort ascending.
+                    sort_order = SortOrder.Ascending;
+                }
+
+                // Remove the old sort indicator.
+                SortingColumn_LeaderboardDetail.Text = SortingColumn_LeaderboardDetail.Text.Substring(2);
+            }
+
+            // Display the new sort order.
+            SortingColumn_LeaderboardDetail = new_sorting_column;
+            if (sort_order == SortOrder.Ascending)
+            {
+                SortingColumn_LeaderboardDetail.Text = "> " + SortingColumn_LeaderboardDetail.Text;
+            }
+            else
+            {
+                SortingColumn_LeaderboardDetail.Text = "< " + SortingColumn_LeaderboardDetail.Text;
+            }
+
+            // Create a comparer.
+            lvwLeaderboard.ListViewItemSorter =
+                new ListViewComparer(e.Column, sort_order);
+
+            // Sort.
+            lvwLeaderboard.Sort();
         }
     }
 }
