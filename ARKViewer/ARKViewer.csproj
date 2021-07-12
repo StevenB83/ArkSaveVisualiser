@@ -232,7 +232,6 @@
     <Compile Include="Models\ASVDataManager.cs" />
     <Compile Include="Models\ASVFoundItem.cs" />
     <Compile Include="Models\ASVFtpItem.cs" />
-    <Compile Include="Models\ASVMapMarker.cs" />
     <Compile Include="Models\ASVMarker.cs" />
     <Compile Include="Models\ASVStructureMarker.cs" />
     <Compile Include="Models\ListViewComparer.cs" />

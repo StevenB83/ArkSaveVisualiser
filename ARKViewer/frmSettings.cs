@@ -467,57 +467,10 @@ namespace ARKViewer
 
             //get registry path for steam apps 
             cboMapSinglePlayer.Items.Clear();
-            string directoryCheck = "";
-
-            try
-            {
-                string steamRoot = Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString();
-
-                if (steamRoot != null && steamRoot.Length > 0)
-                {
-                    steamRoot = steamRoot.Replace(@"/", @"\");
-                    steamRoot = Path.Combine(steamRoot, @"steamapps\libraryfolders.vdf");
-                    if (File.Exists(steamRoot))
-                    {
-                        string fileText = File.ReadAllText(steamRoot).Replace("\"LibraryFolders\"", "");
-
-                        foreach (string line in fileText.Split('\n'))
-                        {
-                            if (line.Contains("\t"))
-                            {
-                                string[] lineContent = line.Split('\t');
-                                if (lineContent.Length == 4)
-                                {
-                                    //check 4th param as a path
-                                    directoryCheck = lineContent[3].ToString().Replace("\"", "").Replace(@"\\", @"\") + @"\SteamApps\Common\ARK\ShooterGame\Saved\";
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                //permission access to registry or unavailable?
-
-            }
-
-            if (directoryCheck.Length == 0)
-            {
-                //no directory found for steam from registry, ask user.
-                if (MessageBox.Show("Unable to determine Steam library folder.\n\nWould you like to select it yourself?", "Steam Not Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    using(FolderBrowserDialog browse = new FolderBrowserDialog())
-                    {
-                        browse.Description = "Select Steam library folder containing SteamApps.";
-                        if(browse.ShowDialog() == DialogResult.OK)
-                        {
-                            directoryCheck = browse.SelectedPath;
-                        }
-                    }
-                }
-            }
+            
+            
+            string directoryCheck = Program.ProgramConfig.ArkSavedGameFolder;
+            if (directoryCheck.Length == 0) directoryCheck = Program.GetSteamFolder();
 
             if (Directory.Exists(directoryCheck))
             {
@@ -704,6 +657,8 @@ namespace ARKViewer
             chkUpdateNotificationSingle.Enabled = optSinglePlayer.Checked;
             
             cboMapSinglePlayer.Enabled = optSinglePlayer.Checked;
+            btnSelectFolder.Enabled = optSinglePlayer.Checked;
+
             if (optSinglePlayer.Checked)
             {
                 if (cboMapSinglePlayer.SelectedIndex < 0 && cboMapSinglePlayer.Items.Count > 0) cboMapSinglePlayer.SelectedIndex = 0;
@@ -2168,6 +2123,7 @@ namespace ARKViewer
         private void cboLocalARK_SelectedIndexChanged(object sender, EventArgs e)
         {
             btnRemoveARK.Enabled = cboLocalARK.SelectedItem != null;
+            btnEditARK.Enabled = cboLocalARK.SelectedItem != null;
         }
 
         private void btnRemoveARK_Click(object sender, EventArgs e)
@@ -2211,6 +2167,44 @@ namespace ARKViewer
             RefreshUnknownColours();
 
             btnRefreshUnknownColours.Enabled = true;
+        }
+
+        private void btnEditARK_Click(object sender, EventArgs e)
+        {
+            if (cboLocalARK.SelectedIndex < 0) return;
+            int selectedIndex = cboLocalARK.SelectedIndex;
+            ASVComboValue selectedValue = (ASVComboValue)cboLocalARK.SelectedItem;
+
+            using (frmAddLocalARK selectFile = new frmAddLocalARK(selectedValue))
+            {
+                if (selectFile.ShowDialog() == DialogResult.OK)
+                {
+                    //commit changes to combo tag
+                    cboLocalARK.Items[selectedIndex] = new ASVComboValue(selectFile.Filename, selectFile.OfflineName);
+                }
+            }
+        }
+
+        private void btnSelectFolder_Click(object sender, EventArgs e)
+        {
+            using(FolderBrowserDialog dialog = new FolderBrowserDialog())
+            {
+                dialog.Description = @"Please select location of 'ARK\ShooterGame\Saved'";
+                if(Program.ProgramConfig.ArkSavedGameFolder.Length > 0) dialog.SelectedPath = Program.ProgramConfig.ArkSavedGameFolder;
+                if(dialog.ShowDialog() == DialogResult.OK)
+                {
+                    string folderCheck = dialog.SelectedPath;
+                    string savedLocal = Path.Combine(folderCheck, @"SavedArksLocal\");
+                    if (!Directory.Exists(savedLocal))
+                    {
+
+                        return;
+                    }
+
+                    Program.ProgramConfig.ArkSavedGameFolder = folderCheck;
+                    PopulateSinglePlayerGames();
+                }
+            }
         }
     }
 }

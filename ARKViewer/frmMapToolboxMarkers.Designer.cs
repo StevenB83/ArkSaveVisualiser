@@ -86,6 +86,7 @@ namespace ARKViewer
             this.btnRemoveMarker.Size = new System.Drawing.Size(30, 30);
             this.btnRemoveMarker.TabIndex = 2;
             this.btnRemoveMarker.UseVisualStyleBackColor = true;
+            this.btnRemoveMarker.Click += new System.EventHandler(this.btnRemoveMarker_Click);
             // 
             // chkApplyFilterMarkers
             // 
@@ -97,6 +98,7 @@ namespace ARKViewer
             this.chkApplyFilterMarkers.Size = new System.Drawing.Size(30, 30);
             this.chkApplyFilterMarkers.TabIndex = 4;
             this.chkApplyFilterMarkers.UseVisualStyleBackColor = true;
+            this.chkApplyFilterMarkers.CheckedChanged += new System.EventHandler(this.chkApplyFilterMarkers_CheckedChanged);
             // 
             // btnAddMarker
             // 
@@ -119,6 +121,7 @@ namespace ARKViewer
             this.btnEditMarker.Size = new System.Drawing.Size(30, 30);
             this.btnEditMarker.TabIndex = 5;
             this.btnEditMarker.UseVisualStyleBackColor = true;
+            this.btnEditMarker.Click += new System.EventHandler(this.btnEditMarker_Click);
             // 
             // txtMarkerFilter
             // 

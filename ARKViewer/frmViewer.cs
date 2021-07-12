@@ -20,6 +20,7 @@ using ASVPack.Models;
 using ARKViewer.Models.NameMap;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ProgressBar;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.ComponentModel;
 
 namespace ARKViewer
 {
@@ -133,6 +134,9 @@ namespace ARKViewer
             UpdateProgress("Loading content.");
 
             long startLoadTicks = DateTime.Now.Ticks;
+            
+            //remove in-game markers
+            Program.ProgramConfig.MapMarkerList.RemoveAll(x => x.InGameMarker == true);
 
             try
             {
@@ -159,7 +163,20 @@ namespace ARKViewer
 
                     container.LoadSaveGame(fileName, localProfileFilename);
 
+
+
+                    if (container != null && container.LocalProfile != null)
+                    {
+                        //add in-game map markers
+                        if (container.LocalProfile.MapMarkers != null)
+                        {
+                            Program.ProgramConfig.MapMarkerList.AddRange(container.LocalProfile.MapMarkers);
+                        }
+                    }
+
                     cm = new ASVDataManager(container);
+
+
                 }
 
                 try
@@ -170,6 +187,9 @@ namespace ARKViewer
                 {
                 }
                 MapViewer = frmMapView.GetForm(cm);
+
+
+
                 MapViewer.OnMapClicked += MapViewer_OnMapClicked;
 
                 string mapFileDateString = (cm.ContentDate.Equals(new DateTime()) ? "n/a" : cm.ContentDate.ToString("dd MMM yyyy HH:mm"));
@@ -3475,12 +3495,12 @@ namespace ARKViewer
             if (MapViewer == null || MapViewer.IsDisposed)
             {
                 MapViewer = frmMapView.GetForm(cm);
-                //MapViewer.Owner = this;
-
                 MapViewer.OnMapClicked += MapViewer_OnMapClicked;
-
-                DrawMap(0, 0);
             }
+
+            MapViewer.CustomMarkers = Program.ProgramConfig.MapMarkerList.Where(x => x.Map.ToLower().StartsWith(cm.MapFilename.ToLower())).ToList();
+            DrawMap(0, 0);
+
             MapViewer.Show();
             MapViewer.BringToFront();
         }
@@ -3679,7 +3699,7 @@ namespace ARKViewer
 
         private void AttemptReverseMapSelection(decimal latitude, decimal longitude)
         {
-            this.BringToFront();
+
             switch (tabFeatures.SelectedTab.Name)
             {
                 case "tpgWild":
@@ -3699,6 +3719,7 @@ namespace ARKViewer
                                 lvwWildDetail.SelectedItems.Clear();
                                 item.Selected = true;
                                 item.EnsureVisible();
+                                this.BringToFront();
                                 break;
                             }
 
@@ -3725,6 +3746,7 @@ namespace ARKViewer
                                 lvwTameDetail.SelectedItems.Clear();
                                 item.Selected = true;
                                 item.EnsureVisible();
+                                this.BringToFront();
                                 break;
                             }
                         }
@@ -3747,6 +3769,7 @@ namespace ARKViewer
                                 lvwStructureLocations.SelectedItems.Clear();
                                 item.Selected = true;
                                 item.EnsureVisible();
+                                this.BringToFront();
                                 break;
                             }
 
@@ -3774,6 +3797,7 @@ namespace ARKViewer
                                 lvwStructureLocations.SelectedItems.Clear();
                                 item.Selected = true;
                                 item.EnsureVisible();
+                                this.BringToFront();
                                 break;
                             }
 
@@ -3799,6 +3823,7 @@ namespace ARKViewer
                                 lvwItemList.SelectedItems.Clear();
                                 item.Selected = true;
                                 item.EnsureVisible();
+                                this.BringToFront();
                                 break;
                             }
 

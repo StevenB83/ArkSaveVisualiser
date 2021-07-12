@@ -69,6 +69,7 @@
             this.cboMapSinglePlayer = new System.Windows.Forms.ComboBox();
             this.tpgColours = new System.Windows.Forms.TabPage();
             this.grpColoursNotMapped = new System.Windows.Forms.GroupBox();
+            this.btnRefreshUnknownColours = new System.Windows.Forms.Button();
             this.lblColourNotMapped = new System.Windows.Forms.Label();
             this.lblHeaderColoursNotMatched = new System.Windows.Forms.Label();
             this.lvwColoursNotMapped = new System.Windows.Forms.ListView();
@@ -88,6 +89,7 @@
             this.btnNewColour = new System.Windows.Forms.Button();
             this.tpgCreatures = new System.Windows.Forms.TabPage();
             this.grpCreaturesNotMapped = new System.Windows.Forms.GroupBox();
+            this.btnRefreshUnknownCreatures = new System.Windows.Forms.Button();
             this.btnCreaturesNotMappedAdd = new System.Windows.Forms.Button();
             this.lblCreaturesNotMapped = new System.Windows.Forms.Label();
             this.lblHeaderCreaturesNotMapped = new System.Windows.Forms.Label();
@@ -106,6 +108,7 @@
             this.btnRemoveDinoClass = new System.Windows.Forms.Button();
             this.tpgStructures = new System.Windows.Forms.TabPage();
             this.grpStructuresNotMapped = new System.Windows.Forms.GroupBox();
+            this.btnRefreshUnknownStructures = new System.Windows.Forms.Button();
             this.btnStructuresNotMappedAdd = new System.Windows.Forms.Button();
             this.lblStructuresNotMapped = new System.Windows.Forms.Label();
             this.lblHeaderStructuresNotMapped = new System.Windows.Forms.Label();
@@ -123,6 +126,7 @@
             this.btnRemoveStructure = new System.Windows.Forms.Button();
             this.tpgItems = new System.Windows.Forms.TabPage();
             this.grpItemsNotMatched = new System.Windows.Forms.GroupBox();
+            this.btnRefreshUnknownItems = new System.Windows.Forms.Button();
             this.btnItemsNotMatchedAdd = new System.Windows.Forms.Button();
             this.lblItemsNotMatched = new System.Windows.Forms.Label();
             this.lblHeaderItemsNotMatched = new System.Windows.Forms.Label();
@@ -237,10 +241,8 @@
             this.lblOptionHeaderBody = new System.Windows.Forms.Label();
             this.lblOptionTextBody = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnRefreshUnknownColours = new System.Windows.Forms.Button();
-            this.btnRefreshUnknownCreatures = new System.Windows.Forms.Button();
-            this.btnRefreshUnknownStructures = new System.Windows.Forms.Button();
-            this.btnRefreshUnknownItems = new System.Windows.Forms.Button();
+            this.btnEditARK = new System.Windows.Forms.Button();
+            this.btnSelectFolder = new System.Windows.Forms.Button();
             this.tabSettings.SuspendLayout();
             this.tpgMap.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -636,6 +638,7 @@
             // 
             // grpOffline
             // 
+            this.grpOffline.Controls.Add(this.btnEditARK);
             this.grpOffline.Controls.Add(this.btnRemoveARK);
             this.grpOffline.Controls.Add(this.btnAddARK);
             this.grpOffline.Controls.Add(this.cboLocalARK);
@@ -652,7 +655,7 @@
             this.btnRemoveARK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnRemoveARK.Enabled = false;
             this.btnRemoveARK.Image = global::ARKViewer.Properties.Resources.button_remove;
-            this.btnRemoveARK.Location = new System.Drawing.Point(407, 28);
+            this.btnRemoveARK.Location = new System.Drawing.Point(413, 28);
             this.btnRemoveARK.Name = "btnRemoveARK";
             this.btnRemoveARK.Size = new System.Drawing.Size(35, 35);
             this.btnRemoveARK.TabIndex = 7;
@@ -665,7 +668,7 @@
             this.btnAddARK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAddARK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnAddARK.Image = global::ARKViewer.Properties.Resources.button_add;
-            this.btnAddARK.Location = new System.Drawing.Point(367, 28);
+            this.btnAddARK.Location = new System.Drawing.Point(373, 28);
             this.btnAddARK.Name = "btnAddARK";
             this.btnAddARK.Size = new System.Drawing.Size(35, 35);
             this.btnAddARK.TabIndex = 6;
@@ -682,7 +685,7 @@
             this.cboLocalARK.FormattingEnabled = true;
             this.cboLocalARK.Location = new System.Drawing.Point(18, 34);
             this.cboLocalARK.Name = "cboLocalARK";
-            this.cboLocalARK.Size = new System.Drawing.Size(343, 24);
+            this.cboLocalARK.Size = new System.Drawing.Size(306, 24);
             this.cboLocalARK.TabIndex = 5;
             this.cboLocalARK.SelectedIndexChanged += new System.EventHandler(this.cboLocalARK_SelectedIndexChanged);
             // 
@@ -701,6 +704,7 @@
             // 
             // grpSinglePlayer
             // 
+            this.grpSinglePlayer.Controls.Add(this.btnSelectFolder);
             this.grpSinglePlayer.Controls.Add(this.chkUpdateNotificationSingle);
             this.grpSinglePlayer.Controls.Add(this.lblSelectedMapSP);
             this.grpSinglePlayer.Controls.Add(this.cboMapSinglePlayer);
@@ -742,7 +746,7 @@
             this.cboMapSinglePlayer.FormattingEnabled = true;
             this.cboMapSinglePlayer.Location = new System.Drawing.Point(19, 34);
             this.cboMapSinglePlayer.Name = "cboMapSinglePlayer";
-            this.cboMapSinglePlayer.Size = new System.Drawing.Size(430, 21);
+            this.cboMapSinglePlayer.Size = new System.Drawing.Size(391, 21);
             this.cboMapSinglePlayer.TabIndex = 1;
             this.cboMapSinglePlayer.SelectedIndexChanged += new System.EventHandler(this.cboMapSinglePlayer_SelectedIndexChanged);
             // 
@@ -769,6 +773,19 @@
             this.grpColoursNotMapped.Size = new System.Drawing.Size(508, 256);
             this.grpColoursNotMapped.TabIndex = 1;
             this.grpColoursNotMapped.TabStop = false;
+            // 
+            // btnRefreshUnknownColours
+            // 
+            this.btnRefreshUnknownColours.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefreshUnknownColours.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshUnknownColours.Image = global::ARKViewer.Properties.Resources.button_refresh;
+            this.btnRefreshUnknownColours.Location = new System.Drawing.Point(13, 212);
+            this.btnRefreshUnknownColours.Name = "btnRefreshUnknownColours";
+            this.btnRefreshUnknownColours.Size = new System.Drawing.Size(35, 35);
+            this.btnRefreshUnknownColours.TabIndex = 4;
+            this.toolTip1.SetToolTip(this.btnRefreshUnknownColours, "Add mapping");
+            this.btnRefreshUnknownColours.UseVisualStyleBackColor = true;
+            this.btnRefreshUnknownColours.Click += new System.EventHandler(this.btnRefreshUnknownColours_Click);
             // 
             // lblColourNotMapped
             // 
@@ -994,6 +1011,19 @@
             this.grpCreaturesNotMapped.TabIndex = 1;
             this.grpCreaturesNotMapped.TabStop = false;
             // 
+            // btnRefreshUnknownCreatures
+            // 
+            this.btnRefreshUnknownCreatures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefreshUnknownCreatures.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshUnknownCreatures.Image = global::ARKViewer.Properties.Resources.button_refresh;
+            this.btnRefreshUnknownCreatures.Location = new System.Drawing.Point(13, 212);
+            this.btnRefreshUnknownCreatures.Name = "btnRefreshUnknownCreatures";
+            this.btnRefreshUnknownCreatures.Size = new System.Drawing.Size(35, 35);
+            this.btnRefreshUnknownCreatures.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.btnRefreshUnknownCreatures, "Add mapping");
+            this.btnRefreshUnknownCreatures.UseVisualStyleBackColor = true;
+            this.btnRefreshUnknownCreatures.Click += new System.EventHandler(this.btnRefreshUnknownCreatures_Click);
+            // 
             // btnCreaturesNotMappedAdd
             // 
             this.btnCreaturesNotMappedAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1201,6 +1231,19 @@
             this.grpStructuresNotMapped.TabIndex = 1;
             this.grpStructuresNotMapped.TabStop = false;
             // 
+            // btnRefreshUnknownStructures
+            // 
+            this.btnRefreshUnknownStructures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefreshUnknownStructures.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshUnknownStructures.Image = global::ARKViewer.Properties.Resources.button_refresh;
+            this.btnRefreshUnknownStructures.Location = new System.Drawing.Point(13, 212);
+            this.btnRefreshUnknownStructures.Name = "btnRefreshUnknownStructures";
+            this.btnRefreshUnknownStructures.Size = new System.Drawing.Size(35, 35);
+            this.btnRefreshUnknownStructures.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.btnRefreshUnknownStructures, "Add mapping");
+            this.btnRefreshUnknownStructures.UseVisualStyleBackColor = true;
+            this.btnRefreshUnknownStructures.Click += new System.EventHandler(this.btnRefreshUnknownStructures_Click);
+            // 
             // btnStructuresNotMappedAdd
             // 
             this.btnStructuresNotMappedAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -1394,6 +1437,19 @@
             this.grpItemsNotMatched.Size = new System.Drawing.Size(508, 256);
             this.grpItemsNotMatched.TabIndex = 1;
             this.grpItemsNotMatched.TabStop = false;
+            // 
+            // btnRefreshUnknownItems
+            // 
+            this.btnRefreshUnknownItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnRefreshUnknownItems.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRefreshUnknownItems.Image = global::ARKViewer.Properties.Resources.button_refresh;
+            this.btnRefreshUnknownItems.Location = new System.Drawing.Point(13, 212);
+            this.btnRefreshUnknownItems.Name = "btnRefreshUnknownItems";
+            this.btnRefreshUnknownItems.Size = new System.Drawing.Size(35, 35);
+            this.btnRefreshUnknownItems.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.btnRefreshUnknownItems, "Add mapping");
+            this.btnRefreshUnknownItems.UseVisualStyleBackColor = true;
+            this.btnRefreshUnknownItems.Click += new System.EventHandler(this.btnRefreshUnknownItems_Click);
             // 
             // btnItemsNotMatchedAdd
             // 
@@ -2732,57 +2788,33 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Information";
             // 
-            // btnRefreshUnknownColours
+            // btnEditARK
             // 
-            this.btnRefreshUnknownColours.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefreshUnknownColours.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefreshUnknownColours.Image = global::ARKViewer.Properties.Resources.button_refresh;
-            this.btnRefreshUnknownColours.Location = new System.Drawing.Point(13, 212);
-            this.btnRefreshUnknownColours.Name = "btnRefreshUnknownColours";
-            this.btnRefreshUnknownColours.Size = new System.Drawing.Size(35, 35);
-            this.btnRefreshUnknownColours.TabIndex = 4;
-            this.toolTip1.SetToolTip(this.btnRefreshUnknownColours, "Add mapping");
-            this.btnRefreshUnknownColours.UseVisualStyleBackColor = true;
-            this.btnRefreshUnknownColours.Click += new System.EventHandler(this.btnRefreshUnknownColours_Click);
+            this.btnEditARK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditARK.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditARK.Enabled = false;
+            this.btnEditARK.Image = global::ARKViewer.Properties.Resources.button_edit;
+            this.btnEditARK.Location = new System.Drawing.Point(332, 28);
+            this.btnEditARK.Name = "btnEditARK";
+            this.btnEditARK.Size = new System.Drawing.Size(35, 35);
+            this.btnEditARK.TabIndex = 22;
+            this.toolTip1.SetToolTip(this.btnEditARK, "Edit details");
+            this.btnEditARK.UseVisualStyleBackColor = true;
+            this.btnEditARK.Click += new System.EventHandler(this.btnEditARK_Click);
             // 
-            // btnRefreshUnknownCreatures
+            // btnSelectFolder
             // 
-            this.btnRefreshUnknownCreatures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefreshUnknownCreatures.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefreshUnknownCreatures.Image = global::ARKViewer.Properties.Resources.button_refresh;
-            this.btnRefreshUnknownCreatures.Location = new System.Drawing.Point(13, 212);
-            this.btnRefreshUnknownCreatures.Name = "btnRefreshUnknownCreatures";
-            this.btnRefreshUnknownCreatures.Size = new System.Drawing.Size(35, 35);
-            this.btnRefreshUnknownCreatures.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.btnRefreshUnknownCreatures, "Add mapping");
-            this.btnRefreshUnknownCreatures.UseVisualStyleBackColor = true;
-            this.btnRefreshUnknownCreatures.Click += new System.EventHandler(this.btnRefreshUnknownCreatures_Click);
-            // 
-            // btnRefreshUnknownStructures
-            // 
-            this.btnRefreshUnknownStructures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefreshUnknownStructures.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefreshUnknownStructures.Image = global::ARKViewer.Properties.Resources.button_refresh;
-            this.btnRefreshUnknownStructures.Location = new System.Drawing.Point(13, 212);
-            this.btnRefreshUnknownStructures.Name = "btnRefreshUnknownStructures";
-            this.btnRefreshUnknownStructures.Size = new System.Drawing.Size(35, 35);
-            this.btnRefreshUnknownStructures.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.btnRefreshUnknownStructures, "Add mapping");
-            this.btnRefreshUnknownStructures.UseVisualStyleBackColor = true;
-            this.btnRefreshUnknownStructures.Click += new System.EventHandler(this.btnRefreshUnknownStructures_Click);
-            // 
-            // btnRefreshUnknownItems
-            // 
-            this.btnRefreshUnknownItems.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnRefreshUnknownItems.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRefreshUnknownItems.Image = global::ARKViewer.Properties.Resources.button_refresh;
-            this.btnRefreshUnknownItems.Location = new System.Drawing.Point(13, 212);
-            this.btnRefreshUnknownItems.Name = "btnRefreshUnknownItems";
-            this.btnRefreshUnknownItems.Size = new System.Drawing.Size(35, 35);
-            this.btnRefreshUnknownItems.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.btnRefreshUnknownItems, "Add mapping");
-            this.btnRefreshUnknownItems.UseVisualStyleBackColor = true;
-            this.btnRefreshUnknownItems.Click += new System.EventHandler(this.btnRefreshUnknownItems_Click);
+            this.btnSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectFolder.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSelectFolder.Enabled = false;
+            this.btnSelectFolder.Image = global::ARKViewer.Properties.Resources.button_folder;
+            this.btnSelectFolder.Location = new System.Drawing.Point(414, 26);
+            this.btnSelectFolder.Name = "btnSelectFolder";
+            this.btnSelectFolder.Size = new System.Drawing.Size(35, 35);
+            this.btnSelectFolder.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.btnSelectFolder, "Select ARK save location.");
+            this.btnSelectFolder.UseVisualStyleBackColor = true;
+            this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
             // 
             // frmSettings
             // 
@@ -3072,5 +3104,7 @@
         private System.Windows.Forms.Button btnRefreshUnknownCreatures;
         private System.Windows.Forms.Button btnRefreshUnknownStructures;
         private System.Windows.Forms.Button btnRefreshUnknownItems;
+        private System.Windows.Forms.Button btnEditARK;
+        private System.Windows.Forms.Button btnSelectFolder;
     }
 }

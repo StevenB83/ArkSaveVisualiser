@@ -85,12 +85,7 @@ namespace ASVPack.Models
 
         public void LoadSaveGame(string saveFilename, string localProfileFilename)
         {
-            
-
-
-
             logWriter.Trace("BEGIN LoadSaveGame()");
-
 
             if (!File.Exists(saveFilename))
             {
@@ -103,21 +98,32 @@ namespace ASVPack.Models
 
             long startTicks = DateTime.Now.Ticks;
 
-            if (localProfileFilename.Length > 0 && File.Exists(localProfileFilename))
+            try
             {
-                using (Stream streamProfile = new FileStream(localProfileFilename, FileMode.Open))
+                if (localProfileFilename.Length > 0 && File.Exists(localProfileFilename))
                 {
-                    using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
+
+                    logWriter.Info("Reading LocalProfile data...");
+                    using (Stream streamProfile = new FileStream(localProfileFilename, FileMode.Open))
                     {
-                        ArkLocalProfile arkProfile = new ArkLocalProfile();
-                        arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(true).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
-                        LocalProfile = new ContentLocalProfile(arkProfile);
+                        using (ArkArchive archiveProfile = new ArkArchive(streamProfile))
+                        {
+                            ArkLocalProfile arkProfile = new ArkLocalProfile();
+                            arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(true).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
+                            LocalProfile = new ContentLocalProfile(arkProfile);
+                        }
                     }
+
                 }
 
             }
+            catch
+            {
+                //ignore, not really that bothered about LocalProfile, added bonus if it is read in.
+            }
 
 
+            logWriter.Info("Reading game save data...");
             try
             {
                 List<ContentTribe> tribeContentList = new List<ContentTribe>();
@@ -175,6 +181,9 @@ namespace ASVPack.Models
                         TimeSpan timeTaken = TimeSpan.FromTicks(saveLoadTime - startTicks);
                         logWriter.Info($"Game data loaded in: {timeTaken.ToString(@"mm\:ss")}.");
 
+
+
+                        logWriter.Info("Reading mission leaderboard data...");
                         List<ContentLeaderboard> leaderboardList = new List<ContentLeaderboard>();
 
                         var testGameMode = objectContainer.FirstOrDefault(x => x.ClassString == "TestGameMode_C");
@@ -235,9 +244,10 @@ namespace ASVPack.Models
                         }
 
 
+
                         var filePath = Path.GetDirectoryName(saveFilename);
                         long profileStart = DateTime.Now.Ticks;
-                        logWriter.Debug($"Reading .arkprofile(s)");
+                        logWriter.Info("Reading .arkprofile(s)");
                         ConcurrentBag<ContentPlayer> fileProfiles = new ConcurrentBag<ContentPlayer>();
                         var profileFilenames = Directory.GetFiles(filePath, "*.arkprofile");
                         profileFilenames.AsParallel().ForAll(x =>
@@ -299,7 +309,7 @@ namespace ASVPack.Models
                         });
 
                         long tribeStart = DateTime.Now.Ticks;
-                        logWriter.Debug($"Reading .arktribe(s)");
+                        logWriter.Info("Reading .arktribe(s)");
 
                         var tribeFilenames = Directory.GetFiles(filePath, "*.arktribe");
                         tribeFilenames.AsParallel().ForAll(x =>
@@ -341,7 +351,7 @@ namespace ASVPack.Models
                         long tribeEnd = DateTime.Now.Ticks;
 
 
-                        logWriter.Debug($"Allocating players to tribes");
+                        logWriter.Info($"Allocating players to tribes");
 
                         //allocate players to tribes
                         fileProfiles.AsParallel().ForAll(p =>
@@ -369,7 +379,7 @@ namespace ASVPack.Models
                         long structureStart = DateTime.Now.Ticks;
 
 
-                        logWriter.Debug($"Identifying map structures");
+                        logWriter.Info($"Identifying map structures");
                         //map structures we care about
                         MapStructures = objectContainer.Objects.Where(x =>
                             x.Location != null
@@ -477,7 +487,7 @@ namespace ASVPack.Models
                         long wildStart = DateTime.Now.Ticks;
 
 
-                        logWriter.Debug($"Identifying wild creatures");
+                        logWriter.Info($"Identifying wild creatures");
                         //wilds
                         WildCreatures = objectContainer.Objects.AsParallel().Where(x => x.IsWild())
                             .Select(x =>
@@ -535,7 +545,7 @@ namespace ASVPack.Models
 
                         var parallelContainer = objectContainer.AsParallel();
 
-                        logWriter.Debug($"Identifying tamed creatures");
+                        logWriter.Info($"Identifying tamed creatures");
                         var allTames = parallelContainer
                                         .Where(x => x.IsTamed()) //exclude rafts.. no idea why these are "creatures"
                                         .GroupBy(x => new { TribeId = (long)x.GetPropertyValue<int>("TargetingTeam"), TribeName = x.GetPropertyValue<string>("TamerString") });
@@ -1214,6 +1224,7 @@ namespace ASVPack.Models
 
                     }
                 }
+
 
                 long endTicks = DateTime.Now.Ticks;
                 var duration = TimeSpan.FromTicks(endTicks - startTicks);

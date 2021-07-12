@@ -12,6 +12,7 @@ using ARKViewer.Models;
 using ARKViewer.Models.NameMap;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using ASVPack.Models;
 
 namespace ARKViewer.Configuration
 {
@@ -86,10 +87,11 @@ namespace ARKViewer.Configuration
         [DataMember(IsRequired = false, EmitDefaultValue = false)] public bool ExportInventories { get; set; } = false;
         [DataMember(IsRequired = false, EmitDefaultValue = true)] public LogColourMap TribeLogColours { get; set; } = new LogColourMap();
         [DataMember(IsRequired = false)] public bool StoredTames { get; set; } = false;
+        [DataMember] public string ArkSavedGameFolder { get; set; } = "";
 
 
         public List<DinoClassMap> DinoMap = new List<DinoClassMap>();
-        public List<ASVMapMarker> MapMarkerList { get; set; } = new List<ASVMapMarker>();
+        public List<ContentMarker> MapMarkerList { get; set; } = new List<ContentMarker>();
         public List<ItemClassMap> ItemMap { get; set; } = new List<ItemClassMap>();
         public List<StructureClassMap> StructureMap { get; set; } = new List<StructureClassMap>();
         public List<ColourMap> ColourMap { get; set; } = new List<ColourMap>();
@@ -191,7 +193,7 @@ namespace ARKViewer.Configuration
             JArray markerArray = new JArray();
             if (MapMarkerList.Count > 0)
             {
-                foreach (var marker in MapMarkerList)
+                foreach (var marker in MapMarkerList.Where(x => x.InGameMarker == false))
                 {
                     JObject markerObject = new JObject();
                     markerObject.Add(new JProperty("Map", marker.Map));
@@ -202,6 +204,8 @@ namespace ARKViewer.Configuration
                     markerObject.Add(new JProperty("BorderWidth", marker.BorderWidth));
                     markerObject.Add(new JProperty("Lat", marker.Lat));
                     markerObject.Add(new JProperty("Lon", marker.Lon));
+                    markerObject.Add(new JProperty("Visible", marker.Displayed));
+
 
                     markerArray.Add(markerObject);
                 }
@@ -259,7 +263,7 @@ JArray itemList = (JArray)itemFile.GetValue("colors");
             }
 
             //load markers
-            MapMarkerList = new List<ASVMapMarker>();
+            MapMarkerList = new List<ContentMarker>();
             string markerFilename = Path.Combine(savePath, "mapmarkers.json");
             if (File.Exists(markerFilename))
             {
@@ -269,7 +273,7 @@ JArray itemList = (JArray)itemFile.GetValue("colors");
                 JArray markerList = (JArray)markerFile.GetValue("markers");
                 foreach (JObject markerObject in markerList)
                 {
-                    ASVMapMarker mapMarker = new ASVMapMarker();
+                    ContentMarker mapMarker = new ContentMarker();
 
                     mapMarker.Map = markerObject.Value<string>("Map");
                     mapMarker.Name = markerObject.Value<string>("Name");
@@ -279,6 +283,8 @@ JArray itemList = (JArray)itemFile.GetValue("colors");
                     mapMarker.Image = markerObject.Value<string>("Image");
                     mapMarker.Lat = markerObject.Value<double>("Lat");
                     mapMarker.Lon = markerObject.Value<double>("Lon");
+                    mapMarker.Displayed= markerObject.Value<bool>("Visible");
+
 
 
                     MapMarkerList.Add(mapMarker);

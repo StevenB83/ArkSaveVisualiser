@@ -1,6 +1,7 @@
 ﻿using ARKViewer.Configuration;
 using ARKViewer.Models;
 using ASVPack.Models;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
@@ -37,11 +38,14 @@ namespace ARKViewer
 
         public static string GetSteamFolder()
         {
-            string directoryCheck = "";
+            string directoryCheck = Program.ProgramConfig.ArkSavedGameFolder;
 
             try
             {
-                string steamRoot = Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString();
+                RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Valve\Steam");
+                if (key == null) return "";
+
+                string steamRoot = key.GetValue("SteamPath", "").ToString();
 
                 if (steamRoot != null && steamRoot.Length > 0)
                 {
@@ -60,6 +64,11 @@ namespace ARKViewer
                                 {
                                     //check 4th param as a path
                                     directoryCheck = lineContent[3].ToString().Replace("\"", "").Replace(@"\\", @"\") + @"\SteamApps\Common\ARK\ShooterGame\Saved\";
+                                    if (Directory.Exists(directoryCheck))
+                                    {
+                                        Program.ProgramConfig.ArkSavedGameFolder = directoryCheck;
+                                        break;
+                                    }
                                 }
 
                             }

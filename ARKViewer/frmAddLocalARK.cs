@@ -66,6 +66,13 @@ namespace ARKViewer
         }
 
 
+        public frmAddLocalARK(ASVComboValue selectedValue): this()
+        {
+            txtFilename.Text = selectedValue.Key;
+            txtName.Text = selectedValue.Value;
+            btnSave.Enabled = true;
+        }
+
         public frmAddLocalARK()
         {
             InitializeComponent();

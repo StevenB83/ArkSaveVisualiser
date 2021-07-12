@@ -41,6 +41,7 @@ namespace ARKViewer
             this.picIcon = new System.Windows.Forms.PictureBox();
             this.btnSave = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             this.pnlZoom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackZoom)).BeginInit();
             this.pnlMap.SuspendLayout();
@@ -103,6 +104,7 @@ namespace ARKViewer
             this.picMap.TabStop = false;
             this.picMap.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseClick);
             this.picMap.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseDown);
+            this.picMap.MouseHover += new System.EventHandler(this.picMap_MouseHover);
             this.picMap.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picMap_MouseMove);
             // 
             // btnMapMarkers
@@ -169,6 +171,14 @@ namespace ARKViewer
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // toolTip1
+            // 
+            this.toolTip1.StripAmpersands = true;
+            // 
+            // toolTip2
+            // 
+            this.toolTip2.StripAmpersands = true;
+            // 
             // frmMapView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,5 +219,6 @@ namespace ARKViewer
         private System.Windows.Forms.PictureBox picIcon;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
     }
 }

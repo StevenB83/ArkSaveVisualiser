@@ -363,6 +363,7 @@
             this.columnHeader35 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader36 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwLeaderboard = new System.Windows.Forms.ListView();
+            this.lvwLeaderboard_Mission = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwLeaderboard_Tribe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwLeaderboard_Player = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwLeaderboard_Score = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -378,7 +379,6 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMap = new System.Windows.Forms.Label();
             this.cboSelectedMap = new System.Windows.Forms.ComboBox();
-            this.lvwLeaderboard_Mission = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.mnuContext.SuspendLayout();
             this.tabFeatures.SuspendLayout();
             this.tpgWild.SuspendLayout();
@@ -799,6 +799,7 @@
             // 
             this.btnDinoInventory.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnDinoInventory.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDinoInventory.Enabled = false;
             this.btnDinoInventory.Image = ((System.Drawing.Image)(resources.GetObject("btnDinoInventory.Image")));
             this.btnDinoInventory.Location = new System.Drawing.Point(606, 403);
             this.btnDinoInventory.Name = "btnDinoInventory";
@@ -3636,6 +3637,11 @@
             this.lvwLeaderboard.View = System.Windows.Forms.View.Details;
             this.lvwLeaderboard.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.lvwLeaderboard_ColumnClick);
             // 
+            // lvwLeaderboard_Mission
+            // 
+            this.lvwLeaderboard_Mission.Text = "Mission";
+            this.lvwLeaderboard_Mission.Width = 350;
+            // 
             // lvwLeaderboard_Tribe
             // 
             this.lvwLeaderboard_Tribe.Text = "Tribe";
@@ -3781,11 +3787,6 @@
             this.cboSelectedMap.Size = new System.Drawing.Size(207, 21);
             this.cboSelectedMap.TabIndex = 26;
             this.cboSelectedMap.SelectedIndexChanged += new System.EventHandler(this.cboSelectedMap_SelectedIndexChanged);
-            // 
-            // lvwLeaderboard_Mission
-            // 
-            this.lvwLeaderboard_Mission.Text = "Mission";
-            this.lvwLeaderboard_Mission.Width = 350;
             // 
             // frmViewer
             // 

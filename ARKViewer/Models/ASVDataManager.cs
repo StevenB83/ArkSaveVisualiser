@@ -1585,6 +1585,12 @@ namespace ARKViewer.Models
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
+
+
+
+
+
+
             if (cacheImagePlayerStructures != null
                 && cacheImagePlayerStructures.Item1 == className
                 && cacheImagePlayerStructures.Item2 == tribeId
@@ -1638,6 +1644,14 @@ namespace ARKViewer.Models
             Graphics graphics = Graphics.FromImage(bitmap);
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+
+
+
+
+
+
+
+
 
             if (cacheImageTribes != null
                 && cacheImageTribes.Item1 == tribeId
@@ -2155,9 +2169,15 @@ namespace ARKViewer.Models
 
             return g;
         }
+
+        //area, name tooltip
+        public List<Tuple<RectangleF, string>> CustomMarkerRegions = new List<Tuple<RectangleF, string>>();
+
         private Graphics AddCustomMarkers(Graphics g, List<ContentMarker> markers)
         {
-            foreach (var marker in markers)
+            CustomMarkerRegions = new List<Tuple<RectangleF,string>>();
+
+            foreach (var marker in markers.Where(x=>x.Displayed))
             {
                 var markerX = (decimal)(marker.Lon) * 1024 / 100;
                 var markerY = (decimal)(marker.Lat) * 1024 / 100;
@@ -2165,10 +2185,12 @@ namespace ARKViewer.Models
                 Color markerBackGround = Color.FromArgb(marker.Colour);
                 g.FillEllipse(new SolidBrush(markerBackGround), (float)markerX - 17.5f, (float)markerY - 17.5f, 35, 35);
 
+                RectangleF markerRect = new RectangleF(new PointF((float)markerX - 17.5f, (float)markerY - 17.5f), new SizeF(35f, 35f));
+                CustomMarkerRegions.Add(new Tuple<RectangleF, string>(markerRect,marker.Name));
 
                 if (marker.Image.Length > 0)
                 {
-                    string imageFilename = Path.Combine(Program.ItemImageFolder, marker.Image);
+                    string imageFilename = Path.Combine(Program.MarkerImageFolder, marker.Image);
                     if (File.Exists(imageFilename))
                     {
                         Image markerImage = Image.FromFile(imageFilename);

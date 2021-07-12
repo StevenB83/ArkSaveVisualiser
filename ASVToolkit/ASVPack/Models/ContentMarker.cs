@@ -11,6 +11,7 @@ namespace ASVPack.Models
     [DataContract]
     public class ContentMarker
     {
+        [DataMember] public string Map { get; set; } = "";
         [DataMember] public string Name { get; set; } = "";
         [DataMember] public int Colour { get; set; } = Color.White.ToArgb();
         [DataMember] public string Image { get; set; } = "";
@@ -19,5 +20,6 @@ namespace ASVPack.Models
         [DataMember] public double Lat { get; set; } = 0;
         [DataMember] public double Lon { get; set; } = 0;
         [DataMember] public bool Displayed { get; set; } = false;
+        [DataMember] public bool InGameMarker { get; set; }  = false;
     }
 }

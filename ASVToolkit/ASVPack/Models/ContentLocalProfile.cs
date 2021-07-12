@@ -47,6 +47,8 @@ namespace ASVPack.Models
                         newMarker.Lat = lat;
                         newMarker.Lon = lon;
                         newMarker.Name = markerName;
+                        newMarker.Map = mapName;
+                        newMarker.InGameMarker = true;
 
                         var markerColor = markerProperties.GetTypedProperty<PropertyStruct>("OverrideMarkerTextColor")?.Value;
                         if (markerColor != null)

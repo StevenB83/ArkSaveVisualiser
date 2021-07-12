@@ -16,7 +16,9 @@ namespace ARKViewer
 {
     public partial class frmMapToolboxMarkers : Form
     {
+        private bool isLoading = false;
         private frmMapView MapViewer = null;
+
         private ColumnHeader SortingColumn_Markers = null;
 
         private static frmMapToolboxMarkers inst;
@@ -96,6 +98,10 @@ namespace ARKViewer
 
         private void PopulateCustomMarkers()
         {
+
+            lvwMapMarkers.ItemChecked -= lvwMapMarkers_ItemChecked;
+
+            isLoading = true;
             lvwMapMarkers.SmallImageList = Program.MarkerImageList;
             lvwMapMarkers.LargeImageList = Program.MarkerImageList;
 
@@ -104,7 +110,7 @@ namespace ARKViewer
             lvwMapMarkers.BeginUpdate();
             foreach (var marker in MapViewer.CustomMarkers)
             {
-                if (marker.Name.ToLower().Contains(txtMarkerFilter.Text.ToLower()))
+                if (txtMarkerFilter.TextLength == 0 ||  marker.Name.ToLower().Contains(txtMarkerFilter.Text.ToLower()))
                 {
                     ListViewItem newItem = lvwMapMarkers.Items.Add(marker.Name);
                     newItem.ImageIndex = Program.GetMarkerImageIndex(marker.Image) - 1;
@@ -120,10 +126,37 @@ namespace ARKViewer
             }
 
             lvwMapMarkers.EndUpdate();
+
+            lvwMapMarkers.ItemChecked += lvwMapMarkers_ItemChecked;
+
+            isLoading = false;
         }
 
         private void lvwMapMarkers_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (lvwMapMarkers.Items.Count == 0) return;
+
+            decimal selectedX = 0;
+            decimal selectedY = 0;
+            ContentMarker selectedMarker = null;
+
+            if (lvwMapMarkers.SelectedItems.Count > 0)
+            {
+                selectedMarker = (ContentMarker)lvwMapMarkers.SelectedItems[0].Tag;
+                selectedX = (decimal)selectedMarker.Lon;
+                selectedY = (decimal)selectedMarker.Lat;
+
+            }
+            MapViewer.DrawTestMap(selectedX, selectedY);
+
+            btnEditMarker.Enabled = selectedMarker != null && selectedMarker.InGameMarker == false;
+            btnRemoveMarker.Enabled = selectedMarker!=null && selectedMarker.InGameMarker == false;
+        }
+
+        private void lvwMapMarkers_ItemChecked(object sender, ItemCheckedEventArgs e)
+        {
+            if (lvwMapMarkers.Items.Count == 0 || isLoading) return;
+
             decimal selectedX = 0;
             decimal selectedY = 0;
 
@@ -134,35 +167,34 @@ namespace ARKViewer
                 selectedY = (decimal)selectedMarker.Lat;
 
             }
-            MapViewer.DrawTestMap(selectedX, selectedY);
+
+            ContentMarker checkMarker = (ContentMarker)e.Item.Tag;
+            if (checkMarker != null)
+            {
+                checkMarker.Displayed = e.Item.Checked;
+
+                var mapViewMarker = MapViewer.CustomMarkers.FirstOrDefault(x => x.Map == checkMarker.Map && x.Name == checkMarker.Name);
+                mapViewMarker.Displayed = checkMarker.Displayed;
+
+                var configMarker = Program.ProgramConfig.MapMarkerList.FirstOrDefault(x => x.Map == checkMarker.Map && x.Name == checkMarker.Name);
+                mapViewMarker.Displayed = checkMarker.Displayed;
+
+                MapViewer.DrawTestMap(selectedX, selectedY);
+            }
+
         }
 
-        private void lvwMapMarkers_ItemChecked(object sender, ItemCheckedEventArgs e)
+        private void UpdateSavedMarkers()
         {
-            MapViewer.CustomMarkers.Clear();
-            if (lvwMapMarkers.CheckedItems.Count == 0) return;
+            if (isLoading) return;
+            MapViewer.CustomMarkers = new List<ContentMarker>();
 
             foreach (ListViewItem checkedItem in lvwMapMarkers.Items)
             {
                 ContentMarker itemMarker = (ContentMarker)checkedItem.Tag;
                 itemMarker.Displayed = checkedItem.Checked;
-                checkedItem.Tag = itemMarker;
-
-                if (checkedItem.Checked) MapViewer.CustomMarkers.Add(itemMarker);
+                MapViewer.CustomMarkers.Add(itemMarker);
             }
-
-            decimal selectedX = 0;
-            decimal selectedY = 0;
-
-            if (lvwMapMarkers.SelectedItems.Count > 0)
-            {
-                ContentMarker selectedMarker = (ContentMarker)lvwMapMarkers.SelectedItems[0].Tag;
-                selectedX = (decimal)selectedMarker.Lon;
-                selectedY = (decimal)selectedMarker.Lat;
-
-            }
-
-            MapViewer.DrawTestMap(selectedX, selectedY);
         }
 
         private void lvwMapMarkers_ColumnClick(object sender, ColumnClickEventArgs e)
@@ -223,17 +255,20 @@ namespace ARKViewer
 
         private void btnAddMarker_Click(object sender, EventArgs e)
         {
-            frmMarkerEditor markerEditor = new frmMarkerEditor(Path.GetFileName(ARKViewer.Program.ProgramConfig.SelectedFile), ARKViewer.Program.ProgramConfig.MapMarkerList, "");
+            frmMarkerEditor markerEditor = new frmMarkerEditor(MapViewer.GetMapFileName(), ARKViewer.Program.ProgramConfig.MapMarkerList, "");
             markerEditor.Owner = this;
             if (markerEditor.ShowDialog() == DialogResult.OK)
             {
                 ListViewItem newItem = lvwMapMarkers.Items.Add(markerEditor.EditingMarker.Name);
+                newItem.Tag = markerEditor.EditingMarker;
+
                 newItem.ImageIndex = Program.GetMarkerImageIndex(markerEditor.EditingMarker.Image) - 1;
                 newItem.SubItems.Add(markerEditor.EditingMarker.Lat.ToString("0.00"));
                 newItem.SubItems.Add(markerEditor.EditingMarker.Lon.ToString("0.00"));
-                newItem.Tag = markerEditor.EditingMarker;
 
-                ARKViewer.Program.ProgramConfig.MapMarkerList.Add(markerEditor.EditingMarker);
+                MapViewer.CustomMarkers.Add(markerEditor.EditingMarker);
+                Program.ProgramConfig.MapMarkerList.Add(markerEditor.EditingMarker);
+                MapViewer.DrawTestMap(0, 0);
             }
         }
 
@@ -242,14 +277,19 @@ namespace ARKViewer
             if (lvwMapMarkers.SelectedItems.Count == 0) return;
 
             ListViewItem selectedItem = lvwMapMarkers.SelectedItems[0];
-            ASVMapMarker selectedMarker = (ASVMapMarker)selectedItem.Tag;
+            ContentMarker selectedMarker = (ContentMarker)selectedItem.Tag;
             if (MessageBox.Show($"Are you sure you want to remove your marker for '{selectedMarker.Name}'?", "Remove Marker?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 lvwMapMarkers.Items.Remove(selectedItem);
-                if (ARKViewer.Program.ProgramConfig.MapMarkerList.Contains(selectedMarker))
-                {
-                    ARKViewer.Program.ProgramConfig.MapMarkerList.Remove(selectedMarker);
-                }
+
+
+                var mapViewMarker = MapViewer.CustomMarkers.FirstOrDefault(x => x.Map == selectedMarker.Map && x.Name == selectedMarker.Name);
+                if (mapViewMarker != null) MapViewer.CustomMarkers.Remove(mapViewMarker);
+                
+                var configMarker = Program.ProgramConfig.MapMarkerList.FirstOrDefault(x => x.Map == selectedMarker.Map && x.Name == selectedMarker.Name);
+                if (configMarker != null) Program.ProgramConfig.MapMarkerList.Remove(configMarker);
+
+                MapViewer.DrawTestMap(0, 0);
             }
         }
 
@@ -270,26 +310,29 @@ namespace ARKViewer
             if (lvwMapMarkers.SelectedItems.Count == 0) return;
 
             ListViewItem selectedItem = lvwMapMarkers.SelectedItems[0];
-            ASVMapMarker selectedMarker = (ASVMapMarker)selectedItem.Tag;
+            ContentMarker selectedMarker = (ContentMarker)selectedItem.Tag;
 
-            frmMarkerEditor markerEditor = new frmMarkerEditor(Path.GetFileName(ARKViewer.Program.ProgramConfig.SelectedFile), Program.ProgramConfig.MapMarkerList, selectedMarker.Name);
+            frmMarkerEditor markerEditor = new frmMarkerEditor(MapViewer.GetMapFileName(), Program.ProgramConfig.MapMarkerList, selectedMarker.Name);
             markerEditor.Owner = this;
             if (markerEditor.ShowDialog() == DialogResult.OK)
             {
                 selectedItem.Text = markerEditor.EditingMarker.Name;
-                selectedItem.ImageKey = $"marker_{markerEditor.EditingMarker.Image}";
+                //selectedItem.ImageKey = $"marker_{markerEditor.EditingMarker.Image}";
                 selectedItem.SubItems[1].Text = markerEditor.EditingMarker.Lat.ToString("0.00");
                 selectedItem.SubItems[2].Text = markerEditor.EditingMarker.Lon.ToString("0.00");
                 selectedItem.Tag = markerEditor.EditingMarker;
 
-                if (ARKViewer.Program.ProgramConfig.MapMarkerList.Contains(selectedMarker))
-                {
-                    ARKViewer.Program.ProgramConfig.MapMarkerList.Remove(selectedMarker);
-                    ARKViewer.Program.ProgramConfig.MapMarkerList.Add(markerEditor.EditingMarker);
-                }
+                var mapViewMarker = MapViewer.CustomMarkers.FirstOrDefault(x => x.Map == selectedMarker.Map && x.Name == selectedMarker.Name);
+                if (mapViewMarker != null) MapViewer.CustomMarkers.Remove(mapViewMarker);
+                MapViewer.CustomMarkers.Add(markerEditor.EditingMarker);
+
+                var configMarker = Program.ProgramConfig.MapMarkerList.FirstOrDefault(x => x.Map == selectedMarker.Map && x.Name == selectedMarker.Name);
+                if (configMarker != null) Program.ProgramConfig.MapMarkerList.Remove(configMarker);
+                Program.ProgramConfig.MapMarkerList.Add(markerEditor.EditingMarker);
+
+                MapViewer.DrawTestMap(0, 0);
 
             }
         }
-
     }
 }

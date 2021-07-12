@@ -1,5 +1,6 @@
 ﻿using ARKViewer.Configuration;
 using ARKViewer.Models;
+using ASVPack.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,8 @@ namespace ARKViewer
     public partial class frmMarkerEditor : Form
     {
         private string selectedMap = "TheIsland.ark";
-        public ASVMapMarker EditingMarker { get; set; } = new ASVMapMarker();
-        private List<ASVMapMarker> markerList = new List<ASVMapMarker>();
+        public ContentMarker EditingMarker { get; set; } = new ContentMarker();
+        private List<ContentMarker> markerList = new List<ContentMarker>();
         string imageFolder = "";
 
         private void LoadWindowSettings()
@@ -68,7 +69,7 @@ namespace ARKViewer
         }
 
 
-        public frmMarkerEditor(string currentMapFile, List<ASVMapMarker> currentMarkers, string selectedMarkerName)
+        public frmMarkerEditor(string currentMapFile, List<ContentMarker> currentMarkers, string selectedMarkerName)
         {
             InitializeComponent();
             LoadWindowSettings();
@@ -82,7 +83,7 @@ namespace ARKViewer
             if (selectedMarkerName.Length > 0)
             {
                 //attempt to find and load it
-                ASVMapMarker selectedMarker = currentMarkers.Where(m => m.Map.ToLower() == currentMapFile.ToLower() && m.Name == selectedMarkerName).FirstOrDefault();
+                ContentMarker selectedMarker = currentMarkers.Where(m => m.Map.ToLower() == currentMapFile.ToLower() && m.Name == selectedMarkerName).FirstOrDefault();
                 EditingMarker = selectedMarker;
             }
 
@@ -184,6 +185,9 @@ namespace ARKViewer
             EditingMarker.Lon = (double)udLon.Value;
 
             EditingMarker.Image = picIcon.Tag.ToString();
+
+            this.DialogResult = DialogResult.OK;
+            this.Close();
         }
 
         private void picIcon_Click(object sender, EventArgs e)

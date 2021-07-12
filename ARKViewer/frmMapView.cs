@@ -18,6 +18,7 @@ namespace ARKViewer
     public partial class frmMapView : Form
     {
 
+
         private static frmMapView inst;
         public static frmMapView GetForm(ASVDataManager manager)
         {
@@ -28,6 +29,13 @@ namespace ARKViewer
             }
 
             return inst;
+        }
+
+        public string GetMapFileName()
+        {
+            if (cm == null) return "";
+
+            return cm.MapFilename;
         }
 
         private static ASVDataManager cm;
@@ -203,6 +211,7 @@ namespace ARKViewer
             int movementX = e.X - mapMouseDownX;
 
 
+
             if (e.Button == MouseButtons.Left)
             {
                 picMap.Left = picMap.Left + movementX;
@@ -225,6 +234,33 @@ namespace ARKViewer
                     }
                 }
             }
+
+            if(e.Button == MouseButtons.None)
+            {
+                if (picMap.Image == null) return;
+
+                double zoomLevel = (double)picMap.Height / (double)picMap.Image.Height;
+                double clickY = e.Y / (zoomLevel);
+                double clickX = e.X / (zoomLevel);
+
+                var customMarker = cm.CustomMarkerRegions.FirstOrDefault(x =>
+                    clickY >= x.Item1.Top
+                    && clickY <= x.Item1.Top + x.Item1.Height
+                    && clickX >= x.Item1.Left
+                    && clickX <= x.Item1.Left + x.Item1.Width
+                );
+
+                if (customMarker != null)
+                {
+                    toolTip2.SetToolTip(picMap, customMarker.Item2);
+                }
+                else
+                {
+                    toolTip2.RemoveAll();
+                }
+            }
+            
+
         }
 
         private void picMap_MouseClick(object sender, MouseEventArgs e)
@@ -237,8 +273,7 @@ namespace ARKViewer
 
             double latitude = clickY / 10.25;
             double longitude = clickX / 10.25;
-
-            OnMapClicked?.Invoke((decimal)latitude, (decimal)longitude);
+            if(e.Button == MouseButtons.Left) OnMapClicked?.Invoke((decimal)latitude, (decimal)longitude);
         }
 
         private void trackZoom_ValueChanged(object sender, EventArgs e)
@@ -315,6 +350,11 @@ namespace ARKViewer
                     MessageBox.Show("Map image saved.", "Save Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+        }
+
+        private void picMap_MouseHover(object sender, EventArgs e)
+        {
+
         }
     }
 }
