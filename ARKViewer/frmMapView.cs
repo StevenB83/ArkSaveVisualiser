@@ -101,47 +101,171 @@ namespace ARKViewer
         public void DrawMapImageTribes(long tribeId, bool showStructures, bool showPlayers, bool showTames, decimal selectedLat, decimal selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImageTribes(tribeId, showStructures, showPlayers, showTames, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            ASVStructureOptions mapOptions = new ASVStructureOptions()
+            {
+                Terminals = c.Obelisks,
+                Glitches = c.Glitches,
+                ChargeNodes = c.ChargeNodes,
+                BeaverDams = c.BeaverDams,
+                DeinoNests = c.DeinoNests,
+                WyvernNests = c.WyvernNests,
+                DrakeNests = c.DrakeNests,
+                MagmaNests = c.MagmaNests,
+                Artifacts = c.Artifacts,
+                GasVeins = c.GasVeins,
+                OilVeins = c.OilVeins,
+                WaterVeins = c.WaterVeins
+            };
+
+
+            DrawMapImage(cm.GetMapImageTribes(tribeId, showStructures, showPlayers, showTames, selectedLat, selectedLon, mapOptions, CustomMarkers));
         }
         public void DrawMapImageItems(long tribeId, string className, decimal selectedLat, decimal selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImageItems(tribeId, className, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+
+            ASVStructureOptions mapOptions = new ASVStructureOptions()
+            {
+                Terminals = c.Obelisks,
+                Glitches = c.Glitches,
+                ChargeNodes = c.ChargeNodes,
+                BeaverDams = c.BeaverDams,
+                DeinoNests = c.DeinoNests,
+                WyvernNests = c.WyvernNests,
+                DrakeNests = c.DrakeNests,
+                MagmaNests = c.MagmaNests,
+                Artifacts = c.Artifacts,
+                GasVeins = c.GasVeins,
+                OilVeins = c.OilVeins,
+                WaterVeins = c.WaterVeins
+            };
+
+            DrawMapImage(cm.GetMapImageItems(tribeId, className, selectedLat, selectedLon, mapOptions, CustomMarkers));
         }
 
 
         public void DrawMapImageWild(string className, string productionClassName, int minLevel, int maxLevel, float filterLat, float filterLon, float filterRadius, decimal? selectedLat, decimal? selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImageWild(className, productionClassName, minLevel, maxLevel, filterLat, filterLon, filterRadius, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            ASVStructureOptions mapOptions = new ASVStructureOptions()
+            {
+                Terminals = c.Obelisks,
+                Glitches = c.Glitches,
+                ChargeNodes = c.ChargeNodes,
+                BeaverDams = c.BeaverDams,
+                DeinoNests = c.DeinoNests,
+                WyvernNests = c.WyvernNests,
+                DrakeNests = c.DrakeNests,
+                MagmaNests = c.MagmaNests,
+                Artifacts = c.Artifacts,
+                GasVeins = c.GasVeins,
+                OilVeins = c.OilVeins,
+                WaterVeins = c.WaterVeins
+            };
+            DrawMapImage(cm.GetMapImageWild(className, productionClassName, minLevel, maxLevel, filterLat, filterLon, filterRadius, selectedLat, selectedLon, mapOptions, CustomMarkers));
         }
         public void DrawMapImageTamed(string className, string productionClassName, bool includeStored, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImageTamed(className, productionClassName, includeStored, tribeId, playerId, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            ASVStructureOptions mapOptions = new ASVStructureOptions()
+            {
+                Terminals = c.Obelisks,
+                Glitches = c.Glitches,
+                ChargeNodes = c.ChargeNodes,
+                BeaverDams = c.BeaverDams,
+                DeinoNests = c.DeinoNests,
+                WyvernNests = c.WyvernNests,
+                DrakeNests = c.DrakeNests,
+                MagmaNests = c.MagmaNests,
+                Artifacts = c.Artifacts,
+                GasVeins = c.GasVeins,
+                OilVeins = c.OilVeins,
+                WaterVeins = c.WaterVeins
+            };
+            DrawMapImage(cm.GetMapImageTamed(className, productionClassName, includeStored, tribeId, playerId, selectedLat, selectedLon, mapOptions, CustomMarkers));
 
         }
         public void DrawMapImageDroppedItems(long droppedPlayerId, string droppedClass, decimal? selectedLat, decimal? selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImageDroppedItems(droppedPlayerId, droppedClass, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            ASVStructureOptions mapOptions = new ASVStructureOptions()
+            {
+                Terminals = c.Obelisks,
+                Glitches = c.Glitches,
+                ChargeNodes = c.ChargeNodes,
+                BeaverDams = c.BeaverDams,
+                DeinoNests = c.DeinoNests,
+                WyvernNests = c.WyvernNests,
+                DrakeNests = c.DrakeNests,
+                MagmaNests = c.MagmaNests,
+                Artifacts = c.Artifacts,
+                GasVeins = c.GasVeins,
+                OilVeins = c.OilVeins,
+                WaterVeins = c.WaterVeins
+            };
+            DrawMapImage(cm.GetMapImageDroppedItems(droppedPlayerId, droppedClass, selectedLat, selectedLon, mapOptions, CustomMarkers));
 
         }
         public void DrawMapImageDropBags(long droppedPlayerId, decimal? selectedLat, decimal? selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImageDropBags(droppedPlayerId, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            ASVStructureOptions mapOptions = new ASVStructureOptions()
+            {
+                Terminals = c.Obelisks,
+                Glitches = c.Glitches,
+                ChargeNodes = c.ChargeNodes,
+                BeaverDams = c.BeaverDams,
+                DeinoNests = c.DeinoNests,
+                WyvernNests = c.WyvernNests,
+                DrakeNests = c.DrakeNests,
+                MagmaNests = c.MagmaNests,
+                Artifacts = c.Artifacts,
+                GasVeins = c.GasVeins,
+                OilVeins = c.OilVeins,
+                WaterVeins = c.WaterVeins
+            };
+            DrawMapImage(cm.GetMapImageDropBags(droppedPlayerId, selectedLat, selectedLon, mapOptions, CustomMarkers));
         }
         public void DrawMapImagePlayerStructures(string className, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImagePlayerStructures(className, tribeId, playerId, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            ASVStructureOptions mapOptions = new ASVStructureOptions()
+            {
+                Terminals = c.Obelisks,
+                Glitches = c.Glitches,
+                ChargeNodes = c.ChargeNodes,
+                BeaverDams = c.BeaverDams,
+                DeinoNests = c.DeinoNests,
+                WyvernNests = c.WyvernNests,
+                DrakeNests = c.DrakeNests,
+                MagmaNests = c.MagmaNests,
+                Artifacts = c.Artifacts,
+                GasVeins = c.GasVeins,
+                OilVeins = c.OilVeins,
+                WaterVeins = c.WaterVeins
+            };
+            DrawMapImage(cm.GetMapImagePlayerStructures(className, tribeId, playerId, selectedLat, selectedLon,mapOptions, CustomMarkers));
 
         }
         public void DrawMapImagePlayers(long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon)
         {
             var c = Program.ProgramConfig;
-            DrawMapImage(cm.GetMapImagePlayers(tribeId, playerId, selectedLat, selectedLon, c.Obelisks, c.Glitches, c.ChargeNodes, c.BeaverDams, c.DeinoNests, c.WyvernNests, c.DrakeNests, c.MagmaNests, c.OilVeins, c.WaterVeins, c.GasVeins, c.Artifacts, CustomMarkers));
+            ASVStructureOptions mapOptions = new ASVStructureOptions()
+            {
+                Terminals = c.Obelisks,
+                Glitches = c.Glitches,
+                ChargeNodes = c.ChargeNodes,
+                BeaverDams = c.BeaverDams,
+                DeinoNests = c.DeinoNests,
+                WyvernNests = c.WyvernNests,
+                DrakeNests = c.DrakeNests,
+                MagmaNests = c.MagmaNests,
+                Artifacts = c.Artifacts,
+                GasVeins = c.GasVeins,
+                OilVeins = c.OilVeins,
+                WaterVeins = c.WaterVeins
+            };
+            DrawMapImage(cm.GetMapImagePlayers(tribeId, playerId, selectedLat, selectedLon, mapOptions, CustomMarkers));
         }
 
         private void DrawMapImage(Image map)

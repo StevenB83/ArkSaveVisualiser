@@ -79,13 +79,13 @@ namespace ASVPack.Models
             WildCreatures = new List<ContentWildCreature>();
             DroppedItems = new List<ContentDroppedItem>();
             Tribes = new List<ContentTribe>();
-
-
         }
 
         public void LoadSaveGame(string saveFilename, string localProfileFilename)
         {
             logWriter.Trace("BEGIN LoadSaveGame()");
+
+
 
             if (!File.Exists(saveFilename))
             {
@@ -503,27 +503,33 @@ namespace ASVPack.Models
                                     //stryder rigs
                                     if (x.ClassString == "TekStrider_Character_BP_C")
                                     {
-                                        var inventComp = x.InventoryComponent();
-                                        PropertyArray equippedItemsArray = inventComp.GetTypedProperty<PropertyArray>("EquippedItems");
+                                        ObjectReference inventoryRef = x.GetPropertyValue<ObjectReference>("MyInventoryComponent");
 
-                                        if (equippedItemsArray != null)
+                                        if (inventoryRef != null)
                                         {
-                                            ArkArrayObjectReference objectReferences = (ArkArrayObjectReference)equippedItemsArray.Value;
-                                            if (objectReferences != null && objectReferences.Count == 2)
+                                            var inventComp = objectContainer[inventoryRef.ObjectId];
+                                            if (inventComp != null)
                                             {
-                                                objectContainer.TryGetValue(objectReferences[0].ObjectId, out GameObject rig1Object);
-                                                var itemRig1 = rig1Object.AsItem();
-                                                wild.Rig1 = itemRig1.ClassName;
+                                                PropertyArray equippedItemsArray = inventComp.GetTypedProperty<PropertyArray>("EquippedItems");
 
-                                                objectContainer.TryGetValue(objectReferences[1].ObjectId, out GameObject rig2Object);
-                                                var itemRig2 = rig2Object.AsItem();
-                                                wild.Rig2 = itemRig2.ClassName;
+                                                if (equippedItemsArray != null)
+                                                {
+                                                    ArkArrayObjectReference objectReferences = (ArkArrayObjectReference)equippedItemsArray.Value;
+                                                    if (objectReferences != null && objectReferences.Count >= 2)
+                                                    {
+                                                        objectContainer.TryGetValue(objectReferences[0].ObjectId, out GameObject rig1Object);
+                                                        var itemRig1 = rig1Object.AsItem();
+                                                        wild.Rig1 = itemRig1.ClassName;
+
+                                                        objectContainer.TryGetValue(objectReferences[1].ObjectId, out GameObject rig2Object);
+                                                        var itemRig2 = rig2Object.AsItem();
+                                                        wild.Rig2 = itemRig2.ClassName;
+                                                    }
+                                                }
                                             }
+                                            
                                         }
-
                                     }
-
-
 
                                     wild.Latitude = mapLatLonCalcs.Item1 + wild.Y / mapLatLonCalcs.Item2;
                                     wild.Longitude = mapLatLonCalcs.Item3 + wild.X / mapLatLonCalcs.Item4;

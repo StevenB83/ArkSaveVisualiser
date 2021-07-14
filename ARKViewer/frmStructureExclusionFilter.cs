@@ -124,7 +124,18 @@ namespace ARKViewer
 
         private void chkApplyFilter_CheckedChanged(object sender, EventArgs e)
         {
+            if (chkApplyFilter.Checked)
+            {
+                txtFilter.Enabled = false;
+            }
+            else
+            {
+                txtFilter.Enabled = true;
+                txtFilter.Text = string.Empty;
+                txtFilter.Focus();
+            }
 
+            PopulateStructures();
         }
 
         private void UpdateCheckState()
@@ -141,7 +152,27 @@ namespace ARKViewer
 
         private void lstStructureFilter_ItemCheck(object sender, ItemCheckEventArgs e)
         {
+            if (lstStructureFilter.SelectedIndex >= 0)
+            {
 
+                ASVComboValue comboValue = (ASVComboValue)lstStructureFilter.Items[e.Index];
+                if (e.NewValue == CheckState.Checked)
+                {
+                    if (!currentExclusions.Contains(comboValue.Key))
+                    {
+                        currentExclusions.Add(comboValue.Key);
+                    }
+                }
+                else
+                {
+                    if (currentExclusions.Contains(comboValue.Key))
+                    {
+                        currentExclusions.Remove(comboValue.Key);
+                    }
+                }
+
+
+            }
         }
 
         private void frmStructureExclusionFilter_FormClosed(object sender, FormClosedEventArgs e)

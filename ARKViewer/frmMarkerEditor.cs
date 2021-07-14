@@ -95,6 +95,7 @@ namespace ARKViewer
 
         private void UpdateDisplay()
         {
+            txtCategory.Text = "";
             txtName.Text = "";
             pnlBackgroundColour.BackColor = Color.White;
             pnlBorderColour.BackColor = Color.Black;
@@ -105,6 +106,7 @@ namespace ARKViewer
 
             if (EditingMarker != null)
             {
+                txtCategory.Text = EditingMarker.Category;
                 txtName.Text = EditingMarker.Name;
                 pnlBackgroundColour.BackColor = Color.FromArgb(EditingMarker.Colour);
                 pnlBorderColour.BackColor = Color.FromArgb(EditingMarker.BorderColour);
@@ -177,6 +179,7 @@ namespace ARKViewer
         private void btnSave_Click(object sender, EventArgs e)
         {
             EditingMarker.Map = selectedMap;
+            EditingMarker.Category = txtCategory.Text;
             EditingMarker.Name = txtName.Text;
             EditingMarker.Colour = pnlBackgroundColour.BackColor.ToArgb();
             EditingMarker.BorderColour = pnlBorderColour.BackColor.ToArgb();
@@ -231,18 +234,23 @@ namespace ARKViewer
 
         private void udLat_Enter(object sender, EventArgs e)
         {
-
+            udLat.Select(0, int.MaxValue);
         }
 
         private void udLon_Enter(object sender, EventArgs e)
         {
-
+            udLon.Select(0, int.MaxValue);
         }
 
 
         private void frmMarkerEditor_FormClosed(object sender, FormClosedEventArgs e)
         {
             UpdateWindowSettings();
+        }
+
+        private void udLat_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

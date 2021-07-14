@@ -197,6 +197,7 @@ namespace ARKViewer.Configuration
                 {
                     JObject markerObject = new JObject();
                     markerObject.Add(new JProperty("Map", marker.Map));
+                    markerObject.Add(new JProperty("Category", marker.Category));
                     markerObject.Add(new JProperty("Name", marker.Name));
                     markerObject.Add(new JProperty("Image", marker.Image));
                     markerObject.Add(new JProperty("Colour", marker.Colour));
@@ -276,6 +277,7 @@ JArray itemList = (JArray)itemFile.GetValue("colors");
                     ContentMarker mapMarker = new ContentMarker();
 
                     mapMarker.Map = markerObject.Value<string>("Map");
+                    mapMarker.Name = markerObject.Value<string>("Category");
                     mapMarker.Name = markerObject.Value<string>("Name");
                     mapMarker.Colour = markerObject.Value<int>("Colour");
                     mapMarker.BorderColour = markerObject.Value<int>("BorderColour");

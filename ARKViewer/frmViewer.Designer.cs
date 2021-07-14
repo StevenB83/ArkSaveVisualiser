@@ -30,18 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmViewer));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title2 = new System.Windows.Forms.DataVisualization.Charting.Title();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.Title title3 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title4 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title5 = new System.Windows.Forms.DataVisualization.Charting.Title();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title6 = new System.Windows.Forms.DataVisualization.Charting.Title();
             this.lvwWildDetail = new System.Windows.Forms.ListView();
             this.lvwWildDetail_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwWildDetail_Sex = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -677,7 +677,7 @@
             this.cboWildClass.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cboWildClass.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboWildClass.FormattingEnabled = true;
-            this.cboWildClass.Location = new System.Drawing.Point(82, 45);
+            this.cboWildClass.Location = new System.Drawing.Point(75, 49);
             this.cboWildClass.Name = "cboWildClass";
             this.cboWildClass.Size = new System.Drawing.Size(590, 21);
             this.cboWildClass.TabIndex = 13;
@@ -1043,7 +1043,7 @@
             this.cboWildResource.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cboWildResource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboWildResource.FormattingEnabled = true;
-            this.cboWildResource.Location = new System.Drawing.Point(740, 45);
+            this.cboWildResource.Location = new System.Drawing.Point(740, 48);
             this.cboWildResource.Name = "cboWildResource";
             this.cboWildResource.Size = new System.Drawing.Size(191, 21);
             this.cboWildResource.TabIndex = 11;
@@ -1055,7 +1055,7 @@
             this.lblResource.AutoSize = true;
             this.lblResource.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblResource.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblResource.Location = new System.Drawing.Point(674, 48);
+            this.lblResource.Location = new System.Drawing.Point(674, 52);
             this.lblResource.Name = "lblResource";
             this.lblResource.Size = new System.Drawing.Size(65, 13);
             this.lblResource.TabIndex = 10;
@@ -1166,7 +1166,7 @@
             // 
             // udWildMin
             // 
-            this.udWildMin.Location = new System.Drawing.Point(82, 14);
+            this.udWildMin.Location = new System.Drawing.Point(75, 14);
             this.udWildMin.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -1248,7 +1248,7 @@
             this.lblWildClass.AutoSize = true;
             this.lblWildClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWildClass.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblWildClass.Location = new System.Drawing.Point(14, 48);
+            this.lblWildClass.Location = new System.Drawing.Point(14, 53);
             this.lblWildClass.Name = "lblWildClass";
             this.lblWildClass.Size = new System.Drawing.Size(59, 13);
             this.lblWildClass.TabIndex = 12;
@@ -1965,7 +1965,7 @@
             this.pnlFilterTribes.Controls.Add(this.txtFilterTribe);
             this.pnlFilterTribes.Location = new System.Drawing.Point(12, 173);
             this.pnlFilterTribes.Name = "pnlFilterTribes";
-            this.pnlFilterTribes.Size = new System.Drawing.Size(880, 29);
+            this.pnlFilterTribes.Size = new System.Drawing.Size(919, 29);
             this.pnlFilterTribes.TabIndex = 23;
             // 
             // btnFilterTribe
@@ -1973,7 +1973,7 @@
             this.btnFilterTribe.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnFilterTribe.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnFilterTribe.Image = global::ARKViewer.Properties.Resources.button_zoom;
-            this.btnFilterTribe.Location = new System.Drawing.Point(849, -1);
+            this.btnFilterTribe.Location = new System.Drawing.Point(888, -1);
             this.btnFilterTribe.Name = "btnFilterTribe";
             this.btnFilterTribe.Size = new System.Drawing.Size(30, 29);
             this.btnFilterTribe.TabIndex = 9;
@@ -1987,7 +1987,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFilterTribe.Location = new System.Drawing.Point(10, 3);
             this.txtFilterTribe.Name = "txtFilterTribe";
-            this.txtFilterTribe.Size = new System.Drawing.Size(829, 20);
+            this.txtFilterTribe.Size = new System.Drawing.Size(868, 20);
             this.txtFilterTribe.TabIndex = 6;
             this.txtFilterTribe.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtFilterTribe_KeyDown);
             // 
@@ -2008,7 +2008,7 @@
             this.tableCharts.RowCount = 1;
             this.tableCharts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableCharts.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 195F));
-            this.tableCharts.Size = new System.Drawing.Size(880, 195);
+            this.tableCharts.Size = new System.Drawing.Size(919, 195);
             this.tableCharts.TabIndex = 21;
             // 
             // pnlChart3
@@ -2021,9 +2021,9 @@
             this.pnlChart3.Controls.Add(this.udChartTopTames);
             this.pnlChart3.Controls.Add(this.lblChartTopTames);
             this.pnlChart3.Controls.Add(this.chartTribeTames);
-            this.pnlChart3.Location = new System.Drawing.Point(589, 3);
+            this.pnlChart3.Location = new System.Drawing.Point(615, 3);
             this.pnlChart3.Name = "pnlChart3";
-            this.pnlChart3.Size = new System.Drawing.Size(288, 189);
+            this.pnlChart3.Size = new System.Drawing.Size(301, 189);
             this.pnlChart3.TabIndex = 22;
             // 
             // btnSaveChartTames
@@ -2031,7 +2031,7 @@
             this.btnSaveChartTames.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChartTames.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveChartTames.Image = global::ARKViewer.Properties.Resources.button_save;
-            this.btnSaveChartTames.Location = new System.Drawing.Point(252, 154);
+            this.btnSaveChartTames.Location = new System.Drawing.Point(265, 154);
             this.btnSaveChartTames.Name = "btnSaveChartTames";
             this.btnSaveChartTames.Size = new System.Drawing.Size(30, 30);
             this.btnSaveChartTames.TabIndex = 18;
@@ -2071,22 +2071,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeTames.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea1.Name = "ChartArea1";
-            this.chartTribeTames.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chartTribeTames.Legends.Add(legend1);
+            chartArea4.Name = "ChartArea1";
+            this.chartTribeTames.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartTribeTames.Legends.Add(legend4);
             this.chartTribeTames.Location = new System.Drawing.Point(4, 3);
             this.chartTribeTames.Name = "chartTribeTames";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartTribeTames.Series.Add(series1);
-            this.chartTribeTames.Size = new System.Drawing.Size(278, 147);
+            series4.ChartArea = "ChartArea1";
+            series4.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartTribeTames.Series.Add(series4);
+            this.chartTribeTames.Size = new System.Drawing.Size(291, 147);
             this.chartTribeTames.TabIndex = 8;
             this.chartTribeTames.Text = "Tribe Players";
-            title1.Name = "Tribe Players";
-            this.chartTribeTames.Titles.Add(title1);
+            title4.Name = "Tribe Players";
+            this.chartTribeTames.Titles.Add(title4);
             // 
             // pnlChart2
             // 
@@ -2098,9 +2098,9 @@
             this.pnlChart2.Controls.Add(this.udChartTopStructures);
             this.pnlChart2.Controls.Add(this.lblChartTopStructures);
             this.pnlChart2.Controls.Add(this.chartTribeStructures);
-            this.pnlChart2.Location = new System.Drawing.Point(296, 3);
+            this.pnlChart2.Location = new System.Drawing.Point(309, 3);
             this.pnlChart2.Name = "pnlChart2";
-            this.pnlChart2.Size = new System.Drawing.Size(287, 189);
+            this.pnlChart2.Size = new System.Drawing.Size(300, 189);
             this.pnlChart2.TabIndex = 21;
             // 
             // btnSaveChartStructures
@@ -2108,7 +2108,7 @@
             this.btnSaveChartStructures.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChartStructures.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveChartStructures.Image = global::ARKViewer.Properties.Resources.button_save;
-            this.btnSaveChartStructures.Location = new System.Drawing.Point(251, 153);
+            this.btnSaveChartStructures.Location = new System.Drawing.Point(264, 153);
             this.btnSaveChartStructures.Name = "btnSaveChartStructures";
             this.btnSaveChartStructures.Size = new System.Drawing.Size(30, 30);
             this.btnSaveChartStructures.TabIndex = 17;
@@ -2148,22 +2148,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribeStructures.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea2.Name = "ChartArea1";
-            this.chartTribeStructures.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chartTribeStructures.Legends.Add(legend2);
+            chartArea5.Name = "ChartArea1";
+            this.chartTribeStructures.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chartTribeStructures.Legends.Add(legend5);
             this.chartTribeStructures.Location = new System.Drawing.Point(4, 3);
             this.chartTribeStructures.Name = "chartTribeStructures";
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartTribeStructures.Series.Add(series2);
-            this.chartTribeStructures.Size = new System.Drawing.Size(277, 147);
+            series5.ChartArea = "ChartArea1";
+            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series5.Legend = "Legend1";
+            series5.Name = "Series1";
+            this.chartTribeStructures.Series.Add(series5);
+            this.chartTribeStructures.Size = new System.Drawing.Size(290, 147);
             this.chartTribeStructures.TabIndex = 8;
             this.chartTribeStructures.Text = "Tribe Players";
-            title2.Name = "Tribe Players";
-            this.chartTribeStructures.Titles.Add(title2);
+            title5.Name = "Tribe Players";
+            this.chartTribeStructures.Titles.Add(title5);
             // 
             // pnlChart1
             // 
@@ -2177,7 +2177,7 @@
             this.pnlChart1.Controls.Add(this.chartTribePlayers);
             this.pnlChart1.Location = new System.Drawing.Point(3, 3);
             this.pnlChart1.Name = "pnlChart1";
-            this.pnlChart1.Size = new System.Drawing.Size(287, 189);
+            this.pnlChart1.Size = new System.Drawing.Size(300, 189);
             this.pnlChart1.TabIndex = 20;
             // 
             // btnSaveChartPlayers
@@ -2185,7 +2185,7 @@
             this.btnSaveChartPlayers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSaveChartPlayers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnSaveChartPlayers.Image = global::ARKViewer.Properties.Resources.button_save;
-            this.btnSaveChartPlayers.Location = new System.Drawing.Point(251, 153);
+            this.btnSaveChartPlayers.Location = new System.Drawing.Point(264, 153);
             this.btnSaveChartPlayers.Name = "btnSaveChartPlayers";
             this.btnSaveChartPlayers.Size = new System.Drawing.Size(30, 30);
             this.btnSaveChartPlayers.TabIndex = 16;
@@ -2225,22 +2225,22 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.chartTribePlayers.BorderlineColor = System.Drawing.Color.Maroon;
-            chartArea3.Name = "ChartArea1";
-            this.chartTribePlayers.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chartTribePlayers.Legends.Add(legend3);
+            chartArea6.Name = "ChartArea1";
+            this.chartTribePlayers.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chartTribePlayers.Legends.Add(legend6);
             this.chartTribePlayers.Location = new System.Drawing.Point(4, 3);
             this.chartTribePlayers.Name = "chartTribePlayers";
-            series3.ChartArea = "ChartArea1";
-            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chartTribePlayers.Series.Add(series3);
-            this.chartTribePlayers.Size = new System.Drawing.Size(277, 147);
+            series6.ChartArea = "ChartArea1";
+            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Doughnut;
+            series6.Legend = "Legend1";
+            series6.Name = "Series1";
+            this.chartTribePlayers.Series.Add(series6);
+            this.chartTribePlayers.Size = new System.Drawing.Size(290, 147);
             this.chartTribePlayers.TabIndex = 8;
             this.chartTribePlayers.Text = "Tribe Players";
-            title3.Name = "Tribe Players";
-            this.chartTribePlayers.Titles.Add(title3);
+            title6.Name = "Tribe Players";
+            this.chartTribePlayers.Titles.Add(title6);
             // 
             // chkTribeStructures
             // 
@@ -2250,7 +2250,7 @@
             this.chkTribeStructures.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkTribeStructures.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkTribeStructures.ForeColor = System.Drawing.Color.ForestGreen;
-            this.chkTribeStructures.Location = new System.Drawing.Point(768, 405);
+            this.chkTribeStructures.Location = new System.Drawing.Point(810, 405);
             this.chkTribeStructures.Name = "chkTribeStructures";
             this.chkTribeStructures.Size = new System.Drawing.Size(121, 35);
             this.chkTribeStructures.TabIndex = 7;
@@ -2268,7 +2268,7 @@
             this.chkTribeTames.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkTribeTames.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkTribeTames.ForeColor = System.Drawing.Color.Chocolate;
-            this.chkTribeTames.Location = new System.Drawing.Point(657, 405);
+            this.chkTribeTames.Location = new System.Drawing.Point(699, 405);
             this.chkTribeTames.Name = "chkTribeTames";
             this.chkTribeTames.Size = new System.Drawing.Size(105, 35);
             this.chkTribeTames.TabIndex = 6;
@@ -2288,7 +2288,7 @@
             this.chkTribePlayers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.chkTribePlayers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.chkTribePlayers.ForeColor = System.Drawing.Color.LightCyan;
-            this.chkTribePlayers.Location = new System.Drawing.Point(537, 405);
+            this.chkTribePlayers.Location = new System.Drawing.Point(579, 405);
             this.chkTribePlayers.Name = "chkTribePlayers";
             this.chkTribePlayers.Size = new System.Drawing.Size(114, 35);
             this.chkTribePlayers.TabIndex = 5;
@@ -2347,7 +2347,7 @@
             this.lvwTribes.HideSelection = false;
             this.lvwTribes.Location = new System.Drawing.Point(12, 13);
             this.lvwTribes.Name = "lvwTribes";
-            this.lvwTribes.Size = new System.Drawing.Size(880, 161);
+            this.lvwTribes.Size = new System.Drawing.Size(919, 161);
             this.lvwTribes.TabIndex = 0;
             this.lvwTribes.UseCompatibleStateImageBehavior = false;
             this.lvwTribes.View = System.Windows.Forms.View.Details;
@@ -3808,7 +3808,7 @@
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.tabFeatures);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(950, 375);
+            this.MinimumSize = new System.Drawing.Size(990, 650);
             this.Name = "frmViewer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ARK Savegame Visualiser";

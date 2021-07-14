@@ -6,6 +6,7 @@ using Renci.SshNet;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -20,6 +21,7 @@ namespace ARKViewer.Models
 
 
         //cached image params
+        ASVStructureOptions cachedOptions = new ASVStructureOptions();
         Tuple<long, bool, bool, bool> cacheImageTribes = null;
         Tuple<string, string, int, int, float, float, float> cacheImageWild = null;
         Tuple<string, string, bool, long, long> cacheImageTamed = null;
@@ -89,6 +91,8 @@ namespace ARKViewer.Models
             }
         }
 
+        
+
 
         public Image MapImage
         {
@@ -130,13 +134,10 @@ namespace ARKViewer.Models
                         return new Bitmap(ARKViewer.Properties.Resources.map_gen2, new Size(1024, 1024));
                     case "glacius_p":
                         return new Bitmap(ARKViewer.Properties.Resources.map_glacius, new Size(1024, 1024));
-
                     case "antartika":
                         return new Bitmap(ARKViewer.Properties.Resources.map_antartika, new Size(1024, 1024));
-                    case "lostisland":
-                        
+                    case "lostisland":                       
                         return new Bitmap(ARKViewer.Properties.Resources.map_lostisland, new Size(1024, 1024));
-
                     case "amissa":
                         return new Bitmap(ARKViewer.Properties.Resources.map_amissa, new Size(1024, 1024));
                     case "olympus":
@@ -157,8 +158,6 @@ namespace ARKViewer.Models
         public bool MapArtifacts { get; set; } = true;
         public bool MapWyvernNests { get; set; } = true;
 
-
-
         public bool MapDeinoNests { get; set; } = true;
         public bool MapDrakeNests { get; set; } = true;
         public bool MapMagmaNests { get; set; } = true;
@@ -168,6 +167,16 @@ namespace ARKViewer.Models
         public ASVDataManager(ContentContainer data)
         {
             pack = new ContentPack(data, 0, 0, 50, 50, 100,true,true,true,true,true,true,true);
+            if(data.MapStructures.LongCount(x => x.ClassName == "ASV_Glitch") > 0)
+            {
+                data.MapStructures.Where(x=>x.ClassName == "ASV_Glitch")
+                    .ToList()
+                    .ForEach(x =>
+                    {
+                        pack.GlitchMarkers.Add(x);
+                    });
+            }
+
         }
 
         public ASVDataManager(ContentPack data)
@@ -1276,7 +1285,7 @@ namespace ARKViewer.Models
 
 
 
-        public Bitmap GetMapImageItems(long tribeId, string className, decimal selectedLat, decimal selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImageItems(long tribeId, string className, decimal selectedLat, decimal selectedLon, ASVStructureOptions mapOptions, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -1284,12 +1293,18 @@ namespace ARKViewer.Models
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
 
-            if (cacheImageItems != null
-                && cacheImageItems.Item1 == tribeId
-                && cacheImageItems.Item2 == className
-                && cacheImageItems.Item3 == selectedLat
-                && cacheImageItems.Item4 == selectedLon
-                && lastDrawRequest == "items")
+            if (
+                cachedOptions.Equals(mapOptions)
+                &&
+                (
+                    cacheImageItems != null
+                    && cacheImageItems.Item1 == tribeId
+                    && cacheImageItems.Item2 == className
+                    && cacheImageItems.Item3 == selectedLat
+                    && cacheImageItems.Item4 == selectedLon
+                    && lastDrawRequest == "items"
+                )
+            )
             {
                 //if all match, return cached content image
                 graphics.DrawImage(gameContentMap, 0, 0);
@@ -1298,8 +1313,11 @@ namespace ARKViewer.Models
             {
                 lastDrawRequest = "items";
                 cacheImageItems = new Tuple<long, string, decimal, decimal>(tribeId, className, selectedLon, selectedLon);
+                cachedOptions = mapOptions;
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
+                graphics = AddMapStructures(graphics, mapOptions.Terminals, mapOptions.Glitches, mapOptions.ChargeNodes, mapOptions.BeaverDams, mapOptions.DeinoNests, mapOptions.WyvernNests, mapOptions.DrakeNests, mapOptions.MagmaNests, mapOptions.OilVeins, mapOptions.WaterVeins, mapOptions.GasVeins, mapOptions.Artifacts);
+
 
                 var filteredResults = GetItems(tribeId, className);
                 foreach (var result in filteredResults)
@@ -1321,8 +1339,6 @@ namespace ARKViewer.Models
 
 
 
-            graphics = AddMapStructures(graphics, includeTerminals, includeGlitches, includeChargeNodes, includeBeaverDams, includeDeinoNests, includeWyvernNests, includeDrakeNests, includeMagmaNests, includeOilVeins, includeWaterVeins, includeGasVeins, includeArtifacts);
-
             if (customMarkers != null && customMarkers.Count > 0)
             {
                 graphics = AddCustomMarkers(graphics, customMarkers);
@@ -1334,23 +1350,26 @@ namespace ARKViewer.Models
         }
 
         /**** Map & Overlays ****/
-        public Bitmap GetMapImageWild(string className, string productionClassName, int minLevel, int maxLevel, float filterLat, float filterLon, float filterRadius, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImageWild(string className, string productionClassName, int minLevel, int maxLevel, float filterLat, float filterLon, float filterRadius, decimal? selectedLat, decimal? selectedLon, ASVStructureOptions mapOptions, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
-
-            if (cacheImageWild != null
-                && cacheImageWild.Item1 == className
-                && cacheImageWild.Item2 == productionClassName
-                && cacheImageWild.Item3 == minLevel
-                && cacheImageWild.Item4 == maxLevel
-                && cacheImageWild.Item5 == filterLat
-                && cacheImageWild.Item6 == filterLon
-                && cacheImageWild.Item7 == filterRadius
-                && lastDrawRequest == "wild")
+            if (
+                cachedOptions.Equals(mapOptions)
+                && (cacheImageWild != null
+                    && cacheImageWild.Item1 == className
+                    && cacheImageWild.Item2 == productionClassName
+                    && cacheImageWild.Item3 == minLevel
+                    && cacheImageWild.Item4 == maxLevel
+                    && cacheImageWild.Item5 == filterLat
+                    && cacheImageWild.Item6 == filterLon
+                    && cacheImageWild.Item7 == filterRadius
+                    && lastDrawRequest == "wild"
+                    )
+            )
             {
                 //if all match, return cached content image
                 graphics.DrawImage(gameContentMap, 0, 0);
@@ -1359,8 +1378,10 @@ namespace ARKViewer.Models
             {
                 lastDrawRequest = "wild";
                 cacheImageWild = new Tuple<string, string, int, int, float, float, float>(className, productionClassName, minLevel, maxLevel, filterLat, filterLon, filterRadius);
+                cachedOptions = mapOptions;
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
+                graphics = AddMapStructures(graphics, mapOptions.Terminals, mapOptions.Glitches, mapOptions.ChargeNodes, mapOptions.BeaverDams, mapOptions.DeinoNests, mapOptions.WyvernNests, mapOptions.DrakeNests, mapOptions.MagmaNests, mapOptions.OilVeins, mapOptions.WaterVeins, mapOptions.GasVeins, mapOptions.Artifacts);
 
                 var filteredWilds = GetWildCreatures(minLevel, maxLevel, filterLat, filterLon, filterRadius, className);
                 
@@ -1386,9 +1407,6 @@ namespace ARKViewer.Models
             }
 
 
-
-            graphics = AddMapStructures(graphics, includeTerminals, includeGlitches, includeChargeNodes, includeBeaverDams, includeDeinoNests, includeWyvernNests, includeDrakeNests, includeMagmaNests, includeOilVeins, includeWaterVeins, includeGasVeins, includeArtifacts);
-
             if (customMarkers != null && customMarkers.Count > 0)
             {
                 graphics = AddCustomMarkers(graphics, customMarkers);
@@ -1399,20 +1417,23 @@ namespace ARKViewer.Models
             return bitmap;
         }
 
-        public Bitmap GetMapImageTamed(string className, string productionClassName, bool includeStored, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImageTamed(string className, string productionClassName, bool includeStored, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon, ASVStructureOptions mapOptions, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
-            if (cacheImageTamed != null
+
+            if (cachedOptions.Equals(mapOptions) 
+                && (cacheImageTamed != null
                 && cacheImageTamed.Item1 == className
                 && cacheImageTamed.Item2 == productionClassName
                 && cacheImageTamed.Item3 == includeStored
                 && cacheImageTamed.Item4 == tribeId
                 && cacheImageTamed.Item5 == playerId
                 && lastDrawRequest == "tamed")
+            )
             {
                 //if all match, return cached content image
                 graphics.DrawImage(gameContentMap, 0, 0);
@@ -1421,8 +1442,10 @@ namespace ARKViewer.Models
             {
                 lastDrawRequest = "tamed";
                 cacheImageTamed = new Tuple<string, string, bool, long, long>(className, productionClassName, includeStored, tribeId, playerId);
+                cachedOptions = mapOptions;
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
+                graphics = AddMapStructures(graphics, mapOptions.Terminals, mapOptions.Glitches, mapOptions.ChargeNodes, mapOptions.BeaverDams, mapOptions.DeinoNests, mapOptions.WyvernNests, mapOptions.DrakeNests, mapOptions.MagmaNests, mapOptions.OilVeins, mapOptions.WaterVeins, mapOptions.GasVeins, mapOptions.Artifacts);
 
 
                 var filteredTames = GetTamedCreatures(className, tribeId, playerId, includeStored);
@@ -1447,9 +1470,6 @@ namespace ARKViewer.Models
 
             }
 
-
-
-            graphics = AddMapStructures(graphics, includeTerminals, includeGlitches, includeChargeNodes, includeBeaverDams, includeDeinoNests, includeWyvernNests, includeDrakeNests, includeMagmaNests, includeOilVeins, includeWaterVeins, includeGasVeins, includeArtifacts);
             if (customMarkers != null && customMarkers.Count > 0)
             {
                 graphics = AddCustomMarkers(graphics, customMarkers);
@@ -1460,7 +1480,7 @@ namespace ARKViewer.Models
             return bitmap;
         }
 
-        public Bitmap GetMapImageDroppedItems(long droppedPlayerId, string droppedClass, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImageDroppedItems(long droppedPlayerId, string droppedClass, decimal? selectedLat, decimal? selectedLon, ASVStructureOptions mapOptions, List<ContentMarker> customMarkers)
         {
 
             Bitmap bitmap = new Bitmap(1024, 1024);
@@ -1469,10 +1489,13 @@ namespace ARKViewer.Models
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
 
-            if (cacheImageDroppedItems != null
+            if (cachedOptions.Equals(mapOptions)
+                &&(cacheImageDroppedItems != null
                 && cacheImageDroppedItems.Item1 == droppedPlayerId
                 && cacheImageDroppedItems.Item2 == droppedClass
                 && lastDrawRequest == "droppeditems")
+            
+            )
             {
                 //if all match, return cached content image
                 graphics.DrawImage(gameContentMap, 0, 0);
@@ -1481,8 +1504,10 @@ namespace ARKViewer.Models
             {
                 lastDrawRequest = "droppeditems";
                 cacheImageDroppedItems = new Tuple<long, string>(droppedPlayerId, droppedClass);
+                cachedOptions = mapOptions;
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
+                graphics = AddMapStructures(graphics, mapOptions.Terminals, mapOptions.Glitches, mapOptions.ChargeNodes, mapOptions.BeaverDams, mapOptions.DeinoNests, mapOptions.WyvernNests, mapOptions.DrakeNests, mapOptions.MagmaNests, mapOptions.OilVeins, mapOptions.WaterVeins, mapOptions.GasVeins, mapOptions.Artifacts);
 
                 var filteredDrops = GetDroppedItems(droppedPlayerId, droppedClass);
                 float markerSize = 10f;
@@ -1506,7 +1531,6 @@ namespace ARKViewer.Models
                 gameContentMap = (Image)bitmap;
             }
 
-            graphics = AddMapStructures(graphics, includeTerminals, includeGlitches, includeChargeNodes, includeBeaverDams, includeDeinoNests, includeWyvernNests, includeDrakeNests, includeMagmaNests, includeOilVeins, includeWaterVeins, includeGasVeins, includeArtifacts);
             if (customMarkers != null && customMarkers.Count > 0)
             {
                 graphics = AddCustomMarkers(graphics, customMarkers);
@@ -1520,7 +1544,7 @@ namespace ARKViewer.Models
 
         }
 
-        public Bitmap GetMapImageDropBags(long droppedPlayerId, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImageDropBags(long droppedPlayerId, decimal? selectedLat, decimal? selectedLon, ASVStructureOptions mapOptions, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -1528,9 +1552,11 @@ namespace ARKViewer.Models
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
 
-            if (cacheImageDropBags != null
+            if (cachedOptions.Equals(mapOptions)
+                && (cacheImageDropBags != null
                 && droppedPlayerId == cacheImageDropBags.Item1
                 && lastDrawRequest == "dropbags")
+            )
             {
                 //if all match, return cached content image
                 graphics.DrawImage(gameContentMap, 0, 0);
@@ -1539,8 +1565,11 @@ namespace ARKViewer.Models
             {
                 lastDrawRequest = "dropbags";
                 cacheImageDropBags = new Tuple<long>(droppedPlayerId);
+                cachedOptions = mapOptions;
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
+                graphics = AddMapStructures(graphics, mapOptions.Terminals, mapOptions.Glitches, mapOptions.ChargeNodes, mapOptions.BeaverDams, mapOptions.DeinoNests, mapOptions.WyvernNests, mapOptions.DrakeNests, mapOptions.MagmaNests, mapOptions.OilVeins, mapOptions.WaterVeins, mapOptions.GasVeins, mapOptions.Artifacts);
+
 
                 var filteredDrops = GetDeathCacheBags(droppedPlayerId);
                 float markerSize = 10f;
@@ -1564,7 +1593,6 @@ namespace ARKViewer.Models
                 gameContentMap = (Image)bitmap;
             }
 
-            graphics = AddMapStructures(graphics, includeTerminals, includeGlitches, includeChargeNodes, includeBeaverDams, includeDeinoNests, includeWyvernNests, includeDrakeNests, includeMagmaNests, includeOilVeins, includeWaterVeins, includeGasVeins, includeArtifacts);
             if (customMarkers != null && customMarkers.Count > 0)
             {
                 graphics = AddCustomMarkers(graphics, customMarkers);
@@ -1573,12 +1601,9 @@ namespace ARKViewer.Models
             graphics = AddCurrentMarker(graphics, selectedLat, selectedLon);
 
             return bitmap;
-
-
-
         }
 
-        public Bitmap GetMapImagePlayerStructures(string className, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImagePlayerStructures(string className, long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon, ASVStructureOptions mapOptions, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -1586,16 +1611,13 @@ namespace ARKViewer.Models
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
 
-
-
-
-
-
-            if (cacheImagePlayerStructures != null
+            if (cachedOptions.Equals(mapOptions)
+                && (cacheImagePlayerStructures != null
                 && cacheImagePlayerStructures.Item1 == className
                 && cacheImagePlayerStructures.Item2 == tribeId
                 && cacheImagePlayerStructures.Item3 == playerId
                 && lastDrawRequest == "structures")
+            )
             {
                 //if all match, return cached content image
                 graphics.DrawImage(gameContentMap, 0, 0);
@@ -1604,8 +1626,10 @@ namespace ARKViewer.Models
             {
                 lastDrawRequest = "structures";
                 cacheImagePlayerStructures = new Tuple<string, long, long>(className, tribeId, playerId);
+                cachedOptions = mapOptions;
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
+                graphics = AddMapStructures(graphics, mapOptions.Terminals, mapOptions.Glitches, mapOptions.ChargeNodes, mapOptions.BeaverDams, mapOptions.DeinoNests, mapOptions.WyvernNests, mapOptions.DrakeNests, mapOptions.MagmaNests, mapOptions.OilVeins, mapOptions.WaterVeins, mapOptions.GasVeins, mapOptions.Artifacts);
 
                 var filteredStructures = GetPlayerStructures(tribeId, playerId, className, false);
                 foreach (var playerStructure in filteredStructures)
@@ -1626,7 +1650,6 @@ namespace ARKViewer.Models
 
             }
 
-            graphics = AddMapStructures(graphics, includeTerminals, includeGlitches, includeChargeNodes, includeBeaverDams, includeDeinoNests, includeWyvernNests, includeDrakeNests, includeMagmaNests, includeOilVeins, includeWaterVeins, includeGasVeins, includeArtifacts);
 
             if (customMarkers != null && customMarkers.Count > 0)
             {
@@ -1638,19 +1661,12 @@ namespace ARKViewer.Models
             return bitmap;
         }
 
-        public Bitmap GetMapImageTribes(long tribeId, bool showStructures, bool showPlayers, bool showTames, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImageTribes(long tribeId, bool showStructures, bool showPlayers, bool showTames, decimal? selectedLat, decimal? selectedLon, ASVStructureOptions mapOptions, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
             graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-
-
-
-
-
-
-
 
 
             if (cacheImageTribes != null
@@ -1669,6 +1685,8 @@ namespace ARKViewer.Models
                 cacheImageTribes = new Tuple<long, bool, bool, bool>(tribeId, showStructures, showPlayers, showTames);
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
+                graphics = AddMapStructures(graphics, mapOptions.Terminals, mapOptions.Glitches, mapOptions.ChargeNodes, mapOptions.BeaverDams, mapOptions.DeinoNests, mapOptions.WyvernNests, mapOptions.DrakeNests, mapOptions.MagmaNests, mapOptions.OilVeins, mapOptions.WaterVeins, mapOptions.GasVeins, mapOptions.Artifacts);
+
 
                 var tribe = GetTribes(tribeId).FirstOrDefault<ContentTribe>();
                 if (tribe != null)
@@ -1767,10 +1785,6 @@ namespace ARKViewer.Models
                 gameContentMap = (Image)bitmap;
             }
 
-
-
-
-            graphics = AddMapStructures(graphics, includeTerminals, includeGlitches, includeChargeNodes, includeBeaverDams, includeDeinoNests, includeWyvernNests, includeDrakeNests, includeMagmaNests, includeOilVeins, includeWaterVeins, includeGasVeins, includeArtifacts);
             if (customMarkers != null && customMarkers.Count > 0)
             {
                 graphics = AddCustomMarkers(graphics, customMarkers);
@@ -1781,7 +1795,7 @@ namespace ARKViewer.Models
             return bitmap;
         }
 
-        public Bitmap GetMapImagePlayers(long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon, bool includeTerminals, bool includeGlitches, bool includeChargeNodes, bool includeBeaverDams, bool includeDeinoNests, bool includeWyvernNests, bool includeDrakeNests, bool includeMagmaNests, bool includeOilVeins, bool includeWaterVeins, bool includeGasVeins, bool includeArtifacts, List<ContentMarker> customMarkers)
+        public Bitmap GetMapImagePlayers(long tribeId, long playerId, decimal? selectedLat, decimal? selectedLon, ASVStructureOptions mapOptions, List<ContentMarker> customMarkers)
         {
             Bitmap bitmap = new Bitmap(1024, 1024);
             Graphics graphics = Graphics.FromImage(bitmap);
@@ -1789,10 +1803,12 @@ namespace ARKViewer.Models
             graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
 
 
-            if (cacheImagePlayers != null
+            if (cachedOptions.Equals(mapOptions)
+                && (cacheImagePlayers != null
                 && cacheImagePlayers.Item1 == tribeId
                 && cacheImagePlayers.Item2 == playerId
                 && lastDrawRequest == "players")
+            )
             {
                 //if all match, return cached content image
                 graphics.DrawImage(gameContentMap, 0, 0);
@@ -1802,9 +1818,10 @@ namespace ARKViewer.Models
                 lastDrawRequest = "players";
 
                 cacheImagePlayers = new Tuple<long, long>(tribeId, playerId);
-
+                cachedOptions = mapOptions;
 
                 graphics.DrawImage(MapImage, new Rectangle(0, 0, 1024, 1024));
+                graphics = AddMapStructures(graphics, mapOptions.Terminals, mapOptions.Glitches, mapOptions.ChargeNodes, mapOptions.BeaverDams, mapOptions.DeinoNests, mapOptions.WyvernNests, mapOptions.DrakeNests, mapOptions.MagmaNests, mapOptions.OilVeins, mapOptions.WaterVeins, mapOptions.GasVeins, mapOptions.Artifacts);
 
                 var filteredPlayers = GetPlayers(tribeId, playerId);
                 foreach (var player in filteredPlayers)
@@ -1838,8 +1855,7 @@ namespace ARKViewer.Models
 
 
 
-            graphics = AddMapStructures(graphics, includeTerminals, includeGlitches, includeChargeNodes, includeBeaverDams, includeDeinoNests, includeWyvernNests, includeDrakeNests, includeMagmaNests, includeOilVeins, includeWaterVeins, includeGasVeins, includeArtifacts);
-
+            
             if (customMarkers != null && customMarkers.Count > 0)
             {
                 graphics = AddCustomMarkers(graphics, customMarkers);
@@ -1901,6 +1917,10 @@ namespace ARKViewer.Models
 
 
                 }
+
+
+                //TODO:// Get user defined terminals from json
+
             }
 
             if (includeGlitches)

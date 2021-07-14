@@ -234,6 +234,7 @@
     <Compile Include="Models\ASVFtpItem.cs" />
     <Compile Include="Models\ASVMarker.cs" />
     <Compile Include="Models\ASVStructureMarker.cs" />
+    <Compile Include="Models\ASVStructureOptions.cs" />
     <Compile Include="Models\ListViewComparer.cs" />
     <Compile Include="Models\NameMap\ColourMap.cs" />
     <Compile Include="Models\NameMap\DinoClassMap.cs" />

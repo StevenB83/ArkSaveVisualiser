@@ -88,7 +88,7 @@ namespace ARKViewer
             InitializeComponent();
             LoadWindowSettings();
             MapViewer = viewer;
-            PopulateCustomMarkers();
+            PopulateCategories();
         }
 
         private void frmMapToolboxMarkers_FormClosed(object sender, FormClosedEventArgs e)
@@ -96,35 +96,64 @@ namespace ARKViewer
             UpdateWindowSettings();
         }
 
+
+        private void PopulateCategories()
+        {
+            cboCategory.Items.Clear();
+            cboCategory.Items.Add(new ASVComboValue("", "[All]"));
+            var groupedMarkers = MapViewer.CustomMarkers.GroupBy(x => x.Category).ToList().Select(x => x.Key).ToList();
+            if(groupedMarkers!=null && groupedMarkers.Count > 0)
+            {
+                groupedMarkers.OrderBy(x=>x).ToList().ForEach(x =>
+                {
+                    if(x.Length > 0) cboCategory.Items.Add(new ASVComboValue(x,x));
+                });
+            }
+            cboCategory.SelectedIndex = 0;
+
+        }
         private void PopulateCustomMarkers()
         {
 
             lvwMapMarkers.ItemChecked -= lvwMapMarkers_ItemChecked;
 
             isLoading = true;
+            string selectedCategory = "";
+            if (cboCategory.SelectedItem != null) selectedCategory = ((ASVComboValue)cboCategory.SelectedItem).Key;
+            
             lvwMapMarkers.SmallImageList = Program.MarkerImageList;
             lvwMapMarkers.LargeImageList = Program.MarkerImageList;
-
             lvwMapMarkers.Items.Clear();
             lvwMapMarkers.Refresh();
             lvwMapMarkers.BeginUpdate();
-            foreach (var marker in MapViewer.CustomMarkers)
+
+            List<ListViewItem> newItems = new List<ListViewItem>();
+
+            foreach (var marker in MapViewer.CustomMarkers.OrderBy(o=>o.Name))
             {
                 if (txtMarkerFilter.TextLength == 0 ||  marker.Name.ToLower().Contains(txtMarkerFilter.Text.ToLower()))
                 {
-                    ListViewItem newItem = lvwMapMarkers.Items.Add(marker.Name);
-                    newItem.ImageIndex = Program.GetMarkerImageIndex(marker.Image) - 1;
-                    newItem.SubItems.Add(marker.Lat.ToString("0.00"));
-                    newItem.SubItems.Add(marker.Lon.ToString("0.00"));
-                    newItem.Tag = marker;
 
-                    if (marker.Displayed)
+                    if(selectedCategory == "" || marker.Category == selectedCategory)
                     {
-                        newItem.Checked = true;
+                        ListViewItem newItem = new ListViewItem(marker.Name);
+                        newItem.ImageIndex = Program.GetMarkerImageIndex(marker.Image) - 1;
+                        newItem.SubItems.Add(marker.Lat.ToString("0.00"));
+                        newItem.SubItems.Add(marker.Lon.ToString("0.00"));
+                        newItem.Tag = marker;
+
+                        if (marker.Displayed)
+                        {
+                            newItem.Checked = true;
+                        }
+
+                        newItems.Add(newItem);
                     }
+                    
                 }
             }
 
+            lvwMapMarkers.Items.AddRange(newItems.ToArray());
             lvwMapMarkers.EndUpdate();
 
             lvwMapMarkers.ItemChecked += lvwMapMarkers_ItemChecked;
@@ -330,9 +359,17 @@ namespace ARKViewer
                 if (configMarker != null) Program.ProgramConfig.MapMarkerList.Remove(configMarker);
                 Program.ProgramConfig.MapMarkerList.Add(markerEditor.EditingMarker);
 
+
+                PopulateCategories();
+
                 MapViewer.DrawTestMap(0, 0);
 
             }
+        }
+
+        private void cboCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            PopulateCustomMarkers();
         }
     }
 }

@@ -31,12 +31,17 @@ namespace ASVPack.Models
             CraftedByTribe = itemObject.GetPropertyValue<string>("CrafterTribeName");
             CraftedByPlayer = itemObject.GetPropertyValue<string>("CrafterCharacterName");
 
+
             if (itemObject.HasAnyProperty("ItemRating") &! ClassName.ToLower().Contains("egg"))
             {
                 var ratingProp =itemObject.GetTypedProperty<PropertyFloat>("ItemRating")?.Value;
                 if (!float.IsNaN(ratingProp.Value))
                 {
                     Rating = ratingProp.Value;
+                }
+                else
+                {
+                    Rating = 0.0001f;
                 }
 
             }

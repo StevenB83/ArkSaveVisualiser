@@ -135,7 +135,7 @@ namespace ARKViewer
 
             long startLoadTicks = DateTime.Now.Ticks;
             
-            //remove in-game markers
+            //remove in-game markers, will re-load if Local Profile contains any
             Program.ProgramConfig.MapMarkerList.RemoveAll(x => x.InGameMarker == true);
 
             try
@@ -145,6 +145,21 @@ namespace ARKViewer
                 {
                     //asv pack (compressed)
                     ContentPack pack = new ContentPack(File.ReadAllBytes(fileName));
+                    Program.ProgramConfig.GlitchMarkers.ForEach(x =>
+                    {
+                        pack.GlitchMarkers.Add(new ContentStructure()
+                        {
+                            ClassName = "ASV_Glitch",
+                            HasDecayTimeReset=false,
+                            X = x.X,
+                            Y = x.Y,
+                            Z = x.Z,
+                            Latitude = (float)x.Lat,
+                            Longitude = (float)x.Lon
+                        });
+
+                    });
+
                     cm = new ASVDataManager(pack);
 
                 }
@@ -162,6 +177,25 @@ namespace ARKViewer
 
 
                     container.LoadSaveGame(fileName, localProfileFilename);
+                    
+                    //terminals not already in game data
+
+
+                    //glitches
+                    Program.ProgramConfig.GlitchMarkers.ForEach(x =>
+                    {
+                        container.MapStructures.Add(new ContentStructure()
+                        {
+                            ClassName = "ASV_Glitch",
+                            HasDecayTimeReset = false,
+                            X = x.X,
+                            Y = x.Y,
+                            Z = x.Z,
+                            Latitude = (float)x.Lat,
+                            Longitude = (float)x.Lon
+                        });
+                    });
+
 
 
 

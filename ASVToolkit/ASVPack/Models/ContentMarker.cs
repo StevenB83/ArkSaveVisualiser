@@ -12,6 +12,7 @@ namespace ASVPack.Models
     public class ContentMarker
     {
         [DataMember] public string Map { get; set; } = "";
+        [DataMember] public string Category { get; set; } = "";
         [DataMember] public string Name { get; set; } = "";
         [DataMember] public int Colour { get; set; } = Color.White.ToArgb();
         [DataMember] public string Image { get; set; } = "";

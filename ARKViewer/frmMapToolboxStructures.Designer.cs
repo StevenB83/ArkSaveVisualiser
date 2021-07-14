@@ -77,6 +77,9 @@ namespace ARKViewer
             this.btnCopyCommand = new System.Windows.Forms.Button();
             this.cboConsoleCommands = new System.Windows.Forms.ComboBox();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.layoutStructures.SuspendLayout();
             this.pnlContainer6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon6)).BeginInit();
@@ -133,7 +136,7 @@ namespace ARKViewer
             this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.layoutStructures.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.layoutStructures.Size = new System.Drawing.Size(361, 280);
+            this.layoutStructures.Size = new System.Drawing.Size(381, 280);
             this.layoutStructures.TabIndex = 0;
             // 
             // pnlContainer6
@@ -144,14 +147,14 @@ namespace ARKViewer
             this.pnlContainer6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer6.Location = new System.Drawing.Point(3, 233);
             this.pnlContainer6.Name = "pnlContainer6";
-            this.pnlContainer6.Size = new System.Drawing.Size(174, 44);
+            this.pnlContainer6.Size = new System.Drawing.Size(184, 44);
             this.pnlContainer6.TabIndex = 10;
             // 
             // picIcon6
             // 
             this.picIcon6.BackColor = System.Drawing.Color.Cornsilk;
             this.picIcon6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon6.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon6.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon6.Image = ((System.Drawing.Image)(resources.GetObject("picIcon6.Image")));
             this.picIcon6.Location = new System.Drawing.Point(12, 4);
             this.picIcon6.Name = "picIcon6";
@@ -173,20 +176,20 @@ namespace ARKViewer
             // 
             // pnlContainer12
             // 
-            this.pnlContainer12.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer12.BackColor = System.Drawing.Color.PowderBlue;
             this.pnlContainer12.Controls.Add(this.picIcon12);
             this.pnlContainer12.Controls.Add(this.chkMapGlitches);
             this.pnlContainer12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer12.Location = new System.Drawing.Point(183, 233);
+            this.pnlContainer12.Location = new System.Drawing.Point(193, 233);
             this.pnlContainer12.Name = "pnlContainer12";
-            this.pnlContainer12.Size = new System.Drawing.Size(175, 44);
+            this.pnlContainer12.Size = new System.Drawing.Size(185, 44);
             this.pnlContainer12.TabIndex = 11;
             // 
             // picIcon12
             // 
             this.picIcon12.BackColor = System.Drawing.Color.White;
             this.picIcon12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon12.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon12.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon12.Image = global::ARKViewer.Properties.Resources.structure_marker_glitch;
             this.picIcon12.Location = new System.Drawing.Point(11, 4);
             this.picIcon12.Name = "picIcon12";
@@ -214,14 +217,14 @@ namespace ARKViewer
             this.pnlContainer5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer5.Location = new System.Drawing.Point(3, 187);
             this.pnlContainer5.Name = "pnlContainer5";
-            this.pnlContainer5.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer5.Size = new System.Drawing.Size(184, 40);
             this.pnlContainer5.TabIndex = 8;
             // 
             // picIcon5
             // 
             this.picIcon5.BackColor = System.Drawing.Color.White;
             this.picIcon5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon5.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon5.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon5.Image = global::ARKViewer.Properties.Resources.structure_marker_battery;
             this.picIcon5.Location = new System.Drawing.Point(12, 3);
             this.picIcon5.Name = "picIcon5";
@@ -247,16 +250,16 @@ namespace ARKViewer
             this.pnlContainer11.Controls.Add(this.picIcon11);
             this.pnlContainer11.Controls.Add(this.chkMapBeaverDams);
             this.pnlContainer11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer11.Location = new System.Drawing.Point(183, 187);
+            this.pnlContainer11.Location = new System.Drawing.Point(193, 187);
             this.pnlContainer11.Name = "pnlContainer11";
-            this.pnlContainer11.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer11.Size = new System.Drawing.Size(185, 40);
             this.pnlContainer11.TabIndex = 9;
             // 
             // picIcon11
             // 
             this.picIcon11.BackColor = System.Drawing.Color.White;
             this.picIcon11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon11.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon11.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon11.Image = global::ARKViewer.Properties.Resources.structure_marker_beaver;
             this.picIcon11.Location = new System.Drawing.Point(11, 3);
             this.picIcon11.Name = "picIcon11";
@@ -284,14 +287,14 @@ namespace ARKViewer
             this.pnlContainer4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer4.Location = new System.Drawing.Point(3, 141);
             this.pnlContainer4.Name = "pnlContainer4";
-            this.pnlContainer4.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer4.Size = new System.Drawing.Size(184, 40);
             this.pnlContainer4.TabIndex = 6;
             // 
             // picIcon4
             // 
             this.picIcon4.BackColor = System.Drawing.Color.White;
             this.picIcon4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon4.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon4.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon4.Image = global::ARKViewer.Properties.Resources.structure_marker_water;
             this.picIcon4.Location = new System.Drawing.Point(12, 4);
             this.picIcon4.Name = "picIcon4";
@@ -317,9 +320,9 @@ namespace ARKViewer
             this.pnlContainer10.Controls.Add(this.chkMapMagmaNests);
             this.pnlContainer10.Controls.Add(this.picIcon10);
             this.pnlContainer10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer10.Location = new System.Drawing.Point(183, 141);
+            this.pnlContainer10.Location = new System.Drawing.Point(193, 141);
             this.pnlContainer10.Name = "pnlContainer10";
-            this.pnlContainer10.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer10.Size = new System.Drawing.Size(185, 40);
             this.pnlContainer10.TabIndex = 7;
             // 
             // chkMapMagmaNests
@@ -337,7 +340,7 @@ namespace ARKViewer
             // 
             this.picIcon10.BackColor = System.Drawing.Color.White;
             this.picIcon10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon10.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon10.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon10.Image = global::ARKViewer.Properties.Resources.structure_marker_magmasaur;
             this.picIcon10.Location = new System.Drawing.Point(11, 4);
             this.picIcon10.Name = "picIcon10";
@@ -354,7 +357,7 @@ namespace ARKViewer
             this.pnlContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer3.Location = new System.Drawing.Point(3, 95);
             this.pnlContainer3.Name = "pnlContainer3";
-            this.pnlContainer3.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer3.Size = new System.Drawing.Size(184, 40);
             this.pnlContainer3.TabIndex = 4;
             // 
             // chkMapGasVeins
@@ -372,7 +375,7 @@ namespace ARKViewer
             // 
             this.picIcon3.BackColor = System.Drawing.Color.White;
             this.picIcon3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon3.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon3.Image = global::ARKViewer.Properties.Resources.structure_marker_gas;
             this.picIcon3.Location = new System.Drawing.Point(12, 4);
             this.picIcon3.Name = "picIcon3";
@@ -387,9 +390,9 @@ namespace ARKViewer
             this.pnlContainer9.Controls.Add(this.chkMapDrakeNests);
             this.pnlContainer9.Controls.Add(this.picIcon9);
             this.pnlContainer9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer9.Location = new System.Drawing.Point(183, 95);
+            this.pnlContainer9.Location = new System.Drawing.Point(193, 95);
             this.pnlContainer9.Name = "pnlContainer9";
-            this.pnlContainer9.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer9.Size = new System.Drawing.Size(185, 40);
             this.pnlContainer9.TabIndex = 5;
             // 
             // chkMapDrakeNests
@@ -407,7 +410,7 @@ namespace ARKViewer
             // 
             this.picIcon9.BackColor = System.Drawing.Color.White;
             this.picIcon9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon9.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon9.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon9.Image = global::ARKViewer.Properties.Resources.structure_marker_rockdrake;
             this.picIcon9.Location = new System.Drawing.Point(11, 4);
             this.picIcon9.Name = "picIcon9";
@@ -424,7 +427,7 @@ namespace ARKViewer
             this.pnlContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer2.Location = new System.Drawing.Point(3, 49);
             this.pnlContainer2.Name = "pnlContainer2";
-            this.pnlContainer2.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer2.Size = new System.Drawing.Size(184, 40);
             this.pnlContainer2.TabIndex = 2;
             // 
             // chkMapOilVeins
@@ -442,7 +445,7 @@ namespace ARKViewer
             // 
             this.picIcon2.BackColor = System.Drawing.Color.White;
             this.picIcon2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon2.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon2.Image = global::ARKViewer.Properties.Resources.structure_marker_oil;
             this.picIcon2.Location = new System.Drawing.Point(12, 4);
             this.picIcon2.Name = "picIcon2";
@@ -457,9 +460,9 @@ namespace ARKViewer
             this.pnlContainer8.Controls.Add(this.chkMapDeinoNests);
             this.pnlContainer8.Controls.Add(this.picIcon8);
             this.pnlContainer8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer8.Location = new System.Drawing.Point(183, 49);
+            this.pnlContainer8.Location = new System.Drawing.Point(193, 49);
             this.pnlContainer8.Name = "pnlContainer8";
-            this.pnlContainer8.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer8.Size = new System.Drawing.Size(185, 40);
             this.pnlContainer8.TabIndex = 3;
             // 
             // chkMapDeinoNests
@@ -477,7 +480,7 @@ namespace ARKViewer
             // 
             this.picIcon8.BackColor = System.Drawing.Color.White;
             this.picIcon8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon8.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon8.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon8.Image = global::ARKViewer.Properties.Resources.structure_marker_deino;
             this.picIcon8.Location = new System.Drawing.Point(11, 4);
             this.picIcon8.Name = "picIcon8";
@@ -488,20 +491,20 @@ namespace ARKViewer
             // 
             // pnlContainer1
             // 
-            this.pnlContainer1.BackColor = System.Drawing.Color.CadetBlue;
+            this.pnlContainer1.BackColor = System.Drawing.Color.PowderBlue;
             this.pnlContainer1.Controls.Add(this.picIcon1);
             this.pnlContainer1.Controls.Add(this.chkMapTerminals);
             this.pnlContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlContainer1.Location = new System.Drawing.Point(3, 3);
             this.pnlContainer1.Name = "pnlContainer1";
-            this.pnlContainer1.Size = new System.Drawing.Size(174, 40);
+            this.pnlContainer1.Size = new System.Drawing.Size(184, 40);
             this.pnlContainer1.TabIndex = 0;
             // 
             // picIcon1
             // 
             this.picIcon1.BackColor = System.Drawing.Color.Green;
             this.picIcon1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon1.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon1.Image = ((System.Drawing.Image)(resources.GetObject("picIcon1.Image")));
             this.picIcon1.Location = new System.Drawing.Point(12, 4);
             this.picIcon1.Name = "picIcon1";
@@ -527,16 +530,16 @@ namespace ARKViewer
             this.pnlContainer7.Controls.Add(this.picIcon7);
             this.pnlContainer7.Controls.Add(this.chkMapWyvernNests);
             this.pnlContainer7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlContainer7.Location = new System.Drawing.Point(183, 3);
+            this.pnlContainer7.Location = new System.Drawing.Point(193, 3);
             this.pnlContainer7.Name = "pnlContainer7";
-            this.pnlContainer7.Size = new System.Drawing.Size(175, 40);
+            this.pnlContainer7.Size = new System.Drawing.Size(185, 40);
             this.pnlContainer7.TabIndex = 1;
             // 
             // picIcon7
             // 
             this.picIcon7.BackColor = System.Drawing.Color.White;
             this.picIcon7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.picIcon7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picIcon7.Cursor = System.Windows.Forms.Cursors.Default;
             this.picIcon7.Image = global::ARKViewer.Properties.Resources.structure_marker_wyvern;
             this.picIcon7.Location = new System.Drawing.Point(11, 4);
             this.picIcon7.Name = "picIcon7";
@@ -570,7 +573,7 @@ namespace ARKViewer
             this.lvwStructureLocations.Location = new System.Drawing.Point(12, 303);
             this.lvwStructureLocations.MultiSelect = false;
             this.lvwStructureLocations.Name = "lvwStructureLocations";
-            this.lvwStructureLocations.Size = new System.Drawing.Size(358, 115);
+            this.lvwStructureLocations.Size = new System.Drawing.Size(378, 115);
             this.lvwStructureLocations.TabIndex = 1;
             this.lvwStructureLocations.UseCompatibleStateImageBehavior = false;
             this.lvwStructureLocations.View = System.Windows.Forms.View.Details;
@@ -598,7 +601,7 @@ namespace ARKViewer
             this.chkGroup.AutoSize = true;
             this.chkGroup.Checked = true;
             this.chkGroup.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkGroup.Location = new System.Drawing.Point(279, 457);
+            this.chkGroup.Location = new System.Drawing.Point(299, 463);
             this.chkGroup.Name = "chkGroup";
             this.chkGroup.Size = new System.Drawing.Size(91, 17);
             this.chkGroup.TabIndex = 5;
@@ -609,12 +612,12 @@ namespace ARKViewer
             // 
             this.txtContents.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtContents.Location = new System.Drawing.Point(16, 480);
+            this.txtContents.Location = new System.Drawing.Point(16, 486);
             this.txtContents.Multiline = true;
             this.txtContents.Name = "txtContents";
             this.txtContents.ReadOnly = true;
             this.txtContents.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtContents.Size = new System.Drawing.Size(354, 104);
+            this.txtContents.Size = new System.Drawing.Size(374, 99);
             this.txtContents.TabIndex = 6;
             // 
             // lblSelectedContent
@@ -622,7 +625,7 @@ namespace ARKViewer
             this.lblSelectedContent.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblSelectedContent.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSelectedContent.ForeColor = System.Drawing.Color.DarkSlateGray;
-            this.lblSelectedContent.Location = new System.Drawing.Point(13, 452);
+            this.lblSelectedContent.Location = new System.Drawing.Point(13, 458);
             this.lblSelectedContent.Name = "lblSelectedContent";
             this.lblSelectedContent.Size = new System.Drawing.Size(125, 25);
             this.lblSelectedContent.TabIndex = 4;
@@ -631,9 +634,9 @@ namespace ARKViewer
             // 
             // btnCopyCommand
             // 
-            this.btnCopyCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyCommand.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCopyCommand.Image = global::ARKViewer.Properties.Resources.button_document;
-            this.btnCopyCommand.Location = new System.Drawing.Point(340, 424);
+            this.btnCopyCommand.Location = new System.Drawing.Point(236, 424);
             this.btnCopyCommand.Name = "btnCopyCommand";
             this.btnCopyCommand.Size = new System.Drawing.Size(30, 30);
             this.btnCopyCommand.TabIndex = 3;
@@ -650,7 +653,7 @@ namespace ARKViewer
             "SetPlayerPos  <x> <y> <z>"});
             this.cboConsoleCommands.Location = new System.Drawing.Point(15, 428);
             this.cboConsoleCommands.Name = "cboConsoleCommands";
-            this.cboConsoleCommands.Size = new System.Drawing.Size(319, 21);
+            this.cboConsoleCommands.Size = new System.Drawing.Size(215, 21);
             this.cboConsoleCommands.TabIndex = 2;
             // 
             // lblStatus
@@ -661,16 +664,50 @@ namespace ARKViewer
             this.lblStatus.ForeColor = System.Drawing.Color.DimGray;
             this.lblStatus.Location = new System.Drawing.Point(13, 593);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(359, 13);
+            this.lblStatus.Size = new System.Drawing.Size(379, 13);
             this.lblStatus.TabIndex = 7;
             this.lblStatus.Text = "Loading...";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAdd.Image = global::ARKViewer.Properties.Resources.button_add;
+            this.btnAdd.Location = new System.Drawing.Point(360, 424);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(30, 30);
+            this.btnAdd.TabIndex = 8;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEdit.Enabled = false;
+            this.btnEdit.Image = global::ARKViewer.Properties.Resources.button_edit;
+            this.btnEdit.Location = new System.Drawing.Point(326, 424);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(30, 30);
+            this.btnEdit.TabIndex = 9;
+            this.btnEdit.UseVisualStyleBackColor = true;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRemove.Enabled = false;
+            this.btnRemove.Image = global::ARKViewer.Properties.Resources.button_remove;
+            this.btnRemove.Location = new System.Drawing.Point(292, 424);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(30, 30);
+            this.btnRemove.TabIndex = 10;
+            this.btnRemove.UseVisualStyleBackColor = true;
             // 
             // frmMapToolboxStructures
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(384, 611);
+            this.ClientSize = new System.Drawing.Size(404, 611);
+            this.Controls.Add(this.btnRemove);
+            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.chkGroup);
             this.Controls.Add(this.txtContents);
@@ -679,6 +716,7 @@ namespace ARKViewer
             this.Controls.Add(this.cboConsoleCommands);
             this.Controls.Add(this.lvwStructureLocations);
             this.Controls.Add(this.layoutStructures);
+            this.Controls.Add(this.btnEdit);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MinimumSize = new System.Drawing.Size(400, 650);
             this.Name = "frmMapToolboxStructures";
@@ -776,5 +814,8 @@ namespace ARKViewer
         private System.Windows.Forms.Button btnCopyCommand;
         private System.Windows.Forms.ComboBox cboConsoleCommands;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Button btnAdd;
+        private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.Button btnRemove;
     }
 }

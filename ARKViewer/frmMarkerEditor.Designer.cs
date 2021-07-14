@@ -46,6 +46,8 @@
             this.pnlBorderColour = new System.Windows.Forms.Panel();
             this.pnlBackgroundColour = new System.Windows.Forms.Panel();
             this.grpWrapper = new System.Windows.Forms.GroupBox();
+            this.lblCategory = new System.Windows.Forms.Label();
+            this.txtCategory = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblHeaderWrapper = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.picIcon)).BeginInit();
@@ -59,7 +61,7 @@
             // 
             this.picIcon.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picIcon.Image = global::ARKViewer.Properties.Resources.marker_0;
-            this.picIcon.Location = new System.Drawing.Point(108, 310);
+            this.picIcon.Location = new System.Drawing.Point(174, 304);
             this.picIcon.Name = "picIcon";
             this.picIcon.Size = new System.Drawing.Size(64, 64);
             this.picIcon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -72,10 +74,10 @@
             this.lblName.BackColor = System.Drawing.SystemColors.Control;
             this.lblName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblName.ForeColor = System.Drawing.Color.DimGray;
-            this.lblName.Location = new System.Drawing.Point(23, 43);
+            this.lblName.Location = new System.Drawing.Point(23, 91);
             this.lblName.Name = "lblName";
             this.lblName.Size = new System.Drawing.Size(239, 23);
-            this.lblName.TabIndex = 0;
+            this.lblName.TabIndex = 4;
             this.lblName.Text = "Name";
             this.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -84,10 +86,10 @@
             this.lblBorderSize.BackColor = System.Drawing.SystemColors.Control;
             this.lblBorderSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorderSize.ForeColor = System.Drawing.Color.DimGray;
-            this.lblBorderSize.Location = new System.Drawing.Point(24, 99);
+            this.lblBorderSize.Location = new System.Drawing.Point(26, 278);
             this.lblBorderSize.Name = "lblBorderSize";
-            this.lblBorderSize.Size = new System.Drawing.Size(238, 23);
-            this.lblBorderSize.TabIndex = 2;
+            this.lblBorderSize.Size = new System.Drawing.Size(114, 23);
+            this.lblBorderSize.TabIndex = 14;
             this.lblBorderSize.Text = "Border Size";
             this.lblBorderSize.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -96,10 +98,10 @@
             this.lblBorderColour.BackColor = System.Drawing.SystemColors.Control;
             this.lblBorderColour.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBorderColour.ForeColor = System.Drawing.Color.DimGray;
-            this.lblBorderColour.Location = new System.Drawing.Point(25, 155);
+            this.lblBorderColour.Location = new System.Drawing.Point(25, 151);
             this.lblBorderColour.Name = "lblBorderColour";
-            this.lblBorderColour.Size = new System.Drawing.Size(237, 23);
-            this.lblBorderColour.TabIndex = 4;
+            this.lblBorderColour.Size = new System.Drawing.Size(115, 23);
+            this.lblBorderColour.TabIndex = 6;
             this.lblBorderColour.Text = "Border Colour";
             this.lblBorderColour.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -108,10 +110,10 @@
             this.lblBackgroundColour.BackColor = System.Drawing.SystemColors.Control;
             this.lblBackgroundColour.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBackgroundColour.ForeColor = System.Drawing.Color.DimGray;
-            this.lblBackgroundColour.Location = new System.Drawing.Point(25, 216);
+            this.lblBackgroundColour.Location = new System.Drawing.Point(148, 151);
             this.lblBackgroundColour.Name = "lblBackgroundColour";
-            this.lblBackgroundColour.Size = new System.Drawing.Size(237, 23);
-            this.lblBackgroundColour.TabIndex = 6;
+            this.lblBackgroundColour.Size = new System.Drawing.Size(115, 23);
+            this.lblBackgroundColour.TabIndex = 8;
             this.lblBackgroundColour.Text = "Background Colour";
             this.lblBackgroundColour.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -120,51 +122,53 @@
             this.lblIcon.BackColor = System.Drawing.SystemColors.Control;
             this.lblIcon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblIcon.ForeColor = System.Drawing.Color.DimGray;
-            this.lblIcon.Location = new System.Drawing.Point(25, 278);
+            this.lblIcon.Location = new System.Drawing.Point(171, 278);
             this.lblIcon.Name = "lblIcon";
-            this.lblIcon.Size = new System.Drawing.Size(237, 23);
-            this.lblIcon.TabIndex = 8;
+            this.lblIcon.Size = new System.Drawing.Size(67, 23);
+            this.lblIcon.TabIndex = 16;
             this.lblIcon.Text = "Icon";
             this.lblIcon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtName
             // 
             this.txtName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtName.Location = new System.Drawing.Point(26, 72);
+            this.txtName.Location = new System.Drawing.Point(26, 114);
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(236, 22);
-            this.txtName.TabIndex = 1;
+            this.txtName.TabIndex = 5;
             this.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtName.Validating += new System.ComponentModel.CancelEventHandler(this.txtName_Validating);
             // 
             // udBorderSize
             // 
             this.udBorderSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.udBorderSize.Location = new System.Drawing.Point(27, 127);
+            this.udBorderSize.Location = new System.Drawing.Point(29, 301);
             this.udBorderSize.Name = "udBorderSize";
-            this.udBorderSize.Size = new System.Drawing.Size(235, 22);
-            this.udBorderSize.TabIndex = 3;
+            this.udBorderSize.Size = new System.Drawing.Size(111, 22);
+            this.udBorderSize.TabIndex = 15;
             this.udBorderSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // udLat
             // 
             this.udLat.DecimalPlaces = 2;
             this.udLat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.udLat.Location = new System.Drawing.Point(27, 405);
+            this.udLat.Location = new System.Drawing.Point(29, 241);
             this.udLat.Name = "udLat";
-            this.udLat.Size = new System.Drawing.Size(235, 22);
-            this.udLat.TabIndex = 10;
+            this.udLat.Size = new System.Drawing.Size(111, 22);
+            this.udLat.TabIndex = 11;
             this.udLat.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udLat.ValueChanged += new System.EventHandler(this.udLat_ValueChanged);
+            this.udLat.Enter += new System.EventHandler(this.udLat_Enter);
             // 
             // lblLat
             // 
             this.lblLat.BackColor = System.Drawing.SystemColors.Control;
             this.lblLat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLat.ForeColor = System.Drawing.Color.DimGray;
-            this.lblLat.Location = new System.Drawing.Point(24, 381);
+            this.lblLat.Location = new System.Drawing.Point(26, 217);
             this.lblLat.Name = "lblLat";
-            this.lblLat.Size = new System.Drawing.Size(238, 23);
-            this.lblLat.TabIndex = 9;
+            this.lblLat.Size = new System.Drawing.Size(114, 23);
+            this.lblLat.TabIndex = 10;
             this.lblLat.Text = "Latitude";
             this.lblLat.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -172,21 +176,22 @@
             // 
             this.udLon.DecimalPlaces = 2;
             this.udLon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.udLon.Location = new System.Drawing.Point(27, 454);
+            this.udLon.Location = new System.Drawing.Point(151, 241);
             this.udLon.Name = "udLon";
-            this.udLon.Size = new System.Drawing.Size(235, 22);
-            this.udLon.TabIndex = 12;
+            this.udLon.Size = new System.Drawing.Size(111, 22);
+            this.udLon.TabIndex = 13;
             this.udLon.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.udLon.Enter += new System.EventHandler(this.udLon_Enter);
             // 
             // lblLon
             // 
             this.lblLon.BackColor = System.Drawing.SystemColors.Control;
             this.lblLon.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblLon.ForeColor = System.Drawing.Color.DimGray;
-            this.lblLon.Location = new System.Drawing.Point(24, 430);
+            this.lblLon.Location = new System.Drawing.Point(148, 217);
             this.lblLon.Name = "lblLon";
-            this.lblLon.Size = new System.Drawing.Size(238, 23);
-            this.lblLon.TabIndex = 11;
+            this.lblLon.Size = new System.Drawing.Size(114, 23);
+            this.lblLon.TabIndex = 12;
             this.lblLon.Text = "Longitude";
             this.lblLon.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -194,7 +199,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(145, 520);
+            this.btnSave.Location = new System.Drawing.Point(145, 411);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 1;
@@ -207,7 +212,7 @@
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.btnClose.Location = new System.Drawing.Point(226, 520);
+            this.btnClose.Location = new System.Drawing.Point(226, 411);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 2;
@@ -217,19 +222,19 @@
             // pnlBorderColour
             // 
             this.pnlBorderColour.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlBorderColour.Location = new System.Drawing.Point(26, 182);
+            this.pnlBorderColour.Location = new System.Drawing.Point(26, 176);
             this.pnlBorderColour.Name = "pnlBorderColour";
-            this.pnlBorderColour.Size = new System.Drawing.Size(236, 27);
-            this.pnlBorderColour.TabIndex = 5;
+            this.pnlBorderColour.Size = new System.Drawing.Size(114, 27);
+            this.pnlBorderColour.TabIndex = 7;
             this.pnlBorderColour.Click += new System.EventHandler(this.pnlBorderColour_Click);
             // 
             // pnlBackgroundColour
             // 
             this.pnlBackgroundColour.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnlBackgroundColour.Location = new System.Drawing.Point(25, 245);
+            this.pnlBackgroundColour.Location = new System.Drawing.Point(148, 176);
             this.pnlBackgroundColour.Name = "pnlBackgroundColour";
-            this.pnlBackgroundColour.Size = new System.Drawing.Size(236, 27);
-            this.pnlBackgroundColour.TabIndex = 7;
+            this.pnlBackgroundColour.Size = new System.Drawing.Size(115, 27);
+            this.pnlBackgroundColour.TabIndex = 9;
             this.pnlBackgroundColour.Click += new System.EventHandler(this.pnlBackgroundColour_Click);
             // 
             // grpWrapper
@@ -237,27 +242,50 @@
             this.grpWrapper.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.grpWrapper.Controls.Add(this.lblCategory);
+            this.grpWrapper.Controls.Add(this.txtCategory);
             this.grpWrapper.Controls.Add(this.label2);
+            this.grpWrapper.Controls.Add(this.picIcon);
             this.grpWrapper.Controls.Add(this.pnlBackgroundColour);
+            this.grpWrapper.Controls.Add(this.lblIcon);
             this.grpWrapper.Controls.Add(this.lblHeaderWrapper);
             this.grpWrapper.Controls.Add(this.pnlBorderColour);
             this.grpWrapper.Controls.Add(this.lblName);
-            this.grpWrapper.Controls.Add(this.picIcon);
             this.grpWrapper.Controls.Add(this.lblBorderSize);
             this.grpWrapper.Controls.Add(this.udLon);
             this.grpWrapper.Controls.Add(this.lblBorderColour);
             this.grpWrapper.Controls.Add(this.lblLon);
             this.grpWrapper.Controls.Add(this.lblBackgroundColour);
             this.grpWrapper.Controls.Add(this.udLat);
-            this.grpWrapper.Controls.Add(this.lblIcon);
             this.grpWrapper.Controls.Add(this.lblLat);
             this.grpWrapper.Controls.Add(this.txtName);
             this.grpWrapper.Controls.Add(this.udBorderSize);
             this.grpWrapper.Location = new System.Drawing.Point(12, 12);
             this.grpWrapper.Name = "grpWrapper";
-            this.grpWrapper.Size = new System.Drawing.Size(287, 500);
+            this.grpWrapper.Size = new System.Drawing.Size(287, 393);
             this.grpWrapper.TabIndex = 0;
             this.grpWrapper.TabStop = false;
+            // 
+            // lblCategory
+            // 
+            this.lblCategory.BackColor = System.Drawing.SystemColors.Control;
+            this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategory.ForeColor = System.Drawing.Color.DimGray;
+            this.lblCategory.Location = new System.Drawing.Point(24, 40);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(239, 23);
+            this.lblCategory.TabIndex = 2;
+            this.lblCategory.Text = "Category";
+            this.lblCategory.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtCategory
+            // 
+            this.txtCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCategory.Location = new System.Drawing.Point(27, 65);
+            this.txtCategory.Name = "txtCategory";
+            this.txtCategory.Size = new System.Drawing.Size(236, 22);
+            this.txtCategory.TabIndex = 3;
+            this.txtCategory.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
@@ -288,7 +316,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(314, 555);
+            this.ClientSize = new System.Drawing.Size(314, 446);
             this.Controls.Add(this.grpWrapper);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.btnClose);
@@ -328,5 +356,7 @@
         private System.Windows.Forms.GroupBox grpWrapper;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblHeaderWrapper;
+        private System.Windows.Forms.Label lblCategory;
+        private System.Windows.Forms.TextBox txtCategory;
     }
 }

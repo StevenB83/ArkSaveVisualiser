@@ -39,6 +39,8 @@ namespace ARKViewer
             this.btnAddMarker = new System.Windows.Forms.Button();
             this.btnEditMarker = new System.Windows.Forms.Button();
             this.txtMarkerFilter = new System.Windows.Forms.TextBox();
+            this.cboCategory = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lvwMapMarkers
@@ -53,9 +55,9 @@ namespace ARKViewer
             this.lvwMapMarkers_Lon});
             this.lvwMapMarkers.FullRowSelect = true;
             this.lvwMapMarkers.HideSelection = false;
-            this.lvwMapMarkers.Location = new System.Drawing.Point(6, 6);
+            this.lvwMapMarkers.Location = new System.Drawing.Point(6, 45);
             this.lvwMapMarkers.Name = "lvwMapMarkers";
-            this.lvwMapMarkers.Size = new System.Drawing.Size(301, 294);
+            this.lvwMapMarkers.Size = new System.Drawing.Size(301, 382);
             this.lvwMapMarkers.TabIndex = 0;
             this.lvwMapMarkers.UseCompatibleStateImageBehavior = false;
             this.lvwMapMarkers.View = System.Windows.Forms.View.Details;
@@ -81,7 +83,7 @@ namespace ARKViewer
             this.btnRemoveMarker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnRemoveMarker.Enabled = false;
             this.btnRemoveMarker.Image = global::ARKViewer.Properties.Resources.button_remove;
-            this.btnRemoveMarker.Location = new System.Drawing.Point(42, 310);
+            this.btnRemoveMarker.Location = new System.Drawing.Point(42, 437);
             this.btnRemoveMarker.Name = "btnRemoveMarker";
             this.btnRemoveMarker.Size = new System.Drawing.Size(30, 30);
             this.btnRemoveMarker.TabIndex = 2;
@@ -93,7 +95,7 @@ namespace ARKViewer
             this.chkApplyFilterMarkers.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.chkApplyFilterMarkers.Appearance = System.Windows.Forms.Appearance.Button;
             this.chkApplyFilterMarkers.Image = global::ARKViewer.Properties.Resources.button_filter;
-            this.chkApplyFilterMarkers.Location = new System.Drawing.Point(239, 310);
+            this.chkApplyFilterMarkers.Location = new System.Drawing.Point(239, 437);
             this.chkApplyFilterMarkers.Name = "chkApplyFilterMarkers";
             this.chkApplyFilterMarkers.Size = new System.Drawing.Size(30, 30);
             this.chkApplyFilterMarkers.TabIndex = 4;
@@ -104,7 +106,7 @@ namespace ARKViewer
             // 
             this.btnAddMarker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAddMarker.Image = global::ARKViewer.Properties.Resources.button_add;
-            this.btnAddMarker.Location = new System.Drawing.Point(6, 310);
+            this.btnAddMarker.Location = new System.Drawing.Point(6, 437);
             this.btnAddMarker.Name = "btnAddMarker";
             this.btnAddMarker.Size = new System.Drawing.Size(30, 30);
             this.btnAddMarker.TabIndex = 1;
@@ -116,7 +118,7 @@ namespace ARKViewer
             this.btnEditMarker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEditMarker.Enabled = false;
             this.btnEditMarker.Image = ((System.Drawing.Image)(resources.GetObject("btnEditMarker.Image")));
-            this.btnEditMarker.Location = new System.Drawing.Point(277, 310);
+            this.btnEditMarker.Location = new System.Drawing.Point(277, 437);
             this.btnEditMarker.Name = "btnEditMarker";
             this.btnEditMarker.Size = new System.Drawing.Size(30, 30);
             this.btnEditMarker.TabIndex = 5;
@@ -128,17 +130,43 @@ namespace ARKViewer
             this.txtMarkerFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtMarkerFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMarkerFilter.Location = new System.Drawing.Point(81, 312);
+            this.txtMarkerFilter.Location = new System.Drawing.Point(81, 439);
             this.txtMarkerFilter.Name = "txtMarkerFilter";
             this.txtMarkerFilter.Size = new System.Drawing.Size(152, 22);
             this.txtMarkerFilter.TabIndex = 3;
+            // 
+            // cboCategory
+            // 
+            this.cboCategory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.cboCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboCategory.FormattingEnabled = true;
+            this.cboCategory.Location = new System.Drawing.Point(75, 13);
+            this.cboCategory.Name = "cboCategory";
+            this.cboCategory.Size = new System.Drawing.Size(232, 21);
+            this.cboCategory.TabIndex = 6;
+            this.cboCategory.SelectedIndexChanged += new System.EventHandler(this.cboCategory_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.CadetBlue;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.label1.Location = new System.Drawing.Point(11, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Category:";
             // 
             // frmMapToolboxMarkers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.CadetBlue;
-            this.ClientSize = new System.Drawing.Size(314, 346);
+            this.ClientSize = new System.Drawing.Size(314, 473);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cboCategory);
             this.Controls.Add(this.lvwMapMarkers);
             this.Controls.Add(this.btnRemoveMarker);
             this.Controls.Add(this.chkApplyFilterMarkers);
@@ -167,5 +195,7 @@ namespace ARKViewer
         private System.Windows.Forms.Button btnAddMarker;
         private System.Windows.Forms.Button btnEditMarker;
         private System.Windows.Forms.TextBox txtMarkerFilter;
+        private System.Windows.Forms.ComboBox cboCategory;
+        private System.Windows.Forms.Label label1;
     }
 }
