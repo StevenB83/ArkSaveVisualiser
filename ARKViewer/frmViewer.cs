@@ -121,11 +121,39 @@ namespace ARKViewer
             lblStatus.Refresh();
         }
 
-        public void LoadContent(string fileName)
+        public void LoadContent(string fileName, bool doUserDownload)
         {
             Program.LogWriter.Trace("BEGIN LoadContent()");
 
             this.Cursor = Cursors.WaitCursor;
+
+            if(Program.ProgramConfig.Mode == ViewerModes.Mode_Ftp)
+            {
+                long downloadStartTicks = DateTime.Now.Ticks;
+                if(Program.ProgramConfig.FtpLoadMode == 1 || doUserDownload || !File.Exists(fileName))
+                {
+                    UpdateProgress("Checking FTP server for new content.");
+
+                    var currentMode = Program.ProgramConfig.FtpDownloadMode;
+                    if (!doUserDownload) Program.ProgramConfig.FtpDownloadMode = 1; //set to sychronise only if user hasn't opted for refresh.
+
+                    var downloadedFile = Download();
+                    long downloadEndTicks = DateTime.Now.Ticks;
+                    if (File.Exists(downloadedFile))
+                    {
+                        fileName = downloadedFile;
+                        Program.LogWriter.Debug($"File downloaded to: {downloadedFile}");
+                        Program.ProgramConfig.SelectedFile = downloadedFile;
+                    }
+
+                    UpdateProgress($"Downloaded from server in {TimeSpan.FromTicks(downloadEndTicks - downloadStartTicks).ToString(@"mm\:ss")}.");
+
+                    Program.ProgramConfig.FtpDownloadMode = currentMode; //reset to user prefererence
+
+                }
+
+                
+            }
 
             cm = null;
             lblMapDate.Text = "No Map Loaded";
@@ -465,7 +493,7 @@ namespace ARKViewer
 
                     UpdateProgress("Loading content pack..");
 
-                    LoadContent(settings.SavedConfig.SelectedFile);
+                    LoadContent(settings.SavedConfig.SelectedFile,false);
 
                     this.Cursor = Cursors.Default;
 
@@ -2865,7 +2893,10 @@ namespace ARKViewer
             ASVComboValue selectedItem = (ASVComboValue)cboSelectedMap.SelectedItem;
 
             Program.ProgramConfig.SelectedFile = selectedItem.Key;
-            if (Program.ProgramConfig.Mode == ViewerModes.Mode_Ftp) Program.ProgramConfig.SelectedServer = selectedItem.Value;
+            if (Program.ProgramConfig.Mode == ViewerModes.Mode_Ftp)
+            {
+                Program.ProgramConfig.SelectedServer = selectedItem.Value;
+            }
 
             RefreshMap();
 
@@ -3478,35 +3509,11 @@ namespace ARKViewer
             Program.LogWriter.Trace("BEGIN RefreshMap()");
 
             this.Cursor = Cursors.WaitCursor;
-            long downloadStartTicks = 0;
-            if (ARKViewer.Program.ProgramConfig.Mode == ViewerModes.Mode_Ftp && downloadData)
-            {
-                UpdateProgress("Downloading new ftp file data...");
-
-                downloadStartTicks = DateTime.Now.Ticks;
-                var downloadedFile = Download();
-                long downloadEndTicks = DateTime.Now.Ticks;
-                if (File.Exists(downloadedFile))
-                {
-                    Program.LogWriter.Debug($"File downloaded to: {downloadedFile}");
-                    Program.ProgramConfig.SelectedFile = downloadedFile;
-                }
-
-                UpdateProgress($"Downloaded from server in {TimeSpan.FromTicks(downloadEndTicks - downloadStartTicks).ToString(@"mm\:ss")}. Loading content pack...");
-            }
-            else
-            {
-                UpdateProgress($"Loading content pack...");
-            }
-
 
             long startContentTicks = DateTime.Now.Ticks;
-            if (downloadStartTicks != (long)0)
-            {
-                startContentTicks = downloadStartTicks;
-            }
 
-            LoadContent(Program.ProgramConfig.SelectedFile);
+            UpdateProgress("Loading content pack. Please wait.");
+            LoadContent(Program.ProgramConfig.SelectedFile,downloadData);
             long endContentTicks = DateTime.Now.Ticks;
 
             if (cm == null || cm.ContentDate == null || cm.ContentDate.Equals(new DateTime()))

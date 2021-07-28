@@ -83,6 +83,8 @@ namespace ARKViewer.Configuration
         [DataMember(IsRequired = false)] public bool HideNoBody { get; set; } = true;
         [DataMember(IsRequired = false)] public int CommandPrefix { get; set; } = 0;
         [DataMember(IsRequired = false, EmitDefaultValue = false)] public int FtpDownloadMode { get; set; } = 0;
+        [DataMember] public int FtpLoadMode { get; set; } = 0; //manual
+
         [DataMember(IsRequired = false, EmitDefaultValue = false)] public bool SortCommandLineExport { get; set; } = false;
         [DataMember(IsRequired = false, EmitDefaultValue = false)] public bool ExportInventories { get; set; } = false;
         [DataMember(IsRequired = false, EmitDefaultValue = true)] public LogColourMap TribeLogColours { get; set; } = new LogColourMap();
@@ -101,7 +103,7 @@ namespace ARKViewer.Configuration
         public List<ASVBreedingSearch> BreedingSearchOptions { get; set; } = new List<ASVBreedingSearch>();
 
         public List<MissionMap> MissionMaps { get; set; } = new List<MissionMap>();
-
+        
 
         public ViewerConfiguration()
         {
@@ -559,6 +561,7 @@ JArray itemList = (JArray)itemFile.GetValue("colors");
                 this.HideNoTames = savedState.HideNoTames;
                 this.CommandPrefix = savedState.CommandPrefix;
                 this.FtpDownloadMode = savedState.FtpDownloadMode;
+                this.FtpLoadMode = savedState.FtpLoadMode;
                 if (savedState.Windows != null) this.Windows = savedState.Windows;
                 this.StoredTames = savedState.StoredTames;
                 this.Zoom = savedState.Zoom;

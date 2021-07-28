@@ -646,7 +646,8 @@ namespace ASVPack.Models
                 //WildCreatures
                 WildCreatures = container.WildCreatures
                 .Where(w =>
-                    w.Latitude != null
+                    (w.Latitude.HasValue &!float.IsNaN(w.Latitude.Value))
+                    && (w.Longitude.HasValue & !float.IsNaN(w.Longitude.Value))
                     && (Math.Abs((decimal)w.Latitude.GetValueOrDefault(0) - FilterLatitude) <= FilterRadius)
                     && (Math.Abs((decimal)w.Longitude.GetValueOrDefault(0) - FilterLongitude) <= FilterRadius)
                 ).ToList();

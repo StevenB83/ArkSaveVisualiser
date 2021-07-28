@@ -77,8 +77,9 @@ namespace ASVPack.Models
             GameSeconds = 0;
             MapStructures = new List<ContentStructure>();
             WildCreatures = new List<ContentWildCreature>();
-            DroppedItems = new List<ContentDroppedItem>();
             Tribes = new List<ContentTribe>();
+            DroppedItems = new List<ContentDroppedItem>();
+            
         }
 
         public void LoadSaveGame(string saveFilename, string localProfileFilename)

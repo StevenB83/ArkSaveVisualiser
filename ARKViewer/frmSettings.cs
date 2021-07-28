@@ -526,6 +526,9 @@ namespace ARKViewer
             optPlayerBodyShow.Checked = !SavedConfig.HideNoBody;
             optFTPSync.Checked = SavedConfig.FtpDownloadMode == 0;
             optFTPClean.Checked = SavedConfig.FtpDownloadMode == 1;
+            optDownloadAuto.Checked = SavedConfig.FtpLoadMode == 1;
+            optDownloadManual.Checked = SavedConfig.FtpLoadMode == 0;
+
             optExportNoSort.Checked = !SavedConfig.SortCommandLineExport;
             optExportSort.Checked = SavedConfig.SortCommandLineExport;
 
@@ -744,6 +747,8 @@ namespace ARKViewer
             SavedConfig.HideNoStructures = optPlayerStructureHide.Checked;
             SavedConfig.HideNoBody = optPlayerBodyHide.Checked;
             SavedConfig.FtpDownloadMode = optFTPSync.Checked ? 0 : 1;
+            SavedConfig.FtpLoadMode = optDownloadAuto.Checked ? 1 : 0;
+
             SavedConfig.SortCommandLineExport = optExportSort.Checked;
             SavedConfig.UpdateNotificationSingle = chkUpdateNotificationSingle.Checked;
 
@@ -2205,6 +2210,11 @@ namespace ARKViewer
                     PopulateSinglePlayerGames();
                 }
             }
+        }
+
+        private void optFTPSync_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

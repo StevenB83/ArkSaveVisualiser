@@ -171,7 +171,7 @@ namespace ARKViewer
                 mainForm.Show();
                 mainForm.BringToFront();
                 Application.DoEvents();
-                mainForm.LoadContent(ProgramConfig.SelectedFile);
+                mainForm.LoadContent(ProgramConfig.SelectedFile,false);
 
                 Application.Run(mainForm);
             }

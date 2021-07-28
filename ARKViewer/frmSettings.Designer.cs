@@ -59,11 +59,13 @@
             this.lblFTPServer = new System.Windows.Forms.Label();
             this.cboFTPServer = new System.Windows.Forms.ComboBox();
             this.grpOffline = new System.Windows.Forms.GroupBox();
+            this.btnEditARK = new System.Windows.Forms.Button();
             this.btnRemoveARK = new System.Windows.Forms.Button();
             this.btnAddARK = new System.Windows.Forms.Button();
             this.cboLocalARK = new System.Windows.Forms.ComboBox();
             this.lblOfflineSave = new System.Windows.Forms.Label();
             this.grpSinglePlayer = new System.Windows.Forms.GroupBox();
+            this.btnSelectFolder = new System.Windows.Forms.Button();
             this.chkUpdateNotificationSingle = new System.Windows.Forms.CheckBox();
             this.lblSelectedMapSP = new System.Windows.Forms.Label();
             this.cboMapSinglePlayer = new System.Windows.Forms.ComboBox();
@@ -241,8 +243,10 @@
             this.lblOptionHeaderBody = new System.Windows.Forms.Label();
             this.lblOptionTextBody = new System.Windows.Forms.Label();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.btnEditARK = new System.Windows.Forms.Button();
-            this.btnSelectFolder = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.pnlDownloadOption = new System.Windows.Forms.Panel();
+            this.optDownloadAuto = new System.Windows.Forms.RadioButton();
+            this.optDownloadManual = new System.Windows.Forms.RadioButton();
             this.tabSettings.SuspendLayout();
             this.tpgMap.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -280,6 +284,7 @@
             this.pnlPlayerSettingsCommands.SuspendLayout();
             this.pnlPlayerSettingsTames.SuspendLayout();
             this.pnlPlayerSettingsBody.SuspendLayout();
+            this.pnlDownloadOption.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnSave
@@ -649,6 +654,20 @@
             this.grpOffline.TabIndex = 3;
             this.grpOffline.TabStop = false;
             // 
+            // btnEditARK
+            // 
+            this.btnEditARK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnEditARK.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnEditARK.Enabled = false;
+            this.btnEditARK.Image = global::ARKViewer.Properties.Resources.button_edit;
+            this.btnEditARK.Location = new System.Drawing.Point(332, 28);
+            this.btnEditARK.Name = "btnEditARK";
+            this.btnEditARK.Size = new System.Drawing.Size(35, 35);
+            this.btnEditARK.TabIndex = 22;
+            this.toolTip1.SetToolTip(this.btnEditARK, "Edit details");
+            this.btnEditARK.UseVisualStyleBackColor = true;
+            this.btnEditARK.Click += new System.EventHandler(this.btnEditARK_Click);
+            // 
             // btnRemoveARK
             // 
             this.btnRemoveARK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -713,6 +732,20 @@
             this.grpSinglePlayer.Size = new System.Drawing.Size(472, 85);
             this.grpSinglePlayer.TabIndex = 1;
             this.grpSinglePlayer.TabStop = false;
+            // 
+            // btnSelectFolder
+            // 
+            this.btnSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSelectFolder.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSelectFolder.Enabled = false;
+            this.btnSelectFolder.Image = global::ARKViewer.Properties.Resources.button_folder;
+            this.btnSelectFolder.Location = new System.Drawing.Point(414, 26);
+            this.btnSelectFolder.Name = "btnSelectFolder";
+            this.btnSelectFolder.Size = new System.Drawing.Size(35, 35);
+            this.btnSelectFolder.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.btnSelectFolder, "Select ARK save location.");
+            this.btnSelectFolder.UseVisualStyleBackColor = true;
+            this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
             // 
             // chkUpdateNotificationSingle
             // 
@@ -2413,7 +2446,7 @@
             this.pnlCommandExportOptions.Controls.Add(this.optExportSort);
             this.pnlCommandExportOptions.Controls.Add(this.lblCommandExportOptionTitle);
             this.pnlCommandExportOptions.Controls.Add(this.lblCommandExportDescription);
-            this.pnlCommandExportOptions.Location = new System.Drawing.Point(6, 336);
+            this.pnlCommandExportOptions.Location = new System.Drawing.Point(6, 374);
             this.pnlCommandExportOptions.Name = "pnlCommandExportOptions";
             this.pnlCommandExportOptions.Size = new System.Drawing.Size(497, 59);
             this.pnlCommandExportOptions.TabIndex = 0;
@@ -2478,13 +2511,15 @@
             this.pnlFtpSettingsCommands.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlFtpSettingsCommands.BackColor = System.Drawing.Color.Transparent;
+            this.pnlFtpSettingsCommands.Controls.Add(this.pnlDownloadOption);
+            this.pnlFtpSettingsCommands.Controls.Add(this.label5);
             this.pnlFtpSettingsCommands.Controls.Add(this.optFTPSync);
             this.pnlFtpSettingsCommands.Controls.Add(this.optFTPClean);
             this.pnlFtpSettingsCommands.Controls.Add(this.label2);
             this.pnlFtpSettingsCommands.Controls.Add(this.label3);
             this.pnlFtpSettingsCommands.Location = new System.Drawing.Point(5, 270);
             this.pnlFtpSettingsCommands.Name = "pnlFtpSettingsCommands";
-            this.pnlFtpSettingsCommands.Size = new System.Drawing.Size(497, 61);
+            this.pnlFtpSettingsCommands.Size = new System.Drawing.Size(497, 98);
             this.pnlFtpSettingsCommands.TabIndex = 5;
             // 
             // optFTPSync
@@ -2499,6 +2534,7 @@
             this.optFTPSync.TabStop = true;
             this.optFTPSync.Text = "Synchronise";
             this.optFTPSync.UseVisualStyleBackColor = true;
+            this.optFTPSync.CheckedChanged += new System.EventHandler(this.optFTPSync_CheckedChanged);
             // 
             // optFTPClean
             // 
@@ -2524,7 +2560,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 35);
+            this.label3.Location = new System.Drawing.Point(10, 37);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(130, 13);
             this.label3.TabIndex = 1;
@@ -2788,33 +2824,48 @@
             this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.toolTip1.ToolTipTitle = "Information";
             // 
-            // btnEditARK
+            // label5
             // 
-            this.btnEditARK.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEditARK.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnEditARK.Enabled = false;
-            this.btnEditARK.Image = global::ARKViewer.Properties.Resources.button_edit;
-            this.btnEditARK.Location = new System.Drawing.Point(332, 28);
-            this.btnEditARK.Name = "btnEditARK";
-            this.btnEditARK.Size = new System.Drawing.Size(35, 35);
-            this.btnEditARK.TabIndex = 22;
-            this.toolTip1.SetToolTip(this.btnEditARK, "Edit details");
-            this.btnEditARK.UseVisualStyleBackColor = true;
-            this.btnEditARK.Click += new System.EventHandler(this.btnEditARK_Click);
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 65);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(154, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "Download before loading map?";
             // 
-            // btnSelectFolder
+            // pnlDownloadOption
             // 
-            this.btnSelectFolder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSelectFolder.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSelectFolder.Enabled = false;
-            this.btnSelectFolder.Image = global::ARKViewer.Properties.Resources.button_folder;
-            this.btnSelectFolder.Location = new System.Drawing.Point(414, 26);
-            this.btnSelectFolder.Name = "btnSelectFolder";
-            this.btnSelectFolder.Size = new System.Drawing.Size(35, 35);
-            this.btnSelectFolder.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.btnSelectFolder, "Select ARK save location.");
-            this.btnSelectFolder.UseVisualStyleBackColor = true;
-            this.btnSelectFolder.Click += new System.EventHandler(this.btnSelectFolder_Click);
+            this.pnlDownloadOption.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pnlDownloadOption.Controls.Add(this.optDownloadAuto);
+            this.pnlDownloadOption.Controls.Add(this.optDownloadManual);
+            this.pnlDownloadOption.Location = new System.Drawing.Point(321, 55);
+            this.pnlDownloadOption.Name = "pnlDownloadOption";
+            this.pnlDownloadOption.Size = new System.Drawing.Size(173, 33);
+            this.pnlDownloadOption.TabIndex = 5;
+            // 
+            // optDownloadAuto
+            // 
+            this.optDownloadAuto.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.optDownloadAuto.AutoSize = true;
+            this.optDownloadAuto.Checked = true;
+            this.optDownloadAuto.Location = new System.Drawing.Point(54, 8);
+            this.optDownloadAuto.Name = "optDownloadAuto";
+            this.optDownloadAuto.Size = new System.Drawing.Size(47, 17);
+            this.optDownloadAuto.TabIndex = 4;
+            this.optDownloadAuto.TabStop = true;
+            this.optDownloadAuto.Text = "Auto";
+            this.optDownloadAuto.UseVisualStyleBackColor = true;
+            // 
+            // optDownloadManual
+            // 
+            this.optDownloadManual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.optDownloadManual.AutoSize = true;
+            this.optDownloadManual.Location = new System.Drawing.Point(103, 8);
+            this.optDownloadManual.Name = "optDownloadManual";
+            this.optDownloadManual.Size = new System.Drawing.Size(60, 17);
+            this.optDownloadManual.TabIndex = 5;
+            this.optDownloadManual.Text = "Manual";
+            this.optDownloadManual.UseVisualStyleBackColor = true;
             // 
             // frmSettings
             // 
@@ -2888,6 +2939,8 @@
             this.pnlPlayerSettingsTames.PerformLayout();
             this.pnlPlayerSettingsBody.ResumeLayout(false);
             this.pnlPlayerSettingsBody.PerformLayout();
+            this.pnlDownloadOption.ResumeLayout(false);
+            this.pnlDownloadOption.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3106,5 +3159,9 @@
         private System.Windows.Forms.Button btnRefreshUnknownItems;
         private System.Windows.Forms.Button btnEditARK;
         private System.Windows.Forms.Button btnSelectFolder;
+        private System.Windows.Forms.Panel pnlDownloadOption;
+        private System.Windows.Forms.RadioButton optDownloadAuto;
+        private System.Windows.Forms.RadioButton optDownloadManual;
+        private System.Windows.Forms.Label label5;
     }
 }
