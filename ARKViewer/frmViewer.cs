@@ -4049,13 +4049,14 @@ namespace ARKViewer
 
         private void DrawTribeChartPlayers()
         {
+            var allTribes = cm.GetTribes(0).Where(x => x.Players!=null);
+            if (allTribes == null) return;
+
+            var topTribes = allTribes.OrderByDescending(x => x.Players.Count).Take((int)udChartTopPlayers.Value).ToList();
+            var otherTribes = allTribes.OrderByDescending(x => x.Players.Count).Skip((int)udChartTopPlayers.Value).ToList();
 
             chartTribePlayers.Series[0].Points.Clear();
 
-            var allTribes = cm.GetTribes(0);
-            var topTribes = allTribes.OrderByDescending(x => x.Players.Count).Take((int)udChartTopPlayers.Value).ToList();
-            var otherTribes = allTribes.OrderByDescending(x => x.Players.Count).Skip((int)udChartTopPlayers.Value).ToList();
-            
             if (topTribes != null && topTribes.Count > 0)
             {
                 foreach (var t in topTribes.OrderByDescending(x => x.Players.Count))
@@ -4084,12 +4085,13 @@ namespace ARKViewer
         
         private void DrawTribeChartStructures()
         {
+            var allTribes = cm.GetTribes(0).Where(x => x.Structures!=null);
+            if (allTribes == null) return;
 
-            chartTribeStructures.Series[0].Points.Clear();
-
-            var allTribes = cm.GetTribes(0);
             var topTribes = allTribes.OrderByDescending(x => x.Structures.Count).Take((int)udChartTopStructures.Value).ToList();
             var otherTribes = allTribes.OrderByDescending(x => x.Structures.Count).Skip((int)udChartTopStructures.Value).ToList();
+
+            chartTribeStructures.Series[0].Points.Clear();
 
             if (topTribes != null && topTribes.Count > 0)
             {
@@ -4138,13 +4140,15 @@ namespace ARKViewer
 
         private void DrawTribeChartTames()
         {
+            var allTribes = cm.GetTribes(0).Where(x => x.Tames != null);
+            if (allTribes == null) return;
 
-            chartTribeTames.Series[0].Points.Clear();
-            var allTribes = cm.GetTribes(0);
             var topTribes = allTribes.OrderByDescending(x => x.Tames.Count).Take((int)udChartTopTames.Value).ToList();
             var otherTribes = allTribes.OrderByDescending(x => x.Tames.Count).Skip((int)udChartTopTames.Value).ToList();
 
-            if(topTribes!=null && topTribes.Count > 0)
+            chartTribeTames.Series[0].Points.Clear();
+
+            if (topTribes!=null && topTribes.Count > 0)
             {
                 foreach (var t in topTribes.OrderByDescending(x=>x.Tames.Count))
                 {

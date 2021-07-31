@@ -555,7 +555,8 @@ namespace ASVPack.Models
                         logWriter.Info($"Identifying tamed creatures");
                         var allTames = parallelContainer
                                         .Where(x => x.IsTamed()) //exclude rafts.. no idea why these are "creatures"
-                                        .GroupBy(x => new { TribeId = (long)x.GetPropertyValue<int>("TargetingTeam"), TribeName = x.GetPropertyValue<string>("TamerString") });
+                                        .GroupBy(x => (long)x.GetPropertyValue<int>("TargetingTeam")).Select(x => new { TribeId = x.Key, TribeName = x.First().GetPropertyValue<string>("TribeName") ?? x.First().GetPropertyValue<string>("TamerString"), Tames = x.ToList() }).ToList();
+
 
 
                         logWriter.Debug($"Identifying player structures");
@@ -608,6 +609,9 @@ namespace ASVPack.Models
 
                         logWriter.Debug($"Identifying in-game missing tribes from player structures");
 
+                        var testTribe1 = fileTribes.FirstOrDefault(x => x.TribeId == 570144799);
+
+
                         //attempt to get missing tribe data from structures
                         var missingStructureTribes = tribeStructures.AsParallel()
                             .Where(x => !fileTribes.Any(t => t.TribeId == x.TribeId))
@@ -620,7 +624,6 @@ namespace ASVPack.Models
                             logWriter.Debug($"Identified player structure tribes: {missingStructureTribes.Count}");
                             missingStructureTribes.ForEach(tribe =>
                             {
-
 
                                 fileTribes.Add(new ContentTribe()
                                 {
@@ -635,9 +638,10 @@ namespace ASVPack.Models
 
                         logWriter.Debug($"Identifying in-game tribes from tames");
 
+                        
                         //attempt to get missing tribe data from tames
                         var missingTameTribes = allTames
-                            .Where(x => !fileTribes.Any(t => t.TribeId == x.Key.TribeId))
+                            .Where(x => !fileTribes.Any(t => t.TribeId == x.TribeId))
                             .ToList();
 
                         if (missingTameTribes != null && missingTameTribes.Count > 0)
@@ -646,28 +650,18 @@ namespace ASVPack.Models
 
                             missingTameTribes.ForEach(tribe =>
                             {
+      
 
                                 //we know there's no .arktribe
                                 fileTribes.Add(new ContentTribe()
                                 {
-                                    TribeId = tribe.Key.TribeId,
-                                    TribeName = tribe.Key.TribeName,
+                                    TribeId = tribe.TribeId,
+                                    TribeName = tribe.TribeName,
                                     HasGameFile = false
                                 });
 
                             });
                         }
-
-
-
-
-
-
-
-
-
-
-
 
 
                         logWriter.Debug($"Populating player data");
@@ -793,7 +787,7 @@ namespace ASVPack.Models
 
                         logWriter.Debug($"Populating tamed creature inventories");
 
-                        Parallel.ForEach(allTames.SelectMany(x => x.ToList()), x =>
+                        Parallel.ForEach(allTames.SelectMany(x => x.Tames), x =>
                         //foreach (GameObject x in allTames)
                         {
                             //find appropriate tribe to add to

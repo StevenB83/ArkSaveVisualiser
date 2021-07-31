@@ -181,6 +181,691 @@ namespace ASVPack.Models
             return JsonConvert.SerializeObject(this);
         }
 
+
+
+
+
+
+
+        public void ExportJsonAll(string exportPath)
+        {
+            if (!Directory.Exists(exportPath)) Directory.CreateDirectory(exportPath);
+            Task.WaitAll(
+                Task.Run(() => ExportJsonWild(Path.Combine(exportPath, "ASV_Wild.json"))),
+                Task.Run(() => ExportJsonPlayerTribes(Path.Combine(exportPath, "ASV_Tribes.json"))),
+                Task.Run(() => ExportJsonPlayerTribeLogs(Path.Combine(exportPath, "ASV_TribeLogs.json"))),
+                Task.Run(() => ExportJsonTamed(Path.Combine(exportPath, "ASV_Tamed.json"))),
+                Task.Run(() => ExportJsonPlayers(Path.Combine(exportPath, "ASV_Players.json"))),
+                Task.Run(() => ExportJsonPlayerStructures(Path.Combine(exportPath, "ASV_Structures.json")))
+                )
+            ;
+        }
+
+        public void ExportJsonWild(string exportFilename)
+        {
+
+            string exportFolder = Path.GetDirectoryName(exportFilename);
+            if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+
+            using (FileStream fs = File.Create(exportFilename))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    using (JsonTextWriter jw = new JsonTextWriter(sw))
+                    {
+                        //var creatureList = Program.ProgramConfig.SortCommandLineExport ? gd.WildCreatures.OrderBy(o => o.ClassName).Cast<ArkWildCreature>() : gd.WildCreatures;
+                        var creatureList = WildCreatures.OrderBy(o => o.ClassName).ToList();
+                        jw.WriteStartArray();
+
+                        //Creature, Sex, Lvl, Lat, Lon, HP, Stam, Weight, Speed, Food, Oxygen, Craft, C0, C1, C2, C3, C4, C5              
+                        foreach (var creature in creatureList)
+                        {
+                            jw.WriteStartObject();
+
+                            jw.WritePropertyName("id");
+                            jw.WriteValue(creature.Id);
+
+                            jw.WritePropertyName("creature");
+                            jw.WriteValue(creature.ClassName);
+
+                            jw.WritePropertyName("sex");
+                            jw.WriteValue(creature.Gender);
+
+                            jw.WritePropertyName("lvl");
+                            jw.WriteValue(creature.BaseLevel);
+
+                            jw.WritePropertyName("lat");
+                            jw.WriteValue(creature.Latitude.GetValueOrDefault(0));
+
+                            jw.WritePropertyName("lon");
+                            jw.WriteValue(creature.Longitude.GetValueOrDefault(0));
+
+                            jw.WritePropertyName("hp");
+                            jw.WriteValue(creature.BaseStats[0]);
+
+                            jw.WritePropertyName("stam");
+                            jw.WriteValue(creature.BaseStats[1]);
+
+                            jw.WritePropertyName("melee");
+                            jw.WriteValue(creature.BaseStats[8]);
+
+                            jw.WritePropertyName("weight");
+                            jw.WriteValue(creature.BaseStats[7]);
+
+                            jw.WritePropertyName("speed");
+                            jw.WriteValue(creature.BaseStats[9]);
+
+                            jw.WritePropertyName("food");
+                            jw.WriteValue(creature.BaseStats[4]);
+
+                            jw.WritePropertyName("oxy");
+                            jw.WriteValue(creature.BaseStats[3]);
+
+                            jw.WritePropertyName("craft");
+                            jw.WriteValue(creature.BaseStats[11]);
+
+                            jw.WritePropertyName("c0");
+                            jw.WriteValue(creature.Colors[0]);
+
+                            jw.WritePropertyName("c1");
+                            jw.WriteValue(creature.Colors[1]);
+
+                            jw.WritePropertyName("c2");
+                            jw.WriteValue(creature.Colors[2]);
+
+                            jw.WritePropertyName("c3");
+                            jw.WriteValue(creature.Colors[3]);
+
+                            jw.WritePropertyName("c4");
+                            jw.WriteValue(creature.Colors[4]);
+
+                            jw.WritePropertyName("c5");
+                            jw.WriteValue(creature.Colors[5]);
+
+                            jw.WritePropertyName("ccc");
+                            jw.WriteValue($"{creature.X} {creature.Y} {creature.Z}");
+
+                            jw.WriteEnd();
+                        }
+
+                        jw.WriteEndArray();
+                    }
+
+                }
+
+            }
+        }
+
+        public void ExportJsonTamed(string exportFilename)
+        {
+            string exportFolder = Path.GetDirectoryName(exportFilename);
+            if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+
+
+            using (FileStream fs = File.Create(exportFilename))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    using (JsonTextWriter jw = new JsonTextWriter(sw))
+                    {
+                        var allTames = Tribes.SelectMany(t => t.Tames).ToList();
+
+                        //var creatureList = shouldSort ? gd.TamedCreatures.OrderBy(o => o.ClassName).Cast<ArkTamedCreature>() : gd.TamedCreatures;
+                        var creatureList = allTames.OrderBy(o => o.ClassName).ToList();
+                        jw.WriteStartArray();
+
+                        foreach (var creature in creatureList)
+                        {
+
+                            jw.WriteStartObject();
+                            jw.WritePropertyName("id");
+                            jw.WriteValue(creature.Id);
+
+                            jw.WritePropertyName("tribeid");
+                            jw.WriteValue(creature.TargetingTeam);
+
+                            jw.WritePropertyName("tribe");
+                            jw.WriteValue(creature.TribeName);
+
+                            jw.WritePropertyName("tamer");
+                            jw.WriteValue(creature.TamerName);
+
+                            jw.WritePropertyName("imprinter");
+                            jw.WriteValue(creature.ImprinterName);
+
+
+                            jw.WritePropertyName("imprint");
+                            jw.WriteValue(creature.ImprintQuality);
+
+                            jw.WritePropertyName("creature");
+                            jw.WriteValue(creature.ClassName);
+
+                            jw.WritePropertyName("name");
+                            jw.WriteValue(creature.Name != null ? creature.Name : "");
+
+
+                            jw.WritePropertyName("sex");
+                            jw.WriteValue(creature.Gender);
+
+                            jw.WritePropertyName("base");
+                            jw.WriteValue(creature.BaseLevel);
+
+
+                            jw.WritePropertyName("lvl");
+                            jw.WriteValue(creature.Level);
+
+                            jw.WritePropertyName("lat");
+                            jw.WriteValue(creature.Latitude.GetValueOrDefault(0));
+
+                            jw.WritePropertyName("lon");
+                            jw.WriteValue(creature.Longitude.GetValueOrDefault(0));
+
+                            jw.WritePropertyName("hp-w");
+                            jw.WriteValue(creature.BaseStats[0]);
+
+                            jw.WritePropertyName("stam-w");
+                            jw.WriteValue(creature.BaseStats[1]);
+
+                            jw.WritePropertyName("melee-w");
+                            jw.WriteValue(creature.BaseStats[8]);
+
+                            jw.WritePropertyName("weight-w");
+                            jw.WriteValue(creature.BaseStats[7]);
+
+                            jw.WritePropertyName("speed-w");
+                            jw.WriteValue(creature.BaseStats[9]);
+
+                            jw.WritePropertyName("food-w");
+                            jw.WriteValue(creature.BaseStats[4]);
+
+                            jw.WritePropertyName("oxy-w");
+                            jw.WriteValue(creature.BaseStats[3]);
+
+                            jw.WritePropertyName("craft-w");
+                            jw.WriteValue(creature.BaseStats[11]);
+
+                            jw.WritePropertyName("hp-t");
+                            jw.WriteValue(creature.TamedStats[0]);
+
+                            jw.WritePropertyName("stam-t");
+                            jw.WriteValue(creature.TamedStats[1]);
+
+                            jw.WritePropertyName("melee-t");
+                            jw.WriteValue(creature.TamedStats[8]);
+
+                            jw.WritePropertyName("weight-t");
+                            jw.WriteValue(creature.TamedStats[7]);
+
+                            jw.WritePropertyName("speed-t");
+                            jw.WriteValue(creature.TamedStats[9]);
+
+                            jw.WritePropertyName("food-t");
+                            jw.WriteValue(creature.TamedStats[4]);
+
+                            jw.WritePropertyName("oxy-t");
+                            jw.WriteValue(creature.TamedStats[3]);
+
+                            jw.WritePropertyName("craft-t");
+                            jw.WriteValue(creature.TamedStats[11]);
+
+
+                            jw.WritePropertyName("c0");
+                            jw.WriteValue(creature.Colors[0]);
+
+                            jw.WritePropertyName("c1");
+                            jw.WriteValue(creature.Colors[1]);
+
+                            jw.WritePropertyName("c2");
+                            jw.WriteValue(creature.Colors[2]);
+
+                            jw.WritePropertyName("c3");
+                            jw.WriteValue(creature.Colors[3]);
+
+                            jw.WritePropertyName("c4");
+                            jw.WriteValue(creature.Colors[4]);
+
+                            jw.WritePropertyName("c5");
+                            jw.WriteValue(creature.Colors[5]);
+
+                            jw.WritePropertyName("mut-f");
+                            jw.WriteValue(creature.RandomMutationsFemale);
+
+                            jw.WritePropertyName("mut-m");
+                            jw.WriteValue(creature.RandomMutationsMale);
+
+                            jw.WritePropertyName("cryo");
+                            jw.WriteValue(creature.IsCryo);
+
+                            jw.WritePropertyName("viv");
+                            jw.WriteValue(creature.IsVivarium);
+
+                            jw.WritePropertyName("ccc");
+                            jw.WriteValue($"{creature.X} {creature.Y} {creature.Z}");
+
+
+                            bool exportInventories = true;
+
+                            if (exportInventories)
+                            {
+                                jw.WritePropertyName("inventory");
+                                jw.WriteStartArray();
+                                if (creature.Inventory.Items.Count > 0)
+                                {
+                                    foreach (var invItem in creature.Inventory.Items)
+                                    {
+                                        if (!invItem.IsEngram)
+                                        {
+                                            jw.WriteStartObject();
+
+                                            jw.WritePropertyName("itemId");
+                                            jw.WriteValue(invItem.ClassName);
+
+                                            jw.WritePropertyName("qty");
+                                            jw.WriteValue(invItem.Quantity);
+
+
+                                            jw.WritePropertyName("blueprint");
+                                            jw.WriteValue(invItem.IsBlueprint);
+
+                                            jw.WriteEndObject();
+                                        }
+
+                                    }
+                                }
+
+
+
+                                jw.WriteEndArray();
+                            }
+
+                            jw.WriteEnd();
+                        }
+
+                        jw.WriteEndArray();
+                    }
+
+                }
+
+            }
+        }
+
+        public void ExportJsonPlayerStructures(string exportFilename)
+        {
+            string exportFolder = Path.GetDirectoryName(exportFilename);
+            if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+
+
+            using (FileStream fs = File.Create(exportFilename))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    using (JsonTextWriter jw = new JsonTextWriter(sw))
+                    {
+                        jw.WriteStartArray();
+
+                        foreach (var tribe in Tribes)
+                        {
+                            var playerStructures = tribe.Structures;
+                            foreach (var structure in playerStructures)
+                            {
+                                jw.WriteStartObject();
+
+                                jw.WritePropertyName("tribeid");
+                                jw.WriteValue(tribe.TribeId);
+
+
+                                jw.WritePropertyName("tribe");
+                                jw.WriteValue(tribe.TribeName);
+
+
+                                jw.WritePropertyName("struct");
+                                jw.WriteValue(structure.ClassName);
+
+                                jw.WritePropertyName("lat");
+                                jw.WriteValue(structure.Latitude.GetValueOrDefault(0));
+
+                                jw.WritePropertyName("lon");
+                                jw.WriteValue(structure.Longitude.GetValueOrDefault(0));
+
+                                jw.WritePropertyName("ccc");
+                                jw.WriteValue($"{structure.X} {structure.Y} {structure.Z}");
+
+                                bool exportInventories = true;
+
+                                if (exportInventories)
+                                {
+                                    jw.WritePropertyName("inventory");
+                                    jw.WriteStartArray();
+                                    if (structure.Inventory.Items.Count > 0)
+                                    {
+                                        foreach (var invItem in structure.Inventory.Items)
+                                        {
+                                            if (!invItem.IsEngram)
+                                            {
+                                                jw.WriteStartObject();
+
+                                                jw.WritePropertyName("itemId");
+                                                jw.WriteValue(invItem.ClassName);
+
+                                                jw.WritePropertyName("qty");
+                                                jw.WriteValue(invItem.Quantity);
+
+                                                jw.WritePropertyName("blueprint");
+                                                jw.WriteValue(invItem.IsBlueprint);
+
+
+                                                jw.WriteEndObject();
+                                            }
+
+                                        }
+                                    }
+
+                                    jw.WriteEndArray();
+                                }
+
+                                jw.WriteEnd();
+                            }
+                        }
+
+                        jw.WriteEndArray();
+                    }
+
+                }
+
+            }
+        }
+
+
+        public void ExportJsonPlayerTribeLogs(string exportFilename)
+        {
+            string exportFolder = Path.GetDirectoryName(exportFilename);
+            if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+
+
+            using (FileStream fs = File.Create(exportFilename))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    using (JsonTextWriter jw = new JsonTextWriter(sw))
+                    {
+                        jw.WriteStartArray();
+
+                        foreach (var playerTribe in Tribes)
+                        {
+                            jw.WriteStartObject();
+
+                            jw.WritePropertyName("tribeid");
+                            jw.WriteValue(playerTribe.TribeId);
+
+                            jw.WritePropertyName("tribe");
+                            jw.WriteValue(playerTribe.TribeName);
+
+
+                            if (playerTribe.Logs != null && playerTribe.Logs.Length > 0)
+                            {
+                                jw.WritePropertyName("logs");
+                                jw.WriteStartArray();
+                                foreach (var logEntry in playerTribe.Logs)
+                                {
+
+                                    jw.WriteValue(logEntry);
+                                }
+
+                                jw.WriteEndArray();
+                            }
+
+                            jw.WriteEnd();
+                        }
+
+                        jw.WriteEndArray();
+                    }
+
+                }
+
+            }
+
+        }
+
+
+        public void ExportJsonPlayerTribes(string exportFilename)
+        {
+            if (File.Exists(exportFilename)) File.Delete(exportFilename);
+
+            using (StreamWriter sw = new StreamWriter(exportFilename))
+            {
+                using (JsonTextWriter jw = new JsonTextWriter(sw))
+                {
+                    jw.WriteStartArray();
+
+                    foreach (var playerTribe in Tribes)
+                    {
+                        jw.WriteStartObject();
+
+                        jw.WritePropertyName("tribeid");
+                        jw.WriteValue(playerTribe.TribeId);
+
+                        jw.WritePropertyName("tribe");
+                        jw.WriteValue(playerTribe.TribeName);
+
+                        jw.WritePropertyName("players");
+                        jw.WriteValue(playerTribe.Players.Count);
+
+                        if (playerTribe.Players != null && playerTribe.Players.Count > 0)
+                        {
+                            jw.WritePropertyName("members");
+                            jw.WriteStartArray();
+                            foreach (var tribePlayer in playerTribe.Players)
+                            {
+                                jw.WriteStartObject();
+
+                                jw.WritePropertyName("ign");
+                                jw.WriteValue(tribePlayer.CharacterName);
+
+                                jw.WritePropertyName("lvl");
+                                jw.WriteValue(tribePlayer.Level.ToString());
+
+                                jw.WritePropertyName("playerid");
+                                jw.WriteValue(tribePlayer.Id.ToString());
+
+                                jw.WritePropertyName("playername");
+                                jw.WriteValue(tribePlayer.Name);
+
+                                jw.WritePropertyName("steamid");
+                                jw.WriteValue(tribePlayer.NetworkId);
+
+                                jw.WriteEndObject();
+                            }
+
+                            jw.WriteEndArray();
+                        }
+
+
+
+                        jw.WritePropertyName("tames");
+                        jw.WriteValue(playerTribe.Tames.Count);
+
+                        jw.WritePropertyName("structures");
+                        jw.WriteValue(playerTribe.Structures.Count);
+
+                        jw.WritePropertyName("active");
+                        jw.WriteValue(playerTribe.LastActive);
+
+
+                        jw.WriteEnd();
+                    }
+
+                    jw.WriteEndArray();
+                }
+
+            }
+
+        }
+
+        public void ExportJsonPlayers(string exportFilename)
+        {
+            string exportFolder = Path.GetDirectoryName(exportFilename);
+            if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+
+            using (FileStream fs = File.Create(exportFilename))
+            {
+                using (StreamWriter sw = new StreamWriter(fs))
+                {
+                    using (JsonTextWriter jw = new JsonTextWriter(sw))
+                    {
+                        jw.WriteStartArray();
+
+                        foreach (var tribe in Tribes)
+                        {
+                            foreach (var player in tribe.Players)
+                            {
+                                jw.WriteStartObject();
+
+                                jw.WritePropertyName("playerid");
+                                jw.WriteValue(player.Id);
+
+                                jw.WritePropertyName("steam");
+                                jw.WriteValue(player.Name);
+
+                                jw.WritePropertyName("name");
+                                jw.WriteValue(player.CharacterName);
+
+                                jw.WritePropertyName("tribeid");
+                                jw.WriteValue(tribe.TribeId);
+
+                                jw.WritePropertyName("tribe");
+                                jw.WriteValue(tribe.TribeName);
+
+                                jw.WritePropertyName("sex");
+                                jw.WriteValue(player.Gender);
+
+                                jw.WritePropertyName("lvl");
+                                jw.WriteValue(player.Level);
+
+                                jw.WritePropertyName("lat");
+                                jw.WriteValue(player.Latitude.GetValueOrDefault(0));
+
+                                jw.WritePropertyName("lon");
+                                jw.WriteValue(player.Longitude.GetValueOrDefault(0));
+
+
+
+                                //0=health
+                                //1=stamina
+                                //2=torpor
+                                //3=oxygen
+                                //4=food
+                                //5=water
+                                //6=temperature
+                                //7=weight
+                                //8=melee damage
+                                //9=movement speed
+                                //10=fortitude
+                                //11=crafting speed
+                                jw.WritePropertyName("hp");
+                                jw.WriteValue(player.Stats[0]);
+
+                                jw.WritePropertyName("stam");
+                                jw.WriteValue(player.Stats[1]);
+
+                                jw.WritePropertyName("melee");
+                                jw.WriteValue(player.Stats[8]);
+
+                                jw.WritePropertyName("weight");
+                                jw.WriteValue(player.Stats[7]);
+
+                                jw.WritePropertyName("speed");
+                                jw.WriteValue(player.Stats[9]);
+
+                                jw.WritePropertyName("food");
+                                jw.WriteValue(player.Stats[4]);
+
+                                jw.WritePropertyName("water");
+                                jw.WriteValue(player.Stats[5]);
+
+                                jw.WritePropertyName("oxy");
+                                jw.WriteValue(player.Stats[3]);
+
+                                jw.WritePropertyName("craft");
+                                jw.WriteValue(player.Stats[11]);
+
+                                jw.WritePropertyName("fort");
+                                jw.WriteValue(player.Stats[10]);
+
+                                jw.WritePropertyName("active");
+                                jw.WriteValue(player.LastActiveDateTime);
+
+                                jw.WritePropertyName("ccc");
+                                jw.WriteValue($"{player.X} {player.Y} {player.Z}");
+
+                                jw.WritePropertyName("steamid");
+                                jw.WriteValue(player.NetworkId);
+
+                                bool exportInventories = true;
+
+                                if (exportInventories)
+                                {
+                                    jw.WritePropertyName("inventory");
+                                    jw.WriteStartArray();
+
+                                    if (player.Inventory.Items.Count > 0)
+                                    {
+                                        foreach (var invItem in player.Inventory.Items)
+                                        {
+                                            if (!invItem.IsEngram && invItem.ClassName != "PrimalItem_StartingNote_C")
+                                            {
+                                                jw.WriteStartObject();
+
+                                                jw.WritePropertyName("itemId");
+                                                jw.WriteValue(invItem.ClassName);
+
+                                                jw.WritePropertyName("qty");
+                                                jw.WriteValue(invItem.Quantity);
+
+                                                jw.WritePropertyName("blueprint");
+                                                jw.WriteValue(invItem.IsBlueprint);
+
+                                                jw.WriteEndObject();
+                                            }
+
+                                        }
+                                    }
+
+
+
+                                    jw.WriteEndArray();
+                                }
+
+
+                                jw.WriteEnd();
+                            }
+                        }
+
+                        jw.WriteEndArray();
+                    }
+
+                }
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public void ExportPack(string fileName)
         {
            

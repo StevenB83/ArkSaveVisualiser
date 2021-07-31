@@ -31,8 +31,31 @@ namespace ASVPack.Models
         {
             get
             {
+                List<DateTime> possibleDates = new List<DateTime>();
+
+                
                 var maxPlayer = Players.Max(p => p.LastActiveDateTime);
-                return maxPlayer.GetValueOrDefault(DateTime.MinValue) > TribeFileDate? maxPlayer.Value : TribeFileDate;
+                if (maxPlayer != null && maxPlayer.HasValue) possibleDates.Add(maxPlayer.Value);
+
+
+                var lastTameRange = Tames.Max(t => t.LastAllyInRangeTime);
+                if (lastTameRange != null && lastTameRange.HasValue) possibleDates.Add(lastTameRange.Value);
+
+                var lastStructureRange = Structures.Max(s => s.LastAllyInRangeTime);
+                if (lastStructureRange != null && lastStructureRange.HasValue) possibleDates.Add(lastStructureRange.Value);
+
+                if(possibleDates.Count > 0)
+                {
+                    //activity
+                    return possibleDates.Max();
+                }
+                else
+                {
+                    //non player related last activity - dino deaths, structure decay etc.
+                    return TribeFileDate;
+                }
+
+
             }
         }
         public bool HasGameFile {get;set;} = false;
@@ -45,6 +68,8 @@ namespace ASVPack.Models
             TribeId = propertyList.GetPropertyValue<int>("TribeId");
             if (TribeId == 0) TribeId = propertyList.GetPropertyValue<int>("TribeID");
             TribeName = propertyList.GetPropertyValue<string>("TribeName");
+
+
 
             //logs
             var tribeLogs = propertyList.GetTypedProperty<PropertyArray>("TribeLog");

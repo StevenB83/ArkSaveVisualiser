@@ -2243,19 +2243,5 @@ namespace ARKViewer.Models
             return g;
         }
 
-        public  List<ContentPlayer> GetUploadedCharacters()
-        {
-            return pack.LocalProfile.UploadedCharacters;
-        }
-
-        public List<ContentTamedCreature> GetUploadedTames()
-        {
-            return pack.LocalProfile.UploadedTames;
-        }
-
-        public List<ContentLeaderboard> GetLeaderboards()
-        {
-            return pack.Leaderboards;
-        }
     }
 }
