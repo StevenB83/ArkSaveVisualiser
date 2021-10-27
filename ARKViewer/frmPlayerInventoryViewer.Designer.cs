@@ -38,6 +38,7 @@
             this.lvwPlayerInventory_BP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwPlayerInventory_Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwPlayerInventory_Quality = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwPlayerInventory_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwPlayerInventory_CraftedBy = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwPlayerInventory_Qty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tabExplorer = new System.Windows.Forms.TabControl();
@@ -60,6 +61,7 @@
             this.lvwCreatureInventory_BP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwCreatureInventory_Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwCreatureInventory_Quality = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwCreatureInventory_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwCreatureInventory_Crafter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwCreatureInventory_Name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwCreatureInventory_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -77,12 +79,13 @@
             this.lvwStorageInventory_Item = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwStorageInventory_BP = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwStorageInventory_Category = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvwStorageInventory_Quality = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader20lvwStorageInventory_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwStorageInventory_Crafter = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwStorageInventory_Container = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwStorageInventory_Lat = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwStorageInventory_Lon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvwStorageInventory_Qty = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwStorageInventory_Quality = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.tpgMissions = new System.Windows.Forms.TabPage();
             this.pnlMissionScores = new System.Windows.Forms.Panel();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -95,9 +98,6 @@
             this.lblWindowTitle = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.lblPlayerId = new System.Windows.Forms.Label();
-            this.columnHeader20lvwStorageInventory_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwCreatureInventory_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.lvwPlayerInventory_Rating = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.pnlPlayerInventory.SuspendLayout();
             this.tabExplorer.SuspendLayout();
             this.tpgPlayerInventory.SuspendLayout();
@@ -203,6 +203,10 @@
             // 
             this.lvwPlayerInventory_Quality.Text = "Quality";
             this.lvwPlayerInventory_Quality.Width = 91;
+            // 
+            // lvwPlayerInventory_Rating
+            // 
+            this.lvwPlayerInventory_Rating.Text = "Rating";
             // 
             // lvwPlayerInventory_CraftedBy
             // 
@@ -332,6 +336,7 @@
             // 
             // cboCreatureType
             // 
+            this.cboCreatureType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboCreatureType.FormattingEnabled = true;
             this.cboCreatureType.Location = new System.Drawing.Point(107, 42);
             this.cboCreatureType.Name = "cboCreatureType";
@@ -443,6 +448,10 @@
             this.lvwCreatureInventory_Quality.Text = "Quality";
             this.lvwCreatureInventory_Quality.Width = 80;
             // 
+            // lvwCreatureInventory_Rating
+            // 
+            this.lvwCreatureInventory_Rating.Text = "Rating";
+            // 
             // lvwCreatureInventory_Crafter
             // 
             this.lvwCreatureInventory_Crafter.Text = "Crafter";
@@ -493,6 +502,7 @@
             // 
             // cboStorageType
             // 
+            this.cboStorageType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboStorageType.FormattingEnabled = true;
             this.cboStorageType.Location = new System.Drawing.Point(107, 42);
             this.cboStorageType.Name = "cboStorageType";
@@ -599,6 +609,15 @@
             this.lvwStorageInventory_Category.Text = "Category";
             this.lvwStorageInventory_Category.Width = 136;
             // 
+            // lvwStorageInventory_Quality
+            // 
+            this.lvwStorageInventory_Quality.Text = "Quality";
+            this.lvwStorageInventory_Quality.Width = 80;
+            // 
+            // columnHeader20lvwStorageInventory_Rating
+            // 
+            this.columnHeader20lvwStorageInventory_Rating.Text = "Rating";
+            // 
             // lvwStorageInventory_Crafter
             // 
             this.lvwStorageInventory_Crafter.Text = "Crafter";
@@ -622,11 +641,6 @@
             // 
             this.lvwStorageInventory_Qty.Text = "Qty";
             this.lvwStorageInventory_Qty.Width = 48;
-            // 
-            // lvwStorageInventory_Quality
-            // 
-            this.lvwStorageInventory_Quality.Text = "Quality";
-            this.lvwStorageInventory_Quality.Width = 80;
             // 
             // tpgMissions
             // 
@@ -756,18 +770,6 @@
             this.lblPlayerId.Size = new System.Drawing.Size(51, 13);
             this.lblPlayerId.TabIndex = 0;
             this.lblPlayerId.Text = "Player Id:";
-            // 
-            // columnHeader20lvwStorageInventory_Rating
-            // 
-            this.columnHeader20lvwStorageInventory_Rating.Text = "Rating";
-            // 
-            // lvwCreatureInventory_Rating
-            // 
-            this.lvwCreatureInventory_Rating.Text = "Rating";
-            // 
-            // lvwPlayerInventory_Rating
-            // 
-            this.lvwPlayerInventory_Rating.Text = "Rating";
             // 
             // frmPlayerInventoryViewer
             // 

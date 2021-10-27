@@ -96,8 +96,30 @@ namespace ARKViewer
 
             if (droppedInventory != null && droppedInventory.Count > 0)
             {
+                var inventItems = droppedInventory.GroupBy(g => new
+                {
+                    g.ClassName,
+                    g.CraftedByTribe,
+                    g.CraftedByPlayer,
+                    g.CustomName,
+                    g.IsBlueprint,
+                    g.IsEngram,
+                    g.Rating
+                }).Select(s => new ContentItem
+                {
+                    ClassName = s.Key.ClassName,
+                    CraftedByTribe = s.Key.CraftedByTribe,
+                    CraftedByPlayer = s.Key.CraftedByPlayer,
+                    CustomName = s.Key.CustomName,
+                    IsBlueprint = s.Key.IsBlueprint,
+                    IsEngram = s.Key.IsEngram,
+                    Rating = s.Key.Rating,
+                    Quantity = s.Sum(i => i.Quantity)
+                }).ToList();
+
+
                 ConcurrentBag<ListViewItem> listItems = new ConcurrentBag<ListViewItem>();
-                Parallel.ForEach(droppedInventory, invItem =>
+                Parallel.ForEach(inventItems, invItem =>
                 {
                     string itemName = invItem.ClassName;
                     string categoryName = "Misc.";

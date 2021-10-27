@@ -6772,6 +6772,8 @@ namespace ARKViewer
             }
 
             lvwLeaderboardSummary.Items.Clear();
+            cboLeaderboardPlayer.Items.Clear();
+            cboLeaderboardPlayer.Items.Add("[All Tribe Players]");
 
             //tribe, player, mission count
             var leaderboards = cm.GetLeaderboards();
@@ -6801,11 +6803,13 @@ namespace ARKViewer
                     newItem.SubItems.Add(player.PlayerName);
                     newItem.SubItems.Add(player.MissionCount.ToString());
                     lvwLeaderboardSummary.Items.Add(newItem);
-                    
+
+                    cboLeaderboardPlayer.Items.Add(player.PlayerName);
                 }
             }
 
-            LoadLeaderboardScores();
+            cboLeaderboardPlayer.SelectedIndex = 0;
+            
 
 
         }
@@ -6817,7 +6821,10 @@ namespace ARKViewer
             //mission, tribe, player, score
             int selectedTribeId = 0;
             string selectedMission = "";
+            string selectedPlayer = "";
 
+            if (cboLeaderboardPlayer.SelectedIndex > 0) selectedPlayer = cboLeaderboardPlayer.SelectedItem.ToString();
+             
             if(cboLeaderboardTribe.SelectedIndex > 0)
             {
                 ASVComboValue selectedValue = (ASVComboValue)cboLeaderboardTribe.SelectedItem;
@@ -6843,18 +6850,20 @@ namespace ARKViewer
             {
                 foreach (var leaderboard in leaderboards)
                 {
-
-                    string tribeName = "";
-                    var tribe = cm.GetTribes(leaderboard.TargetingTeam).FirstOrDefault();
-                    if (tribe != null)
+                    if(selectedPlayer == "" || selectedPlayer.ToLower() == leaderboard.PlayerName.ToLower())
                     {
-                        tribeName = tribe.TribeName;
+                        string tribeName = "";
+                        var tribe = cm.GetTribes(leaderboard.TargetingTeam).FirstOrDefault();
+                        if (tribe != null)
+                        {
+                            tribeName = tribe.TribeName;
+                        }
+                        ListViewItem newItem = new ListViewItem(leaderboard.MissionTag);
+                        newItem.SubItems.Add(tribeName);
+                        newItem.SubItems.Add(leaderboard.PlayerName);
+                        newItem.SubItems.Add(leaderboard.HighScore.ToString());
+                        lvwLeaderboard.Items.Add(newItem);
                     }
-                    ListViewItem newItem = new ListViewItem(leaderboard.MissionTag);
-                    newItem.SubItems.Add(tribeName);
-                    newItem.SubItems.Add(leaderboard.PlayerName);
-                    newItem.SubItems.Add(leaderboard.HighScore.ToString());
-                    lvwLeaderboard.Items.Add(newItem);
                 }
             }
 
@@ -7143,6 +7152,11 @@ namespace ARKViewer
 
             // Sort.
             lvwLeaderboard.Sort();
+        }
+
+        private void cboLeaderboardPlayer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LoadLeaderboardScores();
         }
     }
 }

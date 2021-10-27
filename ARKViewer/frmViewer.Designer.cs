@@ -379,6 +379,8 @@
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.lblMap = new System.Windows.Forms.Label();
             this.cboSelectedMap = new System.Windows.Forms.ComboBox();
+            this.cboLeaderboardPlayer = new System.Windows.Forms.ComboBox();
+            this.lblMissionPlayer = new System.Windows.Forms.Label();
             this.mnuContext.SuspendLayout();
             this.tabFeatures.SuspendLayout();
             this.tpgWild.SuspendLayout();
@@ -3566,6 +3568,8 @@
             // 
             // tpgLeaderboard
             // 
+            this.tpgLeaderboard.Controls.Add(this.cboLeaderboardPlayer);
+            this.tpgLeaderboard.Controls.Add(this.lblMissionPlayer);
             this.tpgLeaderboard.Controls.Add(this.lvwLeaderboardSummary);
             this.tpgLeaderboard.Controls.Add(this.lvwLeaderboard);
             this.tpgLeaderboard.Controls.Add(this.cboLeaderboardMission);
@@ -3581,8 +3585,7 @@
             // 
             // lvwLeaderboardSummary
             // 
-            this.lvwLeaderboardSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lvwLeaderboardSummary.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwLeaderboardSummary.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader32,
@@ -3664,7 +3667,7 @@
             this.cboLeaderboardMission.FormattingEnabled = true;
             this.cboLeaderboardMission.Location = new System.Drawing.Point(69, 211);
             this.cboLeaderboardMission.Name = "cboLeaderboardMission";
-            this.cboLeaderboardMission.Size = new System.Drawing.Size(477, 21);
+            this.cboLeaderboardMission.Size = new System.Drawing.Size(240, 21);
             this.cboLeaderboardMission.TabIndex = 9;
             this.cboLeaderboardMission.SelectedIndexChanged += new System.EventHandler(this.cboLeaderboardMission_SelectedIndexChanged);
             // 
@@ -3787,6 +3790,27 @@
             this.cboSelectedMap.Size = new System.Drawing.Size(207, 21);
             this.cboSelectedMap.TabIndex = 26;
             this.cboSelectedMap.SelectedIndexChanged += new System.EventHandler(this.cboSelectedMap_SelectedIndexChanged);
+            // 
+            // cboLeaderboardPlayer
+            // 
+            this.cboLeaderboardPlayer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLeaderboardPlayer.FormattingEnabled = true;
+            this.cboLeaderboardPlayer.Location = new System.Drawing.Point(402, 211);
+            this.cboLeaderboardPlayer.Name = "cboLeaderboardPlayer";
+            this.cboLeaderboardPlayer.Size = new System.Drawing.Size(240, 21);
+            this.cboLeaderboardPlayer.TabIndex = 18;
+            this.cboLeaderboardPlayer.SelectedIndexChanged += new System.EventHandler(this.cboLeaderboardPlayer_SelectedIndexChanged);
+            // 
+            // lblMissionPlayer
+            // 
+            this.lblMissionPlayer.AutoSize = true;
+            this.lblMissionPlayer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMissionPlayer.ForeColor = System.Drawing.Color.DarkSlateGray;
+            this.lblMissionPlayer.Location = new System.Drawing.Point(344, 215);
+            this.lblMissionPlayer.Name = "lblMissionPlayer";
+            this.lblMissionPlayer.Size = new System.Drawing.Size(46, 13);
+            this.lblMissionPlayer.TabIndex = 17;
+            this.lblMissionPlayer.Text = "Player:";
             // 
             // frmViewer
             // 
@@ -4214,6 +4238,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader35;
         private System.Windows.Forms.ColumnHeader columnHeader36;
         private System.Windows.Forms.ColumnHeader lvwLeaderboard_Mission;
+        private System.Windows.Forms.ComboBox cboLeaderboardPlayer;
+        private System.Windows.Forms.Label lblMissionPlayer;
     }
 }
 

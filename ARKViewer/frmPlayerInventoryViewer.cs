@@ -172,8 +172,31 @@ namespace ARKViewer
 
             Parallel.ForEach(selectedCreatures, creature =>
             {
-                foreach (var invItem in creature.Inventory.Items)
+                var inventItems = creature.Inventory.Items.GroupBy(g => new
                 {
+                    g.ClassName,
+                    g.CraftedByTribe,
+                    g.CraftedByPlayer,
+                    g.CustomName,
+                    g.IsBlueprint,
+                    g.IsEngram,
+                    g.Rating
+                }).Select(s => new ContentItem
+                {
+                    ClassName = s.Key.ClassName,
+                    CraftedByTribe = s.Key.CraftedByTribe,
+                    CraftedByPlayer = s.Key.CraftedByPlayer,
+                    CustomName = s.Key.CustomName,
+                    IsBlueprint = s.Key.IsBlueprint,
+                    IsEngram = s.Key.IsEngram,
+                    Rating = s.Key.Rating,
+                    Quantity = s.Sum(i => i.Quantity)
+                }).ToList();
+
+                foreach (var invItem in inventItems)
+                {
+
+
                     string itemName = invItem.ClassName;
                     string categoryName = "Misc.";
                     string creatureName = creature.ClassName;
@@ -267,8 +290,29 @@ namespace ARKViewer
             ConcurrentBag<ListViewItem> listItems = new ConcurrentBag<ListViewItem>();
             Parallel.ForEach(selectedContainers, container =>
             {
+                var inventItems = container.Inventory.Items.GroupBy(g => new
+                {
+                    g.ClassName,
+                    g.CraftedByTribe,
+                    g.CraftedByPlayer,
+                    g.CustomName,
+                    g.IsBlueprint,
+                    g.IsEngram,
+                    g.Rating
+                }).Select(s => new ContentItem
+                {
+                    ClassName = s.Key.ClassName,
+                    CraftedByTribe = s.Key.CraftedByTribe,
+                    CraftedByPlayer = s.Key.CraftedByPlayer,
+                    CustomName = s.Key.CustomName,
+                    IsBlueprint = s.Key.IsBlueprint,
+                    IsEngram = s.Key.IsEngram,
+                    Rating = s.Key.Rating,
+                    Quantity = s.Sum(i => i.Quantity)
+                }).ToList();
 
-                Parallel.ForEach(container.Inventory.Items, invItem =>  
+
+                Parallel.ForEach(inventItems, invItem =>  
                 {
                     string itemName = invItem.ClassName;
                     string categoryName = "Misc.";
@@ -322,12 +366,6 @@ namespace ARKViewer
                             newItem.SubItems.Add(invItem.IsBlueprint ? "Yes" : "No");
                             newItem.SubItems.Add(categoryName);
                             newItem.SubItems.Add(qualityName);
-                            var test = invItem.Rating.HasValue ? invItem.Rating.Value.ToString() : "";
-                            if(test == "NaN")
-                            {
-
-                            }
-
                             newItem.SubItems.Add(invItem.Rating.HasValue ? invItem.Rating.Value.ToString() : "");
                             newItem.SubItems.Add(craftedBy);
                             newItem.SubItems.Add(containerName);
@@ -357,7 +395,26 @@ namespace ARKViewer
             cm = manager;
             currentPlayer = selectedPlayer;
             playerTribe = cm.GetPlayerTribe(currentPlayer.Id);
-            playerInventory = selectedPlayer.Inventory.Items;
+            playerInventory = selectedPlayer.Inventory.Items.GroupBy(g=> new 
+            { 
+                g.ClassName, 
+                g.CraftedByTribe, 
+                g.CraftedByPlayer,
+                g.CustomName,
+                g.IsBlueprint, 
+                g.IsEngram, 
+                g.Rating
+            }).Select(s=> new ContentItem  
+            { 
+                ClassName =  s.Key.ClassName,
+                CraftedByTribe = s.Key.CraftedByTribe, 
+                CraftedByPlayer = s.Key.CraftedByPlayer, 
+                CustomName = s.Key.CustomName, 
+                IsBlueprint = s.Key.IsBlueprint, 
+                IsEngram  = s.Key.IsEngram, 
+                Rating = s.Key.Rating, 
+                Quantity = s.Sum(i=> i.Quantity) 
+            }).ToList();
 
             lvwCreatureInventory.SmallImageList = Program.ItemImageList;
             lvwCreatureInventory.LargeImageList = Program.ItemImageList;

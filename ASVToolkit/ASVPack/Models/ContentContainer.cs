@@ -186,6 +186,7 @@ namespace ASVPack.Models
 
                         logWriter.Info("Reading mission leaderboard data...");
                         List<ContentLeaderboard> leaderboardList = new List<ContentLeaderboard>();
+ 
 
                         var testGameMode = objectContainer.FirstOrDefault(x => x.ClassString == "TestGameMode_C");
                         if (testGameMode != null)
@@ -609,7 +610,6 @@ namespace ASVPack.Models
 
                         logWriter.Debug($"Identifying in-game missing tribes from player structures");
 
-                        var testTribe1 = fileTribes.FirstOrDefault(x => x.TribeId == 570144799);
 
 
                         //attempt to get missing tribe data from structures

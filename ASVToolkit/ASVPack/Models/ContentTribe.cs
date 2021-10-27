@@ -79,6 +79,7 @@ namespace ASVPack.Models
                 Logs = tribeLogProp.ToArray<string>();
             }
         }
+
         public ContentTribe()
         {
 
