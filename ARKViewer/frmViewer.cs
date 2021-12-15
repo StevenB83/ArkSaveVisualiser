@@ -6763,6 +6763,7 @@ namespace ARKViewer
         private void LoadLeaderboardPlayers()
         {
             if (tabFeatures.SelectedTab.Name != "tpgLeaderboard") return;
+            if (cm == null) return;
 
             int selectedTribeId = 0;
             if(cboLeaderboardTribe.SelectedIndex > 0)
@@ -6777,9 +6778,11 @@ namespace ARKViewer
 
             //tribe, player, mission count
             var leaderboards = cm.GetLeaderboards();
-            var playerSummary = leaderboards
+            if(leaderboards!=null && leaderboards.Count > 0)
+            {
+                var playerSummary = leaderboards
                 .SelectMany(x => x.Scores)
-                .Where(x=> x.TargetingTeam > 0 && (x.TargetingTeam == selectedTribeId || selectedTribeId == 0))
+                .Where(x => x.TargetingTeam > 0 && (x.TargetingTeam == selectedTribeId || selectedTribeId == 0))
                 .GroupBy(x => new { TribeId = x.TargetingTeam, x.NetworkId, x.PlayerName })
                 .Select(x => new
                 {
@@ -6788,25 +6791,27 @@ namespace ARKViewer
                     MissionCount = x.ToList().Count
                 }).ToList();
 
-            if(playerSummary!=null && playerSummary.Count > 0)
-            {
-                foreach(var player in playerSummary)
+                if (playerSummary != null && playerSummary.Count > 0)
                 {
-                    string tribeName = "";
-                    var tribe = cm.GetTribes(player.TribeId).FirstOrDefault();
-                    if (tribe != null)
+                    foreach (var player in playerSummary)
                     {
-                        tribeName = tribe.TribeName;
+                        string tribeName = "";
+                        var tribe = cm.GetTribes(player.TribeId).FirstOrDefault();
+                        if (tribe != null)
+                        {
+                            tribeName = tribe.TribeName;
+                        }
+
+                        ListViewItem newItem = new ListViewItem(tribeName);
+                        newItem.SubItems.Add(player.PlayerName);
+                        newItem.SubItems.Add(player.MissionCount.ToString());
+                        lvwLeaderboardSummary.Items.Add(newItem);
+
+                        cboLeaderboardPlayer.Items.Add(player.PlayerName);
                     }
-
-                    ListViewItem newItem = new ListViewItem(tribeName);
-                    newItem.SubItems.Add(player.PlayerName);
-                    newItem.SubItems.Add(player.MissionCount.ToString());
-                    lvwLeaderboardSummary.Items.Add(newItem);
-
-                    cboLeaderboardPlayer.Items.Add(player.PlayerName);
                 }
             }
+            
 
             cboLeaderboardPlayer.SelectedIndex = 0;
             

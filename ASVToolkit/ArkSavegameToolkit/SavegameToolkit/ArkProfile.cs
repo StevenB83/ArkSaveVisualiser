@@ -42,32 +42,40 @@ namespace SavegameToolkit
 
         public void ReadBinary(ArkArchive archive, ReadingOptions options)
         {
-            ProfileVersion = archive.ReadInt();
-
-            if (ProfileVersion != 1)
+            try
             {
-                //throw new NotSupportedException("Unknown Profile Version " + ProfileVersion);
-            }
+                ProfileVersion = archive.ReadInt();
 
-            int profilesCount = archive.ReadInt();
-
-            Objects.Clear();
-            ObjectMap.Clear();
-            for (int i = 0; i < profilesCount; i++)
-            {
-                addObject(new GameObject(archive), options.BuildComponentTree);
-            }
-
-            for (int i = 0; i < profilesCount; i++)
-            {
-                GameObject gameObject = Objects[i];
-                if (gameObject.ClassString == "PrimalPlayerData" || gameObject.ClassString == "PrimalPlayerDataBP_C")
+                if (ProfileVersion != 1)
                 {
-                    profile = gameObject;
+                    //throw new NotSupportedException("Unknown Profile Version " + ProfileVersion);
                 }
 
-                gameObject.LoadProperties(archive, i < profilesCount - 1 ? Objects[i + 1] : null, 0);
+                int profilesCount = archive.ReadInt();
+
+                Objects.Clear();
+                ObjectMap.Clear();
+                for (int i = 0; i < profilesCount; i++)
+                {
+                    addObject(new GameObject(archive), options.BuildComponentTree);
+                }
+
+                for (int i = 0; i < profilesCount; i++)
+                {
+                    GameObject gameObject = Objects[i];
+                    if (gameObject.ClassString == "PrimalPlayerData" || gameObject.ClassString == "PrimalPlayerDataBP_C")
+                    {
+                        profile = gameObject;
+                    }
+
+                    gameObject.LoadProperties(archive, i < profilesCount - 1 ? Objects[i + 1] : null, 0);
+                }
             }
+            catch
+            {
+
+            }
+            
         }
 
         public void WriteBinary(ArkArchive archive, WritingOptions options)

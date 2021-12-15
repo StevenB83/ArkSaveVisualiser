@@ -266,20 +266,25 @@ namespace ASVPack.Models
                                         ArkProfile arkProfile = new ArkProfile();
                                         arkProfile.ReadBinary(archiveProfile, ReadingOptions.Create().WithBuildComponentTree(false).WithDataFilesObjectMap(false).WithGameObjects(true).WithGameObjectProperties(true));
 
-                                        string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
-                                        logWriter.Debug($"Profile map identified as: {profileMapName}");
-                                        if (profileMapName == MapName.ToLower())
+                                        if (arkProfile.Profile != null)
                                         {
-                                            logWriter.Debug($"Converting to ContentPlayer: {x}");
-                                            ContentPlayer contentPlayer = arkProfile.AsPlayer();
-                                            if (contentPlayer.Id != 0)
+                                            string profileMapName = arkProfile.Profile.Names[3].Name.ToLower();
+                                            logWriter.Debug($"Profile map identified as: {profileMapName}");
+                                            if (profileMapName == MapName.ToLower())
                                             {
+                                                logWriter.Debug($"Converting to ContentPlayer: {x}");
+                                                ContentPlayer contentPlayer = arkProfile.AsPlayer();
+                                                if (contentPlayer.Id != 0)
+                                                {
 
-                                                contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
-                                                fileProfiles.Add(contentPlayer);
+                                                    contentPlayer.LastActiveDateTime = GetApproxDateTimeOf(contentPlayer.LastTimeInGame);
+                                                    fileProfiles.Add(contentPlayer);
+                                                }
+
                                             }
-                                            
                                         }
+
+                                        
                                     }
                                 }
                             }

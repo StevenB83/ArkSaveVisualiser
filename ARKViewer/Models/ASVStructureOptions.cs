@@ -42,5 +42,22 @@ namespace ARKViewer.Models
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            int hashCode = 773983307;
+            hashCode = hashCode * -1521134295 + Terminals.GetHashCode();
+            hashCode = hashCode * -1521134295 + Glitches.GetHashCode();
+            hashCode = hashCode * -1521134295 + ChargeNodes.GetHashCode();
+            hashCode = hashCode * -1521134295 + BeaverDams.GetHashCode();
+            hashCode = hashCode * -1521134295 + DeinoNests.GetHashCode();
+            hashCode = hashCode * -1521134295 + WyvernNests.GetHashCode();
+            hashCode = hashCode * -1521134295 + DrakeNests.GetHashCode();
+            hashCode = hashCode * -1521134295 + MagmaNests.GetHashCode();
+            hashCode = hashCode * -1521134295 + OilVeins.GetHashCode();
+            hashCode = hashCode * -1521134295 + WaterVeins.GetHashCode();
+            hashCode = hashCode * -1521134295 + GasVeins.GetHashCode();
+            hashCode = hashCode * -1521134295 + Artifacts.GetHashCode();
+            return hashCode;
+        }
     }
 }

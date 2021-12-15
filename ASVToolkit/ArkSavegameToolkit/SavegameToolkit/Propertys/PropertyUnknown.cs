@@ -11,7 +11,10 @@ namespace SavegameToolkit.Propertys {
         public PropertyUnknown(ArkArchive archive, ArkName name) : base(name, 0, null) {
             base.Init(archive, name);
             Type = name;
-            Value = archive.ReadBytes(DataSize);
+            if (DataSize > 0)
+            {
+                Value = archive.ReadBytes(DataSize);
+            }
         }
 
         public PropertyUnknown(JObject node) : base(null, 0, null) {
