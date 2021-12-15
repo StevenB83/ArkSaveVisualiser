@@ -2913,41 +2913,7 @@ namespace ARKViewer
 
             //get registry path for steam apps 
             cboSelectedMap.Items.Clear();
-            string directoryCheck = "";
-
-            try
-            {
-                string steamRoot = Microsoft.Win32.Registry.GetValue(@"HKEY_CURRENT_USER\Software\Valve\Steam", "SteamPath", "").ToString();
-
-                if (steamRoot != null && steamRoot.Length > 0)
-                {
-                    steamRoot = steamRoot.Replace(@"/", @"\");
-                    steamRoot = Path.Combine(steamRoot, @"steamapps\libraryfolders.vdf");
-                    if (File.Exists(steamRoot))
-                    {
-                        string fileText = File.ReadAllText(steamRoot).Replace("\"LibraryFolders\"", "");
-
-                        foreach (string line in fileText.Split('\n'))
-                        {
-                            if (line.Contains("\t"))
-                            {
-                                string[] lineContent = line.Split('\t');
-                                if (lineContent.Length == 4)
-                                {
-                                    //check 4th param as a path
-                                    directoryCheck = lineContent[3].ToString().Replace("\"", "").Replace(@"\\", @"\") + @"\SteamApps\Common\ARK\ShooterGame\Saved\";
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                //permission access to registry or unavailable?
-
-            }
+            string directoryCheck = Program.GetSteamFolder();
 
             if (Directory.Exists(directoryCheck))
             {

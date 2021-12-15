@@ -57,18 +57,16 @@ namespace ARKViewer
 
                         foreach (string line in fileText.Split('\n'))
                         {
-                            if (line.Contains("\t"))
+                            if (line.Contains("\"path\""))
                             {
-                                string[] lineContent = line.Split('\t');
-                                if (lineContent.Length == 4)
+                                string lineContent = line.Substring(line.IndexOf("path") + 4).Trim().Replace("\t", "");
+                                
+
+                                directoryCheck = lineContent.Replace("\"", "").Replace(@"\\", @"\") + @"\SteamApps\Common\ARK\ShooterGame\Saved\";
+                                if (Directory.Exists(directoryCheck))
                                 {
-                                    //check 4th param as a path
-                                    directoryCheck = lineContent[3].ToString().Replace("\"", "").Replace(@"\\", @"\") + @"\SteamApps\Common\ARK\ShooterGame\Saved\";
-                                    if (Directory.Exists(directoryCheck))
-                                    {
-                                        Program.ProgramConfig.ArkSavedGameFolder = directoryCheck;
-                                        break;
-                                    }
+                                    Program.ProgramConfig.ArkSavedGameFolder = directoryCheck;
+                                    break;
                                 }
 
                             }
