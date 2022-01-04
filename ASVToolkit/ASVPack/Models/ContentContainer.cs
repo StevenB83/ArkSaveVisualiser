@@ -51,7 +51,7 @@ namespace ASVPack.Models
             { "tiamatprime", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
             { "glacius_p", Tuple.Create(50.0f, 16250.0f,50.0f, 16250.0f)},
             { "antartika", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
-            { "lostisland", Tuple.Create(48.7f, 16000.0f,50.0f, 15500.0f)},
+            { "lostisland", Tuple.Create(48.7f, 16000.0f,50.0f, 17000.0f)},
             { "amissa", Tuple.Create(49.9f, 10900.0f,49.9f, 10850.0f)},
             { "olympus", Tuple.Create(0f, 8130.0f,0f, 8130.0f)},
             { "ebenusastrum", Tuple.Create(52.9f, 8650.0f,25.0f, 18500.0f)},
