@@ -32,34 +32,7 @@ namespace ARKViewer.Models
         Tuple<long, string, decimal, decimal> cacheImageItems = null;
 
         string lastDrawRequest = "";
-        //cached content image
         Image gameContentMap = null; //wilds/tames/tribes/players etc.
-
-
-        Dictionary<string, string> mapFilenameMap = new Dictionary<string, string>
-            {
-                { "theisland.ark", "The Island" },
-                { "thecenter.ark", "The Center" },
-                { "scorchedearth_p.ark","Scorched Earth"},
-                { "aberration_p.ark", "Aberration"},
-                { "extinction.ark", "Extinction"},
-                { "ragnarok.ark", "Ragnarok"},
-                { "valguero_p.ark", "Valguero" },
-                { "crystalisles.ark", "Crystal Isles" },
-                { "genesis.ark", "Genesis" },
-                { "gen2.ark", "Genesis 2" },
-                { "astralark.ark", "AstralARK" },
-                { "hope.ark", "Hope"},
-                { "tunguska_p.ark", "Tunguska"},
-                { "caballus_p.ark", "Caballus"},
-                { "viking_p.ark", "Fjördur"},
-                { "tiamatprime.ark", "Tiamat Prime"},
-                { "glacius_p.ark", "Glacius"},
-                { "amissa.ark", "Amissa" },
-                {"olympus.ark", "Olympus" },
-                {"ebenusastrum.ark", "Ebenus Astrum" },
-                {"arkforum_eventmap.ark", "ArkForum Event Map" }
-            };
 
         ContentPack pack = null;
 
@@ -76,9 +49,9 @@ namespace ARKViewer.Models
         {
             get
             {
-                string mapFileCheck = $"{MapFilename.ToLower()}.ark";
-                if (!mapFilenameMap.ContainsKey(mapFileCheck)) return "Unknown Map";
-                return mapFilenameMap[mapFileCheck];
+                string returnName = "Unknown Map";
+                returnName = Program.MapPack.SupportedMaps.FirstOrDefault(m => m.Filename.ToLower().Contains(MapFilename.ToLower()))?.MapName;
+                return returnName;
             }
         }
 
@@ -98,55 +71,19 @@ namespace ARKViewer.Models
         {
             get
             {
-                switch (MapFilename.ToLower())
+                
+
+                string imageFilePath = AppContext.BaseDirectory;
+                string imageFilename = Program.MapPack.SupportedMaps.FirstOrDefault(m => m.Filename.ToLower().Contains(MapFilename.ToLower()))?.ImageFile;
+                try
                 {
-                    case "thecenter":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_thecenter, new Size(1024, 1024));
-                    case "theisland":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_theisland, new Size(1024, 1024));
-                    case "scorchedearth_p":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_scorchedearth, new Size(1024, 1024));
-                    case "aberration_p":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_aberration, new Size(1024, 1024));
-                    case "ragnarok":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_ragnarok, new Size(1024, 1024));
-                    case "extinction":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_extinction, new Size(1024, 1024));
-                    case "valguero_p":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_valguero, new Size(1024, 1024));
-                    case "crystalisles":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_crystalisles, new Size(1024, 1024));
-                    case "tunguska_p":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_tunguska, new Size(1024, 1024));
-                    case "caballus_p":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_caballus, new Size(1024, 1024));
-                    case "genesis":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_genesis, new Size(1024, 1024));
-                    case "astralark":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_astralark, new Size(1024, 1024));
-                    case "hope":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_hope, new Size(1024, 1024));
-                    case "viking_p":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_fjordur, new Size(1024, 1024));
-                    case "tiamatprime":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_tiamat, new Size(1024, 1024));
-                    case "gen2":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_gen2, new Size(1024, 1024));
-                    case "glacius_p":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_glacius, new Size(1024, 1024));
-                    case "antartika":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_antartika, new Size(1024, 1024));
-                    case "lostisland":                       
-                        return new Bitmap(ARKViewer.Properties.Resources.map_lostisland, new Size(1024, 1024));
-                    case "amissa":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_amissa, new Size(1024, 1024));
-                    case "olympus":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_olympus, new Size(1024, 1024));
-                    case "ebenusastrum":
-                        return new Bitmap(ARKViewer.Properties.Resources.map_ebenusastrum, new Size(1024, 1024));
-                    default:
-                        return new Bitmap(ARKViewer.Properties.Resources.map_none, new Size(1024, 1024));
+                    return Image.FromFile(Path.Combine(imageFilePath, "Maps\\", imageFilename));
                 }
+                catch 
+                {
+                    return new Bitmap(1024, 1024);
+                }
+                
             }
 
         }
@@ -953,6 +890,12 @@ namespace ARKViewer.Models
 
                                 jw.WritePropertyName("ccc");
                                 jw.WriteValue($"{structure.X} {structure.Y} {structure.Z}");
+
+                                if (structure.CreatedDateTime.HasValue)
+                                {
+                                    jw.WritePropertyName("created");
+                                    jw.WriteValue(structure.CreatedDateTime.Value.ToUniversalTime());
+                                }
 
                                 if (Program.ProgramConfig.ExportInventories)
                                 {

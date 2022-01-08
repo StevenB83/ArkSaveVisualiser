@@ -26,39 +26,7 @@ namespace ASVPack.Models
 
         ILogger logWriter = LogManager.GetCurrentClassLogger();
 
-        Dictionary<string, Tuple<float, float, float, float>> latlonCalcs = new Dictionary<string, Tuple<float, float, float, float>>
-        {
-            { "theisland", Tuple.Create(50.0f, 8000.0f, 50.0f, 8000.0f) },
-            { "hope", Tuple.Create(50f, 6850f, 50f, 6850f) },
-            { "thecenter", Tuple.Create(30.34223747253418f, 9584.0f, 55.10416793823242f, 9600.0f) },
-            { "scorchedearth_p", Tuple.Create(50.0f, 8000.0f, 50.0f, 8000.0f) },
-            { "aberration_p", Tuple.Create(50.0f, 8000.0f, 50.0f, 8000.0f) },
-            { "extinction", Tuple.Create(50.0f, 8000.0f, 50.0f, 8000.0f) },
-            { "valhalla", Tuple.Create(48.813560485839844f, 14750.0f, 48.813560485839844f, 14750.0f) },
-            { "mortemtupiu", Tuple.Create(32.479148864746094f, 20000.0f, 40.59893798828125f, 16000.0f) },
-            { "shigoislands", Tuple.Create(50.001777870738339260f, 9562.0f, 50.001777870738339260f, 9562.0f) },
-            { "ragnarok", Tuple.Create(50.009388f, 13100f, 50.009388f, 13100f) },
-            { "thevolcano", Tuple.Create(50.0f, 9181.0f, 50.0f, 9181.0f) },
-            { "pgark", Tuple.Create(0.0f, 6080.0f, 0.0f, 6080.0f) },
-            { "crystalisles" , Tuple.Create(48.7f, 16000f, 50.0f, 17000.0f) },
-            { "valguero_p" , Tuple.Create(50.0f, 8161.0f, 50.0f, 8161.0f) },
-            { "genesis", Tuple.Create(50.0f, 10500.0f, 50.0f, 10500.0f)},
-            { "gen2", Tuple.Create(49.6f, 14500.0f, 49.6f, 14500.0f)},
-            { "astralark", Tuple.Create(50.0f, 2000.0f, 50.0f, 2000.0f)},
-            { "tunguska_p", Tuple.Create(46.8f, 14000.0f,49.29f, 13300.0f) },
-            { "caballus_p", Tuple.Create(50.0f, 8125.0f,50.0f, 8125.0f)},
-            { "viking_p", Tuple.Create(50.0f, 7140.0f,50.0f, 7140.0f)},
-            { "tiamatprime", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
-            { "glacius_p", Tuple.Create(50.0f, 16250.0f,50.0f, 16250.0f)},
-            { "antartika", Tuple.Create(50.0f, 8000.0f,50.0f, 8000.0f)},
-            { "lostisland", Tuple.Create(48.7f, 16000.0f,50.0f, 17000.0f)},
-            { "amissa", Tuple.Create(49.9f, 10900.0f,49.9f, 10850.0f)},
-            { "olympus", Tuple.Create(0f, 8130.0f,0f, 8130.0f)},
-            { "ebenusastrum", Tuple.Create(52.9f, 8650.0f,25.0f, 18500.0f)},
-            { "arkforum_eventmap", Tuple.Create(50.0f, 1500.0f,50.0f, 1500.0f) }
-        };
-
-        Tuple<float, float, float, float> mapLatLonCalcs = new Tuple<float, float, float, float>(50.0f, 8000.0f, 50.0f, 8000.0f); //default to same as The Island map
+        [DataMember] public ContentMap LoadedMap { get; set; } = new ContentMap();
 
         [DataMember] public string MapName { get; set; } = "";
         [DataMember] public List<ContentStructure> MapStructures { get; set; } = new List<ContentStructure>();
@@ -70,9 +38,9 @@ namespace ASVPack.Models
         [DataMember] public DateTime GameSaveTime { get; set; } = new DateTime();
         [DataMember] public float GameSeconds { get; set; } = 0;
 
-
-        private void LoadDefaults()
+         private void LoadDefaults()
         {
+
             GameSaveTime = DateTime.MinValue;
             GameSeconds = 0;
             MapStructures = new List<ContentStructure>();
@@ -82,8 +50,10 @@ namespace ASVPack.Models
             
         }
 
-        public void LoadSaveGame(string saveFilename, string localProfileFilename)
+        public void LoadSaveGame(ContentMap selectedMap, string saveFilename, string localProfileFilename)
         {
+            LoadedMap = selectedMap;
+
             logWriter.Trace("BEGIN LoadSaveGame()");
 
 
@@ -175,9 +145,7 @@ namespace ASVPack.Models
                         logWriter.Debug($"Reading map name from: {saveFilename}");
                         MapName = arkSavegame.DataFiles[0];
                         logWriter.Debug($"Map name returned: {MapName}");
-                        latlonCalcs.TryGetValue(MapName.ToLower(), out mapLatLonCalcs);
-
-
+                        
                         long saveLoadTime = DateTime.Now.Ticks;
                         TimeSpan timeTaken = TimeSpan.FromTicks(saveLoadTime - startTicks);
                         logWriter.Info($"Game data loaded in: {timeTaken.ToString(@"mm\:ss")}.");
@@ -411,11 +379,10 @@ namespace ASVPack.Models
                         {
                             ContentStructure structure = s.AsStructure();
 
-                            structure.Latitude = mapLatLonCalcs.Item1 + structure.Y / mapLatLonCalcs.Item2;
-                            structure.Longitude = mapLatLonCalcs.Item3 + structure.X / mapLatLonCalcs.Item4;
+                            structure.Latitude = (float)LoadedMap.LatShift + (structure.Y / (float)LoadedMap.LatDiv);
+                            structure.Longitude = (float)LoadedMap.LonShift + (structure.X / (float)LoadedMap.LonDiv);
 
                             ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
-
 
                             //check for inventory
                             logWriter.Debug($"Determining if structure has inventory: {s.ClassString}");
@@ -538,8 +505,9 @@ namespace ASVPack.Models
                                         }
                                     }
 
-                                    wild.Latitude = mapLatLonCalcs.Item1 + wild.Y / mapLatLonCalcs.Item2;
-                                    wild.Longitude = mapLatLonCalcs.Item3 + wild.X / mapLatLonCalcs.Item4;
+                                    wild.Latitude = (float)LoadedMap.LatShift + (wild.Y / (float)LoadedMap.LatDiv);
+                                    wild.Longitude = (float)LoadedMap.LonShift + (wild.X / (float)LoadedMap.LonDiv);
+
 
                                     return wild;
                                 }
@@ -693,8 +661,9 @@ namespace ASVPack.Models
                                     player.X = contentPlayer.X;
                                     player.Y = contentPlayer.Y;
                                     player.Z = contentPlayer.Z;
-                                    player.Latitude = mapLatLonCalcs.Item1 + player.Y / mapLatLonCalcs.Item2;
-                                    player.Longitude = mapLatLonCalcs.Item3 + player.X / mapLatLonCalcs.Item4;
+                                    player.Latitude = (float)LoadedMap.LatShift + (player.Y / (float)LoadedMap.LatDiv);
+                                    player.Longitude = (float)LoadedMap.LonShift + (player.X / (float)LoadedMap.LonDiv);
+
 
 
                                     player.LastTimeInGame = contentPlayer.LastTimeInGame;
@@ -808,8 +777,9 @@ namespace ASVPack.Models
                                 logWriter.Debug($"Converting to ContentTamedCreature: {x.ClassString}");
                                 ContentTamedCreature creature = x.AsTamedCreature(statusObject);
 
-                                creature.Latitude = mapLatLonCalcs.Item1 + creature.Y / mapLatLonCalcs.Item2;
-                                creature.Longitude = mapLatLonCalcs.Item3 + creature.X / mapLatLonCalcs.Item4;
+                                creature.Latitude = (float)LoadedMap.LatShift + (creature.Y / (float)LoadedMap.LatDiv);
+                                creature.Longitude = (float)LoadedMap.LonShift + (creature.X / (float)LoadedMap.LonDiv);
+
 
                                 creature.TamedAtDateTime = GetApproxDateTimeOf(creature.TamedTimeInGame);
                                 creature.LastAllyInRangeTime = GetApproxDateTimeOf(creature.LastAllyInRangeTimeInGame);
@@ -959,8 +929,9 @@ namespace ASVPack.Models
                             ContentStructure structure = x.AsStructure();
                             ConcurrentBag<ContentItem> inventoryItems = new ConcurrentBag<ContentItem>();
 
-                            structure.Latitude = mapLatLonCalcs.Item1 + structure.Y / mapLatLonCalcs.Item2;
-                            structure.Longitude = mapLatLonCalcs.Item3 + structure.X / mapLatLonCalcs.Item4;
+                            structure.Latitude = (float)LoadedMap.LatShift + (structure.Y / (float)LoadedMap.LatDiv);
+                            structure.Longitude = (float)LoadedMap.LonShift + (structure.X / (float)LoadedMap.LonDiv);
+
 
                             structure.CreatedDateTime = GetApproxDateTimeOf(structure.CreatedTimeInGame);
                             structure.LastAllyInRangeTime = GetApproxDateTimeOf(structure.LastAllyInRangeTimeInGame);
@@ -1044,10 +1015,11 @@ namespace ASVPack.Models
                                 droppedItem.IsDeathCache = itemObject.IsDeathItemCache();
 
 
-                                droppedItem.Latitude = mapLatLonCalcs.Item1 + droppedItem.Y / mapLatLonCalcs.Item2;
-                                droppedItem.Longitude = mapLatLonCalcs.Item3 + droppedItem.X / mapLatLonCalcs.Item4;
+                                droppedItem.Latitude = (float)LoadedMap.LatShift + (droppedItem.Y / (float)LoadedMap.LatDiv);
+                                droppedItem.Longitude = (float)LoadedMap.LonShift + (droppedItem.X / (float)LoadedMap.LonDiv);
 
-                                
+
+
 
                                 return droppedItem;
                             }).ToList()
@@ -1067,8 +1039,9 @@ namespace ASVPack.Models
                                 droppedItem.DroppedByTribeId = x.GetPropertyValue<int>("TargetingTeam", 0, 0);
                                 droppedItem.DroppedByPlayerId = x.GetPropertyValue<long>("LinkedPlayerDataID", 0, 0);
                                 droppedItem.DroppedByName = x.GetPropertyValue<string>("PlayerName");
-                                droppedItem.Latitude = mapLatLonCalcs.Item1 + droppedItem.Y / mapLatLonCalcs.Item2;
-                                droppedItem.Longitude = mapLatLonCalcs.Item3 + droppedItem.X / mapLatLonCalcs.Item4;
+                                droppedItem.Latitude = (float)LoadedMap.LatShift + (droppedItem.Y / (float)LoadedMap.LatDiv);
+                                droppedItem.Longitude = (float)LoadedMap.LonShift + (droppedItem.X / (float)LoadedMap.LonDiv);
+
 
                                 if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent") != null)
                                 {
@@ -1151,9 +1124,9 @@ namespace ASVPack.Models
                                 droppedItem.ClassName = x.ClassString;
                                 droppedItem.IsDeathCache = true;
 
+                                droppedItem.Latitude = (float)LoadedMap.LatShift + (droppedItem.Y / (float)LoadedMap.LatDiv);
+                                droppedItem.Longitude = (float)LoadedMap.LonShift + (droppedItem.X / (float)LoadedMap.LonDiv);
 
-                                droppedItem.Latitude = mapLatLonCalcs.Item1 + droppedItem.Y / mapLatLonCalcs.Item2;
-                                droppedItem.Longitude = mapLatLonCalcs.Item3 + droppedItem.X / mapLatLonCalcs.Item4;
 
                                 if (x.GetPropertyValue<ObjectReference>("MyInventoryComponent") != null)
                                 {

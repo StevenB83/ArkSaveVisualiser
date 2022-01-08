@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASVPack", "ASVToolkit\ASVPack\ASVPack.csproj", "{144D3950-C91C-4AC1-AAF0-BD64AACE49E5}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SavegameToolkitAdditions", "ASVToolkit\ArkSavegameToolkit\SavegameToolkitAdditions\SavegameToolkitAdditions.csproj", "{181C87D1-13E8-410C-B707-458A46D5D7DB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARKViewer", "ARKViewer\ARKViewer.csproj", "{2694464B-92D2-4DF6-9717-C187442F49C3}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ASVExport", "ASVExport\ASVExport.csproj", "{CE751D55-026F-41AF-BEE4-8F307240BA7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{2694464B-92D2-4DF6-9717-C187442F49C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2694464B-92D2-4DF6-9717-C187442F49C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2694464B-92D2-4DF6-9717-C187442F49C3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE751D55-026F-41AF-BEE4-8F307240BA7C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE751D55-026F-41AF-BEE4-8F307240BA7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE751D55-026F-41AF-BEE4-8F307240BA7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE751D55-026F-41AF-BEE4-8F307240BA7C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -479,9 +479,11 @@ namespace ARKViewer
                 foreach (string saveFilename in saveFiles)
                 {
                     string fileName = Path.GetFileName(saveFilename);
-                    if (Program.MapFilenameMap.ContainsKey(fileName.ToLower()))
+                    if (Program.MapPack.SupportedMaps.Any(m => m.Filename.ToLower() == fileName.ToLower()))
                     {
-                        string knownMapName = Program.MapFilenameMap[fileName.ToLower()];
+                        ContentMap selectedMap = Program.MapPack.SupportedMaps.First(m => m.Filename.ToLower() == fileName.ToLower());
+
+                        string knownMapName = selectedMap.MapName;
                         if (knownMapName.Length > 0)
                         {
                             ASVComboValue comboValue = new ASVComboValue(saveFilename, knownMapName);
@@ -600,10 +602,10 @@ namespace ARKViewer
             }
 
             cboFtpMap.Items.Clear();
-            var orderedMap = Program.MapFilenameMap.OrderBy(o => o.Value);
-            foreach (var knownMap in orderedMap)
+            
+            foreach (var knownMap in Program.MapPack.SupportedMaps.OrderBy(o=>o.MapName))
             {
-                ASVComboValue comboValue = new ASVComboValue(knownMap.Key, knownMap.Value);
+                ASVComboValue comboValue = new ASVComboValue(knownMap.Filename, knownMap.MapName);
                 int newIndex = cboFtpMap.Items.Add(comboValue);
             }
 

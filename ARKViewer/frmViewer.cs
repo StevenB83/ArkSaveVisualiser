@@ -203,41 +203,48 @@ namespace ARKViewer
                         localProfileFilename = Path.Combine(steamFolder, @"LocalProfiles\PlayerLocalData.arkprofile");
                     }
 
-
-                    container.LoadSaveGame(fileName, localProfileFilename);
-                    
-                    //terminals not already in game data
-
-
-                    //glitches
-                    Program.ProgramConfig.GlitchMarkers.ForEach(x =>
+                    ContentMap loadedMap = Program.MapPack.SupportedMaps.FirstOrDefault(m => fileName.ToLower().EndsWith(m.Filename.ToLower()));
+                    if (loadedMap != null)
                     {
-                        container.MapStructures.Add(new ContentStructure()
+                        container.LoadSaveGame(loadedMap, fileName, localProfileFilename);
+
+                        //terminals not already in game data
+
+
+                        //glitches
+                        Program.ProgramConfig.GlitchMarkers.ForEach(x =>
                         {
-                            ClassName = "ASV_Glitch",
-                            HasDecayTimeReset = false,
-                            X = x.X,
-                            Y = x.Y,
-                            Z = x.Z,
-                            Latitude = (float)x.Lat,
-                            Longitude = (float)x.Lon
+                            container.MapStructures.Add(new ContentStructure()
+                            {
+                                ClassName = "ASV_Glitch",
+                                HasDecayTimeReset = false,
+                                X = x.X,
+                                Y = x.Y,
+                                Z = x.Z,
+                                Latitude = (float)x.Lat,
+                                Longitude = (float)x.Lon
+                            });
                         });
-                    });
 
 
 
 
-                    if (container != null && container.LocalProfile != null)
-                    {
-                        //add in-game map markers
-                        if (container.LocalProfile.MapMarkers != null)
+                        if (container != null && container.LocalProfile != null)
                         {
-                            Program.ProgramConfig.MapMarkerList.AddRange(container.LocalProfile.MapMarkers);
+                            //add in-game map markers
+                            if (container.LocalProfile.MapMarkers != null)
+                            {
+                                Program.ProgramConfig.MapMarkerList.AddRange(container.LocalProfile.MapMarkers);
+                            }
                         }
+
+                        cm = new ASVDataManager(container);
                     }
-
-                    cm = new ASVDataManager(container);
-
+                    else
+                    {
+                        MessageBox.Show("Selected map is not currently supported.", "Map Support Unavailable", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        return;
+                    }
 
                 }
 
@@ -2922,9 +2929,11 @@ namespace ARKViewer
                 foreach (string saveFilename in saveFiles)
                 {
                     string fileName = Path.GetFileName(saveFilename);
-                    if (Program.MapFilenameMap.ContainsKey(fileName.ToLower()))
+                    if (Program.MapPack.SupportedMaps.Any(m=> m.Filename.ToLower() == fileName.ToLower()))
                     {
-                        string knownMapName = Program.MapFilenameMap[fileName.ToLower()];
+                        ContentMap selectedMap = Program.MapPack.SupportedMaps.First(m => m.Filename.ToLower() == fileName.ToLower());
+
+                        string knownMapName = selectedMap.MapName;
                         if (knownMapName.Length > 0)
                         {
                             ASVComboValue comboValue = new ASVComboValue(saveFilename, knownMapName);

@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ContentMapPack.cs" />
     <Compile Include="Extensions\GameObjectExtensions.cs" />
     <Compile Include="Models\ContentAncestor.cs" />
     <Compile Include="Models\ContentContainer.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="Models\ContentItemUploaded.cs" />
     <Compile Include="Models\ContentLeaderboard.cs" />
     <Compile Include="Models\ContentLocalProfile.cs" />
+    <Compile Include="Models\ContentMap.cs" />
     <Compile Include="Models\ContentMarker.cs" />
     <Compile Include="Models\ContentMissionScore.cs" />
     <Compile Include="Models\ContentPack.cs" />

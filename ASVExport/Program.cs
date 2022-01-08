@@ -106,6 +106,9 @@ namespace ASVExport
                         }
 
                         ContentContainer container = new ContentContainer();
+                        ContentMap loadedMap = 
+
+
                         container.LoadSaveGame(inputFilename, "");
 
                         ContentPack exportPack = new ContentPack(container, 0, 0, 50, 50, 100, true, true, true, true, true, true, true);
