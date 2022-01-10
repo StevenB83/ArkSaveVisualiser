@@ -106,64 +106,71 @@ namespace ASVExport
                         }
 
                         ContentContainer container = new ContentContainer();
-                        ContentMap loadedMap = 
-
-
-                        container.LoadSaveGame(inputFilename, "");
-
-                        ContentPack exportPack = new ContentPack(container, 0, 0, 50, 50, 100, true, true, true, true, true, true, true);
-
-                        switch (commandOptionCheck)
+                        ContentMap loadedMap = new ASVPack.ContentMapPack().SupportedMaps.FirstOrDefault(m=> inputFilename.ToLower().Contains(m.Filename.ToLower()));
+                        if (loadedMap != null)
                         {
-                            case "all":
-                                //LogWriter.Info($"Exporting JSON (all) for: {inputFilename}");
-                                Console.WriteLine($"Exporting JSON (all) for: {inputFilename}");
+                            container.LoadSaveGame(loadedMap, inputFilename, "");
 
-                                exportPack.ExportJsonAll(exportFilePath);
-                                break;
-                            case "structures":
-                                //LogWriter.Info($"Exporting JSON (structures) for: {inputFilename}");
-                                Console.WriteLine($"Exporting JSON (structures) for: {inputFilename}");
+                            ContentPack exportPack = new ContentPack(container, 0, 0, 50, 50, 100, true, true, true, true, true, true, true);
 
-                                exportPack.ExportJsonPlayerStructures(exportFilename);
-                                break;
-                            case "logs":
-                                //LogWriter.Info($"Exporting JSON (tribe logs) for: {inputFilename}");
-                                Console.WriteLine($"Exporting JSON (tribe logs) for: {inputFilename}");
+                            switch (commandOptionCheck)
+                            {
+                                case "all":
+                                    //LogWriter.Info($"Exporting JSON (all) for: {inputFilename}");
+                                    Console.WriteLine($"Exporting JSON (all) for: {inputFilename}");
 
-                                exportPack.ExportJsonPlayerTribeLogs(exportFilename);
+                                    exportPack.ExportJsonAll(exportFilePath);
+                                    break;
+                                case "structures":
+                                    //LogWriter.Info($"Exporting JSON (structures) for: {inputFilename}");
+                                    Console.WriteLine($"Exporting JSON (structures) for: {inputFilename}");
 
-                                break;
-                            case "tribes":
-                                //LogWriter.Info($"Exporting JSON (tribes) for: {inputFilename}");
+                                    exportPack.ExportJsonPlayerStructures(exportFilename);
+                                    break;
+                                case "logs":
+                                    //LogWriter.Info($"Exporting JSON (tribe logs) for: {inputFilename}");
+                                    Console.WriteLine($"Exporting JSON (tribe logs) for: {inputFilename}");
 
-                                Console.WriteLine($"Exporting JSON (tribes) for: {inputFilename}");
+                                    exportPack.ExportJsonPlayerTribeLogs(exportFilename);
 
-                                exportPack.ExportJsonPlayerTribes(exportFilename);
-                                break;
-                            case "players":
-                                //LogWriter.Info($"Exporting JSON (players) for: {inputFilename}");
+                                    break;
+                                case "tribes":
+                                    //LogWriter.Info($"Exporting JSON (tribes) for: {inputFilename}");
 
-                                Console.WriteLine($"Exporting JSON (players) for: {inputFilename}");
+                                    Console.WriteLine($"Exporting JSON (tribes) for: {inputFilename}");
 
-                                exportPack.ExportJsonPlayers(exportFilename);
-                                break;
-                            case "wild":
-                                //LogWriter.Info($"Exporting JSON (wild) for: {inputFilename}");
+                                    exportPack.ExportJsonPlayerTribes(exportFilename);
+                                    break;
+                                case "players":
+                                    //LogWriter.Info($"Exporting JSON (players) for: {inputFilename}");
 
-                                Console.WriteLine($"Exporting JSON (wild) for: {inputFilename}");
+                                    Console.WriteLine($"Exporting JSON (players) for: {inputFilename}");
 
-                                exportPack.ExportJsonWild(exportFilename);
-                                break;
-                            case "tamed":
-                                //LogWriter.Info($"Exporting JSON (tamed) for: {inputFilename}");
+                                    exportPack.ExportJsonPlayers(exportFilename);
+                                    break;
+                                case "wild":
+                                    //LogWriter.Info($"Exporting JSON (wild) for: {inputFilename}");
 
-                                Console.WriteLine($"Exporting JSON (tamed) for: {inputFilename}");
+                                    Console.WriteLine($"Exporting JSON (wild) for: {inputFilename}");
 
-                                exportPack.ExportJsonTamed(exportFilename);
-                                break;
+                                    exportPack.ExportJsonWild(exportFilename);
+                                    break;
+                                case "tamed":
+                                    //LogWriter.Info($"Exporting JSON (tamed) for: {inputFilename}");
+
+                                    Console.WriteLine($"Exporting JSON (tamed) for: {inputFilename}");
+
+                                    exportPack.ExportJsonTamed(exportFilename);
+                                    break;
+                            }
+                            exportPack = null;
                         }
-                        exportPack = null;
+                        else
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("Unable to load export for selected file. Map not currently supported.");
+                        }
+                        
 
                         //LogWriter.Info($"Completed export for: {inputFilename}");
 
@@ -257,13 +264,19 @@ namespace ASVExport
             ContentContainer exportPack = new ContentContainer();
 
             //LogWriter.Debug($"Loading .ark save file: {mapFilename}");
-            exportPack.LoadSaveGame(mapFilename, "");
+            ContentMap loadedMap= new ASVPack.ContentMapPack().SupportedMaps.FirstOrDefault(m=>mapFilename.ToLower().Contains(m.Filename.ToLower()));
+            if(loadedMap != null)
+            {
+                exportPack.LoadSaveGame(loadedMap, mapFilename, "");
 
-            //LogWriter.Debug($"Creating ContentPack");
-            ContentPack pack = new ContentPack(exportPack, tribeId, playerId, filterLat, filterLon, filterRad, packStructureLocations, packStructureContent, packTribesPlayers, packTamed, packWild, packPlayerStructures, packDroppedItems);
+                //LogWriter.Debug($"Creating ContentPack");
+                ContentPack pack = new ContentPack(exportPack, tribeId, playerId, filterLat, filterLon, filterRad, packStructureLocations, packStructureContent, packTribesPlayers, packTamed, packWild, packPlayerStructures, packDroppedItems);
 
-            //LogWriter.Debug($"Exporting ContentPack");
-            pack.ExportPack(exportFilename);
+                //LogWriter.Debug($"Exporting ContentPack");
+                pack.ExportPack(exportFilename);
+            }
+
+            
 
             //LogWriter.Trace("END ExportCommandLinePack()");
         }
@@ -397,125 +410,132 @@ namespace ASVExport
             //load everything
             ContentContainer exportContainer = new ContentContainer();
             //LogWriter.Debug($"Loading .ark save file.");
-            exportContainer.LoadSaveGame(mapFilename, "");
 
-            //load manager from filtered pack
-            //LogWriter.Debug($"Creating filtered ContentPack.");
-            ContentPack exportManger = new ContentPack(exportContainer, tribeId, playerId, filterLat, filterLon, filterRad, true, mapStructureContent, tribePlayers, tribeTames, true, tribeStructures, false);
-
-            //Export tribes
-            if (tribeExportFilename.Length > 0)
+            ContentMap loadedMap = new ASVPack.ContentMapPack().SupportedMaps.FirstOrDefault(m => mapFilename.ToLower().Contains(m.Filename.ToLower()));
+            if (loadedMap != null)
             {
-                string exportFolder = Path.GetDirectoryName(tribeExportFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                exportContainer.LoadSaveGame(loadedMap, mapFilename, "");
 
-                //LogWriter.Info($"Exporting Tribes.");
-                Console.WriteLine($"Exporting Tribes.");
-                exportManger.ExportJsonPlayerTribes(tribeExportFilename);
+                //load manager from filtered pack
+                //LogWriter.Debug($"Creating filtered ContentPack.");
+                ContentPack exportManger = new ContentPack(exportContainer, tribeId, playerId, filterLat, filterLon, filterRad, true, mapStructureContent, tribePlayers, tribeTames, true, tribeStructures, false);
+
+                //Export tribes
+                if (tribeExportFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(tribeExportFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+
+                    //LogWriter.Info($"Exporting Tribes.");
+                    Console.WriteLine($"Exporting Tribes.");
+                    exportManger.ExportJsonPlayerTribes(tribeExportFilename);
+                }
+                if (tribeImageFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(tribeImageFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Tribes Image.");
+
+                    //var image = exportManger.GetMapImageTribes(tribeId, tribeStructures, tribePlayers, tribeTames, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
+                    //if (image != null)
+                    //{
+                    //    image.Save(tribeImageFilename);
+                    //}
+                }
+
+
+
+
+                //Structures
+                if (structureExportFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(structureExportFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Structures.");
+                    Console.WriteLine($"Exporting Structures.");
+                    exportManger.ExportJsonPlayerStructures(structureExportFilename);
+                }
+
+                if (structureImageFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(structureImageFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Structures Image.");
+                    //var image = exportManger.GetMapImagePlayerStructures(structureImageFilename, tribeId, playerId, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
+                    //if (image != null)
+                    //{
+                    //    image.Save(structureImageFilename);
+                    //}
+                }
+
+
+
+                //Export Players
+                if (playerExportFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(playerExportFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Players.");
+                    Console.WriteLine($"Exporting Players.");
+                    exportManger.ExportJsonPlayers(playerExportFilename);
+                }
+
+                if (playerImageFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(playerImageFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Players Image.");
+                    //var image = exportManger.GetMapImagePlayers(tribeId, playerId, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
+                    //if (image != null)
+                    //{
+                    //    image.Save(playerImageFilename);
+                    //}
+                }
+
+                //Export Wild
+                if (wildExportFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(wildExportFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Wilds.");
+                    Console.WriteLine($"Exporting Wilds.");
+                    exportManger.ExportJsonWild(wildExportFilename);
+                }
+                if (wildImageFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(wildImageFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Wilds Image.");
+                    //var image = exportManger.GetMapImageWild(wildClassName, "", wildMinLevel, wildMaxLevel, (float)filterLat, (float)filterLon, (float)filterRad, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
+                    //if (image != null)
+                    //{
+                    //    image.Save(tamedImageFilename);
+                    //}
+                }
+
+                //Export tamed
+                if (tamedExportFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(tamedExportFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Tames.");
+                    Console.WriteLine($"Exporting Tames.");
+                    exportManger.ExportJsonTamed(tamedExportFilename);
+                }
+                if (tamedImageFilename.Length > 0)
+                {
+                    string exportFolder = Path.GetDirectoryName(tamedImageFilename);
+                    if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
+                    //LogWriter.Info($"Exporting Tames Image.");
+                    //var image = exportManger.GetMapImageTamed(tamedClassName, "", true, tribeId, playerId, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
+                    //if (image != null)
+                    //{
+                    //    image.Save(tamedImageFilename);
+                    //}
+                }
+
             }
-            if (tribeImageFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(tribeImageFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Tribes Image.");
 
-                //var image = exportManger.GetMapImageTribes(tribeId, tribeStructures, tribePlayers, tribeTames, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
-                //if (image != null)
-                //{
-                //    image.Save(tribeImageFilename);
-                //}
-            }
-
-
-
-
-            //Structures
-            if (structureExportFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(structureExportFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Structures.");
-                Console.WriteLine($"Exporting Structures.");
-                exportManger.ExportJsonPlayerStructures(structureExportFilename);
-            }
-
-            if (structureImageFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(structureImageFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Structures Image.");
-                //var image = exportManger.GetMapImagePlayerStructures(structureImageFilename, tribeId, playerId, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
-                //if (image != null)
-                //{
-                //    image.Save(structureImageFilename);
-                //}
-            }
-
-
-
-            //Export Players
-            if (playerExportFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(playerExportFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Players.");
-                Console.WriteLine($"Exporting Players.");
-                exportManger.ExportJsonPlayers(playerExportFilename);
-            }
-
-            if (playerImageFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(playerImageFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Players Image.");
-                //var image = exportManger.GetMapImagePlayers(tribeId, playerId, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
-                //if (image != null)
-                //{
-                //    image.Save(playerImageFilename);
-                //}
-            }
-
-            //Export Wild
-            if (wildExportFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(wildExportFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Wilds.");
-                Console.WriteLine($"Exporting Wilds.");
-                exportManger.ExportJsonWild(wildExportFilename);
-            }
-            if (wildImageFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(wildImageFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Wilds Image.");
-                //var image = exportManger.GetMapImageWild(wildClassName, "", wildMinLevel, wildMaxLevel, (float)filterLat, (float)filterLon, (float)filterRad, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
-                //if (image != null)
-                //{
-                //    image.Save(tamedImageFilename);
-                //}
-            }
-
-            //Export tamed
-            if (tamedExportFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(tamedExportFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Tames.");
-                Console.WriteLine($"Exporting Tames.");
-                exportManger.ExportJsonTamed(tamedExportFilename);
-            }
-            if (tamedImageFilename.Length > 0)
-            {
-                string exportFolder = Path.GetDirectoryName(tamedImageFilename);
-                if (!Directory.Exists(exportFolder)) Directory.CreateDirectory(exportFolder);
-                //LogWriter.Info($"Exporting Tames Image.");
-                //var image = exportManger.GetMapImageTamed(tamedClassName, "", true, tribeId, playerId, 0, 0, new ASVStructureOptions(), new List<ContentMarker>());
-                //if (image != null)
-                //{
-                //    image.Save(tamedImageFilename);
-                //}
-            }
             //LogWriter.Trace("END ExportCommandLine()");
         }
 

@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SavegameToolkitAdditions", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ARKViewer", "ARKViewer\ARKViewer.csproj", "{2694464B-92D2-4DF6-9717-C187442F49C3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ASVExport", "ASVExport\ASVExport.csproj", "{2B642A21-563B-47C7-B7B0-52BD7EE5112A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{2694464B-92D2-4DF6-9717-C187442F49C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2694464B-92D2-4DF6-9717-C187442F49C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2694464B-92D2-4DF6-9717-C187442F49C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B642A21-563B-47C7-B7B0-52BD7EE5112A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B642A21-563B-47C7-B7B0-52BD7EE5112A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B642A21-563B-47C7-B7B0-52BD7EE5112A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B642A21-563B-47C7-B7B0-52BD7EE5112A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

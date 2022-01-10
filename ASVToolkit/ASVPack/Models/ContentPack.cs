@@ -530,6 +530,10 @@ namespace ASVPack.Models
                                 jw.WritePropertyName("ccc");
                                 jw.WriteValue($"{structure.X} {structure.Y} {structure.Z}");
 
+
+                                jw.WritePropertyName("created");
+                                jw.WriteValue($"{structure.CreatedDateTime}");
+
                                 bool exportInventories = true;
 
                                 if (exportInventories)
