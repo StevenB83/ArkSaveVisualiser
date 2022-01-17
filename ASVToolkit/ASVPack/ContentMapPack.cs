@@ -48,7 +48,7 @@ namespace ASVPack
 
         public ContentMap GetMap(string mapName)
         {
-            ContentMap map = SupportedMaps.FirstOrDefault(m => m.MapName.ToLower() == mapName.ToLower());
+            ContentMap map = SupportedMaps.FirstOrDefault(m => m.Filename.ToLower() == mapName.ToLower());
             return map;
         }
     }

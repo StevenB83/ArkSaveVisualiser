@@ -7,7 +7,7 @@
     <ProjectGuid>{2694464B-92D2-4DF6-9717-C187442F49C3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>ARKViewer</RootNamespace>
-    <AssemblyName>ARKSaveViewer</AssemblyName>
+    <AssemblyName>ARKViewer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

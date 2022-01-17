@@ -203,48 +203,41 @@ namespace ARKViewer
                         localProfileFilename = Path.Combine(steamFolder, @"LocalProfiles\PlayerLocalData.arkprofile");
                     }
 
-                    ContentMap loadedMap = Program.MapPack.SupportedMaps.FirstOrDefault(m => fileName.ToLower().EndsWith(m.Filename.ToLower()));
-                    if (loadedMap != null)
+                    
+                    container.LoadSaveGame(fileName, localProfileFilename);
+
+                    //terminals not already in game data
+
+
+                    //glitches
+                    Program.ProgramConfig.GlitchMarkers.ForEach(x =>
                     {
-                        container.LoadSaveGame(loadedMap, fileName, localProfileFilename);
-
-                        //terminals not already in game data
-
-
-                        //glitches
-                        Program.ProgramConfig.GlitchMarkers.ForEach(x =>
+                        container.MapStructures.Add(new ContentStructure()
                         {
-                            container.MapStructures.Add(new ContentStructure()
-                            {
-                                ClassName = "ASV_Glitch",
-                                HasDecayTimeReset = false,
-                                X = x.X,
-                                Y = x.Y,
-                                Z = x.Z,
-                                Latitude = (float)x.Lat,
-                                Longitude = (float)x.Lon
-                            });
+                            ClassName = "ASV_Glitch",
+                            HasDecayTimeReset = false,
+                            X = x.X,
+                            Y = x.Y,
+                            Z = x.Z,
+                            Latitude = (float)x.Lat,
+                            Longitude = (float)x.Lon
                         });
+                    });
 
 
 
 
-                        if (container != null && container.LocalProfile != null)
-                        {
-                            //add in-game map markers
-                            if (container.LocalProfile.MapMarkers != null)
-                            {
-                                Program.ProgramConfig.MapMarkerList.AddRange(container.LocalProfile.MapMarkers);
-                            }
-                        }
-
-                        cm = new ASVDataManager(container);
-                    }
-                    else
+                    if (container != null && container.LocalProfile != null)
                     {
-                        MessageBox.Show("Selected map is not currently supported.", "Map Support Unavailable", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        return;
+                        //add in-game map markers
+                        if (container.LocalProfile.MapMarkers != null)
+                        {
+                            Program.ProgramConfig.MapMarkerList.AddRange(container.LocalProfile.MapMarkers);
+                        }
                     }
+
+                    cm = new ASVDataManager(container);
+  
 
                 }
 

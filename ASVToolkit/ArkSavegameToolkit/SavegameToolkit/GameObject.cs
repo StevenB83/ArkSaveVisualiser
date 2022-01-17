@@ -311,7 +311,15 @@ namespace SavegameToolkit {
 
             long distance = nextOffset - archive.Position;
 
-            ExtraData = distance > 0 ? ExtraDataRegistry.GetExtraData(this, archive, (int)distance) : null;
+            try
+            {
+                ExtraData = distance > 0 ? ExtraDataRegistry.GetExtraData(this, archive, (int)distance) : null;
+            }
+            catch
+            {
+
+            }
+            
         }
 
         public int WriteBinary(ArkArchive archive, int offset) {

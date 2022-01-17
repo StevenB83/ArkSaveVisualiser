@@ -25,6 +25,7 @@ namespace ASVPack.Models
     {
 
         ILogger logWriter = LogManager.GetCurrentClassLogger();
+        private ContentMapPack mapPack = new ContentMapPack();
 
         [DataMember] public ContentMap LoadedMap { get; set; } = new ContentMap();
 
@@ -50,9 +51,11 @@ namespace ASVPack.Models
             
         }
 
-        public void LoadSaveGame(ContentMap selectedMap, string saveFilename, string localProfileFilename)
+        public void LoadSaveGame(string saveFilename, string localProfileFilename)
         {
-            LoadedMap = selectedMap;
+            ContentMap selectedMap = null;
+
+
 
             logWriter.Trace("BEGIN LoadSaveGame()");
 
@@ -145,7 +148,12 @@ namespace ASVPack.Models
                         logWriter.Debug($"Reading map name from: {saveFilename}");
                         MapName = arkSavegame.DataFiles[0];
                         logWriter.Debug($"Map name returned: {MapName}");
-                        
+
+
+                        selectedMap = mapPack.GetMap($"{MapName}.ark");
+                        LoadedMap = selectedMap;
+
+
                         long saveLoadTime = DateTime.Now.Ticks;
                         TimeSpan timeTaken = TimeSpan.FromTicks(saveLoadTime - startTicks);
                         logWriter.Info($"Game data loaded in: {timeTaken.ToString(@"mm\:ss")}.");
@@ -1202,6 +1210,8 @@ namespace ASVPack.Models
 
 
                     }
+
+                    stream.Close();
                 }
 
 
