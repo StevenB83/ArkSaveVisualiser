@@ -1211,7 +1211,6 @@ namespace ASVPack.Models
 
                     }
 
-                    stream.Close();
                 }
 
 
